@@ -1,8 +1,8 @@
-  name: ci
+name: ci
   on:
     push:
       branches:
-        - source
+        - source  # Changed from master/main
   permissions:
     contents: write
   jobs:
