@@ -40,7 +40,7 @@ ams292@dcc-login-04  ~ $
 
 ### SSH Keys
 
-You can setting up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
+You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
 
 ``` sh
 ssh-keygen -t ed25519
@@ -111,7 +111,13 @@ To connect to Isilon on a Mac:
 
 ## R
 
+R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. 
+
+To download R, visit https://cran.r-project.org/ and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this [here](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/) for computers running macOS with Apple silicon and [here](https://cran.r-project.org/bin/windows/base/old/) for computers running Windows. A majority of the lab currently uses R 4.4.1.
+
 ### Setting Up RStudio
+
+RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at https://posit.co/download/rstudio-desktop/ to download RStudio.
 
 ### Common Commands
 
