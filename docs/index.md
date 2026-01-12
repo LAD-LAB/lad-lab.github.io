@@ -4,9 +4,9 @@ Welcome to the David Lab Biostatistics Handbook! This website is intended to sup
 
 ## Navigation
 
-* [**Getting Started:**](http://127.0.0.1:8000/) How to get set up and familiarize yourself with GitHub, the Duke Compute Cluster, and Isilon, as well as other lab biostatistics essentials.
-* [**Creating a Phyloseq:**](http://127.0.0.1:8000/pipeline.html) How to create a phyloseq object from sequencing output, as well as information on creating and maintaining `human-foods.csv`, the trnL and 12Sv5 references, the SQL file on Isilon, and the common names assignment csv and code.
-* [**Post-Phyloseq Processing and Analysis:**](http://127.0.0.1:8000/processing.html) How to process and analyze your phyloseq once it has been created.
+* [**Getting Started:**](https://lad-lab.github.io/) How to get set up and familiarize yourself with GitHub, the Duke Compute Cluster, and Isilon, as well as other lab biostatistics essentials.
+* [**Creating a Phyloseq:**](https://lad-lab.github.io/pipeline.html) How to create a phyloseq object from sequencing output, as well as information on creating and maintaining `human-foods.csv`, the trnL and 12Sv5 references, the SQL file on Isilon, and the common names assignment csv and code.
+* [**Post-Phyloseq Processing and Analysis:**](https://lad-lab.github.io/processing.html) How to process and analyze your phyloseq once it has been created.
 
 To navigate between pages, use the following keyboard shortcuts:
 

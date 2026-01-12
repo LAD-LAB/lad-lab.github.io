@@ -157,6 +157,7 @@ library(MButils)
 
 Besides `install.packages()` and `library()`, common or helpful operators and functions to know include:
 **Operators**
+
 * `?` is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running `?ggplot` in the Console pane opens up documentation for the `ggplot()` function in the Help pane, including Usage, the syntax for calling `ggplot()`; Arguments, explanations of the variables inputted into `ggplot()`; Details; and Examples of use.
 *  `<-` is used for creating a variable. For example, `x <- 10` assigns the variable `x` to have a value of 10, while `my_csv <- read.csv("path/to/file.csv")` reads in a file to the variable `my_csv`.
 * `%in%` checks if an element belongs to a vector. For example, `2 %in% c(1, 2, 3)` returns `TRUE`.
@@ -166,6 +167,7 @@ Besides `install.packages()` and `library()`, common or helpful operators and fu
 
 **Base R**
 Creating and converting objects:
+
 * `as.character()` and `as.data.frame()` convert an inputted object into a character string vector or a data frame respectively.
 * `c()` combines values into a single vector.
 * `character()` creates a character vector.
@@ -173,10 +175,12 @@ Creating and converting objects:
 * `list()` creates a list with optionally-named elements.
 
 Getting or setting names:
+
 * `colnames()` and `rownames()` get or set the column and row names respectively of a data frame or matrix.
 * `names()` gets or sets the names attribute of a vector or list.
 
 Previewing and inspecting outputted objects:
+
 * `cat()` concatenates inputted text and prints the output to the console, helpful for quickly checking outputs while running a file.
 * `dim()` outputs the dimensions of an object.
 * `head()` shows the first few elements of an object, like the first six rows of a data frame.
@@ -185,26 +189,31 @@ Previewing and inspecting outputted objects:
 * `print()` displays an object in the console.
 
 Logical functions:
+
 * `any()` returns `TRUE` if a given condition is met by any value in a vector.
 * `if()`, `ifelse()`, and `else()` are used for creating if-else statements, leading to different outcomes being run if a condition is satisfied or not.
 * `is.na()` and `is.null()` return `TRUE` if an input is `NA` or `NULL` respectively.
 
 String handling:
+
 * `gsub()` uses regular expressions to replace all pattern matches in a string.
 * `paste()` concatenates strings together with a separator; `paste0()` does the same with no separator, equivalent to `paste(..., sep = "")`.
 
 Setup, data importation and saving, and reproducibility:
+
 * `file.path()` builds a file path in a platform-safe way.
 * `read.csv()` and `write.csv()` are used for reading a CSV as a data frame in and writing a data frame as a CSV out respectively.
 * `setwd()` sets the working directory, the default folder R reads from and writes to.
 * `source()` reads in a locally-saved R script, including functions.
 
 Miscellaneous:
+
 * `lapply()` applies a function to all elements of a list.
 * `setdiff()` returns elements present in one vector but not another.
 * `unique()` returns the unique values in a vector, unique rows in a data frame, etc.
 
 **dplyr Functions**
+
 * `arrange()` sorts the rows of a data frame by one or more columns.
 * `bind_rows()` stacks multiple data frames on top of each other, matching columns by name.
 * `filter()` keeps only the rows of a data frame that match given logical conditions.
