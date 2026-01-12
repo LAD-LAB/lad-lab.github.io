@@ -603,10 +603,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#common-commands_2" class="md-nav__link">
+  <a href="#common-commands-and-packages" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Commands
+        Common Commands and Packages
       
     </span>
   </a>
@@ -642,7 +642,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#common-commands_3" class="md-nav__link">
+  <a href="#common-commands_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Common Commands
@@ -1153,17 +1153,93 @@
 <h3 id="common-commands_1">Common Commands</h3>
 <h2 id="r">R</h2>
 <p>R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. </p>
-<p>To download R, visit https://cran.r-project.org/ and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this <a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/">here</a> for computers running macOS with Apple silicon and <a href="https://cran.r-project.org/bin/windows/base/old/">here</a> for computers running Windows. A majority of the lab currently uses R 4.4.1.</p>
+<p>To download R, visit <a href="https://cran.r-project.org/">https://cran.r-project.org/</a> and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this <a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/">here</a> for computers running macOS with Apple silicon and <a href="https://cran.r-project.org/bin/windows/base/old/">here</a> for computers running Windows. A majority of the lab currently uses R 4.4.1.</p>
 <h3 id="setting-up-rstudio">Setting Up RStudio</h3>
-<p>RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at https://posit.co/download/rstudio-desktop/ to download RStudio.</p>
-<h3 id="common-commands_2">Common Commands</h3>
+<p>RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a> to download RStudio.</p>
+<p>In RStudio, you will see a number of different panes. The Source pane in the top left is where you can write, edit, and run R scripts and files. The Console pane in the bottom left can be used for executing short R commands, like <code>View()</code>, and for viewing the output of R scripts. The Environment pane in the top right displays temporary R objects, like data, values, and functions, created or loaded during an R session. The Output pane in the bottom right displays plots, tables, and other outputs of executed code.</p>
+<p>To get started, create a new project via File &gt; New Project, giving it a name and selecting a directory to save the project in. You should create a new project for each analysis project you work on in the lab for saving data files, scripts, and outputs. You can then create a new file from File Menu &gt; New File &gt; R Markdown...; R Markdown files allow you to run isolated code chunks and interleave documentation and notes.</p>
+<p>For more information, visit the <a href="https://docs.posit.co/ide/user/">RStudio IDE User Guide</a>.</p>
+<h3 id="common-commands-and-packages">Common Commands and Packages</h3>
+<p>Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include <code>dplyr</code>, for data manipulation, and <code>ggplot2</code>, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use <code>MButils</code>, made by past lab members, and <code>phyloseq</code>, for working with phyloseq objects.</p>
+<p>To load a package, you will first need to install it and then load it with the <code>library()</code> function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># From CRAN:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># From Bioconductor:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nf">library</span><span class="p">(</span><span class="n">BiocManager</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;phyloseq&quot;</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1"># From GitHub:</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;ammararuby/MButils&quot;</span><span class="p">)</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="nf">library</span><span class="p">(</span><span class="n">MButils</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that you will need to install the CRAN packages <code>BiocManager</code> and <code>devtools</code> first in order to install packages from Bioconductor and GitHub respectively. </p>
+<p>Also note that package installation functions require quotes around the name of a package, but <code>library()</code> does not.</p>
+</div>
+<p>Besides <code>install.packages()</code> and <code>library()</code>, common or helpful operators and functions to know include:
+<strong>Operators</strong>
+* <code>?</code> is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running <code>?ggplot</code> in the Console pane opens up documentation for the <code>ggplot()</code> function in the Help pane, including Usage, the syntax for calling <code>ggplot()</code>; Arguments, explanations of the variables inputted into <code>ggplot()</code>; Details; and Examples of use.
+*  <code>&lt;-</code> is used for creating a variable. For example, <code>x &lt;- 10</code> assigns the variable <code>x</code> to have a value of 10, while <code>my_csv &lt;- read.csv("path/to/file.csv")</code> reads in a file to the variable <code>my_csv</code>.
+* <code>%in%</code> checks if an element belongs to a vector. For example, <code>2 %in% c(1, 2, 3)</code> returns <code>TRUE</code>.
+* <code>%&gt;%</code> is called a "pipe" from the <code>magrittr</code> package, part of the tidyverse, and allows you to run multiple transformations or operations at once in a clean way instead of nesting them. <code>df %&gt;% filter(var1 &gt; 5) %&gt;% select(var2)</code> keeps the column <code>var2</code> from a data frame <code>df</code> with all rows where <code>var1</code> is greater than 5 and is easier to understand than running <code>select(filter(df, var1 &gt; 5), var2)</code>.
+* <code>!</code> is for negation; if <code>is.na(value)</code> returns <code>FALSE</code>, then <code>!is.na(value)</code> will return <code>TRUE</code>.
+* <code>&amp;</code> and <code>|</code> are <code>AND</code> and <code>OR</code> respectively, for use when writing conditions.</p>
+<p><strong>Base R</strong>
+Creating and converting objects:
+* <code>as.character()</code> and <code>as.data.frame()</code> convert an inputted object into a character string vector or a data frame respectively.
+* <code>c()</code> combines values into a single vector.
+* <code>character()</code> creates a character vector.
+* <code>data.frame()</code> creates a data frame from inputted vectors or lists, which become columns in the outputted data frame.
+* <code>list()</code> creates a list with optionally-named elements.</p>
+<p>Getting or setting names:
+* <code>colnames()</code> and <code>rownames()</code> get or set the column and row names respectively of a data frame or matrix.
+* <code>names()</code> gets or sets the names attribute of a vector or list.</p>
+<p>Previewing and inspecting outputted objects:
+* <code>cat()</code> concatenates inputted text and prints the output to the console, helpful for quickly checking outputs while running a file.
+* <code>dim()</code> outputs the dimensions of an object.
+* <code>head()</code> shows the first few elements of an object, like the first six rows of a data frame.
+* <code>length()</code> returns the number of elements in a vector or list.
+* <code>ncol()</code> and <code>nrow()</code> return the number of columns and rows respectively in a data frame or matrix.
+* <code>print()</code> displays an object in the console.</p>
+<p>Logical functions:
+* <code>any()</code> returns <code>TRUE</code> if a given condition is met by any value in a vector.
+* <code>if()</code>, <code>ifelse()</code>, and <code>else()</code> are used for creating if-else statements, leading to different outcomes being run if a condition is satisfied or not.
+* <code>is.na()</code> and <code>is.null()</code> return <code>TRUE</code> if an input is <code>NA</code> or <code>NULL</code> respectively.</p>
+<p>String handling:
+* <code>gsub()</code> uses regular expressions to replace all pattern matches in a string.
+* <code>paste()</code> concatenates strings together with a separator; <code>paste0()</code> does the same with no separator, equivalent to <code>paste(..., sep = "")</code>.</p>
+<p>Setup, data importation and saving, and reproducibility:
+* <code>file.path()</code> builds a file path in a platform-safe way.
+* <code>read.csv()</code> and <code>write.csv()</code> are used for reading a CSV as a data frame in and writing a data frame as a CSV out respectively.
+* <code>setwd()</code> sets the working directory, the default folder R reads from and writes to.
+* <code>source()</code> reads in a locally-saved R script, including functions.</p>
+<p>Miscellaneous:
+* <code>lapply()</code> applies a function to all elements of a list.
+* <code>setdiff()</code> returns elements present in one vector but not another.
+* <code>unique()</code> returns the unique values in a vector, unique rows in a data frame, etc.</p>
+<p><strong>dplyr Functions</strong>
+* <code>arrange()</code> sorts the rows of a data frame by one or more columns.
+* <code>bind_rows()</code> stacks multiple data frames on top of each other, matching columns by name.
+* <code>filter()</code> keeps only the rows of a data frame that match given logical conditions.
+* <code>group_by()</code> groups a data frame by one or more columns, often for subsequent operations like <code>summarise</code> or <code>mutate</code>.
+* <code>left_join()</code> is the most common of a family of join functions, merging two data frames by matching certain columns and keeping all rows from the first specified table.
+* <code>mutate()</code> adds new columns or modifies existing columns, usually based on other columns.
+* <code>select()</code> chooses a subset of columns from a larger data frame using their names.
+* <code>summarise()</code> collapses a data frame down to summary values, often used with <code>group_by</code> to calculate values for a group of interest.</p>
 <h2 id="box">Box</h2>
 <h2 id="github">GitHub</h2>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
 <p>Add GitHub instructions.</p>
 </div>
-<h3 id="common-commands_3">Common Commands</h3>
+<h3 id="common-commands_2">Common Commands</h3>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
 <p>Add common <code>git</code> commands.</p>
@@ -1190,7 +1266,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 12, 2026 15:46:08 UTC">January 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 12, 2026 17:58:04 UTC">January 12, 2026</span>
   </span>
 
     
@@ -1200,7 +1276,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 12, 2026 15:46:08 UTC">January 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 12, 2026 17:58:04 UTC">January 12, 2026</span>
   </span>
 
     
