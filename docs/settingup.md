@@ -109,6 +109,10 @@ To connect to Isilon on a Mac:
 
 ### Common Commands
 
+!!! to-do
+
+    Add common Terminal commands.
+
 ## R
 
 R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. 
