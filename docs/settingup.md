@@ -156,6 +156,7 @@ library(MButils)
     Also note that package installation functions require quotes around the name of a package, but `library()` does not.
 
 Besides `install.packages()` and `library()`, common or helpful operators and functions to know include:
+
 **Operators**
 
 * `?` is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running `?ggplot` in the Console pane opens up documentation for the `ggplot()` function in the Help pane, including Usage, the syntax for calling `ggplot()`; Arguments, explanations of the variables inputted into `ggplot()`; Details; and Examples of use.
@@ -166,6 +167,7 @@ Besides `install.packages()` and `library()`, common or helpful operators and fu
 * `&` and `|` are `AND` and `OR` respectively, for use when writing conditions.
 
 **Base R**
+
 Creating and converting objects:
 
 * `as.character()` and `as.data.frame()` convert an inputted object into a character string vector or a data frame respectively.
@@ -227,6 +229,8 @@ Miscellaneous:
 ## Box
 
 ## GitHub
+
+GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
 
 !!! to-do
 
