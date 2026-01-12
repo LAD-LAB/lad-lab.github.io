@@ -113,13 +113,107 @@ To connect to Isilon on a Mac:
 
 R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. 
 
-To download R, visit https://cran.r-project.org/ and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this [here](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/) for computers running macOS with Apple silicon and [here](https://cran.r-project.org/bin/windows/base/old/) for computers running Windows. A majority of the lab currently uses R 4.4.1.
+To download R, visit [https://cran.r-project.org/](https://cran.r-project.org/) and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this [here](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/) for computers running macOS with Apple silicon and [here](https://cran.r-project.org/bin/windows/base/old/) for computers running Windows. A majority of the lab currently uses R 4.4.1.
 
 ### Setting Up RStudio
 
-RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at https://posit.co/download/rstudio-desktop/ to download RStudio.
+RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) to download RStudio.
 
-### Common Commands
+In RStudio, you will see a number of different panes. The Source pane in the top left is where you can write, edit, and run R scripts and files. The Console pane in the bottom left can be used for executing short R commands, like `View()`, and for viewing the output of R scripts. The Environment pane in the top right displays temporary R objects, like data, values, and functions, created or loaded during an R session. The Output pane in the bottom right displays plots, tables, and other outputs of executed code.
+
+To get started, create a new project via File > New Project, giving it a name and selecting a directory to save the project in. You should create a new project for each analysis project you work on in the lab for saving data files, scripts, and outputs. You can then create a new file from File Menu > New File > R Markdown...; R Markdown files allow you to run isolated code chunks and interleave documentation and notes.
+
+For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/ide/user/).
+
+### Common Commands and Packages
+
+Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include `dplyr`, for data manipulation, and `ggplot2`, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use `MButils`, made by past lab members, and `phyloseq`, for working with phyloseq objects.
+
+To load a package, you will first need to install it and then load it with the `library()` function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:
+
+``` r
+# From CRAN:
+install.packages("tidyverse")
+library(tidyverse)
+
+# From Bioconductor:
+install.packages("BiocManager")
+library(BiocManager)
+BiocManager::install("phyloseq")
+library(phyloseq)
+
+# From GitHub:
+install.packages("devtools")
+library(devtools)
+devtools::install_github("ammararuby/MButils")
+library(MButils)
+```
+
+!!! note 
+
+    Note that you will need to install the CRAN packages `BiocManager` and `devtools` first in order to install packages from Bioconductor and GitHub respectively. 
+
+    Also note that package installation functions require quotes around the name of a package, but `library()` does not.
+
+Besides `install.packages()` and `library()`, common or helpful operators and functions to know include:
+**Operators**
+* `?` is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running `?ggplot` in the Console pane opens up documentation for the `ggplot()` function in the Help pane, including Usage, the syntax for calling `ggplot()`; Arguments, explanations of the variables inputted into `ggplot()`; Details; and Examples of use.
+*  `<-` is used for creating a variable. For example, `x <- 10` assigns the variable `x` to have a value of 10, while `my_csv <- read.csv("path/to/file.csv")` reads in a file to the variable `my_csv`.
+* `%in%` checks if an element belongs to a vector. For example, `2 %in% c(1, 2, 3)` returns `TRUE`.
+* `%>%` is called a "pipe" from the `magrittr` package, part of the tidyverse, and allows you to run multiple transformations or operations at once in a clean way instead of nesting them. `df %>% filter(var1 > 5) %>% select(var2)` keeps the column `var2` from a data frame `df` with all rows where `var1` is greater than 5 and is easier to understand than running `select(filter(df, var1 > 5), var2)`.
+* `!` is for negation; if `is.na(value)` returns `FALSE`, then `!is.na(value)` will return `TRUE`.
+* `&` and `|` are `AND` and `OR` respectively, for use when writing conditions.
+
+**Base R**
+Creating and converting objects:
+* `as.character()` and `as.data.frame()` convert an inputted object into a character string vector or a data frame respectively.
+* `c()` combines values into a single vector.
+* `character()` creates a character vector.
+* `data.frame()` creates a data frame from inputted vectors or lists, which become columns in the outputted data frame.
+* `list()` creates a list with optionally-named elements.
+
+Getting or setting names:
+* `colnames()` and `rownames()` get or set the column and row names respectively of a data frame or matrix.
+* `names()` gets or sets the names attribute of a vector or list.
+
+Previewing and inspecting outputted objects:
+* `cat()` concatenates inputted text and prints the output to the console, helpful for quickly checking outputs while running a file.
+* `dim()` outputs the dimensions of an object.
+* `head()` shows the first few elements of an object, like the first six rows of a data frame.
+* `length()` returns the number of elements in a vector or list.
+* `ncol()` and `nrow()` return the number of columns and rows respectively in a data frame or matrix.
+* `print()` displays an object in the console.
+
+Logical functions:
+* `any()` returns `TRUE` if a given condition is met by any value in a vector.
+* `if()`, `ifelse()`, and `else()` are used for creating if-else statements, leading to different outcomes being run if a condition is satisfied or not.
+* `is.na()` and `is.null()` return `TRUE` if an input is `NA` or `NULL` respectively.
+
+String handling:
+* `gsub()` uses regular expressions to replace all pattern matches in a string.
+* `paste()` concatenates strings together with a separator; `paste0()` does the same with no separator, equivalent to `paste(..., sep = "")`.
+
+Setup, data importation and saving, and reproducibility:
+* `file.path()` builds a file path in a platform-safe way.
+* `read.csv()` and `write.csv()` are used for reading a CSV as a data frame in and writing a data frame as a CSV out respectively.
+* `setwd()` sets the working directory, the default folder R reads from and writes to.
+* `source()` reads in a locally-saved R script, including functions.
+
+Miscellaneous:
+* `lapply()` applies a function to all elements of a list.
+* `setdiff()` returns elements present in one vector but not another.
+* `unique()` returns the unique values in a vector, unique rows in a data frame, etc.
+
+**dplyr Functions**
+* `arrange()` sorts the rows of a data frame by one or more columns.
+* `bind_rows()` stacks multiple data frames on top of each other, matching columns by name.
+* `filter()` keeps only the rows of a data frame that match given logical conditions.
+* `group_by()` groups a data frame by one or more columns, often for subsequent operations like `summarise` or `mutate`.
+* `left_join()` is the most common of a family of join functions, merging two data frames by matching certain columns and keeping all rows from the first specified table.
+* `mutate()` adds new columns or modifies existing columns, usually based on other columns.
+* `select()` chooses a subset of columns from a larger data frame using their names.
+* `summarise()` collapses a data frame down to summary values, often used with `group_by` to calculate values for a group of interest.
+
 
 ## Box
 
