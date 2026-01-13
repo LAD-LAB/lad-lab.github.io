@@ -136,15 +136,15 @@ For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/i
 
 ### Coding in R
 
-With a new markdown file, you can insert a code chunk by enclosing code in `\`\`\`{r}` and `\`\`\`` or by using the shortcut  <kbd>Ctrl + Alt + I</kbd>  (Windows) or  <kbd>Cmd + Option + I</kbd>  (macOS).
+With a new markdown file, you can insert a code chunk by enclosing code in `&#96;&#96;&#96;{r}` and ``````` or by using the shortcut  <kbd>Ctrl + Alt + I</kbd>  (Windows) or  <kbd>Cmd + Option + I</kbd>  (macOS).
 
 Here is an example of a code chunk, with comments created with a `#` to prevent them from being executed when run:
 ``` r
-    \`\`\`{r}
+    ```{r}
     print("This code will be run.") # This is a comment, useful for creating notes and annotations.
 
     # print("This code will not be run because it is commented out.")
-    \`\`\`
+    ```
 ```
 
 Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:
