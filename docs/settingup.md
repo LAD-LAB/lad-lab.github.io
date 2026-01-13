@@ -125,6 +125,11 @@ RStudio is an IDE, or integrated development environment, that creates a user-fr
 
 In RStudio, you will see a number of different panes. The Source pane in the top left is where you can write, edit, and run R scripts and files. The Console pane in the bottom left can be used for executing short R commands, like `View()`, and for viewing the output of R scripts. The Environment pane in the top right displays temporary R objects, like data, values, and functions, created or loaded during an R session. The Output pane in the bottom right displays plots, tables, and other outputs of executed code.
 
+<figure markdown="span">
+  ![RStudio](images/RStudio.png){ width="600" }
+  <figcaption></figcaption>
+</figure>
+
 To get started, create a new project via File > New Project, giving it a name and selecting a directory to save the project in. You should create a new project for each analysis project you work on in the lab for saving data files, scripts, and outputs. You can then create a new file from File Menu > New File > R Markdown...; R Markdown files allow you to run isolated code chunks and interleave documentation and notes.
 
 For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/ide/user/).
@@ -142,7 +147,18 @@ Here is an example of a code chunk, with comments created with a `#` to prevent 
     \`\`\`
 ```
 
+Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:
 
+* A vector is a one-dimensional list of objects of the same type.
+* A list is a one-dimensional list of objects that can be of different types.
+* A matrix is a two-dimensional table of objects of the same type. An array is a multidimensional matrix.
+* A data frame is a two-dimensional table of objects that can be of different types. 
+
+Some commonly-used data types include:
+
+* Numeric data, like `3.14` or `42`.
+* Character data, or strings, like `"Hello, World!"` or `"100"` or `"TRUE"`.
+* Logical data, or booleans, like `TRUE` or `FALSE`.
 
 ### Common Commands and Packages
 
@@ -208,6 +224,7 @@ Previewing and inspecting outputted objects:
 * `length()` returns the number of elements in a vector or list.
 * `ncol()` and `nrow()` return the number of columns and rows respectively in a data frame or matrix.
 * `print()` displays an object in the console.
+* `View()` opens a dataframe in a new viewer window.
 
 Logical functions:
 
