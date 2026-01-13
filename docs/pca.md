@@ -263,6 +263,10 @@ The PCA plot `pca.biplot` and its interpretation will be covered in the next sec
 
 ## Interpreting the PCA Plot
 
+!!! to-do
+    
+    Replace the PCA below with one from a published, lab-internal cohort.
+
 Below is an example of a PCA plot for us to interpret. It was created with the following line of code:
 
 ``` r
