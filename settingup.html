@@ -1172,6 +1172,11 @@
 <h3 id="setting-up-rstudio">Setting Up RStudio</h3>
 <p>RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a> to download RStudio.</p>
 <p>In RStudio, you will see a number of different panes. The Source pane in the top left is where you can write, edit, and run R scripts and files. The Console pane in the bottom left can be used for executing short R commands, like <code>View()</code>, and for viewing the output of R scripts. The Environment pane in the top right displays temporary R objects, like data, values, and functions, created or loaded during an R session. The Output pane in the bottom right displays plots, tables, and other outputs of executed code.</p>
+<figure>
+  <img alt="RStudio" src="images/RStudio.png" width="600" />
+<br />
+<figcaption></figcaption>
+</figure>
 <p>To get started, create a new project via File &gt; New Project, giving it a name and selecting a directory to save the project in. You should create a new project for each analysis project you work on in the lab for saving data files, scripts, and outputs. You can then create a new file from File Menu &gt; New File &gt; R Markdown...; R Markdown files allow you to run isolated code chunks and interleave documentation and notes.</p>
 <p>For more information, visit the <a href="https://docs.posit.co/ide/user/">RStudio IDE User Guide</a>.</p>
 <h3 id="coding-in-r">Coding in R</h3>
@@ -1183,6 +1188,19 @@
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="c1"># print(&quot;This code will not be run because it is commented out.&quot;)</span>
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>\`\`\`
 </span></code></pre></div></p>
+<p>Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:</p>
+<ul>
+<li>A vector is a one-dimensional list of objects of the same type.</li>
+<li>A list is a one-dimensional list of objects that can be of different types.</li>
+<li>A matrix is a two-dimensional table of objects of the same type. An array is a multidimensional matrix.</li>
+<li>A data frame is a two-dimensional table of objects that can be of different types. </li>
+</ul>
+<p>Some commonly-used data types include:</p>
+<ul>
+<li>Numeric data, like <code>3.14</code> or <code>42</code>.</li>
+<li>Character data, or strings, like <code>"Hello, World!"</code> or <code>"100"</code> or <code>"TRUE"</code>.</li>
+<li>Logical data, or booleans, like <code>TRUE</code> or <code>FALSE</code>.</li>
+</ul>
 <h3 id="common-commands-and-packages">Common Commands and Packages</h3>
 <p>Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include <code>dplyr</code>, for data manipulation, and <code>ggplot2</code>, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use <code>MButils</code>, made by past lab members, and <code>phyloseq</code>, for working with phyloseq objects.</p>
 <p>To load a package, you will first need to install it and then load it with the <code>library()</code> function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:</p>
@@ -1239,6 +1257,7 @@
 <li><code>length()</code> returns the number of elements in a vector or list.</li>
 <li><code>ncol()</code> and <code>nrow()</code> return the number of columns and rows respectively in a data frame or matrix.</li>
 <li><code>print()</code> displays an object in the console.</li>
+<li><code>View()</code> opens a dataframe in a new viewer window.</li>
 </ul>
 <p>Logical functions:</p>
 <ul>
@@ -1309,7 +1328,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 13, 2026 17:02:54 UTC">January 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 13, 2026 17:45:01 UTC">January 13, 2026</span>
   </span>
 
     
@@ -1319,7 +1338,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 13, 2026 17:02:54 UTC">January 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 13, 2026 17:45:01 UTC">January 13, 2026</span>
   </span>
 
     
