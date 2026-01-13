@@ -137,10 +137,12 @@ Here is an example of a code chunk, with comments created with a `#` to prevent 
 ``` r
     \`\`\`{r}
     print("This code will be run.") # This is a comment, useful for creating notes and annotations.
-    
+
     # print("This code will not be run because it is commented out.")
     \`\`\`
 ```
+
+
 
 ### Common Commands and Packages
 
