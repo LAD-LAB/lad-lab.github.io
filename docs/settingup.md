@@ -129,6 +129,19 @@ To get started, create a new project via File > New Project, giving it a name an
 
 For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/ide/user/).
 
+### Coding in R
+
+With a new markdown file, you can insert a code chunk by enclosing code in `\`\`\`{r}` and `\`\`\`` or by using the shortcut  <kbd>Ctrl + Alt + I</kbd>  (Windows) or  <kbd>Cmd + Option + I</kbd>  (macOS).
+
+Here is an example of a code chunk, with comments created with a `#` to prevent them from being executed when run:
+``` r
+    \`\`\`{r}
+    print("This code will be run.") # This is a comment, useful for creating notes and annotations.
+    
+    # print("This code will not be run because it is commented out.")
+    \`\`\`
+```
+
 ### Common Commands and Packages
 
 Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include `dplyr`, for data manipulation, and `ggplot2`, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use `MButils`, made by past lab members, and `phyloseq`, for working with phyloseq objects.
