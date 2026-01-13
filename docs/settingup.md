@@ -140,11 +140,11 @@ With a new markdown file, you can insert a code chunk by enclosing code in `` ``
 
 Here is an example of a code chunk, with comments created with a `#` to prevent them from being executed when run:
 ``` r
-```{r}
+ ```{r}
 print("This code will be run.") # This is a comment, useful for creating notes and annotations.
 
 # print("This code will not be run because it is commented out.")
-```
+ ```
 ```
 
 Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:
@@ -263,6 +263,10 @@ Miscellaneous:
 
 
 ## Box
+
+To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at [https://duke.app.box.com/](https://duke.app.box.com/).
+
+To access Box through Mac Finder or Windows Explorer, install Box Drive from [https://duke.app.box.com/services/browse/newest/box_drive](https://duke.app.box.com/services/browse/newest/box_drive) and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.
 
 ## GitHub
 
