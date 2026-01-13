@@ -195,7 +195,7 @@ Besides `install.packages()` and `library()`, common or helpful operators and fu
 **Operators**
 
 * `?` is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running `?ggplot` in the Console pane opens up documentation for the `ggplot()` function in the Help pane, including Usage, the syntax for calling `ggplot()`; Arguments, explanations of the variables inputted into `ggplot()`; Details; and Examples of use.
-*  `<-` is used for creating a variable. For example, `x <- 10` assigns the variable `x` to have a value of 10, while `my_csv <- read.csv("path/to/file.csv")` reads in a file to the variable `my_csv`.
+*  `<-` is used for creating a variable. For example, `x <- 10` assigns the variable `x` to have a value of 10, while `my_csv <- read.csv("path/to/file.csv")` reads in a file to the variable `my_csv` as a dataframe.
 * `%in%` checks if an element belongs to a vector. For example, `2 %in% c(1, 2, 3)` returns `TRUE`.
 * `%>%` is called a "pipe" from the `magrittr` package, part of the tidyverse, and allows you to run multiple transformations or operations at once in a clean way instead of nesting them. `df %>% filter(var1 > 5) %>% select(var2)` keeps the column `var2` from a data frame `df` with all rows where `var1` is greater than 5 and is easier to understand than running `select(filter(df, var1 > 5), var2)`.
 * `!` is for negation; if `is.na(value)` returns `FALSE`, then `!is.na(value)` will return `TRUE`.

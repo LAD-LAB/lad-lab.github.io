@@ -114,7 +114,7 @@ Rscript Rscript-echo.R taxonomizr.R $1
     conda activate [qiime2-2022.8]
     ```
 
-    You will learn how to do set this up in the next section; don't forget to add the name of the environment you create back into `taxonomizr.sh`!
+    You will learn how to set this up in the next section; don't forget to add the name of the environment you create back into `taxonomizr.sh`!
 
 ``` r title="taxonomizr.R"
 # Prepare NCBI taxonomy SQL database on cluster (runs out of memory locally) 
