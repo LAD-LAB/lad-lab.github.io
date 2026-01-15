@@ -1,6 +1,6 @@
 # Creating the References
 
-These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5." A [flowchart](http://127.0.0.1:8000/references/#flowchart) is provided at the bottom of the page if it may help simplify the workflow of the phyloseq creation process.
+These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5." A [flowchart](https://lad-lab.github.io/references.html#flowchart) is provided at the bottom of the page if it may help simplify the workflow of the phyloseq creation process.
 
 ## Setting Up and Reading in Data
 
@@ -863,7 +863,7 @@ dim(seqs.df)
 
 !!! to-do
 
-    Finish this section.
+    Finish the following sections.
 
 ### DADA2
 

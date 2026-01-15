@@ -8,6 +8,8 @@ These instructions will help you create a `taxonomizr`-prepared SQLite database 
 
     Add instructions on downloading these scripts from GitHub once they are uploaded there.
 
+    EDIT 01/15/26: All scripts but conda.sh are located at [https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation).
+
 You will need to download the following four scripts to a folder in the DCC under `/hpc/group/ldavidlab/users/[NetID]`. To this same DCC folder, also add a subfolder called `tempdir`:
 
 ``` sh title="conda.sh"
