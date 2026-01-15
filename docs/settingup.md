@@ -136,7 +136,7 @@ For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/i
 
 ### Coding in R
 
-With a new markdown file, you can insert a code chunk by enclosing code in `` ```{r} `` and `` ``` `` or by using the shortcut  <kbd>Ctrl + Alt + I</kbd>  (Windows) or  <kbd>Cmd + Option + I</kbd>  (macOS).
+With a new markdown file, you can insert a code chunk by enclosing code in `` ```{r} `` and `` ``` `` or by using the shortcut  <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>  (Windows) or  <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd>  (macOS).
 
 Here is an example of a code chunk, with comments created with a `#` to prevent them from being executed when run:
 ``` r
