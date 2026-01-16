@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#long-read-sequencing-pacbio" class="md-skip">
+        <a href="#long-read-16s-sequencing-pacbio" class="md-skip">
           Skip to content
         </a>
       
@@ -854,13 +854,14 @@
   
 
 
-<h1 id="long-read-sequencing-pacbio">Long-Read Sequencing (PacBio)</h1>
+<h1 id="long-read-16s-sequencing-pacbio">Long-Read 16S Sequencing (PacBio)</h1>
 <p>Long-read sequencing has certain advantages over our in-lab 16S sequencing with Illumina, like its high accuracy and species-level resolution, and the lab plans to switch to long-read sequencing in the future with the help of the Duke Microbiome Core. However, one of the drawbacks is that the pipeline takes forever; the one cohort I've run through so far took about five days to complete and often got preempted due to the sheer resources required by the run, so plan out enough time for the run accordingly and be patient with it.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Ask Auri for instructions on uploading PacBio sequencing data to Isilon.</p>
+<p>To get the data from the sequencing core, create a Globus account by following the instructions <a href="https://oit-rc.pages.oit.duke.edu/rcsupportdocs/help/globus/">here</a>. Next, ask your contact at the sequencing core (for us, it was Graham Alexander) to add you to the data folder. To upload this folder to Isilon, click the link in the share email, which should open up the Globus Web App with the Collection and Path fields filled in, click 'Transfer or Sync to...' in the panel on the right, and fill the Collection and Path fields on the right. Click Start on the left, and you should get a green "Transfer request submitted successfully" notification. You can then check the status of the transfer on the Activity page, which can be accessed from the menu on the left.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You may need to configure a folder connection with Isilon in order to see it as an allowed collection to transfer to. To do so, follow the instructions <a href="https://docs.globus.org/globus-connect-personal/install/mac/#configuration">here</a>.</p>
 </div>
-<h1 id="short-read-sequencing-illumina">Short-Read Sequencing (Illumina)</h1>
+<h1 id="short-read-16s-sequencing-illumina">Short-Read 16S Sequencing (Illumina)</h1>
 
 
 
@@ -883,7 +884,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 16, 2026 15:16:18 UTC">January 16, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 16, 2026 19:47:07 UTC">January 16, 2026</span>
   </span>
 
     
