@@ -1,6 +1,6 @@
 # Calculating Diversity
 
-This page will instruct you in the calculation of various common diversity metrics `[what are they used for? what do they tell us?]`. These steps are intended to precede the [calculation of relative abundance](http://127.0.0.1:8000/abundance.html).
+This page will instruct you in the calculation of various common diversity metrics `[what are they used for? what do they tell us?]`. These steps are intended to precede the [calculation of relative abundance](http://lad-lab.github.io/abundance.html).
 
 ## Alpha Diversity
 
