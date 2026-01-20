@@ -1,6 +1,6 @@
 # Creating a PCA Plot
 
-This page will instruct you in the creation of a principal component analysis (PCA) plot using the custom `pcaPlot()` function and to provide background on the purpose and interpretation of PCA plots. These steps are intended to follow the [calculation of relative abundance](http://127.0.0.1:8000/abundance.html).
+This page will instruct you in the creation of a principal component analysis (PCA) plot using the custom `pcaPlot()` function and to provide background on the purpose and interpretation of PCA plots. These steps are intended to follow the [calculation of relative abundance](http://127.0.0.1:8000/abundance.html). test.
 
 ## What is a PCA Plot?
 
