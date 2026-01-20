@@ -8,7 +8,9 @@ A PCA plot is a graphical representation of Principal Component Analysis (PCA), 
 
 In many datasets, you might have a large number of variables (features). PCA helps simplify such datasets by transforming them into a smaller set of uncorrelated variables called principal components (PCs). These PCs capture the maximum variation in the data, with each successive PC accounting for progressively less of the remaining variability.
 
-`[rewrite; from ChatGPT]`
+!!! to-do
+
+  Rewrite this definition or make it clearer.
 
 ## CLR Transform
 

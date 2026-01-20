@@ -2,6 +2,10 @@
 
 Welcome to the David Lab Biostatistics Handbook! This website is intended to supplement the `LAD-LAB` GitHub project by providing detailed documentation and step-by-step guidance for lab members running or maintaining the lab's biostatistical scripts and tools. The instructions on this site assume minimal familiarity with R and shell and should be suitable for almost all biostatistical backgrounds.
 
+!!! warning
+
+    This website is a **work in progress** that was originally intended for lab-internal use. Key upcoming changes will generalize the instructions on this website for lab-external use, update older files like `Pipeline-to-Phyloseq.Rmd`, and add pages for common lab tools like a human read anonymizer and a 16S pipeline.
+
 ## Navigation
 
 * [**Getting Started:**](https://lad-lab.github.io/) How to get set up and familiarize yourself with GitHub, the Duke Compute Cluster, and Isilon, as well as other lab biostatistics essentials.
