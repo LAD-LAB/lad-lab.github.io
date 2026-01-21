@@ -10,7 +10,7 @@ In many datasets, you might have a large number of variables (features). PCA hel
 
 !!! to-do
 
-  Rewrite this definition or make it clearer.
+    Rewrite this definition or make it clearer.
 
 ## CLR Transform
 

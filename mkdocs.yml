@@ -97,3 +97,6 @@ plugins:
 
 extra:
   generator: true
+  analytics:
+    provider: google
+    property: G-1LM4D2NZZL
