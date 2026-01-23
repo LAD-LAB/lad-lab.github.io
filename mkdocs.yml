@@ -16,6 +16,16 @@ nav:
   - Calculating Relative Abundance: abundance.md
   - Creating a PCA Plot: pca.md
   - Assigning Common Names: commonnames.md
+- Statistical Analysis:
+  - Overview: stats-overview.md
+  - Data Transformations: transformations.md
+  - Correlation Analysis: correlation.md
+  - Multivariate Tests: multivariate.md
+  - Regression Analysis: regression.md
+  - Survival Analysis: survival.md
+  - Clustering Methods: clustering.md
+  - Classification & ROC: classification.md
+  - Reporting Standards: reporting.md
 
 theme:
   name: material

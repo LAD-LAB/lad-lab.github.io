@@ -1,129 +1,191 @@
 # Creating the SQL File
 
-These instructions will help you create a `taxonomizr`-prepared SQLite database on Isilon for use in creating the references and phyloseq objects.
+These instructions help you create a `taxonomizr`-prepared SQLite database for use in taxonomy assignment during reference and phyloseq creation.
+
+!!! info "Why HPC?"
+    This process requires significant memory (~64GB) and will likely fail on a local machine. Run it on your institution's HPC cluster.
+
+## Overview
+
+You'll need four scripts to create the taxonomy database:
+
+1. **conda.sh** — Conda environment initialization
+2. **taxonomizr.sh** — SLURM batch script to run the R code
+3. **taxonomizr.R** — R script that creates the SQL database
+4. **Rscript-echo.R** — Helper script for logging R output
 
 ## Download Scripts
 
-!!! to-do
+=== "General"
 
-    Add instructions on downloading these scripts from GitHub once they are uploaded there.
+    Create a working directory on your HPC cluster and download these scripts. Also create a `tempdir` subfolder for temporary files:
 
-    EDIT 01/15/26: All scripts but conda.sh are located at [https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation).
-
-You will need to download the following four scripts to a folder in the DCC under `/hpc/group/ldavidlab/users/[NetID]`. To this same DCC folder, also add a subfolder called `tempdir`:
-
-``` sh title="conda.sh"
-export CONDA_EXE='/hpc/group/ldavidlab/users/[NetID]/miniconda3/bin/conda'
-export _CE_M=''
-export _CE_CONDA=''
-export CONDA_PYTHON_EXE='/hpc/group/ldavidlab/users/[NetID]/miniconda3/bin/python'
-
-# Copyright (C) 2012 Anaconda, Inc
-# SPDX-License-Identifier: BSD-3-Clause
-__conda_exe() (
-    "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
-)
-
-__conda_hashr() {
-    if [ -n "${ZSH_VERSION:+x}" ]; then
-        \rehash
-    elif [ -n "${POSH_VERSION:+x}" ]; then
-        :  # pass
-    else
-        \hash -r
-    fi
-}
-
-__conda_activate() {
-    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
-        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
-        # after conda updated to >= 4.4. See issue #6173.
-        PS1="$CONDA_PS1_BACKUP"
-        \unset CONDA_PS1_BACKUP
-    fi
-    \local ask_conda
-    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
-    \eval "$ask_conda"
-    __conda_hashr
-}
-
-conda() {
-    \local cmd="${1-__missing__}"
-    case "$cmd" in
-        activate|deactivate)
-            __conda_activate "$@"
-            ;;
-        install|update|upgrade|remove|uninstall)
-            __conda_exe "$@" || \return
-            __conda_activate reactivate
-            ;;
-        *)
-            __conda_exe "$@"
-            ;;
-    esac
-}
-
-if [ -z "${CONDA_SHLVL+x}" ]; then
-    \export CONDA_SHLVL=0
-    # In dev-mode CONDA_EXE is python.exe and on Windows
-    # it is in a different relative location to condabin.
-    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
-        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
-    else
-        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
-    fi
-    \export PATH
-
-    # We're not allowing PS1 to be unbound. It must at least be set.
-    # However, we're not exporting it, which can cause problems when starting a second shell
-    # via a first shell (i.e. starting zsh from bash).
-    if [ -z "${PS1+x}" ]; then
-        PS1=
-    fi
-fi
-```
-
-``` sh title="taxonomizr.sh"
-#!/bin/bash
-#SBATCH --job-name=taxonomizr
-#SBATCH --partition common-old,scavenger 
-#SBATCH --mem=64000
-#SBATCH -n 2  # Number of cores
-#SBATCH --out=taxonomizr-%j.out
-#SBATCH --error=taxonomizr-%j.err
-#SBATCH --mail-user=blp23@duke.edu
-#SBATCH --mail-type=FAIL
-#SBATCH --mail-type=END
-
-# Usage: taxonomizr.sh [/path/to/SQL/directory]
-
-# source QIIME2 environment
-source [/path/to/conda.sh]
-conda activate [qiime2-2022.8]
-
-# load R and run taxonomizr script
-Rscript Rscript-echo.R taxonomizr.R $1
-
-```
-
-???+ note
-
-    Note that you must create a conda environment for use here:
-
-    ``` sh hl_lines="3"
-    # source QIIME2 environment
-    source [/path/to/conda.sh]
-    conda activate [qiime2-2022.8]
+    ```sh
+    mkdir -p /path/to/your/working-directory/tempdir
+    cd /path/to/your/working-directory
     ```
 
-    You will learn how to set this up in the next section; don't forget to add the name of the environment you create back into `taxonomizr.sh`!
+    Download the scripts from [LAD-LAB mb-pipeline](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation) or create them manually below.
 
-``` r title="taxonomizr.R"
-# Prepare NCBI taxonomy SQL database on cluster (runs out of memory locally) 
+=== "Duke DCC"
+
+    Create your working directory on the DCC:
+
+    ```sh
+    mkdir -p /hpc/group/ldavidlab/users/[NetID]/sql-creation/tempdir
+    cd /hpc/group/ldavidlab/users/[NetID]/sql-creation
+    ```
+
+    Download the scripts from [LAD-LAB mb-pipeline](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation).
+
+## Script Files
+
+### conda.sh
+
+This script initializes the Conda environment. Update the paths to match your Miniconda installation:
+
+=== "General"
+
+    ```sh title="conda.sh"
+    export CONDA_EXE='/path/to/your/miniconda3/bin/conda'
+    export _CE_M=''
+    export _CE_CONDA=''
+    export CONDA_PYTHON_EXE='/path/to/your/miniconda3/bin/python'
+
+    # Copyright (C) 2012 Anaconda, Inc
+    # SPDX-License-Identifier: BSD-3-Clause
+    __conda_exe() (
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    )
+
+    __conda_hashr() {
+        if [ -n "${ZSH_VERSION:+x}" ]; then
+            \rehash
+        elif [ -n "${POSH_VERSION:+x}" ]; then
+            :  # pass
+        else
+            \hash -r
+        fi
+    }
+
+    __conda_activate() {
+        if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+            PS1="$CONDA_PS1_BACKUP"
+            \unset CONDA_PS1_BACKUP
+        fi
+        \local ask_conda
+        ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+        \eval "$ask_conda"
+        __conda_hashr
+    }
+
+    conda() {
+        \local cmd="${1-__missing__}"
+        case "$cmd" in
+            activate|deactivate)
+                __conda_activate "$@"
+                ;;
+            install|update|upgrade|remove|uninstall)
+                __conda_exe "$@" || \return
+                __conda_activate reactivate
+                ;;
+            *)
+                __conda_exe "$@"
+                ;;
+        esac
+    }
+
+    if [ -z "${CONDA_SHLVL+x}" ]; then
+        \export CONDA_SHLVL=0
+        if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+            PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+        else
+            PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+        fi
+        \export PATH
+
+        if [ -z "${PS1+x}" ]; then
+            PS1=
+        fi
+    fi
+    ```
+
+=== "Duke DCC"
+
+    ```sh title="conda.sh"
+    export CONDA_EXE='/hpc/group/ldavidlab/users/[NetID]/miniconda3/bin/conda'
+    export _CE_M=''
+    export _CE_CONDA=''
+    export CONDA_PYTHON_EXE='/hpc/group/ldavidlab/users/[NetID]/miniconda3/bin/python'
+
+    # (rest of script is identical - see General tab)
+    ```
+
+### taxonomizr.sh
+
+SLURM batch script to run the taxonomy database creation. Adjust partition names and paths for your cluster:
+
+=== "General"
+
+    ```sh title="taxonomizr.sh"
+    #!/bin/bash
+    #SBATCH --job-name=taxonomizr
+    #SBATCH --partition=[YOUR_PARTITION]
+    #SBATCH --mem=64000
+    #SBATCH -n 2
+    #SBATCH --out=taxonomizr-%j.out
+    #SBATCH --error=taxonomizr-%j.err
+    #SBATCH --mail-user=[YOUR_EMAIL]
+    #SBATCH --mail-type=FAIL
+    #SBATCH --mail-type=END
+
+    # Usage: taxonomizr.sh [/path/to/SQL/directory]
+
+    # source conda environment
+    source /path/to/conda.sh
+    conda activate [your-conda-env]
+
+    # load R and run taxonomizr script
+    Rscript Rscript-echo.R taxonomizr.R $1
+    ```
+
+=== "Duke DCC"
+
+    ```sh title="taxonomizr.sh"
+    #!/bin/bash
+    #SBATCH --job-name=taxonomizr
+    #SBATCH --partition common-old,scavenger
+    #SBATCH --mem=64000
+    #SBATCH -n 2
+    #SBATCH --out=taxonomizr-%j.out
+    #SBATCH --error=taxonomizr-%j.err
+    #SBATCH --mail-user=[NetID]@duke.edu
+    #SBATCH --mail-type=FAIL
+    #SBATCH --mail-type=END
+
+    # Usage: taxonomizr.sh [/path/to/SQL/directory]
+
+    # source conda environment
+    source /hpc/group/ldavidlab/users/[NetID]/sql-creation/conda.sh
+    conda activate qiime2-2022.8
+
+    # load R and run taxonomizr script
+    Rscript Rscript-echo.R taxonomizr.R $1
+    ```
+
+???+ note
+    You must create a conda environment first (see next section). Update the environment name in the script after creating it.
+
+### taxonomizr.R
+
+R script that creates the SQLite database:
+
+```r title="taxonomizr.R"
+# Prepare NCBI taxonomy SQL database on cluster (runs out of memory locally)
 
 # Setup -----------------------------------------------------------------------
 
-args <- commandArgs(trailingOnly=TRUE) 
+args <- commandArgs(trailingOnly=TRUE)
 print(args)
 setwd(args[2]) # Set the directory
 
@@ -131,15 +193,17 @@ library(taxonomizr); packageVersion('taxonomizr') # Read in library
 
 # Format SQL database ---------------------------------------------------------
 prepareDatabase('accessionTaxa.sql',
-		extraSqlCommand="PRAGMA temp_store_directory = args[2]")
+    extraSqlCommand="PRAGMA temp_store_directory = args[2]")
 ```
 
-``` r title="Rscript-echo.R"
-# Using a combination of source() and sink(), get Rscript to produce an .Rout file like that
-# produced by R CMD BATCH. 
+### Rscript-echo.R
+
+Helper script for capturing R output:
+
+```r title="Rscript-echo.R"
+# Using a combination of source() and sink(), get Rscript to produce an .Rout file
 
 # Command-line usage: Rscript Rscript-echo.R [Primary script name] [Primary script args]
-# Remember to adjust args indices of receiving script accordingly!
 
 args <- commandArgs(TRUE)
 srcfile <- args[1]
@@ -152,55 +216,106 @@ source(srcfile, echo=TRUE)
 
 ## Setting Up a Conda Environment
 
-Next, you must set up a `conda` environment. First, log into the DCC and run the following code to install MiniConda3 by following the instructions; give the MiniConda install location as `/hpc/group/ldavidlab/users/[NetID]/miniconda3`:
+=== "General"
 
-``` sh
-mkdir -p /hpc/group/ldavidlab/users/[NetID]
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sh Miniconda3-latest-Linux-x86_64.sh
-```
+    Most HPC clusters have Conda available via modules. If not, install Miniconda:
 
-Next, create a `conda` environment:
+    ```sh
+    mkdir -p /path/to/your/working-directory
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    sh Miniconda3-latest-Linux-x86_64.sh
+    ```
 
-``` sh
-conda create --name [qiime2-YYYY.MM]
-```
+    When prompted, install to a location in your group's directory (not your home directory, which typically has limited storage).
 
-and follow the instructions. Install R to this environment by running:
+    Create and set up your environment:
 
-``` sh
-conda activate [qiime2-YYYY.MM]
-conda install -c conda-forge r-base
-```
+    ```sh
+    # Create environment
+    conda create --name taxonomizr-env
 
-and following the instructions. Next, activate R and install the necessary packages:
+    # Activate and install R
+    conda activate taxonomizr-env
+    conda install -c conda-forge r-base
 
-``` sh
-R
-install.packages("tidyverse")
-install.packages("taxonomizr")
-```
+    # Install R packages
+    R
+    install.packages("tidyverse")
+    install.packages("taxonomizr")
+    q()  # Exit R
+    ```
 
-and after these packages are installed, run `q()` to exit R. 
+=== "Duke DCC"
+
+    Install Miniconda to your lab directory:
+
+    ```sh
+    mkdir -p /hpc/group/ldavidlab/users/[NetID]
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    sh Miniconda3-latest-Linux-x86_64.sh
+    ```
+
+    When prompted, set the install location to `/hpc/group/ldavidlab/users/[NetID]/miniconda3`.
+
+    Create and set up your environment:
+
+    ```sh
+    # Create environment
+    conda create --name qiime2-2022.8
+
+    # Activate and install R
+    conda activate qiime2-2022.8
+    conda install -c conda-forge r-base
+
+    # Install R packages
+    R
+    install.packages("tidyverse")
+    install.packages("taxonomizr")
+    q()  # Exit R
+    ```
 
 ## Running the Scripts
 
-Navigate into the DCC folder in which you have downloaded the above scripts. Make sure you update `taxonomizr.sh` with the name of your environment and path to `conda.sh` and make sure you update `conda.sh` with your NetID!
+=== "General"
 
-``` sh
-cd [/hpc/group/ldavidlab/users/[NetID/script-folder]]
-```
+    1. Navigate to your scripts directory:
+        ```sh
+        cd /path/to/your/working-directory
+        ```
 
-Next, set the `tempdir` subfolder as your temporary directory:
+    2. Set the temporary directory:
+        ```sh
+        export TMPDIR=/path/to/your/working-directory/tempdir
+        ```
 
-``` sh
-export TMPDIR=[/hpc/group/ldavidlab/users/[NetID/script-folder]/tempdir]
-```
+    3. Submit the job:
+        ```sh
+        sbatch taxonomizr.sh /path/to/your/working-directory
+        ```
 
-And now you can run the scripts:
+    4. After completion, copy the `accessionTaxa.sql` file to your shared storage location.
 
-``` sh
-sbatch --mail-user=[NetID]@duke.edu /hpc/group/ldavidlab/users/[NetID/script-folder]/taxonomizr.sh /hpc/group/ldavidlab/users/[NetID/script-folder]
-```
+=== "Duke DCC"
 
-Last, make sure to upload the SQL file to Isilon! Given its size, this will take a while.
+    1. Navigate to your scripts directory:
+        ```sh
+        cd /hpc/group/ldavidlab/users/[NetID]/sql-creation
+        ```
+
+    2. Set the temporary directory:
+        ```sh
+        export TMPDIR=/hpc/group/ldavidlab/users/[NetID]/sql-creation/tempdir
+        ```
+
+    3. Submit the job:
+        ```sh
+        sbatch --mail-user=[NetID]@duke.edu taxonomizr.sh /hpc/group/ldavidlab/users/[NetID]/sql-creation
+        ```
+
+    4. After completion, upload the `accessionTaxa.sql` file to Isilon. Given its size (~80GB), this will take a while:
+        ```sh
+        cp accessionTaxa.sql /path/to/isilon/localreference/ncbi_taxonomy/
+        ```
+
+!!! warning "Large File"
+    The resulting `accessionTaxa.sql` file is approximately 80GB. Ensure you have sufficient storage space.

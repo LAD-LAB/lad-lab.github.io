@@ -1,283 +1,321 @@
 # Setting Up
 
-This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, the Duke Compute Cluster, and Isilon.
+This page covers the essentials for setting up your biostatistics environment: high-performance computing access, network storage, R/RStudio, and version control.
 
-## Duke Compute Cluster
+!!! info "About This Documentation"
+    Instructions are written for general use. Duke-specific details appear in labeled tabs and callouts marked "Duke Lab."
 
-The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit [https://oit-rc.pages.oit.duke.edu/rcsupportdocs/](https://oit-rc.pages.oit.duke.edu/rcsupportdocs/).
+## High-Performance Computing (HPC)
 
-The DCC has two directories, `/hpc/home` and `/hpc/group`; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within `/hpc/group/ldavidlab`. Create a folder for yourself at `/hpc/group/ldavidlab/users/[NetID]`.
+Most metabarcoding pipelines require access to a high-performance computing cluster—a group of powerful servers connected by a high-speed network that can handle large datasets. Common job schedulers include SLURM and PBS.
 
-### Logging In
+=== "General HPC"
 
-To use the Duke Compute Cluster, open the terminal and log in with `ssh [NetID]@dcc-login.oit.duke.edu`. This will require multi-factor authentication. Here is an example of what this should look like:
+    Contact your institution's research computing team to get access to their cluster. Typical setup involves:
 
-``` sh
-(base) ams292@MGM-C6LXGRQV ~ % ssh ams292@dcc-login.oit.duke.edu
-(ams292@dcc-login.oit.duke.edu) Password: 
-(ams292@dcc-login.oit.duke.edu) Duo two-factor login for ams292
+    1. **Request an account** from your institution's HPC administrators
+    2. **SSH access**: `ssh username@cluster.your-institution.edu`
+    3. **Understand the directory structure**: Most clusters have a home directory (limited storage) and a group/project directory (larger storage for data)
+    4. **Learn the job scheduler**: SLURM (`sbatch`, `squeue`, `scancel`) and PBS are common
 
-Enter a passcode or select one of the following options:
+    Create a working directory for yourself in your group's shared space:
+    ```sh
+    mkdir -p /path/to/group/users/your-username
+    ```
 
- 1. Duo Push to XXX-XXX-0389
- 2. Duo Push to ipad (iOS)
- 3. Phone call to XXX-XXX-0389
- 4. SMS passcodes to XXX-XXX-0389
+=== "Duke DCC"
 
-Passcode or option (1-4): 1
-Success. Logging you in...
-Success. Logging you in...
-Last login: Tue Oct  1 10:26:19 2024 from 152.16.191.138
-################################################################################
-# Please report any issues or questions to: oitresearchsupport@duke.edu        #
-#                                                                              #
-# Duke Research Computing info and documentation: https://rc.duke.edu          #
-#                                                                              #
-# My next patch run is Wednesday (10-02-2024) at  7 PM                         #
-################################################################################
-ams292@dcc-login-04  ~ $ 
-```
+    The Duke Compute Cluster (DCC) uses SLURM for job scheduling. For full documentation, visit [Duke Research Computing](https://oit-rc.pages.oit.duke.edu/rcsupportdocs/).
 
-### SSH Keys
+    The DCC has two directories: `/hpc/home` (limited storage) and `/hpc/group` (project storage). Our lab works in `/hpc/group/ldavidlab`. Create your folder at:
+    ```sh
+    mkdir -p /hpc/group/ldavidlab/users/[NetID]
+    ```
 
-You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
+    ### Logging In
 
-``` sh
-ssh-keygen -t ed25519
-```
+    Log in with `ssh [NetID]@dcc-login.oit.duke.edu`. This requires multi-factor authentication:
 
-Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
+    ```sh
+    (base) user@local ~ % ssh ams292@dcc-login.oit.duke.edu
+    (ams292@dcc-login.oit.duke.edu) Password:
+    (ams292@dcc-login.oit.duke.edu) Duo two-factor login for ams292
 
-Next, view your *public* key by running:
+    Enter a passcode or select one of the following options:
 
-``` sh
-cat ~/.ssh/id_ed25519.pub 
-# Make sure to include .pub
-```
+     1. Duo Push to XXX-XXX-0389
+     2. Duo Push to ipad (iOS)
+     3. Phone call to XXX-XXX-0389
+     4. SMS passcodes to XXX-XXX-0389
 
-and copy the contents to your Duke profile at [https://idms-web-selfservice.oit.duke.edu/advanced](https://idms-web-selfservice.oit.duke.edu/advanced) under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA! 
+    Passcode or option (1-4): 1
+    Success. Logging you in...
+    ```
 
-Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
+    ### SSH Keys (Bypass MFA)
 
-``` sh
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-```
+    Set up SSH keys to avoid entering your password each time:
 
-and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
+    1. Generate a key pair:
+        ```sh
+        ssh-keygen -t ed25519
+        ```
+        Save to the default location and choose a secure passphrase.
 
-``` sh
-Host *
-UseKeychain yes
-AddKeysToAgent yes
-IdentityFile ~/.ssh/id_ed25519
-```
+    2. View your public key:
+        ```sh
+        cat ~/.ssh/id_ed25519.pub
+        ```
 
- For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
+    3. Add it to your [Duke profile](https://idms-web-selfservice.oit.duke.edu/advanced) under "Manage Your Public SSH Keys."
 
-### Command-Line Alternatives
+    4. Set up a key manager. On Mac:
+        ```sh
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+        ```
+        Then edit `~/.ssh/config`:
+        ```sh
+        Host *
+        UseKeychain yes
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_ed25519
+        ```
+        For Windows, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
 
-You can also access the DCC from [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.
+    ### Web Interface
 
-!!! to-do
+    You can also access the DCC via [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (NetID login required).
 
-    Add instructions for setting up and using Cyberduck.
+### Common SLURM Commands
 
-### Common Commands
+These commands work on most SLURM-based clusters:
 
-Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:
+* `sbatch [script.sh]` — Submit a batch job. Output: `Submitted batch job [jobid]`
+    * Add `--mail-user=[YOUR_EMAIL]` to receive email notifications when jobs complete
+    * Add `--dependency=afterok:[jobid]` to run a job after another completes
+* `squeue -u [username]` — List your submitted jobs
+* `scancel [jobid]` — Cancel a job
 
-* `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`. 
-    * you can receive an email notification when the job finishes running by inserting `--mail-user=[NetID]@duke.edu` after `sbatch`.
-    * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
-* `squeue -u [NetID]` — this shows a list of jobs submitted under your NetID.
-* `scancel [jobid]` — this cancels a job.
+## Network Storage
 
-## Isilon
+High-volume storage is essential for sequencing data and reference databases. Most institutions provide network-attached storage (NAS) that can be mounted on your local machine.
 
-We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. To connect to Isilon on Windows:
+=== "General"
 
-1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
-2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
-3. If prompted to sign in, enter `DHE\[NetID]` as your username.
+    Contact your IT department about available network storage options. Common approaches:
 
-To connect to Isilon on a Mac:
+    - **Institutional NAS**: Mounted via SMB/CIFS or NFS
+    - **Cloud storage**: AWS S3, Google Cloud Storage, institutional Box/OneDrive
+    - **Local NAS**: Lab-managed storage servers
 
-1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
-2. Enter `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`; add this to Favorite Servers under + and then select Connect.
+    When mounting network storage, you'll typically need:
+
+    - Server address (e.g., `storage.institution.edu`)
+    - Share name or path
+    - Your credentials (often institutional SSO)
+
+=== "Duke (Isilon)"
+
+    We use Isilon for high-volume storage, including sequencing data and reference databases.
+
+    **Windows:**
+
+    1. Open This PC. Select More (⋯) → Map network drive
+    2. Choose any drive letter. Enter: `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`
+    3. Check "Reconnect at sign-in" → Finish
+    4. Sign in with `DHE\[NetID]` as username
+
+    **Mac:**
+
+    1. Open Finder → Go → Connect to Server (<kbd>⌘ K</kbd>)
+    2. Enter: `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`
+    3. Add to Favorites (+) → Connect
 
 ## Terminal
 
 ### Common Commands
 
-!!! to-do
+Basic terminal commands useful for pipeline work:
 
-    Add common Terminal commands.
+* `cd [path]` — Change directory
+* `ls -la` — List files with details
+* `cp [source] [dest]` — Copy files
+* `mv [source] [dest]` — Move/rename files
+* `rm [file]` — Remove files (use carefully!)
+* `mkdir -p [path]` — Create directories
+* `scp [source] [user@host:dest]` — Secure copy between machines
 
 ## R
 
-R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. 
+R is the programming language most commonly used in academia for statistical computing and data visualization, including the biostatistical tools used in metabarcoding analysis.
 
-To download R, visit [https://cran.r-project.org/](https://cran.r-project.org/) and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this [here](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/) for computers running macOS with Apple silicon and [here](https://cran.r-project.org/bin/windows/base/old/) for computers running Windows. A majority of the lab currently uses R 4.4.1.
+### Installation
+
+Download R from [https://cran.r-project.org/](https://cran.r-project.org/) and follow the instructions for your operating system. You may need an older version for package compatibility:
+
+- [macOS (Apple Silicon)](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/)
+- [Windows (older versions)](https://cran.r-project.org/bin/windows/base/old/)
+
+Most workflows in this handbook use **R 4.4.1**.
 
 ### Setting Up RStudio
 
-RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) to download RStudio.
+RStudio is an IDE that provides a user-friendly interface for R. Download it from [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/).
 
-In RStudio, you will see a number of different panes. The Source pane in the top left is where you can write, edit, and run R scripts and files. The Console pane in the bottom left can be used for executing short R commands and for viewing the output of R scripts. The Environment pane in the top right displays temporary R objects, like data, values, and functions, created or loaded during an R session. The Output pane in the bottom right displays plots, tables, and other outputs of executed code.
+RStudio has four main panes:
+
+- **Source** (top left): Write and edit R scripts
+- **Console** (bottom left): Execute commands and view output
+- **Environment** (top right): View loaded data and variables
+- **Output** (bottom right): View plots, files, help, and packages
 
 <figure markdown="span">
   ![RStudio](images/RStudio.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
-To get started, create a new project via File > New Project, giving it a name and selecting a directory to save the project in. You should create a new project for each analysis project you work on in the lab for saving data files, scripts, and outputs. You can then create a new file from File Menu > New File > R Markdown...; R Markdown files allow you to run isolated code chunks and interleave documentation and notes.
+To get started:
 
-For more information, visit the [RStudio IDE User Guide](https://docs.posit.co/ide/user/).
+1. Create a new project: File → New Project
+2. Create a new R Markdown file: File → New File → R Markdown
+3. R Markdown lets you run code chunks and interleave documentation
+
+For more information, see the [RStudio IDE User Guide](https://docs.posit.co/ide/user/).
 
 ### Coding in R
 
-With a new markdown file, you can insert a code chunk by enclosing code in `` ```{r} `` and `` ``` `` or by using the shortcut  <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>  (Windows) or  <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd>  (macOS).
+Insert a code chunk with `` ```{r} `` and `` ``` `` or use <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd> (Windows) / <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (macOS).
 
-Here is an example of a code chunk, with comments created with a `#` to prevent them from being executed when run:
-``` r
+Example:
+```r
  ```{r}
-print("This code will be run.") # This is a comment, useful for creating notes and annotations.
+print("This code will be run.") # This is a comment
 
 # print("This code will not be run because it is commented out.")
  ```
 ```
 
-Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:
+**Common Data Structures:**
 
-* A vector is a one-dimensional list of objects of the same type.
-* A list is a one-dimensional list of objects that can be of different types.
-* A matrix is a two-dimensional table of objects of the same type. An array is a multidimensional matrix.
-* A data frame is a two-dimensional table of objects that can be of different types. 
+* **Vector**: One-dimensional list of same-type objects
+* **List**: One-dimensional list of mixed-type objects
+* **Matrix/Array**: Two/multi-dimensional table of same-type objects
+* **Data frame**: Two-dimensional table of mixed-type objects
 
-Some commonly-used data types include:
+**Common Data Types:**
 
-* Numeric data, like `3.14` or `42`.
-* Character data, or strings, like `"Hello, World!"` or `"100"` or `"TRUE"`.
-* Logical data, or booleans, like `TRUE` or `FALSE`.
+* Numeric: `3.14`, `42`
+* Character (strings): `"Hello, World!"`, `"100"`
+* Logical (booleans): `TRUE`, `FALSE`
 
 ### Common Commands and Packages
 
-Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include `dplyr`, for data manipulation, and `ggplot2`, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use `MButils`, made by past lab members, and `phyloseq`, for working with phyloseq objects.
+Packages are bundles of functions from repositories like CRAN, Bioconductor, or GitHub. Key packages for this workflow:
 
-To load a package, you will first need to install it and then load it with the `library()` function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:
+- `tidyverse` (includes `dplyr`, `ggplot2`) — Data manipulation and visualization
+- `phyloseq` — Microbiome data handling
+- `MButils` — Lab-developed utilities
 
-``` r
+Installing packages:
+
+```r
 # From CRAN:
 install.packages("tidyverse")
 library(tidyverse)
 
 # From Bioconductor:
 install.packages("BiocManager")
-library(BiocManager)
 BiocManager::install("phyloseq")
 library(phyloseq)
 
 # From GitHub:
 install.packages("devtools")
-library(devtools)
 devtools::install_github("ammararuby/MButils")
 library(MButils)
 ```
 
-!!! note 
+!!! note
+    Install `BiocManager` and `devtools` first to access Bioconductor and GitHub packages. Package installation requires quotes; `library()` does not.
 
-    Note that you will need to install the CRAN packages `BiocManager` and `devtools` first in order to install packages from Bioconductor and GitHub respectively. 
+**Operators:**
 
-    Also note that package installation functions require quotes around the name of a package, but `library()` does not.
+* `?function` — Access help/documentation
+* `<-` — Assignment (e.g., `x <- 10`)
+* `%in%` — Check membership (e.g., `2 %in% c(1,2,3)` → `TRUE`)
+* `%>%` — Pipe operator for chaining operations
+* `!` — Negation
+* `&`, `|` — AND, OR
 
-Besides `install.packages()` and `library()`, common or helpful operators and functions to know include:
+**Base R Functions:**
 
-**Operators**
+| Category | Functions |
+|----------|-----------|
+| Creating objects | `c()`, `list()`, `data.frame()`, `character()` |
+| Converting objects | `as.character()`, `as.data.frame()` |
+| Names | `names()`, `colnames()`, `rownames()` |
+| Inspection | `head()`, `dim()`, `length()`, `nrow()`, `ncol()`, `View()`, `print()` |
+| Logic | `if()`, `ifelse()`, `any()`, `is.na()`, `is.null()` |
+| Strings | `paste()`, `paste0()`, `gsub()` |
+| Files | `read.csv()`, `write.csv()`, `file.path()`, `setwd()`, `source()` |
+| Misc | `lapply()`, `unique()`, `setdiff()` |
 
-* `?` is used for accessing documentation and help files for any loaded package and is a great way for learning how to code in R. For example, running `?ggplot` in the Console pane opens up documentation for the `ggplot()` function in the Help pane, including Usage, the syntax for calling `ggplot()`; Arguments, explanations of the variables inputted into `ggplot()`; Details; and Examples of use.
-*  `<-` is used for creating a variable. For example, `x <- 10` assigns the variable `x` to have a value of 10, while `my_csv <- read.csv("path/to/file.csv")` reads in a file to the variable `my_csv` as a dataframe.
-* `%in%` checks if an element belongs to a vector. For example, `2 %in% c(1, 2, 3)` returns `TRUE`.
-* `%>%` is called a "pipe" from the `magrittr` package, part of the tidyverse, and allows you to run multiple transformations or operations at once in a clean way instead of nesting them. `df %>% filter(var1 > 5) %>% select(var2)` keeps the column `var2` from a data frame `df` with all rows where `var1` is greater than 5 and is easier to understand than running `select(filter(df, var1 > 5), var2)`.
-* `!` is for negation; if `is.na(value)` returns `FALSE`, then `!is.na(value)` will return `TRUE`.
-* `&` and `|` are `AND` and `OR` respectively, for use when writing conditions.
+**dplyr Functions:**
 
-**Base R**
+* `filter()` — Keep rows matching conditions
+* `select()` — Choose columns
+* `mutate()` — Add/modify columns
+* `arrange()` — Sort rows
+* `group_by()` + `summarise()` — Aggregate data
+* `left_join()` — Merge data frames
+* `bind_rows()` — Stack data frames
 
-Creating and converting objects:
+## Cloud Storage
 
-* `as.character()` and `as.data.frame()` convert an inputted object into a character string vector or a data frame respectively.
-* `c()` combines values into a single vector.
-* `character()` creates a character vector.
-* `data.frame()` creates a data frame from inputted vectors or lists, which become columns in the outputted data frame.
-* `list()` creates a list with optionally-named elements.
+Cloud storage is useful for project files, documentation, and backups.
 
-Getting or setting names:
+=== "General"
 
-* `colnames()` and `rownames()` get or set the column and row names respectively of a data frame or matrix.
-* `names()` gets or sets the names attribute of a vector or list.
+    Common options include:
 
-Previewing and inspecting outputted objects:
+    - **Institutional cloud** (Box, OneDrive, Google Drive)
+    - **Research-focused** (AWS S3, Google Cloud Storage, CyVerse)
+    - **Version-controlled** (GitHub for code, DVC for data)
 
-* `cat()` concatenates inputted text and prints the output to the console, helpful for quickly checking outputs while running a file.
-* `dim()` outputs the dimensions of an object.
-* `head()` shows the first few elements of an object, like the first six rows of a data frame.
-* `length()` returns the number of elements in a vector or list.
-* `ncol()` and `nrow()` return the number of columns and rows respectively in a data frame or matrix.
-* `print()` displays an object in the console.
-* `View()` opens a dataframe in a new viewer window.
+    Install your institution's cloud sync client to access files through your file browser.
 
-Logical functions:
+=== "Duke (Box)"
 
-* `any()` returns `TRUE` if a given condition is met by any value in a vector.
-* `if()`, `ifelse()`, and `else()` are used for creating if-else statements, leading to different outcomes being run if a condition is satisfied or not.
-* `is.na()` and `is.null()` return `TRUE` if an input is `NA` or `NULL` respectively.
+    We use Duke Box for project files. Access at [https://duke.app.box.com/](https://duke.app.box.com/).
 
-String handling:
+    To get access to `project_davidlab`, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator.
 
-* `gsub()` uses regular expressions to replace all pattern matches in a string.
-* `paste()` concatenates strings together with a separator; `paste0()` does the same with no separator, equivalent to `paste(..., sep = "")`.
+    **Desktop Access:**
 
-Setup, data importation and saving, and reproducibility:
-
-* `file.path()` builds a file path in a platform-safe way.
-* `read.csv()` and `write.csv()` are used for reading a CSV as a data frame in and writing a data frame as a CSV out respectively.
-* `setwd()` sets the working directory, the default folder R reads from and writes to.
-* `source()` reads in a locally-saved R script, including functions.
-
-Miscellaneous:
-
-* `lapply()` applies a function to all elements of a list.
-* `setdiff()` returns elements present in one vector but not another.
-* `unique()` returns the unique values in a vector, unique rows in a data frame, etc.
-
-**dplyr Functions**
-
-* `arrange()` sorts the rows of a data frame by one or more columns.
-* `bind_rows()` stacks multiple data frames on top of each other, matching columns by name.
-* `filter()` keeps only the rows of a data frame that match given logical conditions.
-* `group_by()` groups a data frame by one or more columns, often for subsequent operations like `summarise` or `mutate`.
-* `left_join()` is the most common of a family of join functions, merging two data frames by matching certain columns and keeping all rows from the first specified table.
-* `mutate()` adds new columns or modifies existing columns, usually based on other columns.
-* `select()` chooses a subset of columns from a larger data frame using their names.
-* `summarise()` collapses a data frame down to summary values, often used with `group_by` to calculate values for a group of interest.
-
-
-## Box
-
-To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at [https://duke.app.box.com/](https://duke.app.box.com/).
-
-To access Box through Mac Finder or Windows Explorer, install Box Drive from [https://duke.app.box.com/services/browse/newest/box_drive](https://duke.app.box.com/services/browse/newest/box_drive) and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.
+    Install Box Drive from [Duke Box Services](https://duke.app.box.com/services/browse/newest/box_drive) to access Box files through Finder/Explorer.
 
 ## GitHub
 
-GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
+GitHub is a platform for version control and code collaboration. We use it to store pipeline scripts and reference files.
 
-!!! to-do
+=== "General"
 
-    Add GitHub instructions.
+    1. Create a free account at [github.com](https://github.com)
+    2. Install Git: [git-scm.com/downloads](https://git-scm.com/downloads)
+    3. Configure Git:
+        ```sh
+        git config --global user.name "Your Name"
+        git config --global user.email "your.email@institution.edu"
+        ```
 
-### Common Commands
+=== "Duke Lab"
 
-!!! to-do
+    Create a GitHub account and contact a project owner to be added to [LAD-LAB](https://github.com/LAD-LAB). Current owners: Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
 
-    Add common `git` commands.
+### Common Git Commands
+
+* `git clone [url]` — Download a repository
+* `git pull` — Update local copy with remote changes
+* `git add [files]` — Stage changes for commit
+* `git commit -m "message"` — Save staged changes
+* `git push` — Upload commits to remote
+* `git status` — Check current state
