@@ -1,6 +1,6 @@
 # Home
 
-Welcome to the David Lab Biostatistics Handbook! This website is intended to supplement the `LAD-LAB` GitHub project by providing detailed documentation and step-by-step guidance for lab members running or maintaining the lab's biostatistical scripts and tools. The instructions on this site assume minimal familiarity with R and shell and should be suitable for almost all biostatistical backgrounds.
+Welcome to the David Lab Biostatistics Handbook! This website is intended to supplement the LAD-LAB GitHub organization by providing detailed documentation and step-by-step guidance for lab members running or maintaining the lab's biostatistical scripts and tools. The instructions on this site assume minimal familiarity with R and shell and should be suitable for almost all biostatistical backgrounds.
 
 !!! warning
 
