@@ -907,6 +907,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#assigning-common-names-to-a-phyloseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Common Names to a Phyloseq
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assigning Common Names to a Phyloseq">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-in-the-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading In the Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-matching-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Matching Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1094,11 +1155,58 @@
 </span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">  </span><span class="nf">ungroup</span><span class="p">()</span><span class="w">  </span><span class="c1"># Remove grouping</span>
 </span></code></pre></div>
-<p>From this point, standardized taxa-level common names will need to be added in manually.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Finalize this page.</p>
+<p>From this point, the <code>result</code> dataframe will have a <code>common_name</code> column containing concatenated species-level common names from <code>human-foods.csv</code>. These individual names need to be consolidated into a single standardized name per ASV — a <code>conventional_name</code> — that is concise and human-readable. For example, an ASV matching <em>Fragaria</em> and <em>Rubus</em> species might have a <code>common_name</code> of "beach strawberry; scarlet strawberry; strawberry; arctic bramble; cloudberry; ..." but a <code>conventional_name</code> of "strawberries, raspberries, and blackberries."</p>
+<p>This consolidation is done manually and saved as a new column in the CSV. The lab maintains a curated trnL common names CSV with <code>conventional_name</code> already populated for all known ASVs; if you are working with trnL data, you likely do not need to create the CSV from scratch.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The common names CSV also includes <code>genus</code> and <code>genus_conventional_name</code> columns, which are used by the <code>assign_common_names()</code> function (below) to resolve conflicts when an ASV in your phyloseq matches multiple rows in the CSV. These columns are semicolon-separated and map each genus to a conventional name at the genus level.</p>
 </div>
+<h2 id="assigning-common-names-to-a-phyloseq">Assigning Common Names to a Phyloseq</h2>
+<p>Once you have a common names CSV — either the lab's existing trnL CSV or one you have created following the steps above — you can use the <code>assign_common_names()</code> function to assign those names to your phyloseq object. The function matches each ASV in the phyloseq against the CSV, handles cases where an ASV matches multiple rows, and adds <code>common_name</code> and <code>taxa</code> columns to the phyloseq's taxonomy table.</p>
+<h3 id="reading-in-the-function">Reading In the Function</h3>
+<p>Source the function from the R file where it is saved:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nf">source</span><span class="p">(</span><span class="s">&quot;[path/to/assign_common_names.R]&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="running-the-function">Running the Function</h3>
+<p>The function takes a phyloseq object and the path to a common names CSV and returns the phyloseq with two new columns appended to the taxonomy table:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">assign_common_names</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[path/to/common_names.csv]&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The inputs of the function are:</p>
+<ul>
+<li><code>physeq</code> (required) — your phyloseq object</li>
+<li><code>common_names_csv</code> (required) — the file path to a common names CSV containing at least the columns <code>asv</code>, <code>taxon</code>, and <code>conventional_name</code></li>
+<li><code>report_conflicts</code> (optional) — a Boolean that controls whether conflicts (ASVs matching multiple CSV rows) are printed to the console; by default <code>TRUE</code></li>
+<li><code>report_all_conflicts</code> (optional) — a Boolean that controls whether all conflicts are printed or only unresolved ones; by default <code>TRUE</code></li>
+<li><code>concatenate_conflicts</code> (optional) — a Boolean that controls whether unresolved conflicts are concatenated into a single name rather than defaulting to the first match; by default <code>TRUE</code></li>
+</ul>
+<h3 id="understanding-the-output">Understanding the Output</h3>
+<p>The function returns the same phyloseq object with two columns added to the taxonomy table:</p>
+<ul>
+<li><code>common_name</code> — the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains," "oranges, lemons, grapefruits, and other citruses")</li>
+<li><code>taxa</code> — the full set of scientific names associated with the ASV, alphabetized and semicolon-separated</li>
+</ul>
+<p>You can view the updated taxonomy table with the following:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">View</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps</span><span class="p">)))</span>
+</span></code></pre></div>
+<p>ASVs that did not match any row in the CSV will have <code>NA</code> for both <code>common_name</code> and <code>taxa</code>.</p>
+<h3 id="how-matching-works">How Matching Works</h3>
+<p>The function matches each ASV in the phyloseq's taxonomy table against the <code>asv</code> column of the CSV using substring matching. For most ASVs, this produces a single, unambiguous match; the <code>conventional_name</code> from that row is assigned directly.</p>
+<p>When an ASV matches multiple rows in the CSV — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function attempts to resolve the conflict using the following strategies, in order:</p>
+<ol>
+<li><strong>Superset resolution</strong> — if one matched row's <code>taxon</code> field contains all of the species from every other matched row, that row's <code>conventional_name</code> is used.</li>
+<li><strong>Genus-level resolution</strong> — if the <code>genus</code> and <code>genus_conventional_name</code> columns in the CSV provide mappings for all genera involved, those genus-level names are merged into a single conventional name.</li>
+<li><strong>Partial genus resolution</strong> — if genus-level mappings exist for some but not all genera, the function combines genus-level names with the <code>conventional_name</code> values from unresolved rows.</li>
+<li><strong>Concatenation</strong> — if none of the above strategies resolve the conflict and <code>concatenate_conflicts</code> is <code>TRUE</code>, the function merges the <code>conventional_name</code> values from all matched rows into a single name using intelligent formatting (consolidating subtypes, deduplicating plurals, and formatting with commas and "and").</li>
+</ol>
+<p>The function prints a summary of all conflicts and their resolution methods to the console. You can also access the full conflict report as a dataframe:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;common_name_conflicts&quot;</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nf">View</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The conflict report includes the ASV sequence, the number of matches, the resolution method used, the assigned name, and all candidate names and taxa. This is useful for auditing assignments and identifying cases that may need manual review.</p>
+<details class="question">
+<summary>When would I need to review conflicts manually?</summary>
+<p>In most cases, the function's resolution strategies produce sensible names automatically. Manual review is most useful when you see <code>concatenated</code> or <code>first_match_default</code> in the <code>resolution_method</code> column of the conflict report, as these indicate cases where the function could not confidently resolve the conflict using taxonomic information alone. You can update the CSV's <code>conventional_name</code>, <code>genus</code>, or <code>genus_conventional_name</code> columns to improve resolution for these ASVs in future runs.</p>
+</details>
 
 
 
@@ -1121,7 +1229,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 11, 2026 19:59:59 UTC">February 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 11, 2026 20:13:58 UTC">February 11, 2026</span>
   </span>
 
     
