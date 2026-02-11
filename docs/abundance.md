@@ -1,6 +1,6 @@
 # Calculating Relative Abundance
 
-This page will instruct you in the calculation of relative abundance using the custom `foodseqSetup()` function and to provide background on the purpose and interpretation of relative abundance. These steps are intended to follow the [calculation of diversity](http://127.0.0.1:8000/diversity.html) and precede the [creation of a PCA plot](http://127.0.0.1:8000/pca.html).
+This page will instruct you in the calculation of relative abundance using the custom `foodseqSetup()` function and to provide background on the purpose and interpretation of relative abundance. These steps are intended to follow the [calculation of diversity](https://lad-lab.github.io/diversity.html) and precede the [creation of a PCA plot](https://lad-lab.github.io/pca.html).
 
 !!! to-do
 
