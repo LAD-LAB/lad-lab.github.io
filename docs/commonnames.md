@@ -44,6 +44,44 @@ Prune human-foods.csv to the desired species:
     dim(humanfoods)
     ```
 
+    Modify the names of the read-in reference and mutate into a dataframe:
+
+    ``` r
+    headers <- names(taxref)
+    asv <- as.character(taxref)
+
+    taxa_df <- headers %>%
+      # Remove the leading ">" character from headers
+      str_remove("^>") %>%
+      # Split headers by ";"
+      str_split(";") %>%
+      # Convert to a dataframe
+      map_dfr(~as.data.frame(t(.x), stringsAsFactors = FALSE)) %>%
+      # Rename columns for taxonomic ranks
+      rename(
+        Kingdom = V1, 
+        Phylum = V2, 
+        Class = V3, 
+        Order = V4, 
+        Family = V5, 
+        Genus = V6, 
+        Species = V7, 
+        Subspecies = V8,
+        Varietas = V9,
+        Forma = V10
+      )
+    
+    taxa_df <- taxa_df %>%
+      mutate(across(everything(), ~ na_if(., "NA")))
+
+    taxa_df <- taxa_df %>%
+      mutate(
+        asv = asv,  # Add sequences as a column
+        scientific_name = coalesce(Subspecies, Species, Genus)  # Choose the lowest assigned level; for trnL add Varietas and Forma
+      ) %>%
+      select(asv, everything()) 
+    ```
+
 === "12Sv5"
 
     ``` r
@@ -57,44 +95,41 @@ Prune human-foods.csv to the desired species:
     dim(humanfoods)
     ```
 
-Modify the names of the read-in reference and mutate into a dataframe:
+    Modify the names of the read-in reference and mutate into a dataframe:
 
-``` r
-headers <- names(taxref)
-asv <- as.character(taxref)
+    ``` r
+    headers <- names(taxref)
+    asv <- as.character(taxref)
 
-taxa_df <- headers %>%
-  # Remove the leading ">" character from headers
-  str_remove("^>") %>%
-  # Split headers by ";"
-  str_split(";") %>%
-  # Convert to a dataframe
-  map_dfr(~as.data.frame(t(.x), stringsAsFactors = FALSE)) %>%
-  # Rename columns for taxonomic ranks
-  rename(
-    Kingdom = V1, 
-    Phylum = V2, 
-    Class = V3, 
-    Order = V4, 
-    Family = V5, 
-    Genus = V6, 
-    Species = V7, 
-    Subspecies = V8,
-    # for trnL only:
-    # Varietas = V9,
-    # Forma = V10
-  )
+    taxa_df <- headers %>%
+      # Remove the leading ">" character from headers
+      str_remove("^>") %>%
+      # Split headers by ";"
+      str_split(";") %>%
+      # Convert to a dataframe
+      map_dfr(~as.data.frame(t(.x), stringsAsFactors = FALSE)) %>%
+      # Rename columns for taxonomic ranks
+      rename(
+        Kingdom = V1, 
+        Phylum = V2, 
+        Class = V3, 
+        Order = V4, 
+        Family = V5, 
+        Genus = V6, 
+        Species = V7, 
+        Subspecies = V8
+      )
 
-taxa_df <- taxa_df %>%
-  mutate(across(everything(), ~ na_if(., "NA")))
+    taxa_df <- taxa_df %>%
+      mutate(across(everything(), ~ na_if(., "NA")))
 
-taxa_df <- taxa_df %>%
-  mutate(
-    asv = asv,  # Add sequences as a column
-    scientific_name = coalesce(Subspecies, Species, Genus)  # Choose the lowest assigned level; for trnL add Varietas and Forma
-  ) %>%
-  select(asv, everything()) 
-```
+    taxa_df <- taxa_df %>%
+      mutate(
+        asv = asv,  # Add sequences as a column
+        scientific_name = coalesce(Subspecies, Species, Genus)  # Choose the lowest assigned level; for trnL add Varietas and Forma
+      ) %>%
+      select(asv, everything()) 
+    ```
 
 Join `humanfoods` to `taxa_df` to add in common names:
 
