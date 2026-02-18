@@ -178,9 +178,9 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 
     The common names CSV also includes `genus` and `genus_conventional_name` columns, which are used by the `assign_common_names()` function (below) to resolve conflicts when an ASV in your phyloseq matches multiple rows in the CSV. These columns are semicolon-separated and map each genus to a conventional name at the genus level.
 
-## Assigning Common Names to a Phyloseq
+## `assign_common_names()` Function
 
-With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. First, read in the function and run it on your phyloseq:
+With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. After reading it into your analysis file, run:
 
 ``` r
 source("[path/to/assign_common_names.R]")
@@ -188,7 +188,7 @@ source("[path/to/assign_common_names.R]")
 ps <- assign_common_names(ps, "[path/to/common_names.csv]")
 ```
 
-The inputs of the function are:
+at minimum to assign common names. The inputs of the function are:
 
 * `physeq` (required) — your phyloseq object
 * `common_names_csv` (required) — the file path to a common names CSV containing at least the columns `asv`, `taxon`, and `conventional_name`
@@ -196,17 +196,136 @@ The inputs of the function are:
 * `report_all_conflicts` (optional) — whether all conflicts are printed or only unresolved ones; by default `TRUE`
 * `concatenate_conflicts` (optional) — whether unresolved conflicts are concatenated into a single name rather than defaulting to the first match; by default `TRUE`
 
+The function first reads in the common names CSV and builds a genus-level lookup table from the `genus` and `genus_conventional_name` columns, splitting semicolon-separated entries into individual genus-name pairs:
+
+``` r
+common_names <- read.csv(common_names_csv, stringsAsFactors = FALSE)
+
+genus_key <- NULL
+if ("genus" %in% colnames(common_names) && "genus_conventional_name" %in% colnames(common_names)) {
+  # ...
+  genus_list <- list()
+  for (idx in which(valid_genus)) {
+    genera <- trimws(strsplit(common_names$genus[idx], ";")[[1]])
+    conv_names <- trimws(strsplit(common_names$genus_conventional_name[idx], ";")[[1]])
+
+    for (j in seq_along(genera)) {
+      if (j <= length(conv_names)) {
+        genus_list[[genera[j]]] <- conv_names[j]
+      }
+    }
+  }
+
+  if (length(genus_list) > 0) {
+    genus_key <- unlist(genus_list)
+  }
+}
+```
+
+Next, it extracts the taxonomy table and ASV sequences from the phyloseq and initializes `common_name` and `taxa` columns:
+
+``` r
+tax_tab <- as.data.frame(tax_table(physeq))
+
+if ("ASV" %in% colnames(tax_tab)) {
+  asv_seqs <- tax_tab$ASV
+} else {
+  asv_seqs <- rownames(tax_tab)
+}
+
+tax_tab$common_name <- NA_character_
+tax_tab$taxa <- NA_character_
+```
+
+The function also defines a set of internal helper functions for string manipulation (`singularize()`, `pluralize()`, `consolidate_subtypes()`, `deduplicate_with_plurals()`, and others) used to intelligently merge conventional names when conflicts arise — for example, consolidating "wild rice" and "rice" into "rices," or deduplicating plural forms. These are wrapped by `smart_merge_names()`, which applies them in sequence.
+
+The main matching loop iterates over each ASV in the phyloseq and uses `grepl()` for substring matching against the `asv` column of the CSV. For most ASVs this produces a single match, and the `conventional_name` from that row is assigned directly:
+
+``` r
+for (i in seq_along(asv_seqs)) {
+  query_seq <- asv_seqs[i]
+  matches <- grepl(query_seq, common_names$asv, fixed = TRUE)
+
+  if (sum(matches) == 0) {
+    next
+  } else if (sum(matches) == 1) {
+    tax_tab$common_name[i] <- common_names$conventional_name[matches]
+    tax_tab$taxa[i] <- common_names$taxon[matches]
+  } else {
+    # Multiple matches — attempt to resolve (see below)
+  }
+}
+```
+
+When an ASV matches multiple rows — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function tries three resolution strategies in order. First, it checks whether one matched row's `taxon` field is a superset of all others:
+
+``` r
+for (j in seq_along(matched_taxa)) {
+  species_j <- strsplit(matched_taxa[j], "; ")[[1]]
+  is_superset_of_all <- TRUE
+  for (k in seq_along(matched_taxa)) {
+    if (j == k) next
+    species_k <- strsplit(matched_taxa[k], "; ")[[1]]
+    if (!all(species_k %in% species_j)) {
+      is_superset_of_all <- FALSE
+      break
+    }
+  }
+  if (is_superset_of_all) {
+    tax_tab$common_name[i] <- matched_conv_names[j]
+    resolution_method <- "superset"
+    resolved <- TRUE
+    break
+  }
+}
+```
+
+If that does not resolve the conflict, it attempts genus-level resolution using the `genus_key` lookup built earlier:
+
+``` r
+if (!resolved && !is.null(genus_key)) {
+  all_genera <- unique(unlist(lapply(matched_taxa, extract_genera)))
+  genus_common_names <- genus_key[all_genera]
+  genus_common_names <- genus_common_names[!is.na(genus_common_names)]
+
+  if (length(genus_common_names) == length(all_genera) && length(all_genera) > 0) {
+    # All genera have mappings — merge them
+    formatted_name <- smart_merge_names(genus_common_names)
+    tax_tab$common_name[i] <- formatted_name
+    resolved <- TRUE
+  } else if (length(genus_common_names) > 0) {
+    # Partial resolution — combine genus-level and row-level names
+    # ...
+  }
+}
+```
+
+Finally, if the conflict is still unresolved and `concatenate_conflicts` is `TRUE`, it merges the matched `conventional_name` values with `smart_merge_names()`:
+
+``` r
+if (!resolved) {
+  if (concatenate_conflicts) {
+    unique_names <- unique(matched_conv_names[matched_conv_names != "" & !is.na(matched_conv_names)])
+    if (length(unique_names) > 0) {
+      formatted_name <- smart_merge_names(unique_names)
+      tax_tab$common_name[i] <- formatted_name
+      resolution_method <- "concatenated"
+    }
+  }
+}
+```
+
+All conflicts are recorded in a dataframe that is stored as an attribute on the returned phyloseq.
+
+### Understanding the Output
+
 The function returns the same phyloseq with two columns added to the taxonomy table: `common_name`, the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains"); and `taxa`, the full set of scientific names associated with the ASV, alphabetized and semicolon-separated. ASVs that did not match any row in the CSV will have `NA` for both columns. You can view the updated taxonomy table with:
 
 ``` r
 View(as.data.frame(tax_table(ps)))
 ```
 
-### Conflict Resolution
-
-The function matches each ASV in the phyloseq against the `asv` column of the CSV using substring matching. For most ASVs this produces a single match, and the `conventional_name` from that row is assigned directly. When an ASV matches multiple rows — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function attempts to resolve the conflict by checking, in order, whether one matched row's `taxon` field is a superset of all others; whether the `genus` and `genus_conventional_name` columns in the CSV can resolve the conflict at the genus level; and, if `concatenate_conflicts` is `TRUE`, whether the matched `conventional_name` values can be merged into a single name.
-
-The function prints a summary of all conflicts and their resolution methods to the console. You can also access the full conflict report as a dataframe:
+The function also prints a summary of all conflicts and their resolution methods to the console. You can access the full conflict report as a dataframe with:
 
 ``` r
 conflicts <- attr(ps, "common_name_conflicts")
