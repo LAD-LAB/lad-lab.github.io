@@ -180,21 +180,11 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 
 ## Assigning Common Names to a Phyloseq
 
-Once you have a common names CSV — either the lab's existing trnL CSV or one you have created following the steps above — you can use the `assign_common_names()` function to assign those names to your phyloseq object. The function matches each ASV in the phyloseq against the CSV, handles cases where an ASV matches multiple rows, and adds `common_name` and `taxa` columns to the phyloseq's taxonomy table.
-
-### Reading In the Function
-
-Source the function from the R file where it is saved:
+With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. First, read in the function and run it on your phyloseq:
 
 ``` r
 source("[path/to/assign_common_names.R]")
-```
 
-### Running the Function
-
-The function takes a phyloseq object and the path to a common names CSV and returns the phyloseq with two new columns appended to the taxonomy table:
-
-``` r
 ps <- assign_common_names(ps, "[path/to/common_names.csv]")
 ```
 
@@ -202,35 +192,19 @@ The inputs of the function are:
 
 * `physeq` (required) — your phyloseq object
 * `common_names_csv` (required) — the file path to a common names CSV containing at least the columns `asv`, `taxon`, and `conventional_name`
-* `report_conflicts` (optional) — a Boolean that controls whether conflicts (ASVs matching multiple CSV rows) are printed to the console; by default `TRUE`
-* `report_all_conflicts` (optional) — a Boolean that controls whether all conflicts are printed or only unresolved ones; by default `TRUE`
-* `concatenate_conflicts` (optional) — a Boolean that controls whether unresolved conflicts are concatenated into a single name rather than defaulting to the first match; by default `TRUE`
+* `report_conflicts` (optional) — whether conflicts (ASVs matching multiple CSV rows) are printed to the console; by default `TRUE`
+* `report_all_conflicts` (optional) — whether all conflicts are printed or only unresolved ones; by default `TRUE`
+* `concatenate_conflicts` (optional) — whether unresolved conflicts are concatenated into a single name rather than defaulting to the first match; by default `TRUE`
 
-### Understanding the Output
-
-The function returns the same phyloseq object with two columns added to the taxonomy table:
-
-* `common_name` — the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains," "oranges, lemons, grapefruits, and other citruses")
-* `taxa` — the full set of scientific names associated with the ASV, alphabetized and semicolon-separated
-
-You can view the updated taxonomy table with the following:
+The function returns the same phyloseq with two columns added to the taxonomy table: `common_name`, the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains"); and `taxa`, the full set of scientific names associated with the ASV, alphabetized and semicolon-separated. ASVs that did not match any row in the CSV will have `NA` for both columns. You can view the updated taxonomy table with:
 
 ``` r
 View(as.data.frame(tax_table(ps)))
 ```
 
-ASVs that did not match any row in the CSV will have `NA` for both `common_name` and `taxa`.
+### Conflict Resolution
 
-### How Matching Works
-
-The function matches each ASV in the phyloseq's taxonomy table against the `asv` column of the CSV using substring matching. For most ASVs, this produces a single, unambiguous match; the `conventional_name` from that row is assigned directly.
-
-When an ASV matches multiple rows in the CSV — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function attempts to resolve the conflict using the following strategies, in order:
-
-1. **Superset resolution** — if one matched row's `taxon` field contains all of the species from every other matched row, that row's `conventional_name` is used.
-2. **Genus-level resolution** — if the `genus` and `genus_conventional_name` columns in the CSV provide mappings for all genera involved, those genus-level names are merged into a single conventional name.
-3. **Partial genus resolution** — if genus-level mappings exist for some but not all genera, the function combines genus-level names with the `conventional_name` values from unresolved rows.
-4. **Concatenation** — if none of the above strategies resolve the conflict and `concatenate_conflicts` is `TRUE`, the function merges the `conventional_name` values from all matched rows into a single name using intelligent formatting (consolidating subtypes, deduplicating plurals, and formatting with commas and "and").
+The function matches each ASV in the phyloseq against the `asv` column of the CSV using substring matching. For most ASVs this produces a single match, and the `conventional_name` from that row is assigned directly. When an ASV matches multiple rows — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function attempts to resolve the conflict by checking, in order, whether one matched row's `taxon` field is a superset of all others; whether the `genus` and `genus_conventional_name` columns in the CSV can resolve the conflict at the genus level; and, if `concatenate_conflicts` is `TRUE`, whether the matched `conventional_name` values can be merged into a single name.
 
 The function prints a summary of all conflicts and their resolution methods to the console. You can also access the full conflict report as a dataframe:
 
@@ -239,8 +213,8 @@ conflicts <- attr(ps, "common_name_conflicts")
 View(conflicts)
 ```
 
-The conflict report includes the ASV sequence, the number of matches, the resolution method used, the assigned name, and all candidate names and taxa. This is useful for auditing assignments and identifying cases that may need manual review.
+The conflict report includes the ASV sequence, the number of matches, the resolution method, the assigned name, and all candidate names and taxa.
 
-??? question "When would I need to review conflicts manually?"
+??? question "Why would I need to review conflicts manually?"
 
-    In most cases, the function's resolution strategies produce sensible names automatically. Manual review is most useful when you see `concatenated` or `first_match_default` in the `resolution_method` column of the conflict report, as these indicate cases where the function could not confidently resolve the conflict using taxonomic information alone. You can update the CSV's `conventional_name`, `genus`, or `genus_conventional_name` columns to improve resolution for these ASVs in future runs.
+    In most cases the function's resolution strategies produce sensible names automatically. Manual review is most useful when you see `concatenated` or `first_match_default` in the `resolution_method` column of the conflict report, as these indicate cases where the function could not confidently resolve the conflict using taxonomic information alone. You can update the CSV's `conventional_name`, `genus`, or `genus_conventional_name` columns to improve resolution for these ASVs in future runs.
