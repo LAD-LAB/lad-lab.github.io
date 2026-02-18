@@ -115,12 +115,23 @@ Read in primers, food species, and RefSeq data for the gene of interest:
     mito
     ```
 
-Also, read in the SQL file from Isilon (make sure you are connected):
+Also, read in the SQL file (see [Creating the SQL File](sql.md) for more information):
 
-``` r
-# SQL reference
-sql <- '/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql'
-```
+=== "Duke"
+
+    Make sure you are connected to Isilon:
+
+    ``` r
+    # SQL reference
+    sql <- '/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql'
+    ```
+
+=== "General"
+
+    ``` r
+    # SQL reference
+    sql <- '[/path/to/accessionTaxa.sql]'
+    ```
 
 ## Querying for Sequences
 

@@ -21,11 +21,21 @@ humanfoods
 
 Read in the desired reference, for either trnL or 12Sv5. Make sure you read in the reference with taxonomy:
 
-``` r
-taxref <- Biostrings::readDNAStringSet("/Users/ams292/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/Ashish_S/References/dada2-compatible/[path-to-reference]")
+=== "Duke"
 
-taxref
-```
+    ``` r
+    taxref <- Biostrings::readDNAStringSet("/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/Ashish_S/References/dada2-compatible/[path-to-reference]")
+
+    taxref
+    ```
+
+=== "General"
+
+    ``` r
+    taxref <- Biostrings::readDNAStringSet("[/path/to/references/dada2-compatible/path-to-reference]")
+
+    taxref
+    ```
 
 ### Pre-Processing and Data Wrangling
 

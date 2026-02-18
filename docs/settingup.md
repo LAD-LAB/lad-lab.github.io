@@ -1,109 +1,191 @@
 # Setting Up
 
-This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, the Duke Compute Cluster, and Isilon.
+This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, your computing cluster, and shared storage.
 
-## Duke Compute Cluster
+## Computing Cluster
 
-The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit [https://oit-rc.pages.oit.duke.edu/rcsupportdocs/](https://oit-rc.pages.oit.duke.edu/rcsupportdocs/).
+=== "Duke"
 
-The DCC has two directories, `/hpc/home` and `/hpc/group`; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within `/hpc/group/ldavidlab`. Create a folder for yourself at `/hpc/group/ldavidlab/users/[NetID]`.
+    The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit [https://oit-rc.pages.oit.duke.edu/rcsupportdocs/](https://oit-rc.pages.oit.duke.edu/rcsupportdocs/).
 
-### Logging In
+    The DCC has two directories, `/hpc/home` and `/hpc/group`; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within `/hpc/group/ldavidlab`. Create a folder for yourself at `/hpc/group/ldavidlab/users/[NetID]`.
 
-To use the Duke Compute Cluster, open the terminal and log in with `ssh [NetID]@dcc-login.oit.duke.edu`. This will require multi-factor authentication. Here is an example of what this should look like:
+    ### Logging In
 
-``` sh
-(base) ams292@MGM-C6LXGRQV ~ % ssh ams292@dcc-login.oit.duke.edu
-(ams292@dcc-login.oit.duke.edu) Password: 
-(ams292@dcc-login.oit.duke.edu) Duo two-factor login for ams292
+    To use the Duke Compute Cluster, open the terminal and log in with `ssh [NetID]@dcc-login.oit.duke.edu`. This will require multi-factor authentication. Here is an example of what this should look like:
 
-Enter a passcode or select one of the following options:
+    ``` sh
+    (base) ams292@MGM-C6LXGRQV ~ % ssh ams292@dcc-login.oit.duke.edu
+    (ams292@dcc-login.oit.duke.edu) Password:
+    (ams292@dcc-login.oit.duke.edu) Duo two-factor login for ams292
 
- 1. Duo Push to XXX-XXX-0389
- 2. Duo Push to ipad (iOS)
- 3. Phone call to XXX-XXX-0389
- 4. SMS passcodes to XXX-XXX-0389
+    Enter a passcode or select one of the following options:
 
-Passcode or option (1-4): 1
-Success. Logging you in...
-Success. Logging you in...
-Last login: Tue Oct  1 10:26:19 2024 from 152.16.191.138
-################################################################################
-# Please report any issues or questions to: oitresearchsupport@duke.edu        #
-#                                                                              #
-# Duke Research Computing info and documentation: https://rc.duke.edu          #
-#                                                                              #
-# My next patch run is Wednesday (10-02-2024) at  7 PM                         #
-################################################################################
-ams292@dcc-login-04  ~ $ 
-```
+     1. Duo Push to XXX-XXX-0389
+     2. Duo Push to ipad (iOS)
+     3. Phone call to XXX-XXX-0389
+     4. SMS passcodes to XXX-XXX-0389
 
-### SSH Keys
+    Passcode or option (1-4): 1
+    Success. Logging you in...
+    Success. Logging you in...
+    Last login: Tue Oct  1 10:26:19 2024 from 152.16.191.138
+    ################################################################################
+    # Please report any issues or questions to: oitresearchsupport@duke.edu        #
+    #                                                                              #
+    # Duke Research Computing info and documentation: https://rc.duke.edu          #
+    #                                                                              #
+    # My next patch run is Wednesday (10-02-2024) at  7 PM                         #
+    ################################################################################
+    ams292@dcc-login-04  ~ $
+    ```
 
-You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
+    ### SSH Keys
 
-``` sh
-ssh-keygen -t ed25519
-```
+    You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
 
-Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
+    ``` sh
+    ssh-keygen -t ed25519
+    ```
 
-Next, view your *public* key by running:
+    Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
 
-``` sh
-cat ~/.ssh/id_ed25519.pub 
-# Make sure to include .pub
-```
+    Next, view your *public* key by running:
 
-and copy the contents to your Duke profile at [https://idms-web-selfservice.oit.duke.edu/advanced](https://idms-web-selfservice.oit.duke.edu/advanced) under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA! 
+    ``` sh
+    cat ~/.ssh/id_ed25519.pub
+    # Make sure to include .pub
+    ```
 
-Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
+    and copy the contents to your Duke profile at [https://idms-web-selfservice.oit.duke.edu/advanced](https://idms-web-selfservice.oit.duke.edu/advanced) under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA!
 
-``` sh
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-```
+    Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
 
-and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
+    ``` sh
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+    ```
 
-``` sh
-Host *
-UseKeychain yes
-AddKeysToAgent yes
-IdentityFile ~/.ssh/id_ed25519
-```
+    and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
 
- For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
+    ``` sh
+    Host *
+    UseKeychain yes
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+    ```
 
-### Command-Line Alternatives
+     For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
 
-You can also access the DCC from [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.
+    ### Command-Line Alternatives
 
-!!! to-do
+    You can also access the DCC from [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.
 
-    Add instructions for setting up and using Cyberduck.
+    !!! to-do
 
-### Common Commands
+        Add instructions for setting up and using Cyberduck.
 
-Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:
+    ### Common Commands
 
-* `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`. 
-    * you can receive an email notification when the job finishes running by inserting `--mail-user=[NetID]@duke.edu` after `sbatch`.
-    * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
-* `squeue -u [NetID]` — this shows a list of jobs submitted under your NetID.
-* `scancel [jobid]` — this cancels a job.
+    Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:
 
-## Isilon
+    * `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`.
+        * you can receive an email notification when the job finishes running by inserting `--mail-user=[NetID]@duke.edu` after `sbatch`.
+        * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
+    * `squeue -u [NetID]` — this shows a list of jobs submitted under your NetID.
+    * `scancel [jobid]` — this cancels a job.
 
-We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. To connect to Isilon on Windows:
+=== "General"
 
-1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
-2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
-3. If prompted to sign in, enter `DHE\[NetID]` as your username.
+    A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use [Slurm](https://slurm.schedmd.com/) for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.
 
-To connect to Isilon on a Mac:
+    Create a folder for yourself in your lab's shared directory on the cluster, e.g. `[/hpc/path/to/lab/directory]/users/[username]`.
 
-1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
-2. Enter `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`; add this to Favorite Servers under + and then select Connect.
+    ### Logging In
+
+    To use your cluster, open the terminal and log in with `ssh [username]@[hpc-hostname]`. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:
+
+    ``` sh
+    (base) user@local ~ % ssh user@hpc-login.example.edu
+    Password:
+    Last login: Tue Oct  1 10:26:19 2024
+    user@hpc-login ~ $
+    ```
+
+    ### SSH Keys
+
+    You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:
+
+    ``` sh
+    ssh-keygen -t ed25519
+    ```
+
+    Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
+
+    Next, view your *public* key by running:
+
+    ``` sh
+    cat ~/.ssh/id_ed25519.pub
+    # Make sure to include .pub
+    ```
+
+    and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to `~/.ssh/authorized_keys` on the cluster directly. For more details, see the [GitHub SSH documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+    Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
+
+    ``` sh
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+    ```
+
+    and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
+
+    ``` sh
+    Host *
+    UseKeychain yes
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+    ```
+
+     For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
+
+    ### Common Commands
+
+    Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:
+
+    * `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`.
+        * you can receive an email notification when the job finishes running by inserting `--mail-user=[username]@[your-email]` after `sbatch`.
+        * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
+    * `squeue -u [username]` — this shows a list of jobs submitted under your username.
+    * `scancel [jobid]` — this cancels a job.
+
+## Shared Storage
+
+=== "Duke"
+
+    We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. To connect to Isilon on Windows:
+
+    1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
+    2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
+    3. If prompted to sign in, enter `DHE\[NetID]` as your username.
+
+    To connect to Isilon on a Mac:
+
+    1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
+    2. Enter `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`; add this to Favorite Servers under + and then select Connect.
+
+=== "General"
+
+    Your lab likely uses a shared network drive (NAS, NFS mount, or similar) for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. Consult your system administrator for the hostname and share path.
+
+    To connect on Windows:
+
+    1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
+    2. In the Drive list, select any available letter. In the Folder box, enter `\\[nas-hostname]\[share-name]`. Select Reconnect at sign-in and then select Finish.
+    3. If prompted to sign in, enter your credentials.
+
+    To connect on a Mac:
+
+    1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
+    2. Enter `smb://[username]@[nas-hostname]/[share-name]`; add this to Favorite Servers under + and then select Connect.
 
 ## Terminal
 
@@ -115,7 +197,7 @@ To connect to Isilon on a Mac:
 
 ## R
 
-R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. 
+R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab.
 
 To download R, visit [https://cran.r-project.org/](https://cran.r-project.org/) and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this [here](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/) for computers running macOS with Apple silicon and [here](https://cran.r-project.org/bin/windows/base/old/) for computers running Windows. A majority of the lab currently uses R 4.4.1.
 
@@ -152,7 +234,7 @@ Commonly-used packages, operators, and functions in the lab can be found in the 
 * A vector is a one-dimensional list of objects of the same type.
 * A list is a one-dimensional list of objects that can be of different types.
 * A matrix is a two-dimensional table of objects of the same type. An array is a multidimensional matrix.
-* A data frame is a two-dimensional table of objects that can be of different types. 
+* A data frame is a two-dimensional table of objects that can be of different types.
 
 Some commonly-used data types include:
 
@@ -184,9 +266,9 @@ devtools::install_github("ammararuby/MButils")
 library(MButils)
 ```
 
-!!! note 
+!!! note
 
-    Note that you will need to install the CRAN packages `BiocManager` and `devtools` first in order to install packages from Bioconductor and GitHub respectively. 
+    Note that you will need to install the CRAN packages `BiocManager` and `devtools` first in order to install packages from Bioconductor and GitHub respectively.
 
     Also note that package installation functions require quotes around the name of a package, but `library()` does not.
 
@@ -262,22 +344,44 @@ Miscellaneous:
 * `summarise()` collapses a data frame down to summary values, often used with `group_by` to calculate values for a group of interest.
 
 
-## Box
+## Cloud Storage
 
-To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at [https://duke.app.box.com/](https://duke.app.box.com/).
+=== "Duke"
 
-To access Box through Mac Finder or Windows Explorer, install Box Drive from [https://duke.app.box.com/services/browse/newest/box_drive](https://duke.app.box.com/services/browse/newest/box_drive) and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.
+    To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at [https://duke.app.box.com/](https://duke.app.box.com/).
+
+    To access Box through Mac Finder or Windows Explorer, install Box Drive from [https://duke.app.box.com/services/browse/newest/box_drive](https://duke.app.box.com/services/browse/newest/box_drive) and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.
+
+=== "General"
+
+    Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.
 
 ## GitHub
 
-GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
+=== "Duke"
 
-!!! to-do
+    GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
 
-    Add GitHub instructions.
+    !!! to-do
 
-### Common Commands
+        Add GitHub instructions.
 
-!!! to-do
+    ### Common Commands
 
-    Add common `git` commands.
+    !!! to-do
+
+        Add common `git` commands.
+
+=== "General"
+
+    GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.
+
+    !!! to-do
+
+        Add GitHub instructions.
+
+    ### Common Commands
+
+    !!! to-do
+
+        Add common `git` commands.

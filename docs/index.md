@@ -4,12 +4,12 @@ Welcome to the David Lab Biostatistics Handbook! This website is intended to sup
 
 !!! warning
 
-    This website is a **work in progress** that was originally intended for lab-internal use. Key upcoming changes will generalize the instructions on this website for lab-external use, update older files like `Pipeline-to-Phyloseq.Rmd`, and add pages for common lab tools like a human read anonymizer and a 16S pipeline.
+    This website is a **work in progress.** Some pages are still being written or updated. Use the Duke/General tabs throughout the site to switch between Duke-specific and institution-agnostic instructions; selecting a tab on any page will switch all pages to that view.
 
 ## Navigation
 
-* [**Getting Started:**](https://lad-lab.github.io/) How to get set up and familiarize yourself with GitHub, the Duke Compute Cluster, and Isilon, as well as other lab biostatistics essentials.
-* [**Creating a Phyloseq:**](https://lad-lab.github.io/pipeline.html) How to create a phyloseq object from sequencing output, as well as information on creating and maintaining `human-foods.csv`, the trnL and 12Sv5 references, the SQL file on Isilon, and the common names assignment csv and code.
+* [**Getting Started:**](https://lad-lab.github.io/) How to get set up and familiarize yourself with GitHub, your computing cluster, and shared storage, as well as other lab biostatistics essentials.
+* [**Creating a Phyloseq:**](https://lad-lab.github.io/pipeline.html) How to create a phyloseq object from sequencing output, as well as information on creating and maintaining `human-foods.csv`, the trnL and 12Sv5 references, the SQL taxonomy file, and the common names assignment CSV and code.
 * [**Post-Phyloseq Processing and Analysis:**](https://lad-lab.github.io/processing.html) How to process and analyze your phyloseq once it has been created.
 
 To navigate between pages, use the following keyboard shortcuts:
@@ -20,4 +20,10 @@ To navigate between pages, use the following keyboard shortcuts:
 
 ## Feedback
 
-If you have comments, questions, or feedback, contact Ashish Subramanian at [ashish.subramanian@duke.edu](mailto:ashish.subramanian@duke.edu).
+=== "Duke"
+
+    If you have comments, questions, or feedback, contact Ashish Subramanian at [ashish.subramanian@duke.edu](mailto:ashish.subramanian@duke.edu).
+
+=== "General"
+
+    If you have comments, questions, or feedback, [open an issue](https://github.com/LAD-LAB/lad-lab.github.io/issues) on the GitHub repository.
