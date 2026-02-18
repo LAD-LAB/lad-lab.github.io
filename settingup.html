@@ -490,15 +490,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#duke-compute-cluster" class="md-nav__link">
+  <a href="#computing-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Duke Compute Cluster
+        Computing Cluster
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Duke Compute Cluster">
+    <nav class="md-nav" aria-label="Computing Cluster">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -545,16 +545,49 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#logging-in_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-keys_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-commands_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#isilon" class="md-nav__link">
+  <a href="#shared-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Isilon
+        Shared Storage
       
     </span>
   </a>
@@ -574,7 +607,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#common-commands_1" class="md-nav__link">
+  <a href="#common-commands_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Common Commands
@@ -640,10 +673,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#box" class="md-nav__link">
+  <a href="#cloud-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Box
+        Cloud Storage
       
     </span>
   </a>
@@ -663,7 +696,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#common-commands_2" class="md-nav__link">
+  <a href="#common-commands_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-commands_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         Common Commands
@@ -1091,14 +1135,17 @@
 
 
 <h1 id="setting-up">Setting Up</h1>
-<p>This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, the Duke Compute Cluster, and Isilon.</p>
-<h2 id="duke-compute-cluster">Duke Compute Cluster</h2>
+<p>This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, your computing cluster, and shared storage.</p>
+<h2 id="computing-cluster">Computing Cluster</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit <a href="https://oit-rc.pages.oit.duke.edu/rcsupportdocs/">https://oit-rc.pages.oit.duke.edu/rcsupportdocs/</a>.</p>
 <p>The DCC has two directories, <code>/hpc/home</code> and <code>/hpc/group</code>; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within <code>/hpc/group/ldavidlab</code>. Create a folder for yourself at <code>/hpc/group/ldavidlab/users/[NetID]</code>.</p>
 <h3 id="logging-in">Logging In</h3>
 <p>To use the Duke Compute Cluster, open the terminal and log in with <code>ssh [NetID]@dcc-login.oit.duke.edu</code>. This will require multi-factor authentication. Here is an example of what this should look like:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>ams292@MGM-C6LXGRQV<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>ams292@dcc-login.oit.duke.edu
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Password:<span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Password:
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Duo<span class="w"> </span>two-factor<span class="w"> </span>login<span class="w"> </span><span class="k">for</span><span class="w"> </span>ams292
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Enter<span class="w"> </span>a<span class="w"> </span>passcode<span class="w"> </span>or<span class="w"> </span><span class="k">select</span><span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>options:
@@ -1119,7 +1166,7 @@
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1">#                                                                              #</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="c1"># My next patch run is Wednesday (10-02-2024) at  7 PM                         #</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1">################################################################################</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>ams292@dcc-login-04<span class="w">  </span>~<span class="w"> </span>$<span class="w"> </span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>ams292@dcc-login-04<span class="w">  </span>~<span class="w"> </span>$
 </span></code></pre></div>
 <h3 id="ssh-keys">SSH Keys</h3>
 <p>You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:</p>
@@ -1127,10 +1174,10 @@
 </span></code></pre></div>
 <p>Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file <code>~/.ssh/id_ed25519.pub</code>.</p>
 <p>Next, view your <em>public</em> key by running:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w"> </span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Make sure to include .pub</span>
 </span></code></pre></div>
-<p>and copy the contents to your Duke profile at <a href="https://idms-web-selfservice.oit.duke.edu/advanced">https://idms-web-selfservice.oit.duke.edu/advanced</a> under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA! </p>
+<p>and copy the contents to your Duke profile at <a href="https://idms-web-selfservice.oit.duke.edu/advanced">https://idms-web-selfservice.oit.duke.edu/advanced</a> under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA!</p>
 <p>Next, set up a key manager or <code>ssh-agent</code> to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
 </span></code></pre></div>
@@ -1150,7 +1197,7 @@
 <h3 id="common-commands">Common Commands</h3>
 <p>Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:</p>
 <ul>
-<li><code>sbatch [file.sh]</code> — this submits a batch job to run an inputted shell script; the output should look like <code>Submitted batch job [jobid]</code>. <ul>
+<li><code>sbatch [file.sh]</code> — this submits a batch job to run an inputted shell script; the output should look like <code>Submitted batch job [jobid]</code>.<ul>
 <li>you can receive an email notification when the job finishes running by inserting <code>--mail-user=[NetID]@duke.edu</code> after <code>sbatch</code>.</li>
 <li>you can schedule a job to run after another job completes by inserting <code>--dependency=afterok:[jobid]</code> after <code>sbatch</code>, where <code>[jobid]</code> is the job ID of the previous job.</li>
 </ul>
@@ -1158,7 +1205,55 @@
 <li><code>squeue -u [NetID]</code> — this shows a list of jobs submitted under your NetID.</li>
 <li><code>scancel [jobid]</code> — this cancels a job.</li>
 </ul>
-<h2 id="isilon">Isilon</h2>
+</div>
+<div class="tabbed-block">
+<p>A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use <a href="https://slurm.schedmd.com/">Slurm</a> for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.</p>
+<p>Create a folder for yourself in your lab's shared directory on the cluster, e.g. <code>[/hpc/path/to/lab/directory]/users/[username]</code>.</p>
+<h3 id="logging-in_1">Logging In</h3>
+<p>To use your cluster, open the terminal and log in with <code>ssh [username]@[hpc-hostname]</code>. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>user@local<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>user@hpc-login.example.edu
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Password:
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Oct<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">10</span>:26:19<span class="w"> </span><span class="m">2024</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>user@hpc-login<span class="w"> </span>~<span class="w"> </span>$
+</span></code></pre></div>
+<h3 id="ssh-keys_1">SSH Keys</h3>
+<p>You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
+</span></code></pre></div>
+<p>Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file <code>~/.ssh/id_ed25519.pub</code>.</p>
+<p>Next, view your <em>public</em> key by running:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># Make sure to include .pub</span>
+</span></code></pre></div>
+<p>and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to <code>~/.ssh/authorized_keys</code> on the cluster directly. For more details, see the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub SSH documentation</a>.</p>
+<p>Next, set up a key manager or <code>ssh-agent</code> to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
+</span></code></pre></div>
+<p>and enter your passphrase. Then, edit <code>~/.ssh/config</code> with the following lines:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Host<span class="w"> </span>*
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>UseKeychain<span class="w"> </span>yes
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>AddKeysToAgent<span class="w"> </span>yes
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>IdentityFile<span class="w"> </span>~/.ssh/id_ed25519
+</span></code></pre></div>
+<p>For Windows users, follow <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">these instructions</a>.</p>
+<h3 id="common-commands_1">Common Commands</h3>
+<p>Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:</p>
+<ul>
+<li><code>sbatch [file.sh]</code> — this submits a batch job to run an inputted shell script; the output should look like <code>Submitted batch job [jobid]</code>.<ul>
+<li>you can receive an email notification when the job finishes running by inserting <code>--mail-user=[username]@[your-email]</code> after <code>sbatch</code>.</li>
+<li>you can schedule a job to run after another job completes by inserting <code>--dependency=afterok:[jobid]</code> after <code>sbatch</code>, where <code>[jobid]</code> is the job ID of the previous job.</li>
+</ul>
+</li>
+<li><code>squeue -u [username]</code> — this shows a list of jobs submitted under your username.</li>
+<li><code>scancel [jobid]</code> — this cancels a job.</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="shared-storage">Shared Storage</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Duke</label><label for="__tabbed_2_2">General</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. To connect to Isilon on Windows:</p>
 <ol>
 <li>Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.</li>
@@ -1170,14 +1265,31 @@
 <li>Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)</li>
 <li>Enter <code>smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff</code>; add this to Favorite Servers under + and then select Connect.</li>
 </ol>
+</div>
+<div class="tabbed-block">
+<p>Your lab likely uses a shared network drive (NAS, NFS mount, or similar) for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. Consult your system administrator for the hostname and share path.</p>
+<p>To connect on Windows:</p>
+<ol>
+<li>Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.</li>
+<li>In the Drive list, select any available letter. In the Folder box, enter <code>\\[nas-hostname]\[share-name]</code>. Select Reconnect at sign-in and then select Finish.</li>
+<li>If prompted to sign in, enter your credentials.</li>
+</ol>
+<p>To connect on a Mac:</p>
+<ol>
+<li>Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)</li>
+<li>Enter <code>smb://[username]@[nas-hostname]/[share-name]</code>; add this to Favorite Servers under + and then select Connect.</li>
+</ol>
+</div>
+</div>
+</div>
 <h2 id="terminal">Terminal</h2>
-<h3 id="common-commands_1">Common Commands</h3>
+<h3 id="common-commands_2">Common Commands</h3>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
 <p>Add common Terminal commands.</p>
 </div>
 <h2 id="r">R</h2>
-<p>R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab. </p>
+<p>R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab.</p>
 <p>To download R, visit <a href="https://cran.r-project.org/">https://cran.r-project.org/</a> and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this <a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/">here</a> for computers running macOS with Apple silicon and <a href="https://cran.r-project.org/bin/windows/base/old/">here</a> for computers running Windows. A majority of the lab currently uses R 4.4.1.</p>
 <h3 id="setting-up-rstudio">Setting Up RStudio</h3>
 <p>RStudio is an IDE, or integrated development environment, that creates a user-friendly interface with helpful developer tools for coding in R. Follow the instructions at <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a> to download RStudio.</p>
@@ -1192,18 +1304,18 @@
 <h3 id="coding-in-r">Coding in R</h3>
 <p>With a new markdown file, you can insert a code chunk by enclosing code in <code>```{r}</code> and <code>```</code> or by using the shortcut  <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>  (Windows) or  <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd>  (macOS).</p>
 <p>Here is an example of a code chunk, with comments created with a <code>#</code> to prevent them from being executed when run:
-<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w"> </span><span class="n">```{r}</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">print(&quot;This code will be run.&quot;) # This is a comment, useful for creating notes and annotations.</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n"># print(&quot;This code will not be run because it is commented out.&quot;)</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n"> ```</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w"> </span><span class="n">```{r}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">print(&quot;This code will be run.&quot;) # This is a comment, useful for creating notes and annotations.</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n"># print(&quot;This code will not be run because it is commented out.&quot;)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n"> ```</span>
 </span></code></pre></div></p>
 <p>Commonly-used packages, operators, and functions in the lab can be found in the next section. It is also important to understand common data structures:</p>
 <ul>
 <li>A vector is a one-dimensional list of objects of the same type.</li>
 <li>A list is a one-dimensional list of objects that can be of different types.</li>
 <li>A matrix is a two-dimensional table of objects of the same type. An array is a multidimensional matrix.</li>
-<li>A data frame is a two-dimensional table of objects that can be of different types. </li>
+<li>A data frame is a two-dimensional table of objects that can be of different types.</li>
 </ul>
 <p>Some commonly-used data types include:</p>
 <ul>
@@ -1214,25 +1326,25 @@
 <h3 id="common-commands-and-packages">Common Commands and Packages</h3>
 <p>Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include <code>dplyr</code>, for data manipulation, and <code>ggplot2</code>, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use <code>MButils</code>, made by past lab members, and <code>phyloseq</code>, for working with phyloseq objects.</p>
 <p>To load a package, you will first need to install it and then load it with the <code>library()</code> function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># From CRAN:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># From Bioconductor:</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nf">library</span><span class="p">(</span><span class="n">BiocManager</span><span class="p">)</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;phyloseq&quot;</span><span class="p">)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1"># From GitHub:</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;ammararuby/MButils&quot;</span><span class="p">)</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="nf">library</span><span class="p">(</span><span class="n">MButils</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># From CRAN:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># From Bioconductor:</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nf">library</span><span class="p">(</span><span class="n">BiocManager</span><span class="p">)</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;phyloseq&quot;</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1"># From GitHub:</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;devtools&quot;</span><span class="p">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;ammararuby/MButils&quot;</span><span class="p">)</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="nf">library</span><span class="p">(</span><span class="n">MButils</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Note that you will need to install the CRAN packages <code>BiocManager</code> and <code>devtools</code> first in order to install packages from Bioconductor and GitHub respectively. </p>
+<p>Note that you will need to install the CRAN packages <code>BiocManager</code> and <code>devtools</code> first in order to install packages from Bioconductor and GitHub respectively.</p>
 <p>Also note that package installation functions require quotes around the name of a package, but <code>library()</code> does not.</p>
 </div>
 <p>Besides <code>install.packages()</code> and <code>library()</code>, common or helpful operators and functions to know include:</p>
@@ -1304,19 +1416,46 @@
 <li><code>select()</code> chooses a subset of columns from a larger data frame using their names.</li>
 <li><code>summarise()</code> collapses a data frame down to summary values, often used with <code>group_by</code> to calculate values for a group of interest.</li>
 </ul>
-<h2 id="box">Box</h2>
+<h2 id="cloud-storage">Cloud Storage</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Duke</label><label for="__tabbed_3_2">General</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at <a href="https://duke.app.box.com/">https://duke.app.box.com/</a>.</p>
 <p>To access Box through Mac Finder or Windows Explorer, install Box Drive from <a href="https://duke.app.box.com/services/browse/newest/box_drive">https://duke.app.box.com/services/browse/newest/box_drive</a> and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.</p>
+</div>
+<div class="tabbed-block">
+<p>Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.</p>
+</div>
+</div>
+</div>
 <h2 id="github">GitHub</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Duke</label><label for="__tabbed_4_2">General</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.</p>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
 <p>Add GitHub instructions.</p>
 </div>
-<h3 id="common-commands_2">Common Commands</h3>
+<h3 id="common-commands_3">Common Commands</h3>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
 <p>Add common <code>git</code> commands.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.</p>
+<div class="admonition to-do">
+<p class="admonition-title">To-do</p>
+<p>Add GitHub instructions.</p>
+</div>
+<h3 id="common-commands_4">Common Commands</h3>
+<div class="admonition to-do">
+<p class="admonition-title">To-do</p>
+<p>Add common <code>git</code> commands.</p>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -1340,7 +1479,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 15, 2026 23:38:53 UTC">January 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 18, 2026 19:49:34 UTC">February 18, 2026</span>
   </span>
 
     
