@@ -24,3 +24,10 @@
     -webkit-mask-image: var(--md-admonition-icon--to-do);
             mask-image: var(--md-admonition-icon--to-do);
   }
+
+  .download-buttons {
+    text-align: center;
+  }
+  .download-buttons .md-button {
+    margin: 0.3em 0.5em;
+  }

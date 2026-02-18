@@ -180,8 +180,10 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 
 ## `assign_common_names()` Function
 
+<div class="download-buttons" markdown>
 [Download assign_common_names.R](files/assign_common_names.R){ .md-button }
 [Download trnL common names CSV](files/trnL_common_names.csv){ .md-button }
+</div>
 
 With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. After reading it into your analysis file, run:
 
