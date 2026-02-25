@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
     
     
       
@@ -554,6 +554,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creating a Phyloseq (16S)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="16s.html" class="md-nav__link md-nav__link--active">
         
   
@@ -570,6 +588,180 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running the Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-batch-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring the Batch Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#walking-through-the-r-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Walking Through the R Script
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Walking Through the R Script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primer-removal-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primer Removal and Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dereplication-error-learning-and-denoising" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dereplication, Error Learning, and Denoising
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Tracking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequence-table-taxonomy-and-chimera-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequence Table, Taxonomy, and Chimera Removal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-name-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample Name Extraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phyloseq-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phyloseq Creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -885,6 +1077,172 @@
 </div>
 </div>
 </div>
+<h2 id="running-the-pipeline">Running the Pipeline</h2>
+<div class="download-buttons">
+<p><a class="md-button" href="files/PacBio_16S_pipeline.R">Download PacBio_16S_pipeline.R</a>
+<a class="md-button" href="files/run_r_in_container.sbatch">Download run_r_in_container.sbatch</a></p>
+</div>
+<p>The pipeline consists of two files: <code>PacBio_16S_pipeline.R</code>, the R script that processes raw PacBio HiFi reads into a finished phyloseq object, and <code>run_r_in_container.sbatch</code>, the Slurm batch script that runs the R script inside the lab's Apptainer container on the DCC. The R script uses DADA2 for all processing steps and GreenGenes2 for taxonomy assignment.</p>
+<h3 id="requirements">Requirements</h3>
+<p>The pipeline requires:</p>
+<ul>
+<li>The lab's Apptainer container (<code>metabarcoding.sif</code>), which has R, DADA2, phyloseq, and all other dependencies pre-installed</li>
+<li>A GreenGenes2 reference (<code>gg2_2024_09_toSpecies_trainset.fa.gz</code>)</li>
+<li>A metadata CSV (<code>user_biosamples.csv</code>) with sample information; the first column should contain sample identifiers matching the biosample names in the FASTQ filenames</li>
+<li>A folder of PacBio HiFi <code>.fastq.gz</code> files</li>
+</ul>
+<h3 id="file-structure">File Structure</h3>
+<p>Set up a project folder on the DCC with the following structure:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[project-folder]/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── PacBio_16S_pipeline.R
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── run_r_in_container.sbatch
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── gg2_2024_09_toSpecies_trainset.fa.gz
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── user_biosamples.csv
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└── fastx_files/
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    ├── [sample1].hifi_reads.[biosample1].hifi_reads.fastq.gz
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    ├── [sample2].hifi_reads.[biosample2].hifi_reads.fastq.gz
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    └── ...
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The pipeline extracts sample names from the FASTQ filenames using the pattern <code>*.hifi_reads.[BIOSAMPLE].hifi_reads.fastq.gz</code>. If your filenames follow a different convention, you will need to update the regex on line 114 of <code>PacBio_16S_pipeline.R</code>.</p>
+</div>
+<h3 id="configuring-the-batch-script">Configuring the Batch Script</h3>
+<p>Before running, update the two path variables at the top of <code>run_r_in_container.sbatch</code>:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">IMG</span><span class="o">=</span>/hpc/group/ldavidlab/metabarcoding.sif
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">WORK</span><span class="o">=</span>/hpc/group/ldavidlab/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
+</span></code></pre></div>
+<p><code>IMG</code> points to the Apptainer container and <code>WORK</code> points to your project folder. The batch script binds <code>WORK</code> to <code>/work</code> inside the container, so the R script sees all your input files under <code>/work/</code>. It also binds <code>/scratch</code> for fast temporary I/O during processing.</p>
+<p>The rest of the batch script creates the necessary output directories, sets thread control variables to match the Slurm allocation (32 CPUs, 256 GB memory, 5-day time limit), and runs the R script:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">/logs&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">/output&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-</span><span class="nv">32</span><span class="si">}</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="nv">$OMP_NUM_THREADS</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="nv">$OMP_NUM_THREADS</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span>/scratch/<span class="nv">$SLURM_JOB_ID</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$TMPDIR</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">:/work,/scratch:/scratch&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span>Rscript<span class="w"> </span>/work/PacBio_16S_pipeline.R
+</span></code></pre></div>
+<p>To submit the job:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/hpc/group/ldavidlab/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sbatch<span class="w"> </span>run_r_in_container.sbatch
+</span></code></pre></div>
+<p>You can optionally add <code>--mail-user=[NetID]@duke.edu</code> after <code>sbatch</code> to receive an email when the job finishes or fails.</p>
+<h3 id="walking-through-the-r-script">Walking Through the R Script</h3>
+<p>The R script runs end-to-end without user interaction. The walkthrough below describes each step for reference and troubleshooting.</p>
+<h4 id="setup">Setup</h4>
+<p>The script begins by enabling parallel processing and loading packages:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">options</span><span class="p">(</span><span class="n">mc.cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parallel</span><span class="o">::</span><span class="nf">detectCores</span><span class="p">())</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">dada2</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nf">library</span><span class="p">(</span><span class="n">Biostrings</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nf">library</span><span class="p">(</span><span class="n">ShortRead</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nf">library</span><span class="p">(</span><span class="n">phyloseq</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nf">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nf">library</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span></code></pre></div>
+<p>It then sets the three input paths, all relative to the <code>/work</code> mount inside the container:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">data.dir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/fastx_files&quot;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">greengenes2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/gg2_2024_09_toSpecies_trainset.fa.gz&quot;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">user_biosamples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/user_biosamples.csv&quot;</span>
+</span></code></pre></div>
+<p>Intermediate RDS files are written to scratch space (or <code>/work/temp</code> as a fallback) for faster I/O:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">path.out</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">&quot;TMPDIR&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">                   </span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">&quot;TMPDIR&quot;</span><span class="p">),</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">                   </span><span class="s">&quot;/work/temp&quot;</span><span class="p">)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">path.rds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RDS&quot;</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nf">dir.create</span><span class="p">(</span><span class="n">path.rds</span><span class="p">,</span><span class="w"> </span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">showWarnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="primer-removal-and-filtering">Primer Removal and Filtering</h4>
+<p>The script defines the 27F and 1492R primer sequences used for full-length 16S:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">F27</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;AGRGTTYGATYMTGGCTCAG&quot;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">R1492</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;RGYTACCTTGTTACGACTT&quot;</span>
+</span></code></pre></div>
+<p>Primers are removed with <code>removePrimers()</code>, using the reverse complement of 1492R and allowing for either orientation:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">nops</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">noprimers_dir</span><span class="p">,</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">fns</span><span class="p">))</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">prim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">removePrimers</span><span class="p">(</span><span class="n">fns</span><span class="p">,</span><span class="w"> </span><span class="n">nops</span><span class="p">,</span><span class="w"> </span><span class="n">primer.fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F27</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">                      </span><span class="n">primer.rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dada2</span><span class="o">:::</span><span class="nf">rc</span><span class="p">(</span><span class="n">R1492</span><span class="p">),</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">                      </span><span class="n">orient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The primer-trimmed reads are then filtered for quality. The length bounds (1000–1600 bp) reflect the expected range for full-length 16S amplicons:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">filts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">filtered_dir</span><span class="p">,</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">fns</span><span class="p">))</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">track</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filterAndTrim</span><span class="p">(</span><span class="n">nops</span><span class="p">,</span><span class="w"> </span><span class="n">filts</span><span class="p">,</span><span class="w"> </span><span class="n">minQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">minLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">maxLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1600</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">                       </span><span class="n">maxN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">rm.phix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">maxEE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">                       </span><span class="n">compress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">multithread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="dereplication-error-learning-and-denoising">Dereplication, Error Learning, and Denoising</h4>
+<p>Filtered reads are dereplicated, then the PacBio-specific error model is learned and used for denoising. Note the <code>BAND_SIZE = 32</code> parameter, which is larger than the default to accommodate PacBio's longer reads:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">drp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">derepFastq</span><span class="p">(</span><span class="n">filts</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">err</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">learnErrors</span><span class="p">(</span><span class="n">drp</span><span class="p">,</span><span class="w"> </span><span class="n">errorEstimationFunction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PacBioErrfun</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">                   </span><span class="n">BAND_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="n">multithread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">                   </span><span class="n">randomize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">dd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dada</span><span class="p">(</span><span class="n">drp</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">BAND_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="n">multithread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">           </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</span></code></pre></div>
+<p>An error model plot is saved to <code>error_plot.pdf</code> for quality control. Each of these steps also saves an intermediate RDS file, so if the pipeline fails partway through you can inspect the last successful output.</p>
+<h4 id="read-tracking">Read Tracking</h4>
+<p>A read tracking table is written to <code>read_tracking.csv</code>, recording how many reads survived each step:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">tracking</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">ccs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prim</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">primers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prim</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">                  </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">track</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">                  </span><span class="n">denoised</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sapply</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="o">$</span><span class="n">denoised</span><span class="p">)))</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">tracking</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;read_tracking.csv&quot;</span><span class="p">))</span>
+</span></code></pre></div>
+<h4 id="sequence-table-taxonomy-and-chimera-removal">Sequence Table, Taxonomy, and Chimera Removal</h4>
+<p>The denoised reads are assembled into a sequence table, then taxonomy is assigned using the GreenGenes2 reference with a minimum bootstrap confidence of 50:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">st</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">makeSequenceTable</span><span class="p">(</span><span class="n">dd</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">tax</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">assignTaxonomy</span><span class="p">(</span><span class="n">st</span><span class="p">,</span><span class="w"> </span><span class="n">greengenes2</span><span class="p">,</span><span class="w"> </span><span class="n">multithread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">                      </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">minBoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span>
+</span></code></pre></div>
+<p><em>Escherichia/Shigella</em> assignments are simplified to <em>Escherichia</em>, since the two genera are genomically indistinguishable by 16S:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">tax</span><span class="p">[,</span><span class="s">&quot;Genus&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;Escherichia/Shigella&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Escherichia&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">[,</span><span class="s">&quot;Genus&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<p>Chimeric sequences are then identified and removed from both the sequence table and the taxonomy table:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">bim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">isBimeraDenovo</span><span class="p">(</span><span class="n">st</span><span class="p">,</span><span class="w"> </span><span class="n">minFoldParentOverAbundance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">                      </span><span class="n">multithread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">st_nochim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st</span><span class="p">[,</span><span class="o">!</span><span class="n">bim</span><span class="p">]</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">tax_nochim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tax</span><span class="p">[</span><span class="o">!</span><span class="n">bim</span><span class="p">,]</span>
+</span></code></pre></div>
+<h4 id="sample-name-extraction">Sample Name Extraction</h4>
+<p>Sample names are extracted from the FASTQ filenames by pulling the biosample identifier from the <code>*.hifi_reads.[BIOSAMPLE].hifi_reads.fastq.gz</code> pattern:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">file.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">fns</span><span class="p">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">sample.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="s">&quot;.*\\.hifi_reads\\.(.*?)\\.hifi_reads\\.fastq\\.gz&quot;</span><span class="p">,</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">                    </span><span class="s">&quot;\\1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">file.names</span><span class="p">)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample.names</span>
+</span></code></pre></div>
+<h4 id="phyloseq-creation">Phyloseq Creation</h4>
+<p>The metadata CSV is read in, sample names are verified against the sequence table, and the phyloseq object is assembled from the chimera-free sequence table, taxonomy, metadata, and reference sequences:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">user_biosamples</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">phyloseq</span><span class="p">(</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nf">otu_table</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">,</span><span class="w"> </span><span class="n">taxa_are_rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nf">sample_data</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="nf">rownames</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">),</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">drop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">]),</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span><span class="nf">tax_table</span><span class="p">(</span><span class="n">tax_nochim</span><span class="p">)</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">)</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">dna</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Biostrings</span><span class="o">::</span><span class="nf">DNAStringSet</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">))</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="nf">names</span><span class="p">(</span><span class="n">dna</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">)</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge_phyloseq</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">dna</span><span class="p">)</span>
+</span></code></pre></div>
+<h4 id="output">Output</h4>
+<p>The finished phyloseq and all intermediate objects are copied to <code>output/</code> in your project folder:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[project-folder]/
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>└── output/
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    ├── ps_PacBio_16S.rds          # final phyloseq
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    ├── Sequence_Table_16S.rds     # chimera-free sequence table
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    ├── Taxonomy_GreenGenes.rds    # chimera-free taxonomy
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    ├── read_tracking.csv          # reads per sample per step
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    └── error_plot.pdf             # DADA2 error model plot
+</span></code></pre></div>
+<p>If the job used scratch space for temporary files, those are also copied back to <code>temp/RDS/</code> in your project folder before cleanup.</p>
 <h1 id="short-read-16s-sequencing-illumina">Short-Read 16S Sequencing (Illumina)</h1>
 
 
@@ -908,7 +1266,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 18, 2026 19:49:34 UTC">February 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 25, 2026 20:03:34 UTC">February 25, 2026</span>
   </span>
 
     
