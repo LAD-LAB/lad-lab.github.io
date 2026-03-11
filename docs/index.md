@@ -9,6 +9,7 @@ Welcome to the David Lab Biostatistics Handbook! This website is intended to sup
 ## Navigation
 
 * [**Getting Started:**](https://lad-lab.github.io/) How to get set up and familiarize yourself with GitHub, your computing cluster, and shared storage, as well as other lab biostatistics essentials.
+* [**Wet Lab Protocols:**](https://lad-lab.github.io/wetlab.html) How to perform the lab's core sequencing workflow, from DNA extraction through running the MiniSeq.
 * [**Creating a Phyloseq:**](https://lad-lab.github.io/pipeline.html) How to create a phyloseq object from sequencing output, as well as information on creating and maintaining `human-foods.csv`, the trnL and 12Sv5 references, the SQL taxonomy file, and the common names assignment CSV and code.
 * [**Post-Phyloseq Processing and Analysis:**](https://lad-lab.github.io/processing.html) How to process and analyze your phyloseq once it has been created.
 
