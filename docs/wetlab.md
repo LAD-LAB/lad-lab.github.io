@@ -13,9 +13,9 @@ graph TD
     G --> H[MiniSeq Run]
 ```
 
-- [**DNA Extraction:**](extraction.md) Manual extraction with the PowerSoil Pro kit or automated extraction with the epMotion, followed by LVis quantification.
-- [**PCR Amplification:**](pcr.md) Primary and indexing qPCR for 16S and FoodSeq (trnL / 12SV5) amplicons, as well as primer stock and barcode plate preparation.
+- [**DNA Extraction:**](extraction.md) Manual extraction with the PowerSoil Pro kit or automated extraction with the epMotion.
+- [**PCR Amplification:**](pcr.md) Primary and indexing qPCR for FoodSeq (trnL / 12SV5) amplicons.
 - [**Gel Electrophoresis:**](gel.md) Running agarose gels or E-Gels to verify amplification.
-- [**Amplicon Cleaning and Quantification:**](cleaning.md) Bead cleaning with AMPure XP beads and quantification by plate reader or Qubit.
-- [**Pooling and Sequencing Prep:**](pooling.md) Generating a pooling list, pooling with the epMotion, MinElute cleanup, gel extraction, and bioanalyzer submission.
-- [**Running the MiniSeq:**](miniseq.md) PhiX preparation, library denaturation and dilution, and loading and running the MiniSeq.
+- [**Amplicon Cleaning and Quantification:**](cleaning.md) Bead cleaning with AMPure XP beads and quantification by plate reader.
+- [**Pooling and Sequencing Prep:**](pooling.md) Generating a pooling list, pooling with the epMotion, and running the pool on a bioanalyzer.
+- [**Running the MiniSeq:**](miniseq.md) 1.2 pM pool, ~30% PhiX spike-in.
