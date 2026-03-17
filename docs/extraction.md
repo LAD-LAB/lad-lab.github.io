@@ -1,19 +1,15 @@
 # DNA Extraction
 
-We use two kit-based extraction methods depending on sample throughput.
+Prior to extraction, samples should be randomized, and each batch should include five extraction blanks.
 
-For small batches (up to ~24 samples), we use the **PowerSoil Pro Kit** (Qiagen, Cat. No. 47014) with the Vortex Adapter (Cat. No. 13000-V1-24). This is a manual spin-column extraction; follow the protocol included with the kit.
+We use two kit-based DNA extraction methods depending on sample throughput. Prior to sample homogenization, all samples undergo a 10-minute incubation at 65 °C. All other steps follow the manufacturer's instructions unless otherwise noted.
 
-For larger batches (up to 96 samples), we use the **MagAttract PowerSoil Pro DNA Kit** (Qiagen, Cat. No. 27731) on the **epMotion 5075** (Eppendorf). This kit uses magnetic beads instead of spin columns, allowing the epMotion to automate the binding, washing, and elution steps in a 96-well plate format. The bench work (plating samples, bead-beating lysis, and inhibitor removal with Solution CD2) is done manually on Day 1; the epMotion handles the purification on Day 2.
+For small batches (up to ~24 samples), we use the DNeasy® PowerSoil® Pro Kit (Qiagen; Cat. Nos. 47014 and 47016).
 
-=== "Duke"
+For larger batches (up to 96 samples), we use the MagAttract® PowerSoil® Pro DNA EP Kit (384) (Qiagen; Cat. No. 47119) in combination with an epMotion 5075 (Eppendorf). We typically extract no more than 88 samples per run, leaving the 12th column of a 96‑well plate intentionally empty to accommodate PCR controls. These extractions are usually completed over two days by incubating the lysate with Solution CD2 at 4 °C overnight.
 
-    The epMotion is located in [room]. Log in to the epMotion computer (Login: `Food_Seq`) and open the epBlue software to load the MagAttract PowerSoil Pro method.
+!!! note
 
-=== "General"
-
-    Log in to the epMotion computer and open the epBlue software. Load the MagAttract PowerSoil Pro method.
-
-Both kits are optimized for extracting DNA from challenging sample types like stool and soil, and the chemistries are similar — bead-beating lysis with Solution CD1, inhibitor removal with Solution CD2, and multiple wash steps. The main difference is the purification approach (silica spin columns vs. magnetic beads).
+    Some sample storage solutions may be incompatible with these extraction kits.
 
 With extraction complete, proceed to [PCR Amplification](pcr.md).
