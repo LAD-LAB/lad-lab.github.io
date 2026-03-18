@@ -602,6 +602,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PCR Amplification
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="pcr.html" class="md-nav__link md-nav__link--active">
         
   
@@ -618,6 +636,136 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#primary-qpcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primary qPCR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primary qPCR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equipment-and-consumables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equipment and Consumables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equipment-and-consumables_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equipment and Consumables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indexing-qpcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indexing qPCR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indexing qPCR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equipment-and-consumables_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equipment and Consumables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preparing-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing the Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1140,13 +1288,363 @@
 
 
 <h1 id="pcr-amplification">PCR Amplification</h1>
-<p>The FoodSeq workflow uses a two-step PCR approach: a primary qPCR amplifies the target locus (trnL for plants, 12SV5 for animals) from extracted DNA, and an indexing qPCR adds sample-specific barcodes in a second round of amplification.</p>
-<p>The singleplex protocols for primary and indexing qPCR are available on GitHub:</p>
+<p>The FoodSeq workflow uses a two-step PCR approach: a primary qPCR (qPCRA) amplifies the target locus from extracted DNA, and an indexing qPCR (qPCRB) adds sample-specific barcodes in a second round of amplification. Both steps use SYBR Green I detection on a quantitative real-time PCR instrument.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All PCR setup should be performed in a PCR hood or designated clean area. Wipe both the reagent and DNA PCR hoods with RNAse Away, then treat both hoods with UV light for ~15 minutes before beginning. Wear gloves throughout the protocol and always include a no-template control (nuclease-free water in place of template) on every plate.</p>
+</div>
+<h2 id="primary-qpcr">Primary qPCR</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>This protocol amplifies the trnLGH region for plant detection. It corresponds to WI-PA003.</p>
+<h3 id="equipment-and-consumables">Equipment and Consumables</h3>
 <ul>
-<li><a href="https://github.com/LAD-LAB/foodseq-protocols/blob/main/WI-PA003.md"><strong>WI-PA003</strong> — Primary qPCR for trnLGH</a></li>
-<li><a href="https://github.com/LAD-LAB/foodseq-protocols/blob/main/WI-PA003b.md"><strong>WI-PA003B</strong> — Primary qPCR for 12SV5</a></li>
-<li><a href="https://github.com/LAD-LAB/foodseq-protocols/blob/main/WI-PA004.md"><strong>WI-PA004</strong> — Indexing qPCR</a></li>
+<li>96-well optical PCR plate, optical sealing film, and foil seals</li>
+<li>PCR-certified filter pipette tips and pipettors</li>
+<li>Cooling rack for 96-well plate, ice, and ice bucket</li>
+<li>Nuclease-free water</li>
+<li>KAPA HiFi HotStart ReadyMix (2X) (Roche; Cat. No. KK2602)</li>
+<li>SYBR Green I, diluted in filtered DMSO to 100X</li>
+<li>Positive control template DNA</li>
+<li>PCR primers with Illumina bridges for trnLGH at 10 uM working concentration, diluted with IDTE pH 8.0:<ul>
+<li><strong>BP031</strong> (trnL(UAA)g-Sq) — <code>5' TCGTCGGCAGCGTCAGATGTGTATAAGAGACAGGGGCAATCCTGAGCCA*A 3'</code></li>
+<li><strong>BP032</strong> (trnL(UAA)h-Seq) — <code>5' GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAGCCATTGAGTCTCTGCACCTAT*C 3'</code></li>
 </ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make only as much 10 uM working stock as you need; 10 uM primers degrade with multiple freeze-thaw cycles.</p>
+</div>
+<details class="question">
+<summary>ReadyMix vs. individual components?</summary>
+<p>The KAPA HiFi HotStart kit is also available with individual components (dNTPs kit; Cat. No. KK2502), which allows adjustment of the polymerase concentration to reduce primer dimers. However, the dNTP kit is more temperature-sensitive, and the lab has had issues with kits going bad. The ReadyMix is preferred to avoid these issues.</p>
+</details>
+<h3 id="protocol">Protocol</h3>
+<p>Thaw all necessary reagents on ice. Vortex and spin down all reagents <em>except</em> the mix containing the polymerase.</p>
+<p>In the <strong>reagent PCR hood</strong>, prepare the master mix according to the table below. Keep the reaction mix and plate on ice; otherwise, the exonuclease in the enzyme can degrade the primers prior to the start of the reaction.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>1 rxn (uL)</th>
+<th>100 rxns (uL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclease-free water</td>
+<td>1.3</td>
+<td>130</td>
+</tr>
+<tr>
+<td>10 uM forward primer (BP031)</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>10 uM reverse primer (BP032)</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>2X KAPA HiFi HotStart ReadyMix</td>
+<td>5.0</td>
+<td>500</td>
+</tr>
+<tr>
+<td>100X SYBR Green I</td>
+<td>0.1</td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Total master mix</strong></td>
+<td><strong>7.0</strong></td>
+<td><strong>700</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Aliquot 7 uL of master mix into each well, then seal the plate and move it to the DNA hood.</p>
+<p>In the <strong>DNA PCR hood</strong>, add 3 uL of nuclease-free water to the no-template control wells. Add 3 uL of DNA template to each sample well, and 3 uL of positive control DNA to the positive control well(s). The positive control DNA should be synthetic or relatively phylogenetically distinct and not commonly eaten by humans. Seal the plate with optical film and briefly spin down (13 seconds at 1,000 rpm).</p>
+<p>Run the qPCR with the following cycling parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Temperature</th>
+<th>Time</th>
+<th>Cycles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial denaturation</td>
+<td>95 °C</td>
+<td>3 min</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Denaturation</td>
+<td>98 °C</td>
+<td>20 sec</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Annealing</td>
+<td>63 °C</td>
+<td>15 sec</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>72 °C</td>
+<td>15 sec</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Hold</td>
+<td>12 °C</td>
+<td>∞</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>After the run, clean both hoods with RNAse Away and UV. Transfer plates to -20 °C if pausing for more than one day; otherwise, keep at 4 °C. Inspect the qPCR curves to confirm amplification and/or run 2 uL on an agarose gel or E-Gel to confirm a single band of expected size.</p>
+</div>
+<div class="tabbed-block">
+<p>This protocol amplifies the 12SV5 region for animal detection. It corresponds to WI-PA003B.</p>
+<h3 id="equipment-and-consumables_1">Equipment and Consumables</h3>
+<ul>
+<li>96-well optical PCR plate, optical sealing film, and foil seals</li>
+<li>PCR-certified filter pipette tips and pipettors</li>
+<li>Cooling rack for 96-well plate, ice, and ice bucket</li>
+<li>Nuclease-free water</li>
+<li>2X AccuStart II PCR SuperMix (Quantabio; Cat. No. 95137)</li>
+<li>SYBR Green I, diluted in filtered DMSO to 100X</li>
+<li>BSA, 20 mg/mL (Thermo Fisher; Cat. No. B14)</li>
+<li>Positive control template DNA (e.g., gecko gDNA)</li>
+<li>10 uM working stock of PCR primers with Illumina bridges for 12SV5, diluted with IDTE pH 8.0:<ul>
+<li><strong>BP039</strong> (12SV5F-Seq) — <code>5' TCGTCGGCAGCGTCAGATGTGTATAAGAGACAGTAGAACAGGCTCCTCTAG 3'</code></li>
+<li><strong>BP040</strong> (12SV5R-Seq) — <code>5' GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAGTTAGATACCCCACTATGC 3'</code></li>
+</ul>
+</li>
+<li>100 uM working stock of human blocking primer:<ul>
+<li><strong>BP102</strong> — <code>5' CTATGCTTAGCCCTAAACCTCAACAGTTAAATCAACAAAACTGCT/3SpC3/ 3'</code></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make only as much 10 uM working stock as you need; 10 uM primers degrade with multiple freeze-thaw cycles.</p>
+</div>
+<details class="question">
+<summary>Why is there a blocking primer?</summary>
+<p>The blocking primer (BP102) blocks amplification of human mitochondrial DNA. The 12SV5 primers target vertebrate mitochondrial DNA, which would otherwise amplify large amounts of host (human) DNA from stool samples. The 3' C3 spacer modification prevents the blocking primer from being extended by the polymerase.</p>
+</details>
+<h3 id="protocol_1">Protocol</h3>
+<p>Thaw all necessary reagents on ice. Vortex and spin down all reagents <em>except</em> the mix containing the polymerase.</p>
+<p>In the <strong>reagent PCR hood</strong>, prepare the master mix according to the table below. Keep the reaction mix and plate on ice.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>1 rxn (uL)</th>
+<th>100 rxns (uL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclease-free water</td>
+<td>1.65</td>
+<td>165</td>
+</tr>
+<tr>
+<td>10 uM forward primer (BP039)</td>
+<td>0.5</td>
+<td>50</td>
+</tr>
+<tr>
+<td>10 uM reverse primer (BP040)</td>
+<td>0.5</td>
+<td>50</td>
+</tr>
+<tr>
+<td>100 uM blocking primer (BP102)</td>
+<td>1.0</td>
+<td>100</td>
+</tr>
+<tr>
+<td>100X SYBR Green I</td>
+<td>0.1</td>
+<td>10</td>
+</tr>
+<tr>
+<td>20 mg/mL BSA</td>
+<td>0.25</td>
+<td>25</td>
+</tr>
+<tr>
+<td>2X AccuStart II PCR SuperMix</td>
+<td>5.0</td>
+<td>500</td>
+</tr>
+<tr>
+<td><strong>Total master mix</strong></td>
+<td><strong>9.0</strong></td>
+<td><strong>900</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Aliquot 9 uL of master mix into each well, then seal the plate with adhesive foil and move it to the DNA hood.</p>
+<p>In the <strong>DNA PCR hood</strong>, add 1 uL of nuclease-free water to the no-template control well. Add 1 uL of DNA template to each sample well, and 1 uL of positive control DNA to the positive control well. Seal the plate with optical film and briefly spin down (13 seconds at 1,000 rpm).</p>
+<p>Run the qPCR with the following cycling parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Temperature</th>
+<th>Time</th>
+<th>Cycles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial denaturation</td>
+<td>94 °C</td>
+<td>3 min</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Denaturation</td>
+<td>94 °C</td>
+<td>20 sec</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Annealing</td>
+<td>57 °C</td>
+<td>15 sec</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>72 °C</td>
+<td>1 min</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Hold</td>
+<td>12 °C</td>
+<td>∞</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>After the run, clean both hoods with RNAse Away and UV. Transfer plates to -20 °C if pausing; otherwise, keep at 4 °C. Inspect the qPCR curves to confirm amplification and/or run 2 uL on an agarose gel or E-Gel to confirm a single band of expected size.</p>
+</div>
+</div>
+</div>
+<h2 id="indexing-qpcr">Indexing qPCR</h2>
+<p>The indexing qPCR (qPCRB) adds sample-specific barcodes to the primary amplicons. This protocol corresponds to WI-PA004.</p>
+<h3 id="equipment-and-consumables_2">Equipment and Consumables</h3>
+<ul>
+<li>96-well optical PCR plate, optical sealing film, and foil seals</li>
+<li>PCR-certified filter pipette tips and pipettors</li>
+<li>Cooling rack, ice, and ice bucket</li>
+<li>Nuclease-free water</li>
+<li>KAPA HiFi HotStart ReadyMix (2X) (Roche; Cat. No. KK2602)</li>
+<li>SYBR Green I, diluted in filtered DMSO to 100X</li>
+<li>Pre-mixed Illumina-compatible barcoding primers at 2.5 uM each primer (5 uM total), ordered from IDT and diluted/mixed in-house</li>
+<li>Primary qPCR product (from the previous step)</li>
+<li>Clean biosafety cabinet (BSC)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The working barcode plate is generally made for three uses (each well contains 36 uL of pre-mixed primer when new). Barcoding does not have to be a qPCR — you can replace the SYBR Green volume with nuclease-free water and run it as a regular PCR if preferred.</p>
+</div>
+<h3 id="preparing-the-template">Preparing the Template</h3>
+<p>Template dilution can be done on the epMotion or manually in the biosafety cabinet (BSC). Treat the BSC with RNAse Away, let it dry, then treat with UV for ~15 minutes before starting.</p>
+<p>In a new plate, make a 1:10 dilution of the primary qPCR product by adding 5 uL of amplicons to 45 uL of nuclease-free water; mix well. In another new plate, make a 1:100 dilution by adding 5 uL of the 1:10 diluted amplicons to 45 uL of nuclease-free water; mix well.</p>
+<h3 id="protocol_2">Protocol</h3>
+<p>In the <strong>reagent PCR hood</strong> (with fresh gloves and a disposable lab gown), treat the area with RNAse Away and UV for ~15 minutes. Prepare the master mix according to the table below; mix gently.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>1 rxn (uL)</th>
+<th>100 rxns (uL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclease-free water</td>
+<td>9.5</td>
+<td>950</td>
+</tr>
+<tr>
+<td>2X KAPA HiFi HotStart ReadyMix</td>
+<td>25.0</td>
+<td>2,500</td>
+</tr>
+<tr>
+<td>100X SYBR Green I</td>
+<td>0.5</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Total master mix</strong></td>
+<td><strong>35.0</strong></td>
+<td><strong>3,500</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Aliquot 35 uL of master mix into each well. Add 10 uL of pre-mixed barcoding primers from the working barcode plate to each well. Seal the plate with foil.</p>
+<p>In the <strong>BSC</strong>, add 5 uL of the 1:100 diluted primary qPCR product to each well. Seal the plate with optical film. Briefly spin down (13 seconds at 1,000 rpm).</p>
+<p>Run the qPCR with the following cycling parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Temperature</th>
+<th>Time</th>
+<th>Cycles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial denaturation</td>
+<td>95 °C</td>
+<td>3 min</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Denaturation</td>
+<td>98 °C</td>
+<td>20 sec</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Annealing</td>
+<td>55 °C</td>
+<td>15 sec</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>72 °C</td>
+<td>30 sec</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Hold</td>
+<td>12 °C</td>
+<td>∞</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>After the run, clean all work areas with RNAse Away and UV. Transfer plates to -20 °C if pausing; otherwise, keep at 4 °C. Run 5 uL on an agarose gel or E-Gel to confirm amplification.</p>
 <p>After PCR amplification, verify your products by <a href="gel.html">Gel Electrophoresis</a>.</p>
 
 
@@ -1170,7 +1668,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 17, 2026 21:09:57 UTC">March 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 18, 2026 14:36:42 UTC">March 18, 2026</span>
   </span>
 
     
