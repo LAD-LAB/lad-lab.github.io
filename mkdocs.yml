@@ -10,9 +10,9 @@ nav:
   - DNA Extraction: extraction.md
   - PCR Amplification: pcr.md
   - Gel Electrophoresis: gel.md
-  - Amplicon Cleaning and Quantification: cleaning.md
-  - Pooling and Sequencing Prep: pooling.md
-  - Running the MiniSeq: miniseq.md
+  - Amplicon Cleaning: cleaning.md
+  - Quantification and Pooling: pooling.md
+  - Sequencing: sequencing.md
 - Creating a Phyloseq:
   - Creating a Phyloseq (trnL and 12Sv5): pipeline.md
   - Creating a Phyloseq (16S): 16s.md
