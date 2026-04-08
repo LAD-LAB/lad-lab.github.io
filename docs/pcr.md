@@ -117,6 +117,57 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     | Extension | 72 °C | 1 min | 35 |
     | Hold | 10 °C | ∞ | — |
 
+=== "Multiplex (trnL + 12SV5)"
+
+    The multiplex protocol amplifies trnL(UAA)gh and 12SV5 in a single reaction, replacing the two separate singleplex qPCRs above. It uses KAPA HiFi HotStart ReadyMix as the polymerase, includes the DeBarba14 HomoB human blocking primer to suppress amplification of host DNA, and runs for 32 cycles at a 60 °C annealing temperature. Because the polymerase has exonuclease activity, the reaction mix and plate must be kept on ice at all times before cycling begins; otherwise, the exonuclease can degrade the primers prior to the start of the reaction.
+
+    ### Materials
+
+    - KAPA HiFi HotStart ReadyMix (2X) (Roche, Basel, Switzerland; Cat. No. KK2602)
+    - 10 µM working stock of trnL(UAA)g primer with Illumina bridges (Table 1)
+    - 10 µM working stock of trnL(UAA)h primer with Illumina bridges (Table 1)
+    - 10 µM working stock of 12SV5 forward primer with Illumina bridges (Table 1)
+    - 10 µM working stock of 12SV5 reverse primer with Illumina bridges (Table 1)
+    - 100 µM stock of DeBarba14 HomoB human blocking primer (Table 1)
+    - SYBR Green I (Thermo Fisher Scientific, Waltham, MA) — diluted in DMSO to 100X
+    - Extracted DNA from stool sample
+    - Positive control template DNA — synthetic, or phylogenetically distinct from common foods, containing both plant and animal DNA (or run separate plant and animal positive controls)
+    - Nuclease-free water
+
+    ### Protocol
+
+    Generate enough PCR master mix for the reactions desired according to Table 6. The reaction mix and plate must be kept on ice. Aliquot 7.5 uL of mix into each well.
+
+    Add 2.5 uL of nuclease-free water to no-template control wells. Add 2.5 uL of DNA template to sample wells. Add 2.5 uL of control DNA to positive control wells.
+
+    Seal the plate with optical film. Briefly spin down the plate. Run the qPCR with cycling conditions from Table 7.
+
+    After the run, transfer plates to -20 °C if processing is going to be paused for more than one day; otherwise, keep plates at 4 °C. Inspect qPCR curves to confirm amplification and/or run 2 uL on an agarose gel or an E-Gel Agarose Gel (Thermo Fisher Scientific, Waltham, MA) to confirm two bands of expected sizes. Once amplification is confirmed, proceed to the indexing qPCR described in the [Secondary PCR](#secondary-pcr) section below.
+
+    **Table 6.** Primary qPCR master mix for the trnL + 12SV5 multiplex.
+
+    | Component | 1 rxn (uL) | 100 rxns (uL) |
+    |---|---|---|
+    | Nuclease-free water | 0.6 | 60 |
+    | 10 uM trnL(UAA)g primer | 0.3 | 30 |
+    | 10 uM trnL(UAA)h primer | 0.3 | 30 |
+    | 10 uM 12SV5 forward primer | 0.3 | 30 |
+    | 10 uM 12SV5 reverse primer | 0.3 | 30 |
+    | 100 uM DeBarba14 HomoB | 0.6 | 60 |
+    | KAPA HiFi HotStart ReadyMix (2X) | 5.0 | 500 |
+    | SYBR Green I (100X) | 0.1 | 10 |
+    | **Total** | **7.5** | **750** |
+
+    **Table 7.** Primary qPCR amplification parameters for the trnL + 12SV5 multiplex.
+
+    | Step | Temperature | Time | Cycles |
+    |---|---|---|---|
+    | Initial denaturation | 95 °C | 3 min | 1 |
+    | Denaturation | 98 °C | 20 sec | 32 |
+    | Annealing | 60 °C | 15 sec | 32 |
+    | Extension | 72 °C | 15 sec | 32 |
+    | Hold | 12 °C | ∞ | — |
+
 ## Secondary PCR
 
 ### Materials
@@ -130,13 +181,13 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
 ### Protocol
 
-Generate enough PCR master mix for the reactions desired according to Table 6. The reaction mix and plate must be kept on ice. Aliquot 35 uL of mix into each well. Add 10 uL of pre-mixed indexing primer to each well.
+Generate enough PCR master mix for the reactions desired according to Table 8. The reaction mix and plate must be kept on ice. Aliquot 35 uL of mix into each well. Add 10 uL of pre-mixed indexing primer to each well.
 
-Add 5 uL of diluted primary PCR products. Seal the plate with optical film. Briefly spin down the plate. Run the PCR with cycling conditions from Table 7.
+Add 5 uL of diluted primary PCR products. Seal the plate with optical film. Briefly spin down the plate. Run the PCR with cycling conditions from Table 9.
 
 After the run, transfer plates to -20 °C if processing is going to be paused; otherwise, keep plates at 4 °C. Run up to 5 uL of amplified product on an agarose gel or an E-Gel Agarose Gel (Thermo Fisher Scientific, Waltham, MA) to confirm expected size.
 
-**Table 6.** Secondary PCR master mix.
+**Table 8.** Secondary PCR master mix.
 
 | Component | 1 rxn (uL) | 100 rxns (uL) |
 |---|---|---|
@@ -147,7 +198,7 @@ After the run, transfer plates to -20 °C if processing is going to be paused; o
 | KAPA HiFi HotStart DNA Polymerase (1 U/uL) | 0.5 | 50 |
 | **Total** | **35.0** | **3,500** |
 
-**Table 7.** Secondary PCR amplification parameters.
+**Table 9.** Secondary PCR amplification parameters.
 
 | Step | Temperature | Time | Cycles |
 |---|---|---|---|
