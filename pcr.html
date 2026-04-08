@@ -708,6 +708,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#materials_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -726,7 +748,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#materials_2" class="md-nav__link">
+  <a href="#materials_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Materials
@@ -737,7 +759,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#protocol_2" class="md-nav__link">
+  <a href="#protocol_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Protocol
@@ -1331,7 +1353,7 @@
 <p><em>XXXXXXXX</em> denotes 8-bp barcode sequences, available from Illumina (<a href="https://support-docs.illumina.com/SHARE/AdapterSequences/Content/Nextera-DNAIndexes.htm">Illumina Adapter Sequences</a>).</p>
 <p>All PCR setups should be performed in a PCR hood or designated clean area. Clean the work area with surface decontaminant, then treat with UV light for 15 minutes before beginning.</p>
 <h2 id="primary-qpcr">Primary qPCR</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label><label for="__tabbed_1_3">Multiplex (trnL + 12SV5)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <h3 id="materials">Materials</h3>
@@ -1558,10 +1580,131 @@
 </tbody>
 </table>
 </div>
+<div class="tabbed-block">
+<p>The multiplex protocol amplifies trnL(UAA)gh and 12SV5 in a single reaction, replacing the two separate singleplex qPCRs above. It uses KAPA HiFi HotStart ReadyMix as the polymerase, includes the DeBarba14 HomoB human blocking primer to suppress amplification of host DNA, and runs for 32 cycles at a 60 °C annealing temperature. Because the polymerase has exonuclease activity, the reaction mix and plate must be kept on ice at all times before cycling begins; otherwise, the exonuclease can degrade the primers prior to the start of the reaction.</p>
+<h3 id="materials_2">Materials</h3>
+<ul>
+<li>KAPA HiFi HotStart ReadyMix (2X) (Roche, Basel, Switzerland; Cat. No. KK2602)</li>
+<li>10 µM working stock of trnL(UAA)g primer with Illumina bridges (Table 1)</li>
+<li>10 µM working stock of trnL(UAA)h primer with Illumina bridges (Table 1)</li>
+<li>10 µM working stock of 12SV5 forward primer with Illumina bridges (Table 1)</li>
+<li>10 µM working stock of 12SV5 reverse primer with Illumina bridges (Table 1)</li>
+<li>100 µM stock of DeBarba14 HomoB human blocking primer (Table 1)</li>
+<li>SYBR Green I (Thermo Fisher Scientific, Waltham, MA) — diluted in DMSO to 100X</li>
+<li>Extracted DNA from stool sample</li>
+<li>Positive control template DNA — synthetic, or phylogenetically distinct from common foods, containing both plant and animal DNA (or run separate plant and animal positive controls)</li>
+<li>Nuclease-free water</li>
+</ul>
+<h3 id="protocol_2">Protocol</h3>
+<p>Generate enough PCR master mix for the reactions desired according to Table 6. The reaction mix and plate must be kept on ice. Aliquot 7.5 uL of mix into each well.</p>
+<p>Add 2.5 uL of nuclease-free water to no-template control wells. Add 2.5 uL of DNA template to sample wells. Add 2.5 uL of control DNA to positive control wells.</p>
+<p>Seal the plate with optical film. Briefly spin down the plate. Run the qPCR with cycling conditions from Table 7.</p>
+<p>After the run, transfer plates to -20 °C if processing is going to be paused for more than one day; otherwise, keep plates at 4 °C. Inspect qPCR curves to confirm amplification and/or run 2 uL on an agarose gel or an E-Gel Agarose Gel (Thermo Fisher Scientific, Waltham, MA) to confirm two bands of expected sizes. Once amplification is confirmed, proceed to the indexing qPCR described in the <a href="#secondary-pcr">Secondary PCR</a> section below.</p>
+<p><strong>Table 6.</strong> Primary qPCR master mix for the trnL + 12SV5 multiplex.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>1 rxn (uL)</th>
+<th>100 rxns (uL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclease-free water</td>
+<td>0.6</td>
+<td>60</td>
+</tr>
+<tr>
+<td>10 uM trnL(UAA)g primer</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>10 uM trnL(UAA)h primer</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>10 uM 12SV5 forward primer</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>10 uM 12SV5 reverse primer</td>
+<td>0.3</td>
+<td>30</td>
+</tr>
+<tr>
+<td>100 uM DeBarba14 HomoB</td>
+<td>0.6</td>
+<td>60</td>
+</tr>
+<tr>
+<td>KAPA HiFi HotStart ReadyMix (2X)</td>
+<td>5.0</td>
+<td>500</td>
+</tr>
+<tr>
+<td>SYBR Green I (100X)</td>
+<td>0.1</td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>7.5</strong></td>
+<td><strong>750</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 7.</strong> Primary qPCR amplification parameters for the trnL + 12SV5 multiplex.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Temperature</th>
+<th>Time</th>
+<th>Cycles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial denaturation</td>
+<td>95 °C</td>
+<td>3 min</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Denaturation</td>
+<td>98 °C</td>
+<td>20 sec</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Annealing</td>
+<td>60 °C</td>
+<td>15 sec</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>72 °C</td>
+<td>15 sec</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Hold</td>
+<td>12 °C</td>
+<td>∞</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <h2 id="secondary-pcr">Secondary PCR</h2>
-<h3 id="materials_2">Materials</h3>
+<h3 id="materials_3">Materials</h3>
 <ul>
 <li>KAPA HiFi Hot Start PCR Kit with dNTP Mix (Roche, Basel, Switzerland; Cat. No. KK2502)</li>
 <li>Pre-mixed Illumina-compatible indexing primers, 2.5 uM each primer, 5 uM total (diluted and mixed in-house; Table 1)</li>
@@ -1572,11 +1715,11 @@
 </li>
 <li>Nuclease-free water</li>
 </ul>
-<h3 id="protocol_2">Protocol</h3>
-<p>Generate enough PCR master mix for the reactions desired according to Table 6. The reaction mix and plate must be kept on ice. Aliquot 35 uL of mix into each well. Add 10 uL of pre-mixed indexing primer to each well.</p>
-<p>Add 5 uL of diluted primary PCR products. Seal the plate with optical film. Briefly spin down the plate. Run the PCR with cycling conditions from Table 7.</p>
+<h3 id="protocol_3">Protocol</h3>
+<p>Generate enough PCR master mix for the reactions desired according to Table 8. The reaction mix and plate must be kept on ice. Aliquot 35 uL of mix into each well. Add 10 uL of pre-mixed indexing primer to each well.</p>
+<p>Add 5 uL of diluted primary PCR products. Seal the plate with optical film. Briefly spin down the plate. Run the PCR with cycling conditions from Table 9.</p>
 <p>After the run, transfer plates to -20 °C if processing is going to be paused; otherwise, keep plates at 4 °C. Run up to 5 uL of amplified product on an agarose gel or an E-Gel Agarose Gel (Thermo Fisher Scientific, Waltham, MA) to confirm expected size.</p>
-<p><strong>Table 6.</strong> Secondary PCR master mix.</p>
+<p><strong>Table 8.</strong> Secondary PCR master mix.</p>
 <table>
 <thead>
 <tr>
@@ -1618,7 +1761,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Table 7.</strong> Secondary PCR amplification parameters.</p>
+<p><strong>Table 9.</strong> Secondary PCR amplification parameters.</p>
 <table>
 <thead>
 <tr>
@@ -1684,7 +1827,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 21, 2026 17:20:26 UTC">March 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 8, 2026 15:54:39 UTC">April 8, 2026</span>
   </span>
 
     
