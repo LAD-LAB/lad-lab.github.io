@@ -24,6 +24,7 @@ nav:
   - Calculating Relative Abundance: abundance.md
   - Creating a PCA Plot: pca.md
   - Assigning Common Names: commonnames.md
+  - Anonymizing Human Reads: anonymizer.md
 
 theme:
   name: material
