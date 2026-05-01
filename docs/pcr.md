@@ -28,7 +28,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
 === "trnL"
 
-    ### Materials
+    **Materials**
 
     - KAPA HiFi Hot Start PCR Kit with dNTP Mix (Roche, Basel, Switzerland; Cat. No. KK2502)
     - 10 µM working stock of trnL(UAA)g primer with Illumina bridges (Table 1)
@@ -38,7 +38,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     - Positive control template DNA
     - Nuclease-free water
 
-    ### Protocol
+    **Protocol**
 
     Generate enough PCR master mix for the reactions desired according to Table 2. The reaction mix and plate must be kept on ice. Aliquot 7 uL of mix into each well.
 
@@ -73,7 +73,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
 === "12SV5"
 
-    ### Materials
+    **Materials**
 
     - AccuStart II PCR SuperMix (Quantabio, Beverly, MA; Cat. No. 95137-500)
     - 10 µM working stock of 12SV5 forward primer with Illumina bridges (Table 1)
@@ -84,7 +84,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     - Positive control template DNA
     - Nuclease-free water
 
-    ### Protocol
+    **Protocol**
 
     Generate enough PCR master mix for the reactions desired according to Table 4. Aliquot 9 uL of mix into each well.
 
@@ -121,7 +121,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
     The multiplex protocol amplifies trnL(UAA)gh and 12SV5 in a single reaction, replacing the two separate singleplex qPCRs above. It uses KAPA HiFi HotStart ReadyMix as the polymerase, includes the DeBarba14 HomoB human blocking primer to suppress amplification of host DNA, and runs for 32 cycles at a 60 °C annealing temperature. Because the polymerase has exonuclease activity, the reaction mix and plate must be kept on ice at all times before cycling begins; otherwise, the exonuclease can degrade the primers prior to the start of the reaction.
 
-    ### Materials
+    **Materials**
 
     - KAPA HiFi HotStart ReadyMix (2X) (Roche, Basel, Switzerland; Cat. No. KK2602)
     - 10 µM working stock of trnL(UAA)g primer with Illumina bridges (Table 1)
@@ -134,7 +134,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     - Positive control template DNA — synthetic, or phylogenetically distinct from common foods, containing both plant and animal DNA (or run separate plant and animal positive controls)
     - Nuclease-free water
 
-    ### Protocol
+    **Protocol**
 
     Generate enough PCR master mix for the reactions desired according to Table 6. The reaction mix and plate must be kept on ice. Aliquot 7.5 uL of mix into each well.
 
