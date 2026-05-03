@@ -860,6 +860,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="In the Terminal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-repository-to-dcc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clone Repository to DCC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-sequencing-data-to-dcc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload Sequencing Data to DCC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demultiplex-and-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demultiplex and Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-reads-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Count Reads (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1370,7 +1420,7 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><strong>Clone Repository to DCC</strong></p>
+<h3 id="clone-repository-to-dcc">Clone Repository to DCC</h3>
 <p>First, clone the mb-pipeline repository from GitHub to the DCC to use <code>demux-barcodes.sh</code> and either <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.</p>
 <p>The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">these instructions</a> to set up a personal access token.</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Log into the DCC:</span>
@@ -1384,7 +1434,7 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="o">[</span>GitHub<span class="w"> </span>username<span class="o">]</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="o">[</span>personal<span class="w"> </span>access<span class="w"> </span>token<span class="o">]</span>
 </span></code></pre></div>
-<p><strong>Upload Sequencing Data to DCC</strong></p>
+<h3 id="upload-sequencing-data-to-dcc">Upload Sequencing Data to DCC</h3>
 <p>Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.</p>
 <p>To copy the sequencing data folder from Isilon, first create a DCC folder for your project. Then, make sure you are connected to Isilon and run the following:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Navigate to the sequencing folder on Isilon; change 2025 to the year of the sequencing run:</span>
@@ -1398,7 +1448,7 @@
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>scp<span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu:<span class="o">[</span>/path/to/project/folder<span class="o">]</span>
 </span></code></pre></div>
 <p>You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.</p>
-<p><strong>Demultiplex and Pipeline</strong></p>
+<h3 id="demultiplex-and-pipeline">Demultiplex and Pipeline</h3>
 <p>Now, run the <code>demux-barcodes.sh</code> script with the following:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Log into the DCC:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
@@ -1421,7 +1471,7 @@
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        ├─ demux-barcodes-[jobid].err
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        └─ demux-barcodes-[jobid].out
 </span></code></pre></div>
-<p><strong>Count Reads (Optional)</strong></p>
+<h3 id="count-reads-optional">Count Reads (Optional)</h3>
 <p>If you plan to download your data in minimal mode (the default in <code>Pipeline-to-Phyloseq.Rmd</code>), you should run <code>count-reads.sh</code> on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a <code>track-pipeline.csv</code> file that the R pipeline uses for quality control plots. It runs in a few seconds:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sbatch<span class="w"> </span><span class="o">[</span>/path/to/count-reads.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/XXXXXXXX_output<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline/pipeline<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/metabarcoding.sif
 </span></code></pre></div>
@@ -1877,7 +1927,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 1, 2026 20:17:40 UTC">May 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 3, 2026 14:32:19 UTC">May 3, 2026</span>
   </span>
 
     
