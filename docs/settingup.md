@@ -10,7 +10,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
     The DCC has two directories, `/hpc/home` and `/hpc/group`; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within `/hpc/group/ldavidlab`. Create a folder for yourself at `/hpc/group/ldavidlab/users/[NetID]`.
 
-    **Logging In**
+    ### Logging In
 
     To use the Duke Compute Cluster, open the terminal and log in with `ssh [NetID]@dcc-login.oit.duke.edu`. This will require multi-factor authentication. Here is an example of what this should look like:
 
@@ -40,7 +40,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
     ams292@dcc-login-04  ~ $
     ```
 
-    **SSH Keys**
+    ### SSH Keys
 
     You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:
 
@@ -76,7 +76,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
      For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
 
-    **Command-Line Alternatives**
+    ### Command-Line Alternatives
 
     You can also access the DCC from [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.
 
@@ -84,7 +84,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
         Add instructions for setting up and using Cyberduck.
 
-    **Common Commands**
+    ### Common Commands
 
     Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:
 
@@ -366,7 +366,7 @@ Miscellaneous:
 
         Add GitHub instructions.
 
-    **Common Commands**
+    ### Common Commands
 
     !!! to-do
 

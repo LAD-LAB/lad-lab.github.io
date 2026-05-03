@@ -6,7 +6,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
 === "Duke"
 
-    **Clone Repository to DCC**
+    ### Clone Repository to DCC
 
     First, clone the mb-pipeline repository from GitHub to the DCC to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.
 
@@ -25,7 +25,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
     [personal access token]
     ```
 
-    **Upload Sequencing Data to DCC**
+    ### Upload Sequencing Data to DCC
 
     Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.
 
@@ -49,7 +49,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.
 
-    **Demultiplex and Pipeline**
+    ### Demultiplex and Pipeline
 
     Now, run the `demux-barcodes.sh` script with the following:
 
@@ -82,7 +82,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
             └─ demux-barcodes-[jobid].out
     ```
 
-    **Count Reads (Optional)**
+    ### Count Reads (Optional)
 
     If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
 

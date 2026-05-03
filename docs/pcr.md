@@ -28,7 +28,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
 === "trnL"
 
-    **Materials**
+    ### Materials
 
     - KAPA HiFi Hot Start PCR Kit with dNTP Mix (Roche, Basel, Switzerland; Cat. No. KK2502)
     - 10 µM working stock of trnL(UAA)g primer with Illumina bridges (Table 1)
@@ -38,7 +38,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     - Positive control template DNA
     - Nuclease-free water
 
-    **Protocol**
+    ### Protocol
 
     Generate enough PCR master mix for the reactions desired according to Table 2. The reaction mix and plate must be kept on ice. Aliquot 7 uL of mix into each well.
 
