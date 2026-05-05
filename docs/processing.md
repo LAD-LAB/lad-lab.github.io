@@ -4,8 +4,9 @@ After creating a phyloseq object, lab members have developed the below workflow 
 
 ``` mermaid
 graph TD
-    A[Unfiltered Phyloseq] -->|Step 1: Filter out NAs / human reads for 12Sv5| B[Filtered Phyloseq]
-    B -->|Steps 2-3: Calculate diversity metrics and add to sample metadata| C[Filtered Phyloseq + Diversity Metrics]
-    C -->|Step 4: Perform CLR transform on relative abundances| D[CLR-transformed Phyloseq]
-    D -->|Step 5: Create PCA biplot| E[PCA Biplot]
+    A[Unfiltered Phyloseq] -->|Step 1: Review/BLAST NAs, add taxonomic assignments for any that should be kept| B[Unfiltered Phyloseq with Added Taxonomic Assignments for Select NAs]
+    B -->|Step 2: Filter out remaining NAs & human reads for 12Sv5| C[Filtered Phyloseq]
+    C -->|Steps 3: Calculate diversity metrics and add to sample metadata| D[Filtered Phyloseq + Diversity Metrics]
+    D -->|Step 4: Perform CLR transform on relative abundances| E[CLR-Transformed Phyloseq]
+    E -->|Step 5: Create PCA biplot| F[PCA Biplot]
 ```
