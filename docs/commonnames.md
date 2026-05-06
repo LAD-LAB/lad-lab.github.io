@@ -352,3 +352,23 @@ The conflict report includes the ASV sequence, the number of matches, the resolu
 ??? question "Why would I need to review conflicts manually?"
 
     In most cases the function's resolution strategies produce sensible names automatically. Manual review is most useful when you see `concatenated` or `first_match_default` in the `resolution_method` column of the conflict report, as these indicate cases where the function could not confidently resolve the conflict using taxonomic information alone. You can update the CSV's `conventional_name`, `genus`, or `genus_conventional_name` columns to improve resolution for these ASVs in future runs.
+
+
+!!! note "Avoid blanket agglomeration by common name"
+
+    For trnL, we strongly advise against performing a blanket agglomeration (`tax_glom()`) by common name. Grouping by common name risks silently merging biologically distinct organisms. If grouping is needed for nutritional analysis, it should be done manually and deliberately.
+
+## Known Issues
+
+### Human/Elk 
+
+!!! warning "User action required"
+
+    In the 12Sv5 region, human and elk are phylogenetically similar. We have found that ASVs assigned to elk (*Cervus canadensis*) are not reliably elk: some BLAST to human, others to elk. Users should recheck elk-labeled ASVs and decide whether to manually relabel them as human, based on context.
+
+### Pecan/Walnut
+
+!!! warning "User action required"
+
+    Pecan and walnut ASVs cannot be reliably distinguished. The two species differ by only a single nucleotide, and within a given sample the error-correction step labels reads as one or the other. As a result, pecan and walnut are never both present in the same sample. Users must manually merge these ASVs, labeling them with a combined name (e.g., `pecan/walnut`).
+
