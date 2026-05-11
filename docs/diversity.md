@@ -21,7 +21,7 @@ alphadiv <- estimate_richness(ps.filtered, measures = c("Observed", "Shannon")) 
 
 !!! note Filtering unassigned taxa
 
-  It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order for 12Sv5. This is because trnL uses exact sequence matching via `assignSpecies()`, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12Sv5, by contrast, is assigned via `assignTaxonomy()`, which makes assignments at every level along with bootstrap confidence values. Bootstrap confidence tends to fall off below Order.
+  It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order for 12Sv5. This is because trnL uses exact sequence matching via `assignSpecies()`, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12Sv5, by contrast, is assigned via `assignTaxonomy()`, which makes assignments at every level along with bootstrap confidence values. Bootstrap confidence tends to fall off below Order, so any ASV that is NA at the Order level should be filtered out.
 
 This code creates a dataframe with a column `barcode_well` with the name of each sample and two columns `Observed` and `Shannon` with the observed number of taxa and the Shannon diversity respectively of each sample, measures of alpha diversity. We can now join this dataframe to the sample metadata with the following code chunk, based on if a matching `barcode_well` column exists in your sample metadata:
 
