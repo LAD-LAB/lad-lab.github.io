@@ -4,7 +4,7 @@ This page will instruct you in the calculation of various common diversity metri
 
 ## Alpha Diversity
 
-To calculate alpha diversity, first filter out `NA`s at the highest level (i.e. superkingdom) and then use the `estimate_richness()` function from the package `phyloseq`:
+To calculate alpha diversity, first filter out `NA`s and then use the `estimate_richness()` function from the package `phyloseq`:
 
 ``` r
 library(phyloseq)
@@ -19,9 +19,9 @@ alphadiv <- estimate_richness(ps.filtered, measures = c("Observed", "Shannon")) 
   as.data.frame()
 ```
 
-???+ note
+!!! note Filtering unassigned taxa
 
-    Rename `ps` to something like `ps.filtered` when filtering out `NA`s, as shown above. We want to keep the original unfiltered phyloseq available for future steps like calculating relative abundance and performing a clr transform for creating a PCA plot. 
+  It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12Sv5. This is because trnL uses exact sequence matching via `assignSpecies()`, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12Sv5, by contrast, is assigned via `assignTaxonomy()`, which makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is `NA` at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).
 
 This code creates a dataframe with a column `barcode_well` with the name of each sample and two columns `Observed` and `Shannon` with the observed number of taxa and the Shannon diversity respectively of each sample, measures of alpha diversity. We can now join this dataframe to the sample metadata with the following code chunk, based on if a matching `barcode_well` column exists in your sample metadata:
 
