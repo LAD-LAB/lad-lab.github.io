@@ -25,6 +25,8 @@ nav:
   - Creating a PCA Plot: pca.md
   - Assigning Common Names: commonnames.md
   - Anonymizing Human Reads: anonymizer.md
+- Tools:
+  - PCA Explorer: pca-explorer.md
 
 theme:
   name: material
