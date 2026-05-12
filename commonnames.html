@@ -1197,6 +1197,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#species-level-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Species-Level Propagation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#understanding-the-output" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1489,7 +1500,7 @@
 <p><a class="md-button" href="files/assign_common_names.R">Download assign_common_names.R</a>
 <a class="md-button" href="files/trnL_common_names.csv">Download trnL common names CSV</a></p>
 </div>
-<p>With a common names CSV ready, we can now use the <code>assign_common_names()</code> function to assign those names to a phyloseq object. After reading it into your analysis file, run:</p>
+<p>With a common names CSV ready, we can now use the <code>assign_common_names()</code> function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. After reading it into your analysis file, run:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">source</span><span class="p">(</span><span class="s">&quot;[path/to/assign_common_names.R]&quot;</span><span class="p">)</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">assign_common_names</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[path/to/common_names.csv]&quot;</span><span class="p">)</span>
@@ -1503,7 +1514,7 @@
 <li><code>concatenate_conflicts</code> (optional) — whether unresolved conflicts are concatenated into a single name rather than defaulting to the first match; by default <code>TRUE</code></li>
 </ul>
 <p>The function first reads in the common names CSV and builds a genus-level lookup table from the <code>genus</code> and <code>genus_conventional_name</code> columns, splitting semicolon-separated entries into individual genus-name pairs:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">common_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">common_names_csv</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">common_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="nf">read.csv</span><span class="p">(</span><span class="n">common_names_csv</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">genus_key</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NULL</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;genus&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;genus_conventional_name&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -1526,7 +1537,7 @@
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Next, it extracts the taxonomy table and ASV sequences from the phyloseq and initializes <code>common_name</code> and <code>taxa</code> columns:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">tax_tab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">physeq</span><span class="p">))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">tax_tab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">physeq</span><span class="p">))</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;ASV&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="n">asv_seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tax_tab</span><span class="o">$</span><span class="n">ASV</span>
@@ -1603,13 +1614,30 @@
 </span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>All conflicts are recorded in a dataframe that is stored as an attribute on the returned phyloseq.</p>
+<h3 id="species-level-propagation">Species-Level Propagation</h3>
+<p>After the main matching loop, the function makes a second pass over ASVs that did not match any row in the CSV. If such an ASV has a species-level (or below) taxonomy assignment, the function looks for sibling ASVs that share the same species/subspecies/varietas/forma classification and already have a common name assigned. If all siblings agree on a single unambiguous name, that name is propagated to the unmatched ASV:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">has_species</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">[[</span><span class="n">sp_col</span><span class="p">]])</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">nzchar</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">[[</span><span class="n">sp_col</span><span class="p">]])</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">needs_name</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">has_species</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">has_name</span><span class="w">    </span><span class="o">&lt;-</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">has_species</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">needs_name</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span><span class="n">donors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">has_name</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">species_key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">species_key</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">donors</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span><span class="n">donor_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unique</span><span class="p">(</span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">[</span><span class="n">donors</span><span class="p">])</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">donor_names</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">      </span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">donor_names</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This handles the common case where differential trimming across sequencing runs produces slightly different ASV sequences for the same organism: the longer or shorter variant may not appear in the CSV, but a sibling ASV with the same species assignment does. The function reports how many ASVs were propagated and how many were skipped due to ambiguity (multiple different common names for the same species).</p>
 <h3 id="understanding-the-output">Understanding the Output</h3>
 <p>The function returns the same phyloseq with two columns added to the taxonomy table: <code>common_name</code>, the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains"); and <code>taxa</code>, the full set of scientific names associated with the ASV, alphabetized and semicolon-separated. ASVs that did not match any row in the CSV will have <code>NA</code> for both columns. You can view the updated taxonomy table with:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nf">View</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps</span><span class="p">)))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">View</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps</span><span class="p">)))</span>
 </span></code></pre></div>
 <p>The function also prints a summary of all conflicts and their resolution methods to the console. You can access the full conflict report as a dataframe with:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;common_name_conflicts&quot;</span><span class="p">)</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nf">View</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;common_name_conflicts&quot;</span><span class="p">)</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nf">View</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The conflict report includes the ASV sequence, the number of matches, the resolution method, the assigned name, and all candidate names and taxa.</p>
 <details class="question">
@@ -1653,7 +1681,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 6, 2026 15:53:26 UTC">May 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 12, 2026 15:14:28 UTC">May 12, 2026</span>
   </span>
 
     
