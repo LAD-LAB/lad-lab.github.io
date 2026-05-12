@@ -195,7 +195,7 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 [Download trnL common names CSV](files/trnL_common_names.csv){ .md-button }
 </div>
 
-With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. After reading it into your analysis file, run:
+With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. After reading it into your analysis file, run:
 
 ``` r
 source("[path/to/assign_common_names.R]")
@@ -214,7 +214,7 @@ at minimum to assign common names. The inputs of the function are:
 The function first reads in the common names CSV and builds a genus-level lookup table from the `genus` and `genus_conventional_name` columns, splitting semicolon-separated entries into individual genus-name pairs:
 
 ``` r
-common_names <- read.csv(common_names_csv, stringsAsFactors = FALSE)
+common_names <- utils::read.csv(common_names_csv, stringsAsFactors = FALSE)
 
 genus_key <- NULL
 if ("genus" %in% colnames(common_names) && "genus_conventional_name" %in% colnames(common_names)) {
@@ -240,7 +240,7 @@ if ("genus" %in% colnames(common_names) && "genus_conventional_name" %in% colnam
 Next, it extracts the taxonomy table and ASV sequences from the phyloseq and initializes `common_name` and `taxa` columns:
 
 ``` r
-tax_tab <- as.data.frame(tax_table(physeq))
+tax_tab <- as.data.frame(phyloseq::tax_table(physeq))
 
 if ("ASV" %in% colnames(tax_tab)) {
   asv_seqs <- tax_tab$ASV
@@ -331,6 +331,28 @@ if (!resolved) {
 ```
 
 All conflicts are recorded in a dataframe that is stored as an attribute on the returned phyloseq.
+
+### Species-Level Propagation
+
+After the main matching loop, the function makes a second pass over ASVs that did not match any row in the CSV. If such an ASV has a species-level (or below) taxonomy assignment, the function looks for sibling ASVs that share the same species/subspecies/varietas/forma classification and already have a common name assigned. If all siblings agree on a single unambiguous name, that name is propagated to the unmatched ASV:
+
+``` r
+has_species <- !is.na(tax_tab[[sp_col]]) & nzchar(tax_tab[[sp_col]])
+needs_name  <- is.na(tax_tab$common_name) & has_species
+has_name    <- !is.na(tax_tab$common_name) & has_species
+
+for (i in which(needs_name)) {
+  donors <- which(has_name & species_key == species_key[i])
+  if (length(donors) > 0) {
+    donor_names <- unique(tax_tab$common_name[donors])
+    if (length(donor_names) == 1) {
+      tax_tab$common_name[i] <- donor_names
+    }
+  }
+}
+```
+
+This handles the common case where differential trimming across sequencing runs produces slightly different ASV sequences for the same organism: the longer or shorter variant may not appear in the CSV, but a sibling ASV with the same species assignment does. The function reports how many ASVs were propagated and how many were skipped due to ambiguity (multiple different common names for the same species).
 
 ### Understanding the Output
 
