@@ -8,7 +8,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     ### Clone Repository to DCC
 
-    First, clone the mb-pipelines repository from GitHub to the DCC to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.
+    First, clone the mb-pipeline repository from GitHub to the DCC to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.
 
     The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to set up a personal access token.
 
@@ -82,13 +82,23 @@ These instructions will help you create a phyloseq object from raw sequencing da
             └─ demux-barcodes-[jobid].out
     ```
 
+    ### Count Reads (Optional)
+
+    If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
+
+    ``` sh
+    sbatch [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] /hpc/group/ldavidlab/metabarcoding.sif
+    ```
+
+    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
+
     If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
 
 === "General"
 
-    ### Clone Repository to HPC
+    **Clone Repository to HPC**
 
-    First, clone the mb-pipelines repository from GitHub to your computing cluster to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the cluster, you can skip this section.
+    First, clone the mb-pipeline repository from GitHub to your computing cluster to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the cluster, you can skip this section.
 
     The scripts can be downloaded to your directory with the following shell code. If you are prompted for a password, follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to set up a personal access token.
 
@@ -105,7 +115,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
     [personal access token]
     ```
 
-    ### Upload Sequencing Data to HPC
+    **Upload Sequencing Data to HPC**
 
     Now, copy the sequencing data folder from your shared storage to the cluster and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.
 
@@ -129,7 +139,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     You should now have the sequencing data and a samplesheet CSV in your project folder on the cluster.
 
-    ### Demultiplex and Pipeline
+    **Demultiplex and Pipeline**
 
     Now, run the `demux-barcodes.sh` script with the following:
 
@@ -162,6 +172,16 @@ These instructions will help you create a phyloseq object from raw sequencing da
             └─ demux-barcodes-[jobid].out
     ```
 
+    **Count Reads (Optional)**
+
+    If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
+
+    ``` sh
+    sbatch [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] [/path/to/metabarcoding.sif]
+    ```
+
+    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
+
     If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
 
 ## In R
@@ -177,7 +197,7 @@ Create a project folder and download or duplicate a copy of `Pipeline-to-Phylose
     cd [/Box/path/to/project/folder]
 
     # Download Pipeline-to-Phyloseq.Rmd from GitHub:
-    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-phyloseq.Rmd
+    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
     ```
 
 === "General"
@@ -187,7 +207,7 @@ Create a project folder and download or duplicate a copy of `Pipeline-to-Phylose
     cd [/path/to/project/folder]
 
     # Download Pipeline-to-Phyloseq.Rmd from GitHub:
-    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-phyloseq.Rmd
+    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
     ```
 
 ??? bug "Troubleshooting"
@@ -281,7 +301,7 @@ Set the following variables to match your setup. The `project_path` should be th
 
 The `download_mode` variable controls how much data is copied from the cluster. Set it to `"minimal"` (the default) to download only the files needed for phyloseq creation (`4_denoised-table.qza`, `4_denoised-seqs.qza`, and the read-tracking CSV), or `"full"` to download all pipeline output.
 
-You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. These references can be downloaded from the [LAD-LAB mb-pipeline GitHub repository](https://github.com/LAD-LAB/mb-pipeline); place them locally and set the paths here:
+You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. These references can be downloaded from the [LAD-LAB mb-pipeline GitHub repository](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/references); place them locally and set the paths here:
 
 ``` r
 ref_trnL <- "[/path/to/trnLGH_taxonomy.fasta]"

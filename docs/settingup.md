@@ -100,7 +100,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
     Create a folder for yourself in your lab's shared directory on the cluster, e.g. `[/hpc/path/to/lab/directory]/users/[username]`.
 
-    ### Logging In
+    **Logging In**
 
     To use your cluster, open the terminal and log in with `ssh [username]@[hpc-hostname]`. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:
 
@@ -111,7 +111,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
     user@hpc-login ~ $
     ```
 
-    ### SSH Keys
+    **SSH Keys**
 
     You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:
 
@@ -147,7 +147,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
      For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
 
-    ### Common Commands
+    **Common Commands**
 
     Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:
 
@@ -380,7 +380,7 @@ Miscellaneous:
 
         Add GitHub instructions.
 
-    ### Common Commands
+    **Common Commands**
 
     !!! to-do
 

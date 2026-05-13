@@ -195,7 +195,7 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 [Download trnL common names CSV](files/trnL_common_names.csv){ .md-button }
 </div>
 
-With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. After reading it into your analysis file, run:
+With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. After reading it into your analysis file, run:
 
 ``` r
 source("[path/to/assign_common_names.R]")
@@ -214,7 +214,7 @@ at minimum to assign common names. The inputs of the function are:
 The function first reads in the common names CSV and builds a genus-level lookup table from the `genus` and `genus_conventional_name` columns, splitting semicolon-separated entries into individual genus-name pairs:
 
 ``` r
-common_names <- read.csv(common_names_csv, stringsAsFactors = FALSE)
+common_names <- utils::read.csv(common_names_csv, stringsAsFactors = FALSE)
 
 genus_key <- NULL
 if ("genus" %in% colnames(common_names) && "genus_conventional_name" %in% colnames(common_names)) {
@@ -240,7 +240,7 @@ if ("genus" %in% colnames(common_names) && "genus_conventional_name" %in% colnam
 Next, it extracts the taxonomy table and ASV sequences from the phyloseq and initializes `common_name` and `taxa` columns:
 
 ``` r
-tax_tab <- as.data.frame(tax_table(physeq))
+tax_tab <- as.data.frame(phyloseq::tax_table(physeq))
 
 if ("ASV" %in% colnames(tax_tab)) {
   asv_seqs <- tax_tab$ASV
@@ -332,6 +332,28 @@ if (!resolved) {
 
 All conflicts are recorded in a dataframe that is stored as an attribute on the returned phyloseq.
 
+### Species-Level Propagation
+
+After the main matching loop, the function makes a second pass over ASVs that did not match any row in the CSV. If such an ASV has a species-level (or below) taxonomy assignment, the function looks for sibling ASVs that share the same species/subspecies/varietas/forma classification and already have a common name assigned. If all siblings agree on a single unambiguous name, that name is propagated to the unmatched ASV:
+
+``` r
+has_species <- !is.na(tax_tab[[sp_col]]) & nzchar(tax_tab[[sp_col]])
+needs_name  <- is.na(tax_tab$common_name) & has_species
+has_name    <- !is.na(tax_tab$common_name) & has_species
+
+for (i in which(needs_name)) {
+  donors <- which(has_name & species_key == species_key[i])
+  if (length(donors) > 0) {
+    donor_names <- unique(tax_tab$common_name[donors])
+    if (length(donor_names) == 1) {
+      tax_tab$common_name[i] <- donor_names
+    }
+  }
+}
+```
+
+This handles the common case where differential trimming across sequencing runs produces slightly different ASV sequences for the same organism: the longer or shorter variant may not appear in the CSV, but a sibling ASV with the same species assignment does. The function reports how many ASVs were propagated and how many were skipped due to ambiguity (multiple different common names for the same species).
+
 ### Understanding the Output
 
 The function returns the same phyloseq with two columns added to the taxonomy table: `common_name`, the conventional name assigned to each ASV (e.g., "wheat and rye," "bananas and plantains"); and `taxa`, the full set of scientific names associated with the ASV, alphabetized and semicolon-separated. ASVs that did not match any row in the CSV will have `NA` for both columns. You can view the updated taxonomy table with:
@@ -352,3 +374,23 @@ The conflict report includes the ASV sequence, the number of matches, the resolu
 ??? question "Why would I need to review conflicts manually?"
 
     In most cases the function's resolution strategies produce sensible names automatically. Manual review is most useful when you see `concatenated` or `first_match_default` in the `resolution_method` column of the conflict report, as these indicate cases where the function could not confidently resolve the conflict using taxonomic information alone. You can update the CSV's `conventional_name`, `genus`, or `genus_conventional_name` columns to improve resolution for these ASVs in future runs.
+
+
+!!! note "Avoid blanket agglomeration by common name"
+
+    For trnL, we strongly advise against performing a blanket agglomeration (`tax_glom()`) by common name. Grouping by common name risks silently merging biologically distinct organisms. If grouping is needed for nutritional analysis, it should be done manually and deliberately.
+
+## Known Issues
+
+### Human/Elk 
+
+!!! warning "User action required"
+
+    In the 12Sv5 region, human and elk are phylogenetically similar. We have found that ASVs assigned to elk (*Cervus canadensis*) are not reliably elk: some BLAST to human, others to elk. Users should recheck elk-labeled ASVs and decide whether to manually relabel them as human, based on context.
+
+### Pecan/Walnut
+
+!!! warning "User action required"
+
+    Pecan and walnut ASVs cannot be reliably distinguished. The two species differ by only a single nucleotide, and within a given sample the error-correction step labels reads as one or the other. As a result, pecan and walnut are never both present in the same sample. Users must manually merge these ASVs, labeling them with a combined name (e.g., `pecan/walnut`).
+
