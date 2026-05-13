@@ -1,12 +1,16 @@
 # Overview
 
-After creating a phyloseq object, lab members have developed the below workflow for beginning to process and analyze it. The rest of the pages in this section will walk you though the three steps of calculating diversity metrics and relative abundance and creating a PCA plot:
+Once a phyloseq object is created, the following workflow may be used as a template for further processing and beginning analysis. The rest of the pages in this section will expand on the details of each step.
 
 ``` mermaid
 graph TD
-    A[Unfiltered Phyloseq] -->|Step 1: Review/BLAST NAs, add taxonomic assignments for any that should be kept| B[Unfiltered Phyloseq with Added Taxonomic Assignments for Select NAs]
-    B -->|Step 2: Filter out remaining NAs & human reads for 12Sv5| C[Filtered Phyloseq]
-    C -->|Steps 3: Calculate diversity metrics and add to sample metadata| D[Filtered Phyloseq + Diversity Metrics]
-    D -->|Step 4: Perform CLR transform on relative abundances| E[CLR-Transformed Phyloseq]
-    E -->|Step 5: Create PCA biplot| F[PCA Biplot]
+    A[Unfiltered Phyloseq] -->|Step 1: Assign Common Names| B[Phyloseq with Common Name Assignments]
+    B -->|Step 2: Review Unassigned Taxa - NAs| C[Phyloseq with Updated Assignments for Select NAs]
+    C -->|Step 3: Taxa Filtering| D[Phyloseq with Filtered Taxa]
+    D -->|Step 4: Sample Filtering| E[Phyloseq with Filtered Samples]
+    E -->|Step 5: Prune Taxa| F[Phyloseq with Pruned Taxa after Sample Filtering]
+    F -->|Step 6: Taxa Glomming| G[Phyloseq with Glommed Taxa]
+    G -->|Step 7: Calculate Diversity Metrics| H[Phyloseq with Diversity Metrics]
+    H -->|Step 8: Calculate Relative Abundances and CLR-Transform| I[CLR-Transformed Phyloseq]
+    I -->|Step 9: Perform PCA| J[PCA Biplot]
 ```
