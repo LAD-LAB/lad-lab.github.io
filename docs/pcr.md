@@ -163,9 +163,9 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
     | Step | Temperature | Time | Cycles |
     |---|---|---|---|
     | Initial denaturation | 95 °C | 3 min | 1 |
-    | Denaturation | 98 °C | 20 sec | 32 |
-    | Annealing | 60 °C | 15 sec | 32 |
-    | Extension | 72 °C | 15 sec | 32 |
+    | Denaturation | 98 °C | 20 sec | 33 |
+    | Annealing | 60 °C | 15 sec | 33 |
+    | Extension | 72 °C | 15 sec | 33 |
     | Hold | 12 °C | ∞ | — |
 
 ## Secondary PCR
