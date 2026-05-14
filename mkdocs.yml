@@ -115,16 +115,17 @@ extra:
     provider: google
     property: G-1LM4D2NZZL
     feedback:
-      title: Was this page helpful?
+      title: Did you find everything you were looking for?
       ratings:
-        - icon: material/emoticon-happy-outline
+        - icon: material/thumb-up-outline
           name: This page was helpful
           data: 1
           note: >-
             Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
+        - icon: material/thumb-down-outline
           name: This page could be improved
           data: 0
           note: >-
-            Thanks for your feedback! Help us improve this page by
-            <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+{title}&body=Page:+{url}%0A%0AFeedback:+" target="_blank" rel="noopener">opening an issue</a>.
+            Thanks for your feedback! Please
+            <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+{title}&body=Page:+{url}%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a>
+            and let us know what was missing or unclear (no GitHub familiarity needed).
