@@ -23,10 +23,4 @@ To navigate between pages, use the following keyboard shortcuts:
 
 ## Feedback
 
-=== "Duke"
-
-    If you have comments, questions, or feedback, contact Ashish Subramanian at [ashish.subramanian@duke.edu](mailto:ashish.subramanian@duke.edu).
-
-=== "General"
-
-    If you have comments, questions, or feedback, [open an issue](https://github.com/LAD-LAB/lad-lab.github.io/issues) on the GitHub repository.
+If you have comments, questions, or feedback, use the :material-emoticon-happy-outline: :material-emoticon-sad-outline: widget at the bottom of any page or [open an issue](https://github.com/LAD-LAB/lad-lab.github.io/issues) on the GitHub repository.
