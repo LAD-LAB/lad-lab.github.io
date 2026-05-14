@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+title: David Lab FoodSeq Handbook
+message: >-
+  If you use this resource, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Ashish
+    name-particle: M.
+    family-names: Subramanian
+  - given-names: Sharon
+    family-names: Jiang
+  - given-names: Dorothy
+    name-particle: K.
+    family-names: Superdock
+  - given-names: Katherine
+    family-names: Anderson
+  - given-names: Lawrence
+    name-particle: A.
+    family-names: David
+repository-code: https://github.com/LAD-LAB/lad-lab.github.io
+url: https://lad-lab.github.io
+abstract: >-
+  Step-by-step protocols and documentation for the David
+  Lab's FoodSeq dietary biomarker pipeline, covering DNA
+  extraction, library preparation, sequencing, bioinformatic
+  processing with QIIME2 and DADA2, phyloseq creation in R,
+  and downstream analyses including diversity metrics,
+  relative abundance, and PCA.
+keywords:
+  - dietary assessment
+  - DNA metabarcoding
+  - trnL
+  - 12SV5
+  - FoodSeq
+  - bioinformatics
+  - phyloseq
+license: MIT
+version: 1.0.0
