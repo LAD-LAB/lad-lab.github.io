@@ -37,3 +37,8 @@ keywords:
   - phyloseq
 license: MIT
 version: 1.0.0
+doi: 10.5281/zenodo.20174234
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20174234
+    description: Concept DOI (all versions)
