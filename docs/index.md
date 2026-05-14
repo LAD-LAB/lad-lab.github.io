@@ -1,6 +1,10 @@
 # Home
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20174234.svg)](https://doi.org/10.5281/zenodo.20174234)
+!!! note "Citation"
+
+    [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20174234.svg)](https://doi.org/10.5281/zenodo.20174234)
+
+    If you use the tools or protocols described here, please cite this handbook using the DOI above.
 
 Welcome to the David Lab FoodSeq Handbook! This website is intended to supplement the LAD-LAB GitHub organization by providing detailed documentation and step-by-step guidance for lab members running or maintaining the lab's biostatistical scripts and tools. The instructions on this site assume minimal familiarity with R and shell and should be suitable for almost all biostatistical backgrounds.
 
