@@ -1,6 +1,10 @@
 # Creating the SQL File
 
-These instructions will help you create a `taxonomizr`-prepared SQLite database for use in creating the references and phyloseq objects.
+These instructions will help you create a `taxonomizr`-prepared SQLite database for use in creating the references.
+
+??? info
+
+    The SQL file is no longer required for phyloseq creation. The current `assignment_trnL()` and `assignment_12S()` functions in `foodseq.tools` assign taxonomy directly from taxonomy headers in the reference FASTA, bypassing the accession-to-taxid lookup that previously depended on this file. These instructions are retained for reference, as the SQL file is still used when [creating the references](references.md).
 
 ## Download Scripts
 

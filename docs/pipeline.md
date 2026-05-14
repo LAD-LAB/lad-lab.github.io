@@ -473,6 +473,10 @@ if(dir.exists(qiime.dir.12S)) {
 
 The `assignment_trnL()` and `assignment_12S()` functions handle taxonomy assignment from start to finish. For trnL, the function performs exact sequence matching against the reference FASTA and uses `taxonomizr::condenseTaxa()` to resolve each ASV to its last common ancestor when multiple species match. For 12Sv5, it uses a naive Bayesian classifier (adapted from `dada2::assignTaxonomy()`) to assign taxonomy at each rank down to subspecies, then similarly condenses multi-match ASVs. Both functions clean up subspecific ranks (subspecies, varietas, forma) before condensing, so that disagreements at those ranks do not inflate the ASV to a higher taxonomic level unnecessarily.
 
+??? info
+
+    The lab previously used `dada2::assignSpecies()` for trnL and `dada2::assignTaxonomy()` for 12Sv5. Exact matching was preferred for trnL because trnL sequences are short with high interspecies diversity; a single-nucleotide difference can distinguish closely related plants, so k-mer-based classification would sacrifice resolution. In contrast, 12Sv5 sequences are longer with more intraspecies diversity (a single species like cow may have many ASV variants), making the Bayesian classifier a better fit. However, `assignSpecies()` returned accession-keyed output that required a separate SQL-based lookup to build the full taxonomy table, while `assignTaxonomy()` populated the taxonomy table directly from taxonomy headers in the reference FASTA. The current `assignment_trnL()` function combines the exact matching of `assignSpecies()` with the taxonomy-header compatibility of `assignTaxonomy()`, eliminating the need for the SQL file and the accession-to-taxid conversion steps.
+
 ``` r
 if(dir.exists(qiime.dir.trnL)) {
   assignments.trnL <- assignment_trnL(ref_fasta = ref_trnL)$assignments
