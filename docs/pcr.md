@@ -119,7 +119,7 @@ All PCR setups should be performed in a PCR hood or designated clean area. Clean
 
 === "Multiplex (trnL + 12SV5)"
 
-    The multiplex protocol amplifies trnL(UAA)gh and 12SV5 in a single reaction, replacing the two separate singleplex qPCRs above. It uses KAPA HiFi HotStart ReadyMix as the polymerase, includes the DeBarba14 HomoB human blocking primer to suppress amplification of host DNA, and runs for 32 cycles at a 60 °C annealing temperature. Because the polymerase has exonuclease activity, the reaction mix and plate must be kept on ice at all times before cycling begins; otherwise, the exonuclease can degrade the primers prior to the start of the reaction.
+    The multiplex protocol amplifies trnL(UAA)gh and 12SV5 in a single reaction, replacing the two separate singleplex qPCRs above. It uses KAPA HiFi HotStart ReadyMix as the polymerase, includes the DeBarba14 HomoB human blocking primer to suppress amplification of host DNA, and runs for 33 cycles at a 60 °C annealing temperature. Because the polymerase has exonuclease activity, the reaction mix and plate must be kept on ice at all times before cycling begins; otherwise, the exonuclease can degrade the primers prior to the start of the reaction.
 
     **Materials**
 

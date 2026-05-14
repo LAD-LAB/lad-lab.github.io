@@ -161,7 +161,9 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
 === "Duke"
 
-    We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. To connect to Isilon on Windows:
+    We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. You must be on the DH1 (Duke Health) network to access Isilon; if you are off-site, connect via Cisco Secure Client first.
+
+    To connect to Isilon on Windows:
 
     1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
     2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
