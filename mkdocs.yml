@@ -20,10 +20,15 @@ nav:
   - Creating the SQL File: sql.md
 - Post-Phyloseq Processing and Analysis:
   - Overview: processing.md
-  - Calculating Diversity: diversity.md
-  - Calculating Relative Abundance: abundance.md
-  - Creating a PCA Plot: pca.md
   - Assigning Common Names: commonnames.md
+  - Reviewing Unassigned Taxa: reviewing.md
+  - Filtering Taxa: taxafiltering.md
+  - Filtering Samples: samplefiltering.md
+  - Pruning Taxa: pruning.md
+  - Agglomerating Taxa: glomming.md
+  - Calculating Diversity: diversity.md
+  - Relative Abundance and CLR Transform: abundance.md
+  - Creating a PCA Plot: pca.md
   - Anonymizing Human Reads: anonymizer.md
 
 theme:
