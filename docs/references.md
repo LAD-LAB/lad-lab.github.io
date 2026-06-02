@@ -870,6 +870,16 @@ seqs.df <-
 dim(seqs.df)
 ```
 
+## Adding Human Sequences to the 12Sv5 Reference
+
+The NCBI contains only a single *Homo sapiens* reference sequence for the 12Sv5 region, which is insufficient for accurately assigning all human ASVs in our data due to natural genetic diversity across individuals. To address this, we supplement the 12Sv5 reference with human sequences from Schneider et al. (2021), who compiled a 12S reference from the European Nucleotide Archive (ENA) for forensic dietary analysis and included substantially more *Homo sapiens* sequence variants.
+
+After building the 12Sv5 reference with the steps above, add the human sequences from the Schneider reference by extracting all *Homo sapiens* entries and appending them to `seqs.df`. These sequences should go through the same quality control and deduplication steps described in the previous section.
+
+!!! note
+
+    Schneider J, Novak B, Grisenti E, Thüringen M, Thiele-Bruhn S, A next generation sequencing forensic approach for the identification of last meal components. *Sci. Rep.* **11**, 8876 (2021). [https://doi.org/10.1038/s41598-021-88418-x](https://doi.org/10.1038/s41598-021-88418-x)
+
 ## Saving the References
 
 !!! to-do
