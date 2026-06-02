@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="settingup.html">
       
       
         
@@ -229,10 +233,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="index.html" class="md-tabs__link">
           
   
@@ -356,26 +362,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
             
   
   
@@ -393,7 +404,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -427,6 +438,186 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to Lab Biostatistics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="intro.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to Lab Biostatistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dna-metabarcoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNA Metabarcoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amplicon-sequencing-variants-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Amplicon Sequencing Variants (ASVs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phyloseq-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phyloseq Objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-statistical-and-data-visualization-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Statistical and Data Visualization Techniques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Statistical and Data Visualization Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alpha-diversity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alpha Diversity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relative-abundance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relative Abundance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#centered-log-ratio-clr-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Centered Log-Ratio (CLR) Transform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principal-component-analysis-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principal Component Analysis (PCA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Glossary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1287,12 +1478,62 @@
 
 
 <h1 id="introduction-to-lab-biostatistics">Introduction to Lab Biostatistics</h1>
-<h2 id="introduction-to-phyloseqs">Introduction to Phyloseqs</h2>
+<p>This page provides background on the core concepts used throughout this handbook. If you are new to the lab or to DNA metabarcoding, read through this page before proceeding to <a href="settingup.html">Setting Up</a> or <a href="pipeline.html">Creating a Phyloseq</a>.</p>
+<h2 id="dna-metabarcoding">DNA Metabarcoding</h2>
+<p>DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. In our lab, we use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake at the species level without relying on self-report.</p>
+<p>We target two markers:</p>
+<ul>
+<li><strong>trnL</strong> (trnL-gh intergenic spacer): a chloroplast region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.</li>
+<li><strong>12Sv5</strong> (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12Sv5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.</li>
+</ul>
+<p>Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12Sv5 dataset (animals), which are processed separately throughout the pipeline.</p>
+<h2 id="amplicon-sequencing-variants-asvs">Amplicon Sequencing Variants (ASVs)</h2>
+<p>An amplicon sequencing variant (ASV) is a unique DNA sequence recovered from a sequencing run after denoising. During sequencing, millions of DNA reads are generated from a sample; denoising algorithms like DADA2 correct sequencing errors and resolve the reads into a set of exact sequences, each representing a true biological variant. These are ASVs.</p>
+<p>ASVs are the fundamental unit of observation in our data. Each ASV is defined by its exact nucleotide sequence, and each sample in a sequencing run has a count of how many reads were assigned to each ASV. Taxonomy is assigned by matching ASV sequences against a reference database; for trnL, this is done by exact sequence matching, while for 12Sv5, a naive Bayesian classifier is used. An ASV that does not match anything in the reference is marked as <code>NA</code> and can be investigated further with tools like BLAST.</p>
+<p>A single food species may produce multiple ASVs (due to natural sequence variation within the species), and in some cases a single ASV may match multiple species (when those species share an identical marker sequence). The taxonomy assignment step handles these cases by condensing multi-match ASVs to their last common ancestor.</p>
+<details class="question">
+<summary>How are ASVs different from OTUs?</summary>
+<p>Older metabarcoding workflows clustered similar sequences into operational taxonomic units (OTUs), typically at a 97% similarity threshold. ASVs replace this approach by resolving sequences to exact variants without clustering, which provides higher taxonomic resolution and makes results comparable across studies and sequencing runs. Our lab uses ASVs exclusively.</p>
+</details>
+<h2 id="phyloseq-objects">Phyloseq Objects</h2>
+<p>A phyloseq is an R data structure from the <code>phyloseq</code> package that bundles together the different components of a metabarcoding dataset into a single object. A phyloseq contains up to three components:</p>
+<ul>
+<li><code>otu_table</code>: a matrix of ASV counts per sample (rows are samples, columns are ASVs)</li>
+<li><code>tax_table</code>: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to subspecies)</li>
+<li><code>sam_data</code>: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)</li>
+</ul>
+<p>The phyloseq is the central data object throughout the analysis pipeline. After <a href="pipeline.html">creating a phyloseq</a> from raw sequencing data, the <a href="processing.html">post-phyloseq processing workflow</a> walks through assigning common names, filtering, agglomerating, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).</p>
+<details class="question">
+<summary>Why use phyloseq objects instead of separate tables?</summary>
+<p>Keeping the ASV table, taxonomy, and sample metadata in a single object makes it straightforward to subset and transform the data without worrying about keeping the tables aligned. For example, <code>subset_samples(ps, type == "sample")</code> removes control samples from the ASV table and metadata simultaneously. The <code>phyloseq</code> package also provides built-in functions for common operations like <code>estimate_richness()</code>, <code>tax_glom()</code>, and <code>transform_sample_counts()</code>.</p>
+</details>
 <h2 id="common-statistical-and-data-visualization-techniques">Common Statistical and Data Visualization Techniques</h2>
-<h3 id="principle-components-analysis-pca">Principle Components Analysis (PCA)</h3>
+<p>The downstream analysis pages cover several statistical techniques in detail; brief descriptions are provided here for reference.</p>
+<h3 id="alpha-diversity">Alpha Diversity</h3>
+<p>Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on relative abundance data; see <a href="diversity.html">Calculating Diversity</a> for instructions.</p>
+<h3 id="relative-abundance">Relative Abundance</h3>
+<p>Relative abundance expresses each ASV's count as a proportion of the total reads in that sample, so that all proportions sum to 1. This normalization accounts for differences in sequencing depth across samples and is used for calculating Shannon diversity and for stacked bar plots. See <a href="abundance.html">Relative Abundance and CLR Transform</a> for instructions.</p>
+<h3 id="centered-log-ratio-clr-transform">Centered Log-Ratio (CLR) Transform</h3>
+<p>Compositional data like relative abundances are constrained to sum to 1, which makes standard statistical methods (like Euclidean distance) inappropriate. The centered log-ratio (CLR) transform removes this constraint by dividing each value by the geometric mean of the sample and taking the log. CLR-transformed data can then be analyzed with standard multivariate techniques. See <a href="abundance.html">Relative Abundance and CLR Transform</a> for the formula and code.</p>
+<h3 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h3>
+<p>PCA is a dimensionality reduction technique that projects high-dimensional data (many ASVs per sample) onto a smaller number of axes (principal components) that capture the most variation. We use PCA on CLR-transformed data to visualize how samples cluster by experimental group and to identify which taxa drive the most separation between groups. See <a href="pca.html">Creating a PCA Plot</a> for instructions and interpretation.</p>
 <h2 id="glossary">Glossary</h2>
 <ul>
-<li><strong>ASV</strong> — an amplicon sequencing variant (ASV) is a <code>[finish]</code> </li>
+<li><strong>ASV</strong>: amplicon sequencing variant; a unique DNA sequence recovered after denoising. The fundamental unit of observation in metabarcoding data.</li>
+<li><strong>CLR transform</strong>: centered log-ratio transform; a normalization applied to compositional data before multivariate analysis.</li>
+<li><strong>DADA2</strong>: the denoising algorithm used to resolve raw sequencing reads into ASVs.</li>
+<li><strong>denoising</strong>: the process of correcting sequencing errors and collapsing reads into true biological variants (ASVs).</li>
+<li><strong>marker</strong>: a short, standardized gene region used for identification; our lab uses trnL (plants) and 12Sv5 (animals).</li>
+<li><strong>metabarcoding</strong>: a method for identifying organisms in a mixed sample by sequencing a shared marker region and matching against a reference.</li>
+<li><strong>OTU</strong>: operational taxonomic unit; an older clustering-based approach to grouping sequences, replaced by ASVs in our pipeline.</li>
+<li><strong>pFR</strong>: plant food richness; the number of distinct plant taxa detected in a sample.</li>
+<li><strong>phyloseq</strong>: an R object bundling ASV counts, taxonomy, and sample metadata into a single data structure.</li>
+<li><strong>pMR</strong>: plant and meat richness; the number of distinct taxa detected in a sample (used for 12Sv5 data).</li>
+<li><strong>QIIME2</strong>: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.</li>
+<li><strong>reference database</strong>: a curated FASTA file mapping known marker sequences to taxonomy; used for assigning species to ASVs.</li>
+<li><strong>relative abundance</strong>: ASV counts expressed as proportions of total sample reads, summing to 1.</li>
+<li><strong>Shannon diversity</strong>: an alpha diversity metric that accounts for both richness and evenness.</li>
+<li><strong>taxonomy assignment</strong>: the process of matching ASV sequences to a reference database to determine species identity.</li>
 </ul>
 
 
@@ -1316,7 +1557,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 9, 2026 19:13:05 UTC">January 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 16:02:27 UTC">June 2, 2026</span>
   </span>
 
     
@@ -1425,6 +1666,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="settingup.html" class="md-footer__link md-footer__link--next" aria-label="Next: Setting Up">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Setting Up
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
