@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="pruning.html">
+        <link rel="prev" href="pca.html">
       
       
-        <link rel="next" href="diversity.html">
+        <link rel="next" href="anonymizer.html">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Agglomerating Taxa - David Lab FoodSeq Handbook</title>
+        <title>Merging Phyloseqs - David Lab FoodSeq Handbook</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#agglomerating-taxa" class="md-skip">
+        <a href="#merging-phyloseqs" class="md-skip">
           Skip to content
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Agglomerating Taxa
+              Merging Phyloseqs
             
           </span>
         </div>
@@ -1156,19 +1156,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="glomming.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="glomming.html" class="md-nav__link">
         
   
   
@@ -1184,7 +1175,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1278,10 +1268,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="merging.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merging Phyloseqs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="merging.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1297,6 +1314,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-merging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before Merging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Before Merging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ensuring-unique-sample-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensuring Unique Sample Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-taxonomy-for-reference-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating Taxonomy for Reference Consistency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standardizing-sample-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standardizing Sample Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merging
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1363,11 +1461,42 @@
   
 
 
-<h1 id="agglomerating-taxa">Agglomerating Taxa</h1>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add instructions on taxa agglomeration. This step differs for trnL and 12Sv5 and may require manual work depending on the cohort.</p>
-</div>
+<h1 id="merging-phyloseqs">Merging Phyloseqs</h1>
+<p>These instructions will help you merge multiple phyloseq objects into a single combined dataset using <code>merge_phyloseq()</code> from the <code>phyloseq</code> package. Merging is most commonly used when combining sequencing runs into a single dataset for cross-run analysis or when building a megaphyloseq that aggregates across many runs.</p>
+<h2 id="before-merging">Before Merging</h2>
+<p>Before calling <code>merge_phyloseq()</code>, make sure the following are addressed for each phyloseq you plan to merge.</p>
+<h3 id="ensuring-unique-sample-names">Ensuring Unique Sample Names</h3>
+<p>Phyloseq objects from different sequencing runs will often share sample names (e.g., <code>1-A01</code>, <code>2-B03</code>) because the well-based naming scheme resets with each run. If you merge phyloseqs with overlapping sample names, one will silently overwrite the other. To prevent this, prefix each phyloseq's sample names with a unique identifier before merging:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;[prefix1]-&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">))</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;[prefix2]-&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">))</span>
+</span></code></pre></div>
+<p>The prefix can be anything that uniquely identifies the run — a project name, a run date, a short label. For example, <code>"CHOICE-"</code>, <code>"20250401-"</code>, or <code>"Run1-"</code> would all work, as long as each phyloseq gets a different prefix. You can verify there are no collisions with:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">any</span><span class="p">(</span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">))</span>
+</span></code></pre></div>
+<p>This should return <code>FALSE</code>.</p>
+<h3 id="updating-taxonomy-for-reference-consistency">Updating Taxonomy for Reference Consistency</h3>
+<p>If the phyloseqs you are merging were created against different versions of the trnL or 12Sv5 reference, the same organism may have different taxonomy assignments across runs. To avoid inconsistencies in the merged dataset, re-run taxonomy assignment on each phyloseq against the same reference using <code>update_taxonomy()</code> from <code>foodseq.tools</code>:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ps.run1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[/path/to/current/reference.fasta]&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ps.run2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[/path/to/current/reference.fasta]&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The <code>marker</code> argument should be <code>"trnL"</code> for plant data or <code>"12S"</code> for animal data. Both phyloseqs should point to the same reference FASTA so that taxonomy is assigned identically.</p>
+<h3 id="standardizing-sample-metadata">Standardizing Sample Metadata</h3>
+<p>The <code>merge_phyloseq()</code> function combines the <code>sam_data</code> components by row-binding. If one phyloseq has metadata columns that the other does not, those columns will be filled with <code>NA</code> in the merged object. Before merging, check that the column names and value formats are consistent across phyloseqs:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nf">setdiff</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)),</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">)))</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nf">setdiff</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">)),</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)))</span>
+</span></code></pre></div>
+<p>If either call returns column names, either add the missing columns to the other phyloseq or remove columns that are not shared. Values in shared columns should use the same format — for example, the <code>type</code> column should use exactly <code>"sample"</code>, <code>"positive control"</code>, <code>"negative control"</code>, or <code>"blank"</code> across all phyloseqs.</p>
+<h2 id="merging">Merging</h2>
+<p>With sample names, taxonomy, and metadata aligned, merge the phyloseqs with:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ps.merged</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge_phyloseq</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">,</span><span class="w"> </span><span class="n">ps.run2</span><span class="p">)</span>
+</span></code></pre></div>
+<p>You can merge more than two phyloseqs at once by passing additional arguments:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">ps.merged</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge_phyloseq</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">,</span><span class="w"> </span><span class="n">ps.run2</span><span class="p">,</span><span class="w"> </span><span class="n">ps.run3</span><span class="p">)</span>
+</span></code></pre></div>
+<p>After merging, verify the result:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">ps.merged</span>
+</span></code></pre></div>
+<p>The output should show the combined number of samples and the union of all ASVs across the input phyloseqs.</p>
 
 
 
@@ -1390,7 +1519,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 16:06:40 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 16:48:46 UTC">June 2, 2026</span>
   </span>
 
     
@@ -1400,7 +1529,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 16:06:40 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 16:48:46 UTC">June 2, 2026</span>
   </span>
 
     
@@ -1470,7 +1599,7 @@
                 
                 
               
-              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Agglomerating%20Taxa&body=Page:+/glomming.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
+              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Merging%20Phyloseqs&body=Page:+/merging.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
             </div>
           
         </div>
@@ -1504,7 +1633,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="pruning.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pruning Taxa">
+          <a href="pca.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Creating a PCA Plot">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1514,20 +1643,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Pruning Taxa
+                Creating a PCA Plot
               </div>
             </div>
           </a>
         
         
           
-          <a href="diversity.html" class="md-footer__link md-footer__link--next" aria-label="Next: Calculating Diversity">
+          <a href="anonymizer.html" class="md-footer__link md-footer__link--next" aria-label="Next: Anonymizing Human Reads">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Calculating Diversity
+                Anonymizing Human Reads
               </div>
             </div>
             <div class="md-footer__button md-icon">
