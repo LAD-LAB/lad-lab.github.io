@@ -29,6 +29,7 @@ nav:
   - Calculating Diversity: diversity.md
   - Relative Abundance and CLR Transform: abundance.md
   - Creating a PCA Plot: pca.md
+  - Merging Phyloseqs: merging.md
   - Anonymizing Human Reads: anonymizer.md
 
 theme:
