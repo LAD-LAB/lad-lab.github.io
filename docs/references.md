@@ -878,7 +878,7 @@ After building the 12Sv5 reference with the steps above, add the human sequences
 
 !!! note
 
-    Schneider J, Novak B, Grisenti E, Thüringen M, Thiele-Bruhn S, A next generation sequencing forensic approach for the identification of last meal components. *Sci. Rep.* **11**, 8876 (2021). [https://doi.org/10.1038/s41598-021-88418-x](https://doi.org/10.1038/s41598-021-88418-x)
+    Schneider J, Mas-Carrió E, Jan C, Miquel C, Taberlet P, Michaud K, Fumagalli L, Comprehensive coverage of human last meal components revealed by a forensic DNA metabarcoding approach. *Sci. Rep.* **11**, 8876 (2021). [https://doi.org/10.1038/s41598-021-88418-x](https://doi.org/10.1038/s41598-021-88418-x)
 
 ## Saving the References
 
