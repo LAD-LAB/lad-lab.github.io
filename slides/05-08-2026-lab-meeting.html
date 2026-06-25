@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Years of FoodSeq Bioinformatics</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Reveal.js core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+
+    <style>
+        :root {
+            --text: #1a1a1a;
+            --text-mid: #475569;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --accent: #2563eb;
+            --accent-dark: #1e40af;
+            --accent-light: #dbeafe;
+            --accent-lighter: #eff6ff;
+            --code-bg: #f1f5f9;
+            --code-text: #334155;
+            --border: #e2e8f0;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --red: #dc2626;
+            --red-light: #fee2e2;
+            --amber: #d97706;
+            --amber-light: #fef3c7;
+            --teal: #0d9488;
+            --teal-light: #ccfbf1;
+            --purple: #7c3aed;
+            --purple-light: #ede9fe;
+        }
+
+        /* Base */
+        .reveal {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+        }
+        .reveal .slides { text-align: left; }
+        .reveal .slides section {
+            padding: 40px 60px;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        /* Typography */
+        .reveal h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 0.3em;
+        }
+        .reveal h2 {
+            font-size: 1.65em;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.4em;
+            color: var(--text);
+        }
+        .reveal h3 {
+            font-size: 1.15em;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.3em;
+        }
+        .reveal p, .reveal li {
+            font-size: 0.92em;
+            line-height: 1.55;
+            color: var(--text-mid);
+        }
+        .reveal ul, .reveal ol { margin-left: 0.5em; }
+        .reveal li { margin-bottom: 0.4em; }
+        .reveal strong { color: var(--text); font-weight: 600; }
+        .reveal em { font-style: italic; }
+
+        /* Code */
+        .reveal code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+        }
+
+        /* Title slide */
+        .title-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .title-slide h1 { font-size: 2.4em; margin-bottom: 0.15em; }
+        .title-slide .subtitle {
+            font-size: 1.15em;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-bottom: 1.8em;
+            letter-spacing: -0.01em;
+        }
+        .title-slide .meta {
+            font-size: 0.85em;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .title-slide .meta strong { color: var(--text-mid); }
+
+        /* Section divider */
+        .section-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .section-slide h1 {
+            color: var(--accent);
+            font-size: 2.6em;
+            margin-bottom: 0.1em;
+        }
+        .section-slide .section-desc {
+            font-size: 1em;
+            color: var(--text-light);
+            font-weight: 400;
+            max-width: 70%;
+        }
+        .section-slide::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin-bottom: 1.2em;
+            border-radius: 2px;
+        }
+
+        /* Two-column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3em;
+            align-items: start;
+            margin-top: 0.5em;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 0.8em 1em;
+            border-radius: 8px;
+            margin: 0.6em 0;
+            font-size: 0.88em;
+        }
+        .callout-blue { background: var(--accent-lighter); border-left: 4px solid var(--accent); }
+        .callout-green { background: var(--green-light); border-left: 4px solid var(--green); }
+        .callout-red { background: var(--red-light); border-left: 4px solid var(--red); }
+        .callout-amber { background: var(--amber-light); border-left: 4px solid var(--amber); }
+        .callout-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+        .callout p { margin: 0; }
+
+        /* Tags / chips */
+        .tag {
+            display: inline-block;
+            font-size: 0.6em;
+            font-weight: 500;
+            padding: 0.2em 0.7em;
+            border-radius: 20px;
+            margin-right: 0.3em;
+            vertical-align: middle;
+        }
+        .tag-blue { background: var(--accent-light); color: var(--accent-dark); }
+        .tag-green { background: var(--green-light); color: #15803d; }
+        .tag-amber { background: var(--amber-light); color: #b45309; }
+        .tag-teal { background: var(--teal-light); color: #0f766e; }
+        .tag-red { background: var(--red-light); color: #b91c1c; }
+
+        /* Big number / stat */
+        .big-stat {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.15em;
+        }
+        .stat-label {
+            font-size: 0.88em;
+            color: var(--text-light);
+        }
+
+        /* Step indicators */
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            font-size: 0.75em;
+            margin-right: 0.4em;
+            flex-shrink: 0;
+        }
+        .step-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.6em;
+            font-size: 0.92em;
+            color: var(--text-mid);
+        }
+        .step-row p { margin: 0; }
+
+        /* Comparison table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+            margin: 0.8em 0;
+        }
+        .compare-table th {
+            text-align: left;
+            padding: 0.8em 0.8em;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--text);
+        }
+        .compare-table td {
+            padding: 0.7em 0.8em;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-mid);
+            vertical-align: top;
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        /* Fragment tweaks */
+        .reveal .fragment { transition: all 0.3s ease; }
+
+        /* Centered slide variant */
+        .centered-slide {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .centered-slide p { max-width: 75%; }
+
+        /* Slide number */
+        .reveal .slide-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            background: transparent;
+        }
+
+        /* Progress bar */
+        .reveal .progress span { background: var(--accent); }
+
+        .compact-list li { margin-bottom: 0.3em; font-size: 0.85em; }
+
+        /* Before/After card */
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1em;
+            align-items: center;
+            margin-top: 0.5em;
+        }
+        .ba-card {
+            border-radius: 8px;
+            padding: 0.8em 1em;
+        }
+        .ba-before { background: var(--red-light); border: 1.5px solid var(--red); }
+        .ba-after { background: var(--green-light); border: 1.5px solid var(--green); }
+        .ba-arrow {
+            font-size: 1.8em;
+            color: var(--text-light);
+        }
+
+        /* Quote block */
+        .past-quote {
+            background: var(--code-bg);
+            border-left: 4px solid var(--border);
+            padding: 0.8em 1.2em;
+            border-radius: 0 8px 8px 0;
+            margin: 0.5em 0;
+            font-style: italic;
+        }
+        .past-quote .quote-source {
+            font-style: normal;
+            font-size: 0.82em;
+            color: var(--text-light);
+            margin-top: 0.4em;
+        }
+
+        /* Diagram container */
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1em 0;
+        }
+        .diagram-container svg { max-width: 100%; height: auto; }
+
+        /* Flow arrow */
+        .flow-arrow {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.5em;
+            margin: 0.2em 0;
+        }
+
+        /* Example box */
+        .example-box {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1em 1.2em;
+            margin: 0.5em 0;
+        }
+        .example-box p { margin: 0.3em 0; font-size: 0.88em; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: Title                                                -->
+<!-- ============================================================ -->
+<section class="title-slide">
+    <h1>Two Years of FoodSeq<br>Bioinformatics</h1>
+    <div class="subtitle">A retrospective &middot; and what comes next</div>
+    <div class="meta">
+        <strong>Ashish S.</strong><br>
+        David Lab &middot; Duke University<br>
+        May 8, 2026
+    </div>
+    <aside class="notes">
+        Hi everyone. This is my last lab meeting presentation. I wanted to use it to look back at what I've done over the past two years and talk about where the work is heading, particularly with respect to the pipeline paper. Please stop me with questions at any point.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: Personal updates                                     -->
+<!-- ============================================================ -->
+<section>
+    <h2>Some personal news</h2>
+    <div class="two-col" style="margin-top:0.8em;">
+        <div>
+            <h3>What&rsquo;s next for me</h3>
+            <ul>
+                <li>Starting my <strong>MD-PhD</strong> at <strong>Washington University in St. Louis</strong> this fall</li>
+                <li>Last week in the lab: <strong>week of June 28</strong></li>
+                <li>~8 weeks remaining</li>
+            </ul>
+        </div>
+        <div>
+            <h3>What&rsquo;s been making me happy</h3>
+            <ul>
+                <li><strong>[Please fill in]</strong></li>
+                <li><strong>[Please fill in]</strong></li>
+                <li><strong>[Please fill in]</strong></li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        Before I get into the science, some personal updates. I'll be starting my MD-PhD at WashU in St. Louis this fall. My last week in the lab will be the week of June 28, so I have about eight weeks left. And for the traditional "what's making me happy" segment: [fill in].
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: The Beginning                                        -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>September<br>2024</h1>
+    <p class="section-desc">Where it all started</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: My first presentation                                  -->
+<!-- ============================================================ -->
+<section>
+    <h2>My first lab meeting (September 20, 2024)</h2>
+    <div class="two-col" style="margin-top:0.6em;">
+        <div>
+            <div class="past-quote">
+                <p>&ldquo;What do I do? Curating humanfoods.csv and creating trnL and 12Sv5 references. Running the pipeline, creating phyloseq objects, curating the megaphyloseq. Data collection and analysis. Learning and answering questions!&rdquo;</p>
+                <p class="quote-source">&mdash; me, slide 4, September 2024</p>
+            </div>
+            <p style="margin-top:0.6em;">I was about a month in and still learning, so my first presentation ended with discussion questions for the lab rather than answers.</p>
+        </div>
+        <div>
+            <h3>The questions I asked you</h3>
+            <ul>
+                <li>How can the references be curated to avoid misassignment?</li>
+                <li>How do we standardize data collection and metadata fields?</li>
+                <li>How do we standardize common names assignment?</li>
+                <li>How can documentation be improved?</li>
+                <li>What individual practices should be implemented lab-wide?</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        My very first lab meeting was September 20, 2024. I was about a month in, still learning the codebase, and I ended the presentation by asking the lab discussion questions. I didn't know the answers yet, but these questions ended up becoming most of the projects I worked on.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: What the pipeline looked like when I arrived           -->
+<!-- ============================================================ -->
+<section>
+    <h2>The state of things when I arrived</h2>
+    <div class="two-col" style="margin-top:0.5em;">
+        <div>
+            <h3>What existed</h3>
+            <ul>
+                <li>Pipeline-to-Phyloseq R scripts for single-marker runs (trnL or 12S processed separately)</li>
+                <li>Manual <code>scp</code> to get files from DCC</li>
+                <li>Taxonomy via <code>taxonomizr</code> + 70 GB SQL database on Isilon</li>
+                <li>Missing accessions required manual lookup and hardcoded fixes</li>
+                <li>A megaphyloseq that hadn&rsquo;t been updated in nearly two years</li>
+                <li>No central bioinformatics documentation (wet lab protocols existed)</li>
+            </ul>
+        </div>
+        <div>
+            <h3>What didn&rsquo;t exist</h3>
+            <ul>
+                <li>Multiplex support (trnL + 12S pooled in one run)</li>
+                <li>An automated way to build the megaphyloseq</li>
+                <li>Common name assignment beyond manual curation</li>
+                <li>Human read anonymization for SRA deposition</li>
+                <li>PacBio 16S pipeline</li>
+                <li>A bioinformatics documentation website</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        To set the stage: the core pipeline existed when I arrived and it worked well for single-marker runs. Taxonomy used the taxonomizr package with a 70-gig SQL database on Isilon. The megaphyloseq hadn't been updated in a while because there hadn't been a need. On the documentation side, the wet lab protocols were solid, but there wasn't a central place for the bioinformatics workflow. The items on the right are things that came up during my time here as new needs arose.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: Pipeline Rewrite                                     -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>Rewriting<br>the Pipeline</h1>
+    <p class="section-desc">Building for the multiplex era</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Pipeline before and after                              -->
+<!-- ============================================================ -->
+<section>
+    <h2>Pipeline-to-Phyloseq: before and after</h2>
+    <div class="before-after">
+        <div class="ba-card ba-before">
+            <h3 style="color:var(--red); margin-bottom:0.3em;">Before</h3>
+            <ul class="compact-list">
+                <li>One marker at a time</li>
+                <li>Manual <code>scp</code> from DCC</li>
+                <li>Manual QZV unzipping for read counts</li>
+                <li>70 GB SQL database on Isilon</li>
+                <li>Manual accession lookups for missing taxa</li>
+                <li>Required familiarity with the specific scripts to run</li>
+            </ul>
+        </div>
+        <div class="ba-arrow">&rarr;</div>
+        <div class="ba-card ba-after">
+            <h3 style="color:var(--green); margin-bottom:0.3em;">After</h3>
+            <ul class="compact-list">
+                <li>Handles multiplexed runs natively (trnL + 12S from one pooled run)</li>
+                <li>Automated <code>rsync</code> with staging directory</li>
+                <li>Programmatic read count extraction</li>
+                <li>Custom taxonomy functions in <code>foodseq.tools</code>, no Isilon SQL dependency</li>
+                <li>Template format: change a few variables and run</li>
+                <li>Built-in validation, QC plots, and documentation</li>
+            </ul>
+        </div>
+    </div>
+    <p style="margin-top:0.5em;">The move to multiplex sequencing was the driving force; the existing code was designed for single-marker runs and wasn&rsquo;t set up to handle trnL and 12S pooled together, which motivated a rewrite.</p>
+    <aside class="notes">
+        The move to multiplex sequencing was what motivated the rewrite. The existing code worked well for single-marker runs but wasn't set up for the case where trnL and 12S come from one pooled run. The biggest change under the hood was the taxonomy functions: assignment_trnL does exact sequence matching against the reference FASTA and condenses multi-match ASVs, while assignment_12S uses a naive Bayesian classifier. Both are in the foodseq.tools package, and they eliminated the dependency on the 70-gig SQL database on Isilon that the old taxonomizr-based approach required.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Pipeline journey diagram                               -->
+<!-- ============================================================ -->
+<section>
+    <h2>The journey of a sequencing run</h2>
+    <div class="diagram-container" style="margin-top:0.3em;">
+        <svg viewBox="0 0 940 310" width="900" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker></defs>
+
+            <!-- System labels -->
+            <text x="120" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.08em">SEQUENCER</text>
+            <text x="410" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.08em">DUKE COMPUTING CLUSTER</text>
+            <text x="786" y="18" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.08em">LOCAL (BOX)</text>
+
+            <!-- Vertical lane dividers -->
+            <line x1="240" y1="8" x2="240" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"/>
+            <line x1="635" y1="8" x2="635" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"/>
+
+            <!-- Raw data -->
+            <rect x="30" y="40" width="180" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="120" y="62" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#1e40af">Raw data (BCL)</text>
+            <text x="120" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748b">+ samplesheet</text>
+
+            <!-- Arrow to DCC -->
+            <line x1="218" y1="65" x2="272" y2="65" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr3)"/>
+            <text x="245" y="57" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="500" fill="#2563eb">rsync</text>
+
+            <!-- Step 1: Demux -->
+            <rect x="280" y="40" width="230" height="50" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="300" y="63" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#2563eb">1</text>
+            <text x="318" y="63" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#334155">Demux (bcl2fastq)</text>
+            <text x="318" y="79" font-family="Inter,sans-serif" font-size="11" fill="#64748b">Singularity &middot; SLURM</text>
+
+            <!-- Fork -->
+            <line x1="395" y1="90" x2="395" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="345" y1="108" x2="465" y2="108" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="345" y1="108" x2="345" y2="122" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3)"/>
+            <line x1="465" y1="108" x2="465" y2="122" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Step 2: trnL pipeline -->
+            <rect x="268" y="130" width="155" height="52" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="288" y="152" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#2563eb">2</text>
+            <text x="305" y="152" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#334155">trnL pipeline</text>
+            <text x="305" y="170" font-family="Inter,sans-serif" font-size="11" fill="#64748b">QIIME 2 &middot; DADA2</text>
+
+            <!-- Step 3: 12S pipeline -->
+            <rect x="433" y="130" width="155" height="52" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="453" y="152" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#2563eb">3</text>
+            <text x="470" y="152" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#334155">12S pipeline</text>
+            <text x="470" y="170" font-family="Inter,sans-serif" font-size="11" fill="#64748b">QIIME 2 &middot; DADA2</text>
+
+            <!-- DCC dashed box -->
+            <rect x="262" y="32" width="335" height="160" rx="10" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.35"/>
+            <text x="430" y="207" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#2563eb" font-style="italic">Runs remotely via SLURM</text>
+
+            <!-- Arrow from DCC to P2P -->
+            <line x1="596" y1="156" x2="648" y2="148" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr3)"/>
+            <text x="622" y="141" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="500" fill="#2563eb">rsync</text>
+
+            <!-- Pipeline-to-Phyloseq header -->
+            <rect x="655" y="38" width="260" height="46" rx="8" fill="#2563eb" stroke="none"/>
+            <text x="785" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="600" fill="#fff">Pipeline-to-Phyloseq</text>
+            <text x="785" y="74" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#bfdbfe">Handles both markers</text>
+
+            <line x1="785" y1="84" x2="785" y2="117" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Step 4: Build phyloseq -->
+            <rect x="655" y="124" width="260" height="48" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="675" y="146" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#2563eb">4</text>
+            <text x="693" y="146" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#334155">Build phyloseq objects</text>
+            <text x="693" y="163" font-family="Inter,sans-serif" font-size="11" fill="#64748b">Taxonomy &middot; collapse ASVs</text>
+
+            <line x1="785" y1="172" x2="785" y2="197" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Step 5: QC -->
+            <rect x="655" y="204" width="260" height="48" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="675" y="226" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#2563eb">5</text>
+            <text x="693" y="226" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#334155">Quality control</text>
+            <text x="693" y="243" font-family="Inter,sans-serif" font-size="11" fill="#64748b">Controls &middot; plates &middot; read counts</text>
+
+            <line x1="785" y1="252" x2="785" y2="277" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Output -->
+            <rect x="695" y="282" width="180" height="22" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+            <text x="785" y="297" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#1e40af">Phyloseq object (.rds)</text>
+        </svg>
+    </div>
+    <aside class="notes">
+        Here's the full data flow. Raw data comes off the sequencer, gets transferred to DCC, and forks into the trnL and 12S QIIME2/DADA2 pipelines running in parallel. Everything on the right is Pipeline-to-Phyloseq, which is what I built. It picks up the output from both markers, assigns taxonomy, runs QC, and produces the final phyloseq object.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: The Megaphyloseq                                     -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>The<br>Megaphyloseq</h1>
+    <p class="section-desc">A cumulative archive of every sequencing run</p>
+    <aside class="notes">
+        Now I want to show what happens when you combine all those phyloseq objects together. None of what I'm about to show has been presented before.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: The megaphyloseq                                       -->
+<!-- ============================================================ -->
+<section>
+    <h2>The megaphyloseq</h2>
+    <div class="two-col" style="margin-top:0.5em;">
+        <div>
+            <div class="past-quote">
+                <p>&ldquo;We need new megaphyloseq objects. Generally, the trnL MPS hasn&rsquo;t been updated in nearly two years while the 12S MPS has never been generated.&rdquo;</p>
+                <p class="quote-source">&mdash; me, October 2025, slide 20</p>
+            </div>
+            <p style="margin-top:0.6em;">I built Isilon-to-Phyloseq to solve this. You change one line (the run folder name) and hit go; it handles the Isilon &rarr; DCC &rarr; Box &rarr; merge &rarr; Google Sheets logging flow automatically.</p>
+        </div>
+        <div>
+            <div style="text-align:center; padding-top:0.5em;">
+                <div class="big-stat">103</div>
+                <div class="stat-label">unique runs across both markers</div>
+                <div class="big-stat" style="margin-top:0.5em;">31,631</div>
+                <div class="stat-label">total samples (17,895 trnL + 13,736 12Sv5)</div>
+            </div>
+            <div class="callout callout-green" style="margin-top:0.5em;">
+                <p>Dorothy, Anna, and I have been adding runs and metadata since November 2025, with automated changelog tracking. Run dates span from February 2020 to March 2026.</p>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        In October 2025, I presented on the megaphyloseq problem. The trnL megaphyloseq hadn't been updated in two years, and the 12S one had never existed. To fix that I built Isilon-to-Phyloseq, which automates the entire flow from Isilon to DCC to Box to merge. We now have 103 runs and over 31,000 samples across both markers. It has automated changelog tracking and Google Sheets logging, and it prevents duplicates.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Megaphyloseq growth                                    -->
+<!-- ============================================================ -->
+<section>
+    <h2>Megaphyloseq growth over time</h2>
+    <img src="Megaphyloseq/plot_cumulative_runs.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        This is the cumulative run count over time. The x-axis is the original sequencing run date, not the date the run was added to the megaphyloseq. You can see that most of the lab's runs are trnL-only or both markers, and the 12S megaphyloseq only exists because of this project. The steep section in late 2025 and early 2026 is when I built the batch runner and started processing runs in bulk.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: What's in the megaphyloseq - trnL                      -->
+<!-- ============================================================ -->
+<section>
+    <h2>What&rsquo;s in the trnL megaphyloseq</h2>
+    <img src="Megaphyloseq/plot_trnL_top_taxa.png" style="width:92%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        These are the most frequently detected plant taxa across all 17,895 samples. The labels come from the common name assignment function, so "wheat and rye" is the resolved common name for a group of Poaceae ASVs, "bananas and plantains" covers Musa species, and so on. This is the kind of cross-study view that wasn't possible before the megaphyloseq existed.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: What's in the megaphyloseq - 12S                       -->
+<!-- ============================================================ -->
+<section>
+    <h2>What&rsquo;s in the 12Sv5 megaphyloseq</h2>
+    <img src="Megaphyloseq/plot_12S_top_species.png" style="width:92%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        Same idea for the 12Sv5 marker. Chicken and cattle are by far the most prevalent, which makes sense for a primarily US-based dietary dataset. You'll notice some species appear both by common name and by scientific name, since common name assignment only covers a subset of ASVs right now. That's something to clean up. The dog, cat, and rat detections are interesting; they could be environmental contamination, pet DNA, or non-dietary sources, and having the megaphyloseq lets us see how widespread they are.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Cohort signature foods                                 -->
+<!-- ============================================================ -->
+<section>
+    <h2>What makes each cohort unique?</h2>
+    <p style="margin-bottom:0.3em;">For each project, the most overrepresented food compared to the global detection rate:</p>
+    <img src="Megaphyloseq/plot_cohort_signatures.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        This is a fun one. For each cohort, I found the food with the highest detection rate relative to the global average. Lemurs' signature food is muscadines at 43% detection versus 1% globally. Joti's is Indian yam. Cebu is moringa. Virginia Tech is Brazil nut. Israel is allspice and relatives in the myrtle family. Some of these make immediate dietary sense, others are worth investigating further. And some of the environmental cohorts show expected signals too, like wastewater picking up giant crepe-myrtle.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: PCA of trnL megaphyloseq                               -->
+<!-- ============================================================ -->
+<section>
+    <h2>Cross-study PCA of the trnL megaphyloseq</h2>
+    <img src="Megaphyloseq/plot_trnL_pca.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        This is a PCA of the trnL megaphyloseq following the handbook workflow: NAs filtered at the superkingdom level, CLR-transformed via microbiome::transform, then prcomp with centering. ASVs are glommed by common name, bringing 557 assigned ASVs down to 397 taxa. Project names were pulled from the lab's project tracker sheet and subsampled to about 150 per project. You can see Cebu and DOST, both Filipino cohorts, separating upward, and DFC pulling downward. The loading arrows show which foods drive the separation: rice, brassicas, wheat/rye, bananas, and apiaceae.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: PCA of 12S megaphyloseq                                -->
+<!-- ============================================================ -->
+<section>
+    <h2>Cross-study PCA of the 12Sv5 megaphyloseq</h2>
+    <img src="Megaphyloseq/plot_12S_pca.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        Same approach for the 12Sv5 megaphyloseq, which is the first one this lab has ever had. Human and synthetic ASVs are filtered out, and ASVs are glommed by species, bringing 3,027 ASVs down to 1,136 taxa. PC1 explains 31.1% and PC2 explains 16.7%. The loading arrows show chicken, pork, and cattle as the main drivers of variation. This object didn't exist until a few months ago, and these are the first cross-study analyses anyone has done with it.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Elk heatmap                                            -->
+<!-- ============================================================ -->
+<section>
+    <h2>Case study: is &ldquo;elk&rdquo; really elk?</h2>
+    <p style="margin-bottom:0.3em;">Having 31,000 samples in one object lets us ask cross-study questions. The 12S megaphyloseq contains 26 ASVs assigned to <em>Cervus canadensis</em> (elk); four appear in more than one sample. Here&rsquo;s where they show up, compared to the top <em>Homo sapiens</em> ASV:</p>
+    <img src="Megaphyloseq/plot_elk_heatmap.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <aside class="notes">
+        This is one example of the kind of question the megaphyloseq lets us investigate. We have 26 ASVs assigned to elk in the 12S data, four of which appear in more than one sample. The heatmap shows where those four elk ASVs are detected across projects, with the top human ASV shown at the bottom for comparison. Elk ASV 1, the most prevalent one, shows up in 394 samples across every single project. You can compare its distribution to the human ASV in the bottom row and see how similar the pattern is. The cell numbers are raw sample counts, and the color is the detection rate within each project. I think this is worth discussing as a group.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Elk alignment                                          -->
+<!-- ============================================================ -->
+<section>
+    <h2>How similar are the elk ASVs to human?</h2>
+    <p style="margin-bottom:0.3em;">Each elk ASV aligned against its closest <em>Homo sapiens</em> ASV by sequence identity. Red tiles are mismatches; base pairs shown at each differing position (human on top, elk below).</p>
+    <img src="Megaphyloseq/plot_elk_alignment.png" style="width:95%; border:1px solid var(--border); border-radius:6px;">
+    <div class="callout callout-amber" style="margin-top:0.4em;">
+        <p>Elk ASV 1 (394 samples) differs from its closest human ASV by only 9 bases out of ~100 bp. Elk ASV 4 differs by just 1 base.</p>
+    </div>
+    <aside class="notes">
+        This is the sequence-level view. Each row is one of the four elk ASVs aligned against its closest human ASV by hamming distance. Gray is a match, red is a mismatch. Elk ASV 1, the one in 394 samples, differs from its closest human sequence by only 9 SNPs across around 100 base pairs. Elk ASV 4, in 6 samples, is only 1 SNP away. So we have two pieces of evidence to consider together: the cross-cohort distribution from the heatmap and the sequence similarity here. I'd be curious what the group thinks is going on. Either way, this is the kind of question the megaphyloseq makes it possible to ask, since you wouldn't notice it looking at one study at a time.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: Analysis Work                                        -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>Analysis<br>Projects</h1>
+    <p class="section-desc">Using the tools, not just building them</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Analysis work overview                                 -->
+<!-- ============================================================ -->
+<section>
+    <h2>Analysis projects along the way</h2>
+    <p>Building tools was only part of the job; I was also running analyses with them.</p>
+    <div style="margin-top:0.5em;">
+        <table class="compare-table" style="font-size:0.85em;">
+            <thead>
+                <tr><th>Project</th><th>What I did</th><th>When</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Wastewater 2.0</strong></td>
+                    <td>Ran trnL + 12S pipeline on WWTP samples; relative abundance, PCA, volume optimization (50 mL sufficient)</td>
+                    <td>2025</td>
+                </tr>
+                <tr>
+                    <td><strong>Jot&iuml; samples</strong></td>
+                    <td>Ran 12S pipeline and assignment on indigenous Venezuelan samples; phylogenetic tree</td>
+                    <td>Spring&ndash;Fall 2025</td>
+                </tr>
+                <tr>
+                    <td><strong>Auri&rsquo;s PacBio 16S</strong></td>
+                    <td>Adapted existing code into a PacBio 16S pipeline for mouse cecum/colon samples</td>
+                    <td>Fall 2025&ndash;present</td>
+                </tr>
+                <tr>
+                    <td><strong>trnLGH vs. trnLCD</strong></td>
+                    <td>Quick side project comparing the ~50 bp GH region to the ~600 bp CD region for resolution</td>
+                    <td>Fall 2025</td>
+                </tr>
+                <tr>
+                    <td><strong>Cebu, DOST</strong></td>
+                    <td>Pipeline runs, PCA, and dietary profiling for Filipino cohorts</td>
+                    <td>Spring 2026</td>
+                </tr>
+                <tr>
+                    <td><strong>Lifelines, GMAP, ABC, &hellip;</strong></td>
+                    <td>Routine pipeline runs and phyloseq creation for ongoing studies</td>
+                    <td>Fall 2024 onward</td>
+                </tr>
+                <tr>
+                    <td><strong>Ben&rsquo;s FNDDS work, Dorothy&rsquo;s celiac study</strong></td>
+                    <td>Data extraction, filtering, and analysis support</td>
+                    <td>Summer&ndash;Fall 2024</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout callout-blue" style="margin-top:0.3em;">
+        <p>Each of these projects fed back into the pipeline; bugs were discovered, features were added, and edge cases got documented.</p>
+    </div>
+    <aside class="notes">
+        The tools didn't get built in a vacuum. Each analysis project revealed new problems and drove improvements. The wastewater work showed me how the pipeline handled real multi-site data. The Joti samples were the first real test of the 12S assignment function. Auri's PacBio run is what created the entire 16S pipeline.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: The Anonymizer                                       -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>The Human Read<br>Anonymizer</h1>
+    <p class="section-desc">A recurring theme across my presentations</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Anonymizer journey                                     -->
+<!-- ============================================================ -->
+<section>
+    <h2>The anonymizer over time</h2>
+    <p>This tool has appeared in every one of my presentations. Here&rsquo;s the progression:</p>
+    <div style="margin-top:0.5em; font-size:0.88em;">
+        <div style="display:grid; grid-template-columns:100px 1fr; gap:0.8em; margin-bottom:0.6em; align-items:start;">
+            <div><span class="tag tag-red">May 2025</span></div>
+            <div>
+                Version 1: list-based matching against known human ASVs. Four-day runtimes, broken job arrays, mismatched paired files, and human reads slipping through.
+                <div class="past-quote" style="margin-top:0.3em; padding:0.5em 0.8em;">
+                    <p style="font-size:0.9em;">&ldquo;Currently, running the code on SEEM takes about four days; unreasonably high runtimes make the tool impractical.&rdquo;</p>
+                    <p class="quote-source">&mdash; me, May 2025, slide 11</p>
+                </div>
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:100px 1fr; gap:0.8em; margin-bottom:0.6em; align-items:start;">
+            <div><span class="tag tag-amber">Oct 2025</span></div>
+            <div>
+                Version 2: switched to a k-mer matching approach (inspired by translating Ben Callahan&rsquo;s C++ code). Detection was better, but replacement sequences were getting filtered by DADA2 (116 ASVs existed only pre-filtering, 45 only post-filtering).
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:100px 1fr; gap:0.8em; margin-bottom:0.6em; align-items:start;">
+            <div><span class="tag tag-blue">Feb 2026</span></div>
+            <div>
+                Version 3: primer-aware replacement with preserved quality scores and fixed SNP positions. trnL data fully intact; 12S denoising issue resolved.
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:100px 1fr; gap:0.8em; align-items:start;">
+            <div><span class="tag tag-green">Now</span></div>
+            <div>
+                Documented on the handbook with HPC batch processing scripts, built-in verification, and a full explanation of the detection and replacement logic.
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        The anonymizer has been a constant thread through my presentations. In May 2025, my first attempt used list-based matching, took four days to run, and the job arrays didn't work. By October, I'd rewritten it with k-mer matching, which improved detection but introduced DADA2 artifacts. By February, version 3 with preserved quality scores and fixed SNP positions was working. And now it's fully documented on the handbook.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: Common Names                                         -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>Common Name<br>Assignment</h1>
+    <p class="section-desc">Turning Latin binomials into dietary names</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Common names (single slide, since they saw details in Feb) -->
+<!-- ============================================================ -->
+<section>
+    <h2><code>assign_common_names()</code></h2>
+    <div class="past-quote" style="margin-bottom:0.5em;">
+        <p>&ldquo;Common Names Assignment: This has been on my back-burner for a year now, but I need to manually fill in the common names CSVs at some point.&rdquo;</p>
+        <p class="quote-source">&mdash; me, October 2025, slide 36</p>
+    </div>
+    <p>I presented the details of this in February, so I&rsquo;ll keep it brief. The core problem is that a single ASV can match dozens of species across multiple genera, and you need a concise dietary name, not a list of Latin binomials.</p>
+    <div class="two-col" style="margin-top:0.5em;">
+        <div>
+            <h3>Since the February presentation</h3>
+            <ul>
+                <li>Function is documented on the handbook with downloadable R code and the trnL common names CSV</li>
+                <li>301 trnL ASVs processed from the megaphyloseq; 79% resolve with no conflicts</li>
+                <li>Still needs wider testing by others in the lab</li>
+            </ul>
+        </div>
+        <div>
+            <h3>A few example outputs as a reminder</h3>
+            <table class="compare-table" style="font-size:0.82em;">
+                <thead><tr><th>Input</th><th>Output</th></tr></thead>
+                <tbody>
+                    <tr><td><em>10 Allium spp.</em></td><td>Onions, leeks, scallions, and chives</td></tr>
+                    <tr><td><em>25 Citrus spp.</em></td><td>Oranges, lemons, grapefruits, and other citruses</td></tr>
+                    <tr><td><em>Lactuca sativa</em></td><td>Lettuce</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <aside class="notes">
+        I went into a lot of detail on this in February, so I won't repeat all of it. The short version is that the function resolves multi-species ASV matches into concise dietary names through a hierarchy of conflict resolution strategies. It's worth mentioning that I first tried to use AI to assign common names back in December 2024, but it hallucinated too often to be reliable, which is what eventually led me to build the rule-based system instead. It's documented on the handbook, and the R code and CSV are available for download. The main thing it still needs is testing by other people in the lab.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: PacBio 16S                                           -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>PacBio 16S<br>Pipeline</h1>
+    <p class="section-desc">Full-length microbiome sequencing</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: PacBio 16S                                             -->
+<!-- ============================================================ -->
+<section>
+    <h2>PacBio 16S pipeline</h2>
+    <div class="past-quote" style="margin-bottom:0.5em;">
+        <p>&ldquo;This summer, Auri&rsquo;s 16S run of cecum and colon samples from mice having undergone colostomies and sham surgeries completed, but I have been having a lot of trouble completing the run, partly due to the size of the files.&rdquo;</p>
+        <p class="quote-source">&mdash; me, October 2025, slide 24</p>
+    </div>
+    <div class="two-col" style="margin-top:0.5em;">
+        <div>
+            <h3>What it includes</h3>
+            <ul>
+                <li>DADA2 pipeline for PacBio HiFi long reads (~1500 bp), adapted from existing code</li>
+                <li><code>PacBioErrfun</code> error model (not Illumina defaults)</li>
+                <li>GreenGenes2 taxonomy at species level</li>
+                <li>32 CPUs, 256 GB RAM on DCC via SLURM</li>
+                <li>Singularity container for reproducibility</li>
+                <li>Intermediate RDS saves for crash recovery</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Why it matters</h3>
+            <ul>
+                <li>trnL / 12S &rarr; what subjects eat</li>
+                <li>16S &rarr; the gut microbiome</li>
+                <li>Together &rarr; diet&ndash;microbiome relationships</li>
+            </ul>
+            <div class="callout callout-blue" style="margin-top:0.5em;">
+                <p>This is a separate workflow from the dietary markers, and 16S is out of scope for the FoodSeq paper, but the pipeline exists and is documented on the handbook.</p>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        Auri's PacBio run is what necessitated the 16S pipeline. I was struggling with the file sizes for months. A lot of the code was derived from work by Dr. Callahan, Eva, and Mengyi, and I want to make sure they get credit for that. The result is a full DADA2 pipeline calibrated for PacBio HiFi reads, running on DCC with GreenGenes2 taxonomy. It's separate from the dietary metabarcoding work, since 16S captures the microbiome rather than the diet, but it complements trnL and 12S for studying diet-microbiome relationships. It's documented on the handbook and the R script is available for download.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: The Handbook                                         -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>The FoodSeq<br>Handbook</h1>
+    <p class="section-desc">lad-lab.github.io</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Handbook overview                                      -->
+<!-- ============================================================ -->
+<section>
+    <h2>lad-lab.github.io</h2>
+    <div class="past-quote" style="margin-bottom:0.5em;">
+        <p>&ldquo;How can documentation be improved?&rdquo;</p>
+        <p class="quote-source">&mdash; me, September 2024, discussion question #4</p>
+    </div>
+    <div class="two-col" style="margin-top:0.4em;">
+        <div>
+            <h3>20 pages covering</h3>
+            <ul class="compact-list">
+                <li>Getting started (cluster, SSH, R, GitHub)</li>
+                <li>Wet lab protocols (extraction, PCR, gel, cleaning, pooling, sequencing)</li>
+                <li>The bioinformatics pipeline, from demux through phyloseq</li>
+                <li>Reference databases (NCBI queries, curation, FASTA)</li>
+                <li>SQL taxonomy backbone</li>
+                <li>Post-processing (diversity, abundance, PCA)</li>
+                <li>Common names: CSV creation and <code>assign_common_names()</code></li>
+                <li>Human read anonymization</li>
+                <li>PacBio 16S</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Design choices</h3>
+            <ul class="compact-list">
+                <li>Peer-to-peer voice, not a textbook</li>
+                <li>Every code block preceded by explanatory prose</li>
+                <li>Duke-specific and general-audience tabs</li>
+                <li>Flowcharts and diagrams</li>
+                <li>Honest &ldquo;To-do&rdquo; markers where things are incomplete</li>
+            </ul>
+            <h3 style="margin-top:0.5em;">Built with</h3>
+            <ul class="compact-list">
+                <li>MkDocs Material theme</li>
+                <li>Source on <code>source</code> branch, deploys via GitHub Actions</li>
+                <li>~60 commits since January 2026</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        The handbook has been my main focus this year. The wet lab protocols were already in good shape, so those pages are adapted from existing documentation; the bioinformatics side, from demux through PCA, is where the new writing is. Some pages are still marked with "To-do" items where I know things are incomplete; I'd rather be transparent about gaps than pretend they don't exist.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION: Where This Is All Going                              -->
+<!-- ============================================================ -->
+<section class="section-slide">
+    <h1>Where This<br>Is All Going</h1>
+    <p class="section-desc">The FoodSeq pipeline paper</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: The paper                                              -->
+<!-- ============================================================ -->
+<section>
+    <h2>The FoodSeq pipeline paper</h2>
+    <p>A methods/resource paper on the pipeline and curated reference database for dietary DNA profiling, led by Anna and to be written over the coming months as a group effort.</p>
+    <div class="two-col" style="margin-top:0.6em;">
+        <div>
+            <h3>What it is</h3>
+            <ul>
+                <li>Not a software paper; the database, curation logic, and biological validation are central</li>
+                <li>Framed analogously to QIIME 2 or GATK for standardizing dietary metabarcoding</li>
+                <li>Seven published papers already use FoodSeq, and four provide independent validation</li>
+            </ul>
+            <h3 style="margin-top:0.5em;">Why it&rsquo;s possible now</h3>
+            <ul>
+                <li>The handbook documents the methods core</li>
+                <li>Published validation means we don&rsquo;t start from zero</li>
+                <li>The pipeline is stable and in use across 103 runs and 31,000+ samples</li>
+            </ul>
+        </div>
+        <div>
+            <h3>How my work feeds in</h3>
+            <ul class="compact-list">
+                <li>Pipeline-to-Phyloseq &rarr; pipeline overview, implementation</li>
+                <li>Taxonomy functions &rarr; workflow architecture, resolution logic</li>
+                <li>Common names &rarr; outputs and user-facing reports</li>
+                <li>Anonymizer &rarr; implementation, ethics</li>
+                <li>Reference database docs &rarr; database construction</li>
+                <li>SQL backbone docs &rarr; taxonomy backbone</li>
+                <li>Megaphyloseq (103 runs, 31K+ samples) &rarr; scalability evidence</li>
+                <li>The handbook itself &rarr; user-facing tutorial</li>
+            </ul>
+            <div class="callout callout-green" style="margin-top:0.4em;">
+                <p>Most of what I&rsquo;ve built maps to a specific section of the paper.</p>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        All of this work is heading toward the FoodSeq pipeline paper. It's a methods/resource paper where the database, curation logic, and biological validation are the central contributions. The reason it's feasible to write it now is that the handbook documents the methods, the published corpus provides validation, and the pipeline has been tested across 103 runs.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: My remaining time                                      -->
+<!-- ============================================================ -->
+<section>
+    <h2>My 8 remaining weeks</h2>
+    <div class="two-col" style="margin-top:0.5em;">
+        <div>
+            <h3>What I plan to do</h3>
+            <ul>
+                <li>Convert key handbook pages into paper-ready prose</li>
+                <li>Compute database statistics (taxa counts, resolution rates, coverage) from existing outputs</li>
+                <li>Document known taxonomic ambiguity cases from experience (citrus, Brassica, Poaceae, pecan/walnut, etc.)</li>
+                <li>Implement version tagging and an <code>renv.lock</code></li>
+                <li>Draft workflow schematics for the paper</li>
+                <li>Continue megaphyloseq-based investigations (misassignment, cross-study QC) for the paper&rsquo;s validation section</li>
+                <li>Finish incomplete handbook pages (relative abundance, PCA examples, GitHub/git setup, references)</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Handoff</h3>
+            <ul>
+                <li>Ensure all code is in the LAD-LAB GitHub org</li>
+                <li>Write maintainer notes for each tool</li>
+                <li>Document remaining gaps and who should own them</li>
+                <li>Get others contributing to the handbook</li>
+            </ul>
+            <div class="callout callout-purple" style="margin-top:0.5em;">
+                <p>The goal is to leave the project in a state where anyone can pick up the paper writing and the tools without needing me.</p>
+            </div>
+            <h3 style="margin-top:0.5em;">Things that need the group</h3>
+            <ul class="compact-list">
+                <li>Benchmarking experiments (mock communities, comparator runs)</li>
+                <li>License, IRB, and data deposition decisions</li>
+                <li>Naming a maintainer for the pipeline and handbook</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        Here's how I want to use my remaining eight weeks. On the writing side, converting handbook prose into paper sections and computing the database statistics. On the analysis side, continuing the kind of cross-study investigations we just looked at, like the elk question, which could feed into the paper's validation section. The handbook still has some incomplete pages I want to finish, including relative abundance, the PCA page, and some of the getting-started setup instructions. On the infrastructure side, version tagging and the renv lockfile. And then handoff: getting everything into GitHub, writing maintainer notes, and getting others contributing to the handbook so it doesn't depend on me. Some things will need the group, including benchmarking, license decisions, and naming a maintainer.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: The full arc                                           -->
+<!-- ============================================================ -->
+<section>
+    <h2>September 2024 &rarr; May 2026</h2>
+    <p>From discussion questions to working implementations:</p>
+    <div style="margin-top:0.6em;">
+        <table class="compare-table" style="font-size:0.85em;">
+            <thead>
+                <tr><th style="width:45%">The question I asked (Sept 2024)</th><th>What exists now</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&ldquo;How can the references be curated to avoid misassignment?&rdquo;</td>
+                    <td>Custom <code>assign_trnL()</code> and <code>assign_12S()</code> with documented curation rules; reference database construction on the handbook; megaphyloseq enables cross-study QC (e.g., the elk investigation)</td>
+                </tr>
+                <tr>
+                    <td>&ldquo;How do we standardize data collection and metadata fields?&rdquo;</td>
+                    <td>Pipeline validates <code>Sample_ID</code>, <code>type</code>, <code>pcr_plate</code>; template format enforces consistency</td>
+                </tr>
+                <tr>
+                    <td>&ldquo;How do we standardize common names assignment?&rdquo;</td>
+                    <td><code>assign_common_names()</code> with multi-level conflict resolution (301 ASVs, 79% conflict-free)</td>
+                </tr>
+                <tr>
+                    <td>&ldquo;How can documentation be improved?&rdquo;</td>
+                    <td>20-page FoodSeq Handbook at lad-lab.github.io</td>
+                </tr>
+                <tr>
+                    <td>&ldquo;What individual practices should be implemented lab-wide?&rdquo;</td>
+                    <td>Template-based pipeline, automated QC, changelog-tracked megaphyloseq, version control</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <aside class="notes">
+        These are the five discussion questions from my first lab meeting. I think it's a nice coincidence that they map so directly to the projects I ended up working on.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Recent travels                                         -->
+<!-- ============================================================ -->
+<section>
+    <h2>Recent travels</h2>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.6em; margin-top:0.4em;">
+        <div style="text-align:center;">
+            <img src="Photos/London.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">London</p>
+        </div>
+        <div style="text-align:center;">
+            <img src="Photos/Kruger NP.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">Kruger National Park</p>
+        </div>
+        <div style="text-align:center;">
+            <img src="Photos/Chapel Hill.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">Chapel Hill</p>
+        </div>
+        <div style="text-align:center;">
+            <img src="Photos/Chennai.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">Chennai</p>
+        </div>
+        <div style="text-align:center;">
+            <img src="Photos/Chennai2.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">Chennai</p>
+        </div>
+        <div style="text-align:center;">
+            <img src="Photos/Rome.jpg" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
+            <p style="font-size:0.7em; color:var(--text-light); margin-top:0.2em;">Rome</p>
+        </div>
+    </div>
+    <aside class="notes">
+        And some photos from recent trips. All animals, naturally.
+    </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE: Thank you                                              -->
+<!-- ============================================================ -->
+<section class="centered-slide">
+    <h1 style="font-size:2.8em; margin-bottom:0.3em;">Thank you</h1>
+    <p style="color:var(--text-mid); font-size:1.05em; max-width:70%; margin-top:0.5em;">To everyone in this lab for the mentorship, collaboration, feedback, and bug reports.</p>
+    <p style="margin-top:1.2em; font-size:0.85em; color:var(--text-light);">It&rsquo;s been a great two years.</p>
+    <p style="margin-top:2em; font-size:0.85em; color:var(--text-light);">
+        Handbook: <a href="https://lad-lab.github.io" style="color:var(--accent); font-weight:500;">lad-lab.github.io</a>
+    </p>
+    <aside class="notes">
+        Thank you, to everyone in this lab. It's been a great two years.
+    </aside>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- Reveal.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        transition: 'fade',
+        transitionSpeed: 'default',
+        center: true,
+        width: 1200,
+        height: 700,
+        margin: 0.06,
+        controls: false,
+        progress: true,
+        history: true,
+        keyboard: true,
+        overview: true,
+        navigationMode: 'linear',
+        plugins: [RevealNotes],
+    });
+</script>
+</body>
+</html>
