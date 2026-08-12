@@ -139,6 +139,10 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     You should now have the sequencing data and a samplesheet CSV in your project folder on the cluster.
 
+    **Singularity/Apptainer Containers**
+
+    The pipeline scripts require two Singularity containers: `metabarcoding.sif` (used by `demux-barcodes.sh` and `count-reads.sh`) and `qiime2.sif` (used by `trnL-pipeline.sh` and `12SV5-pipeline.sh`). These containers are built on QIIME2 [version-placeholder] and can be downloaded from [link-placeholder]. If you prefer to use a local QIIME2 installation instead of containers, you can remove the `singularity exec --bind $wd $2` wrapper from the pipeline scripts and run the commands directly.
+
     **Demultiplex and Pipeline**
 
     Now, run the `demux-barcodes.sh` script with the following:
@@ -331,7 +335,9 @@ metadata_path <- file.path(project_path, metadata)
 
 ### Downloading Data from the Cluster
 
-The pipeline downloads results from the cluster using `rsync` over SSH. The following chunk first sets the necessary environment variables so they are accessible from the embedded bash chunk that follows:
+The pipeline downloads results from the cluster using `rsync` over SSH. If you have already downloaded your pipeline output files to your project folder (e.g., via `scp` or a manual transfer), you can skip this section and proceed to [Data Preparation](#data-preparation).
+
+The following chunk first sets the necessary environment variables so they are accessible from the embedded bash chunk that follows:
 
 ``` r
 Sys.setenv(
