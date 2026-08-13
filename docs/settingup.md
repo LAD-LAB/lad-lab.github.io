@@ -80,9 +80,18 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
     You can also access the DCC from [DCC OnDemand](https://dcc-ondemand-01.oit.duke.edu/) (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.
 
-    !!! to-do
+    [Cyberduck](https://cyberduck.io/) is a free graphical file transfer client that lets you browse, upload, and download files on the DCC without using the command line. To set it up:
 
-        Add instructions for setting up and using Cyberduck.
+    1. Download and install Cyberduck from [https://cyberduck.io/](https://cyberduck.io/).
+    2. Open Cyberduck and select Open Connection (or <kbd>⌘ O</kbd> on Mac).
+    3. Select SFTP (SSH File Transfer Protocol) from the dropdown.
+    4. Enter the following:
+        * Server: `dcc-login.oit.duke.edu`
+        * Username: your NetID
+        * Password: your NetID password (or leave blank if using SSH keys)
+    5. Select Connect; if prompted, accept the host key.
+
+    You should now see your home directory on the DCC. Navigate to `/hpc/group/ldavidlab` to browse lab files. You can drag and drop files between Cyberduck and your desktop to transfer them.
 
     ### Common Commands
 
@@ -193,9 +202,22 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
 ### Common Commands
 
-!!! to-do
+Some commonly used terminal commands include:
 
-    Add common Terminal commands.
+* `pwd` — prints the current working directory.
+* `ls` — lists the files and folders in the current directory; `ls -la` includes hidden files and detailed information.
+* `cd [path]` — changes the working directory; `cd ..` moves up one level and `cd ~` returns to your home directory.
+* `mkdir [name]` — creates a new directory.
+* `cp [source] [destination]` — copies a file or directory; use `cp -r` for directories.
+* `mv [source] [destination]` — moves or renames a file or directory.
+* `rm [file]` — deletes a file; use `rm -r` for directories. This is irreversible, so use with caution.
+* `cat [file]` — prints the contents of a file to the terminal.
+* `less [file]` — opens a file for scrollable viewing; press <kbd>q</kbd> to exit.
+* `man [command]` — opens the manual page for a command, useful for learning about flags and options.
+* `wc -l [file]` — counts the number of lines in a file.
+* `grep [pattern] [file]` — searches for a text pattern in a file; `grep -r` searches recursively through directories.
+* `chmod +x [file]` — makes a file executable, which is necessary before running a shell script directly.
+* `nano [file]` — opens a simple text editor in the terminal for quick edits.
 
 ## R
 
@@ -364,26 +386,74 @@ Miscellaneous:
 
     GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
 
-    !!! to-do
+    ### Getting Started
 
-        Add GitHub instructions.
+    1. Create a free account at [https://github.com/](https://github.com/).
+    2. Install Git on your computer if you don't already have it; you can check by running `git --version` in the terminal. If it is not installed, download it from [https://git-scm.com/](https://git-scm.com/).
+    3. Configure your identity so that your commits are attributed to you:
+
+        ``` sh
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@duke.edu"
+        ```
+
+    4. Ask an owner of the LAD-LAB organization to add you as a member.
+
+    To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:
+
+    ``` sh
+    git clone https://github.com/LAD-LAB/[repository-name].git
+    ```
+
+    If prompted for credentials, you will need to set up a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and use it in place of your password.
 
     ### Common Commands
 
-    !!! to-do
-
-        Add common `git` commands.
+    * `git clone [url]` — downloads a remote repository to your computer.
+    * `git pull` — updates your local copy with the latest changes from the remote repository.
+    * `git status` — shows which files have been modified, added, or are untracked.
+    * `git add [file]` — stages a file for the next commit; `git add .` stages all changes in the current directory.
+    * `git commit -m "[message]"` — creates a commit (a snapshot of your staged changes) with a descriptive message.
+    * `git push` — uploads your commits to the remote repository.
+    * `git diff` — shows the changes you have made but not yet staged.
+    * `git log --oneline` — shows a concise list of recent commits.
+    * `git checkout [branch]` — switches to a different branch.
+    * `git checkout -b [branch]` — creates a new branch and switches to it.
 
 === "General"
 
     GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.
 
-    !!! to-do
+    **Getting Started**
 
-        Add GitHub instructions.
+    1. Create a free account at [https://github.com/](https://github.com/).
+    2. Install Git on your computer if you don't already have it; you can check by running `git --version` in the terminal. If it is not installed, download it from [https://git-scm.com/](https://git-scm.com/).
+    3. Configure your identity so that your commits are attributed to you:
+
+        ``` sh
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@example.edu"
+        ```
+
+    4. Ask an owner of your lab's GitHub organization to add you as a member.
+
+    To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:
+
+    ``` sh
+    git clone https://github.com/[organization]/[repository-name].git
+    ```
+
+    If prompted for credentials, you will need to set up a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and use it in place of your password.
 
     **Common Commands**
 
-    !!! to-do
-
-        Add common `git` commands.
+    * `git clone [url]` — downloads a remote repository to your computer.
+    * `git pull` — updates your local copy with the latest changes from the remote repository.
+    * `git status` — shows which files have been modified, added, or are untracked.
+    * `git add [file]` — stages a file for the next commit; `git add .` stages all changes in the current directory.
+    * `git commit -m "[message]"` — creates a commit (a snapshot of your staged changes) with a descriptive message.
+    * `git push` — uploads your commits to the remote repository.
+    * `git diff` — shows the changes you have made but not yet staged.
+    * `git log --oneline` — shows a concise list of recent commits.
+    * `git checkout [branch]` — switches to a different branch.
+    * `git checkout -b [branch]` — creates a new branch and switches to it.
