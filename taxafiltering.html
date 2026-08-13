@@ -1084,6 +1084,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filtering Taxa
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="taxafiltering.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1100,6 +1118,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#removing-unassigned-na-taxa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Unassigned (NA) Taxa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removing-human-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Human Reads
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#removing-synthetic-control-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Synthetic Control ASVs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cohort-specific-removals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cohort-Specific Removals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automated-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated Filtering
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1364,10 +1456,58 @@
 
 
 <h1 id="filtering-taxa">Filtering Taxa</h1>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add instructions on filtering NAs, human reads, controls, and cohort-specific removals (e.g., elk).</p>
+<p>After reviewing unassigned ASVs, the next step is to remove taxa that should not be included in downstream analysis. This typically includes unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded.</p>
+<p>These filtering steps can be performed manually with <code>phyloseq::subset_taxa()</code>, or they are handled automatically by the <code>foodseq_transformations()</code> and <code>foodseq_transformations_12S()</code> functions when you reach the <a href="abundance.html">transformation step</a>. This page documents how to perform them manually if you need more control over what gets removed.</p>
+<h2 id="removing-unassigned-na-taxa">Removing Unassigned (NA) Taxa</h2>
+<p>As described on the <a href="reviewing.html">reviewing page</a>, the definition of an unassigned ASV differs by marker:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>For trnL, an unassigned ASV has NA at all taxonomic ranks. To remove these:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">superkingdom</span><span class="p">))</span>
+</span></code></pre></div>
 </div>
+<div class="tabbed-block">
+<p>For 12Sv5, an unassigned ASV has NA at both order and family. To remove these:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">family</span><span class="p">)))</span>
+</span></code></pre></div>
+<p>Note that this retains ASVs that have an assignment at order or family (or both), even if lower ranks like genus or species are NA.</p>
+</div>
+</div>
+</div>
+<h2 id="removing-human-reads">Removing Human Reads</h2>
+<p>Human DNA is commonly detected in 12Sv5 sequencing of stool samples. These reads should be removed before analysis, as they reflect the host rather than dietary intake.</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;Homo sapiens&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+</span></code></pre></div>
+<p>The <code>| is.na(species)</code> clause ensures that ASVs without a species-level assignment are not accidentally removed.</p>
+<p>In some cases, certain ASVs may BLAST to human but not be assigned as <em>Homo sapiens</em> by the classifier — for example, ASVs that are ambiguous between human and a closely related species. If you have identified such ASVs manually (e.g., through the <a href="reviewing.html#blasting-unassigned-asvs">BLAST review process</a>), you can remove them by sequence:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Remove specific ASVs identified as human through manual review:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">manual_human_asvs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ACGT...&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TGCA...&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prune_taxa</span><span class="p">(</span><span class="o">!</span><span class="nf">taxa_names</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">manual_human_asvs</span><span class="p">,</span><span class="w"> </span><span class="n">ps.12S</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The <code>foodseq_transformations_12S()</code> function supports this through its <code>manual_human_csv</code> parameter, which accepts a path to a CSV file with an <code>ASV</code> column listing sequences to remove as human.</p>
+<h2 id="removing-synthetic-control-asvs">Removing Synthetic Control ASVs</h2>
+<p>If your sequencing run included synthetic positive control sequences (e.g., synthetic trnL or 12S ASVs), these should be removed before analysis:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;synthetic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">ignore.case</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+</span></code></pre></div>
+<h2 id="cohort-specific-removals">Cohort-Specific Removals</h2>
+<p>Some studies may require removing additional taxa based on the study design. Common examples include:</p>
+<ul>
+<li><strong>Environmental contamination</strong> — for trnL, taxa like grasses or trees that reflect environmental DNA rather than dietary intake.</li>
+<li><strong>Known contaminants</strong> — taxa identified during <a href="pipeline.html#quality-control">quality control</a> as likely cross-contamination from positive controls or other samples.</li>
+<li><strong>Study-specific exclusions</strong> — taxa that are not relevant to the research question (e.g., removing non-mammalian vertebrates from a study focused on meat consumption).</li>
+</ul>
+<p>These removals are study-dependent and should be documented in your analysis scripts. Use <code>subset_taxa()</code> to filter by any column in the taxonomy table:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Example: remove a specific genus</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">genus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;Festuca&quot;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">genus</span><span class="p">))</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Example: remove multiple species</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Bos taurus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sus scrofa&quot;</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">species</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+</span></code></pre></div>
+<h2 id="automated-filtering">Automated Filtering</h2>
+<p>The <code>foodseq_transformations()</code> and <code>foodseq_transformations_12S()</code> functions perform NA removal, human read removal, and synthetic ASV removal automatically as part of the CLR transformation pipeline. If you use these functions, you do not need to filter manually — but you should still review your unassigned ASVs before running them, as any taxa worth adding to the reference should be addressed first.</p>
+<p>For details on these functions, see the <a href="abundance.html">relative abundance and CLR transformation page</a>.</p>
 
 
 
@@ -1390,7 +1530,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 16:06:40 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:16:13 UTC">August 13, 2026</span>
   </span>
 
     
