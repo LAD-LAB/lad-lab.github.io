@@ -2,7 +2,7 @@
 
 After reviewing unassigned ASVs, the next step is to remove taxa that should not be included in downstream analysis. This typically includes unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded.
 
-These filtering steps can be performed manually with `phyloseq::subset_taxa()`, or they are handled automatically by the `foodseq_transformations()` and `foodseq_transformations_12S()` functions when you reach the [transformation step](abundance.md). This page documents how to perform them manually if you need more control over what gets removed.
+These filtering steps are performed with `phyloseq::subset_taxa()` and `phyloseq::prune_taxa()`.
 
 ## Removing Unassigned (NA) Taxa
 
@@ -44,8 +44,6 @@ manual_human_asvs <- c("ACGT...", "TGCA...")
 ps.12S <- prune_taxa(!taxa_names(ps.12S) %in% manual_human_asvs, ps.12S)
 ```
 
-The `foodseq_transformations_12S()` function supports this through its `manual_human_csv` parameter, which accepts a path to a CSV file with an `ASV` column listing sequences to remove as human.
-
 ## Removing Synthetic Control ASVs
 
 If your sequencing run included synthetic positive control sequences (e.g., synthetic trnL or 12S ASVs), these should be removed before analysis:
@@ -73,8 +71,3 @@ exclude <- c("Bos taurus", "Sus scrofa")
 ps <- subset_taxa(ps, !species %in% exclude | is.na(species))
 ```
 
-## Automated Filtering
-
-The `foodseq_transformations()` and `foodseq_transformations_12S()` functions perform NA removal, human read removal, and synthetic ASV removal automatically as part of the CLR transformation pipeline. If you use these functions, you do not need to filter manually — but you should still review your unassigned ASVs before running them, as any taxa worth adding to the reference should be addressed first.
-
-For details on these functions, see the [relative abundance and CLR transformation page](abundance.md).
