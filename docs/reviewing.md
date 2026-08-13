@@ -68,22 +68,3 @@ na_reads <- sum(otu[, na_seqs])
 cat(sprintf("Unassigned ASVs: %d (%.1f%% of reads)\n", length(na_seqs), 100 * na_reads / total_reads))
 ```
 
-## Tracking NAs Across Runs
-
-The `update_na_catalog()` function in `foodseq.tools` maintains a shared Google Sheets workbook for tracking unassigned ASVs across sequencing runs. The workbook has two sheets:
-
-* **asv_totals** — cumulative sample counts and read counts per ASV across all ingested runs, with a `runs` column summarizing per-run contributions. Manually added annotation columns (e.g., BLAST results) are preserved across updates.
-* **runs_ingested** — a log of which runs have been processed, preventing duplicate ingestion.
-
-To update the catalog after a new run:
-
-``` r
-update_na_catalog(
-  na_trnL = assignments.trnL$NAs_trnL,
-  na_12S  = assignments.12S$NAs_12S,
-  run_id  = project,
-  ss      = "[your-google-sheets-id]"
-)
-```
-
-The function is idempotent; if a run has already been recorded, it will skip the update and print a message.
