@@ -152,15 +152,23 @@ These instructions will help you create a phyloseq object from raw sequencing da
     ssh [username]@[hpc-hostname]
 
     # Submit a batch job to run demux-barcodes.sh:
-    sbatch --mail-user=[username]@[your-email] [/path/to/demux-barcodes.sh] [/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX] [/path/to/samplesheet.csv] [/path/to/metabarcoding.sif]
+    sbatch --partition=[your-partition] --mail-user=[username]@[your-email] [/path/to/demux-barcodes.sh] [/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX] [/path/to/samplesheet.csv] [/path/to/metabarcoding.sif]
     ```
 
     Next, run the `trnL-pipeline.sh` or `12SV5-pipeline.sh` script, depending on the run:
 
     ``` sh
     # Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:
-    sbatch --mail-user=[username]@[your-email] [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] [/path/to/qiime2.sif]
+    sbatch --partition=[your-partition] --mail-user=[username]@[your-email] [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] [/path/to/qiime2.sif]
     ```
+
+    The pipeline scripts default to importing FASTQs in Illumina's Casava format (`CasavaOneEightSingleLanePerSampleDirFmt`). If your sequencing facility produces FASTQs in a different naming convention, you can pass an alternative format as a third argument to the pipeline script, e.g.:
+
+    ``` sh
+    sbatch --partition=[your-partition] --mail-user=[username]@[your-email] [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] [/path/to/qiime2.sif] PairedEndFastqManifestPhred33V2
+    ```
+
+    See the [QIIME2 importing tutorial](https://docs.qiime2.org/2024.5/tutorials/importing/) for available import formats.
 
     Once this finishes, your file structure should look like
 
@@ -181,7 +189,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
     If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
 
     ``` sh
-    sbatch [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] [/path/to/metabarcoding.sif]
+    sbatch --partition=[your-partition] [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] [/path/to/metabarcoding.sif]
     ```
 
     The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
