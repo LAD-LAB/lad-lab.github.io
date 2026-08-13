@@ -1056,6 +1056,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reviewing Unassigned Taxa
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="reviewing.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1072,6 +1090,97 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-counts-as-unassigned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Counts as Unassigned
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nas-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NAs CSV
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blasting-unassigned-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BLASTing Unassigned ASVs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BLASTing Unassigned ASVs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpreting-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpreting Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extracting-nas-from-the-phyloseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extracting NAs from the Phyloseq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tracking-nas-across-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking NAs Across Runs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1364,10 +1473,93 @@
 
 
 <h1 id="reviewing-unassigned-taxa">Reviewing Unassigned Taxa</h1>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add instructions on reviewing NAs and BLASTing unassigned ASVs.</p>
+<p>After taxonomy assignment, some ASVs will not match any sequence in the reference database and will be left unassigned (NA). This page covers how to identify, review, and BLAST these ASVs to determine what they are and whether the reference needs updating.</p>
+<h2 id="what-counts-as-unassigned">What Counts as Unassigned</h2>
+<p>The definition of an unassigned ASV differs by marker:</p>
+<ul>
+<li><strong>trnL</strong> — an ASV is considered unassigned if it has NA at all taxonomic ranks (i.e., NA at superkingdom). Because trnL assignment uses exact sequence matching, an ASV either matches the reference or it doesn't; there are no partial assignments.</li>
+<li><strong>12Sv5</strong> — an ASV is considered unassigned if it has NA at both order and family. An ASV can have assignments at higher ranks (superkingdom, phylum, class) from the Bayesian classifier and still be flagged as unassigned if it lacks order and family; conversely, an ASV with order but not family (or vice versa) is considered assigned.</li>
+</ul>
+<h2 id="nas-csv">NAs CSV</h2>
+<p>The <code>assignment_trnL()</code> and <code>assignment_12S()</code> functions automatically save a CSV of unassigned ASVs to the output directory (<code>trnL_NAs.csv</code> and <code>12S_NAs.csv</code>). Each CSV contains:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ASV</code></td>
+<td>The full ASV sequence</td>
+</tr>
+<tr>
+<td><code>samples_with_reads</code></td>
+<td>Number of samples in which this ASV was detected</td>
+</tr>
+<tr>
+<td><code>total_reads</code></td>
+<td>Total read count for this ASV across all samples</td>
+</tr>
+</tbody>
+</table>
+<p>ASVs with high read counts or high sample prevalence are the most important to investigate, as they may represent real organisms missing from the reference rather than sequencing artefacts.</p>
+<h2 id="blasting-unassigned-asvs">BLASTing Unassigned ASVs</h2>
+<p>To identify what an unassigned ASV is, you can query it against NCBI's nucleotide database using <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">BLAST</a>:</p>
+<ol>
+<li>Open the NAs CSV and sort by <code>total_reads</code> in descending order to prioritize the most abundant unassigned ASVs.</li>
+<li>Copy the ASV sequence from the <code>ASV</code> column.</li>
+<li>Go to <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">NCBI Nucleotide BLAST</a> and paste the sequence into the query box.</li>
+<li>Under "Database," select "Nucleotide collection (nr/nt)."</li>
+<li>Click BLAST and wait for results.</li>
+</ol>
+<h3 id="interpreting-results">Interpreting Results</h3>
+<p>When reviewing BLAST results:</p>
+<ul>
+<li><strong>High identity (&gt;97%) and low E-value</strong> — the ASV likely belongs to the matched organism. If this organism should be in your reference but isn't, it may need to be added.</li>
+<li><strong>Multiple hits with similar scores</strong> — the ASV may be ambiguous at the species level, which is expected for short amplicons. Look at whether the hits agree at a higher rank (genus or family).</li>
+<li><strong>No significant hits</strong> — the ASV may be a chimera, a sequencing artefact, or an organism not well-represented in NCBI. These are generally safe to filter out.</li>
+<li><strong>Hits to non-food organisms</strong> — for trnL, hits to environmental plant DNA (e.g., grasses, trees) are common and typically reflect environmental contamination rather than dietary intake. For 12Sv5, hits to human sequences are expected and are removed during <a href="taxafiltering.html">taxa filtering</a>.</li>
+</ul>
+<h2 id="extracting-nas-from-the-phyloseq">Extracting NAs from the Phyloseq</h2>
+<p>If you want to examine unassigned ASVs directly from the phyloseq rather than from the CSV, you can extract them in R:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">tax_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">))</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">na_asvs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tax_df</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_df</span><span class="o">$</span><span class="n">superkingdom</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+</span></code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">tax_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">))</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">na_asvs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tax_df</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_df</span><span class="o">$</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">tax_df</span><span class="o">$</span><span class="n">family</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>To see how many reads these unassigned ASVs account for:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">na_seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">na_asvs</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">otu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">otu_table</span><span class="p">(</span><span class="n">ps</span><span class="p">))</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">total_reads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">otu</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">na_reads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">otu</span><span class="p">[,</span><span class="w"> </span><span class="n">na_seqs</span><span class="p">])</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Unassigned ASVs: %d (%.1f%% of reads)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">na_seqs</span><span class="p">),</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">na_reads</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_reads</span><span class="p">))</span>
+</span></code></pre></div>
+<h2 id="tracking-nas-across-runs">Tracking NAs Across Runs</h2>
+<p>The <code>update_na_catalog()</code> function in <code>foodseq.tools</code> maintains a shared Google Sheets workbook for tracking unassigned ASVs across sequencing runs. The workbook has two sheets:</p>
+<ul>
+<li><strong>asv_totals</strong> — cumulative sample counts and read counts per ASV across all ingested runs, with a <code>runs</code> column summarizing per-run contributions. Manually added annotation columns (e.g., BLAST results) are preserved across updates.</li>
+<li><strong>runs_ingested</strong> — a log of which runs have been processed, preventing duplicate ingestion.</li>
+</ul>
+<p>To update the catalog after a new run:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nf">update_na_catalog</span><span class="p">(</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="n">na_trnL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assignments.trnL</span><span class="o">$</span><span class="n">NAs_trnL</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="n">na_12S</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">assignments.12S</span><span class="o">$</span><span class="n">NAs_12S</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="n">run_id</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="n">ss</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[your-google-sheets-id]&quot;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>The function is idempotent; if a run has already been recorded, it will skip the update and print a message.</p>
 
 
 
@@ -1390,7 +1582,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 16:06:40 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:03:48 UTC">August 13, 2026</span>
   </span>
 
     
