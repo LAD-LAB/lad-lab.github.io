@@ -1167,17 +1167,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#tracking-nas-across-runs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tracking NAs Across Runs
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1545,21 +1534,6 @@
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">na_reads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">otu</span><span class="p">[,</span><span class="w"> </span><span class="n">na_seqs</span><span class="p">])</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&quot;Unassigned ASVs: %d (%.1f%% of reads)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">na_seqs</span><span class="p">),</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">na_reads</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_reads</span><span class="p">))</span>
 </span></code></pre></div>
-<h2 id="tracking-nas-across-runs">Tracking NAs Across Runs</h2>
-<p>The <code>update_na_catalog()</code> function in <code>foodseq.tools</code> maintains a shared Google Sheets workbook for tracking unassigned ASVs across sequencing runs. The workbook has two sheets:</p>
-<ul>
-<li><strong>asv_totals</strong> — cumulative sample counts and read counts per ASV across all ingested runs, with a <code>runs</code> column summarizing per-run contributions. Manually added annotation columns (e.g., BLAST results) are preserved across updates.</li>
-<li><strong>runs_ingested</strong> — a log of which runs have been processed, preventing duplicate ingestion.</li>
-</ul>
-<p>To update the catalog after a new run:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nf">update_na_catalog</span><span class="p">(</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="n">na_trnL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assignments.trnL</span><span class="o">$</span><span class="n">NAs_trnL</span><span class="p">,</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="n">na_12S</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">assignments.12S</span><span class="o">$</span><span class="n">NAs_12S</span><span class="p">,</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="n">run_id</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">project</span><span class="p">,</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="n">ss</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[your-google-sheets-id]&quot;</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
-</span></code></pre></div>
-<p>The function is idempotent; if a run has already been recorded, it will skip the update and print a message.</p>
 
 
 
@@ -1582,7 +1556,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:03:48 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:11:28 UTC">August 13, 2026</span>
   </span>
 
     
