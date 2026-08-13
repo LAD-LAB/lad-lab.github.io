@@ -8,13 +8,7 @@ These instructions will help you create a `taxonomizr`-prepared SQLite database 
 
 ## Download Scripts
 
-!!! to-do
-
-    Add instructions on downloading these scripts from GitHub once they are uploaded there.
-
-    EDIT 01/15/26: All scripts but conda.sh are located at [https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation).
-
-You will need to download the following four scripts to a folder on your computing cluster. To this same folder, also add a subfolder called `tempdir`.
+You will need four scripts: `conda.sh`, `taxonomizr.sh`, `taxonomizr.R`, and `Rscript-echo.R`. The last three can be downloaded from the [mb-pipeline repository](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/sql-creation); `conda.sh` is user-specific and must be created manually (see below). Download or create all four scripts in the same folder on your computing cluster, and add a subfolder called `tempdir`.
 
 The first script initializes conda; update the paths to match your conda installation:
 
