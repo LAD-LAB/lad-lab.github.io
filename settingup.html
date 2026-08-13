@@ -711,6 +711,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#common-commands_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1645,10 +1656,20 @@
 <p>For Windows users, follow <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">these instructions</a>.</p>
 <h3 id="command-line-alternatives">Command-Line Alternatives</h3>
 <p>You can also access the DCC from <a href="https://dcc-ondemand-01.oit.duke.edu/">DCC OnDemand</a> (accessible via NetID login) or Cyberduck (instructions for use are below). You may find these alternatives helpful for their intuitive interfaces, but I would recommend developing a familiarity with using the DCC through the command line nevertheless.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add instructions for setting up and using Cyberduck.</p>
-</div>
+<p><a href="https://cyberduck.io/">Cyberduck</a> is a free graphical file transfer client that lets you browse, upload, and download files on the DCC without using the command line. To set it up:</p>
+<ol>
+<li>Download and install Cyberduck from <a href="https://cyberduck.io/">https://cyberduck.io/</a>.</li>
+<li>Open Cyberduck and select Open Connection (or <kbd>⌘ O</kbd> on Mac).</li>
+<li>Select SFTP (SSH File Transfer Protocol) from the dropdown.</li>
+<li>Enter the following:<ul>
+<li>Server: <code>dcc-login.oit.duke.edu</code></li>
+<li>Username: your NetID</li>
+<li>Password: your NetID password (or leave blank if using SSH keys)</li>
+</ul>
+</li>
+<li>Select Connect; if prompted, accept the host key.</li>
+</ol>
+<p>You should now see your home directory on the DCC. Navigate to <code>/hpc/group/ldavidlab</code> to browse lab files. You can drag and drop files between Cyberduck and your desktop to transfer them.</p>
 <h3 id="common-commands">Common Commands</h3>
 <p>Some Slurm commands commonly used in lab scripts include or that otherwise may prove useful include:</p>
 <ul>
@@ -1740,10 +1761,23 @@
 </div>
 <h2 id="terminal">Terminal</h2>
 <h3 id="common-commands_1">Common Commands</h3>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add common Terminal commands.</p>
-</div>
+<p>Some commonly used terminal commands include:</p>
+<ul>
+<li><code>pwd</code> — prints the current working directory.</li>
+<li><code>ls</code> — lists the files and folders in the current directory; <code>ls -la</code> includes hidden files and detailed information.</li>
+<li><code>cd [path]</code> — changes the working directory; <code>cd ..</code> moves up one level and <code>cd ~</code> returns to your home directory.</li>
+<li><code>mkdir [name]</code> — creates a new directory.</li>
+<li><code>cp [source] [destination]</code> — copies a file or directory; use <code>cp -r</code> for directories.</li>
+<li><code>mv [source] [destination]</code> — moves or renames a file or directory.</li>
+<li><code>rm [file]</code> — deletes a file; use <code>rm -r</code> for directories. This is irreversible, so use with caution.</li>
+<li><code>cat [file]</code> — prints the contents of a file to the terminal.</li>
+<li><code>less [file]</code> — opens a file for scrollable viewing; press <kbd>q</kbd> to exit.</li>
+<li><code>man [command]</code> — opens the manual page for a command, useful for learning about flags and options.</li>
+<li><code>wc -l [file]</code> — counts the number of lines in a file.</li>
+<li><code>grep [pattern] [file]</code> — searches for a text pattern in a file; <code>grep -r</code> searches recursively through directories.</li>
+<li><code>chmod +x [file]</code> — makes a file executable, which is necessary before running a shell script directly.</li>
+<li><code>nano [file]</code> — opens a simple text editor in the terminal for quick edits.</li>
+</ul>
 <h2 id="r">R</h2>
 <p>R is the programming language most commonly used in academia for statistical computing and data visualization, including in many of the biostatistical tools and analyses used by the lab.</p>
 <p>To download R, visit <a href="https://cran.r-project.org/">https://cran.r-project.org/</a> and follow the instructions and prompts for your operating system. You may need to download an older version of R for compatibility with some packages; you can do this <a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/">here</a> for computers running macOS with Apple silicon and <a href="https://cran.r-project.org/bin/windows/base/old/">here</a> for computers running Windows. A majority of the lab currently uses R 4.4.1.</p>
@@ -1889,27 +1923,71 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add GitHub instructions.</p>
-</div>
+<h3 id="getting-started">Getting Started</h3>
+<ol>
+<li>Create a free account at <a href="https://github.com/">https://github.com/</a>.</li>
+<li>Install Git on your computer if you don't already have it; you can check by running <code>git --version</code> in the terminal. If it is not installed, download it from <a href="https://git-scm.com/">https://git-scm.com/</a>.</li>
+<li>
+<p>Configure your identity so that your commits are attributed to you:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your-email@duke.edu&quot;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Ask an owner of the LAD-LAB organization to add you as a member.</p>
+</li>
+</ol>
+<p>To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/<span class="o">[</span>repository-name<span class="o">]</span>.git
+</span></code></pre></div>
+<p>If prompted for credentials, you will need to set up a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a> and use it in place of your password.</p>
 <h3 id="common-commands_2">Common Commands</h3>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add common <code>git</code> commands.</p>
-</div>
+<ul>
+<li><code>git clone [url]</code> — downloads a remote repository to your computer.</li>
+<li><code>git pull</code> — updates your local copy with the latest changes from the remote repository.</li>
+<li><code>git status</code> — shows which files have been modified, added, or are untracked.</li>
+<li><code>git add [file]</code> — stages a file for the next commit; <code>git add .</code> stages all changes in the current directory.</li>
+<li><code>git commit -m "[message]"</code> — creates a commit (a snapshot of your staged changes) with a descriptive message.</li>
+<li><code>git push</code> — uploads your commits to the remote repository.</li>
+<li><code>git diff</code> — shows the changes you have made but not yet staged.</li>
+<li><code>git log --oneline</code> — shows a concise list of recent commits.</li>
+<li><code>git checkout [branch]</code> — switches to a different branch.</li>
+<li><code>git checkout -b [branch]</code> — creates a new branch and switches to it.</li>
+</ul>
 </div>
 <div class="tabbed-block">
 <p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add GitHub instructions.</p>
-</div>
+<p><strong>Getting Started</strong></p>
+<ol>
+<li>Create a free account at <a href="https://github.com/">https://github.com/</a>.</li>
+<li>Install Git on your computer if you don't already have it; you can check by running <code>git --version</code> in the terminal. If it is not installed, download it from <a href="https://git-scm.com/">https://git-scm.com/</a>.</li>
+<li>
+<p>Configure your identity so that your commits are attributed to you:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your-email@example.edu&quot;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Ask an owner of your lab's GitHub organization to add you as a member.</p>
+</li>
+</ol>
+<p>To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/<span class="o">[</span>organization<span class="o">]</span>/<span class="o">[</span>repository-name<span class="o">]</span>.git
+</span></code></pre></div>
+<p>If prompted for credentials, you will need to set up a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a> and use it in place of your password.</p>
 <p><strong>Common Commands</strong></p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add common <code>git</code> commands.</p>
-</div>
+<ul>
+<li><code>git clone [url]</code> — downloads a remote repository to your computer.</li>
+<li><code>git pull</code> — updates your local copy with the latest changes from the remote repository.</li>
+<li><code>git status</code> — shows which files have been modified, added, or are untracked.</li>
+<li><code>git add [file]</code> — stages a file for the next commit; <code>git add .</code> stages all changes in the current directory.</li>
+<li><code>git commit -m "[message]"</code> — creates a commit (a snapshot of your staged changes) with a descriptive message.</li>
+<li><code>git push</code> — uploads your commits to the remote repository.</li>
+<li><code>git diff</code> — shows the changes you have made but not yet staged.</li>
+<li><code>git log --oneline</code> — shows a concise list of recent commits.</li>
+<li><code>git checkout [branch]</code> — switches to a different branch.</li>
+<li><code>git checkout -b [branch]</code> — creates a new branch and switches to it.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1935,7 +2013,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 03:07:47 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 14:22:00 UTC">August 13, 2026</span>
   </span>
 
     
