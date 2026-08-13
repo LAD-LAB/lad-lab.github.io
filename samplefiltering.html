@@ -1163,10 +1163,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#removing-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing Controls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-sample-exclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Sample Exclusions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#minimum-read-count-thresholds" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Minimum read count thresholds
+        Minimum Read Count Thresholds
       
     </span>
   </a>
@@ -1412,12 +1434,37 @@
 
 
 <h1 id="filtering-samples">Filtering Samples</h1>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p>Add instructions on removing control samples and other sample-level exclusions.</p>
-</div>
-<h2 id="minimum-read-count-thresholds">Minimum read count thresholds</h2>
+<p>After filtering taxa, the next step is to remove samples that should not be included in downstream analysis. This includes control samples (positive controls, negative controls, and blanks) as well as any samples that need to be excluded for study-specific reasons.</p>
+<h2 id="removing-controls">Removing Controls</h2>
+<p>Your phyloseq should have a <code>type</code> column in its sample metadata with values like <code>"sample"</code>, <code>"positive control"</code>, <code>"negative control"</code>, and <code>"blank"</code>. To keep only biological samples:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ps.12S</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>By this point in the workflow, you should have already reviewed your controls during the <a href="pipeline.html#quality-control">quality control step</a> to check for contamination. Removing controls here simply excludes them from the analysis; it does not address contamination that may have spread into biological samples.</p>
+<h2 id="other-sample-exclusions">Other Sample Exclusions</h2>
+<p>Depending on your study, you may need to exclude additional samples. Common reasons include:</p>
+<ul>
+<li><strong>Failed samples</strong> — samples with very low read counts that suggest a technical failure (see <a href="#minimum-read-count-thresholds">minimum read count thresholds</a> below).</li>
+<li><strong>Cohort subsetting</strong> — keeping only samples relevant to your analysis (e.g., a specific time point, treatment group, or study site).</li>
+<li><strong>Duplicate or mislabelled samples</strong> — samples identified during quality control as duplicates or labelling errors.</li>
+</ul>
+<p>Use <code>subset_samples()</code> to filter by any column in the sample metadata:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Example: keep only samples from a specific cohort</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">cohort</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;intervention&quot;</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Example: exclude specific sample IDs</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;1-A01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2-B03&quot;</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">Sample_ID</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="minimum-read-count-thresholds">Minimum Read Count Thresholds</h2>
 <p>You may choose to drop samples that fall below a minimum read count. We do not have a blanket recommendation for a minimum threshold, as an appropriate value varies considerably between datasets. Note that <a href="taxafiltering.html">Filtering Taxa</a> changes per-sample totals, so the same threshold may exclude different samples depending on when it is applied.</p>
+<p>To check per-sample read counts and apply a threshold:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># View the distribution of read counts:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nf">sort</span><span class="p">(</span><span class="nf">sample_sums</span><span class="p">(</span><span class="n">ps</span><span class="p">))</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Remove samples below a threshold:</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prune_samples</span><span class="p">(</span><span class="nf">sample_sums</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">ps</span><span class="p">)</span>
+</span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>A low read count may reflect technical failure or genuinely low food DNA in the sample (equimolar pooling may not fully equalize read depth). Dropping low-count samples always risks discarding true dietary signal, so do this carefully and document your decision.</p>
@@ -1444,7 +1491,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 12, 2026 15:45:25 UTC">August 12, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 16:54:41 UTC">August 13, 2026</span>
   </span>
 
     
