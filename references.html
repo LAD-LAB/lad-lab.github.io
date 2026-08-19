@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,23 +667,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -1143,11 +1034,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1565,19 +1451,19 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">library</span><span class="p">(</span><span class="n">taxonomizr</span><span class="p">)</span><span class="w"> </span><span class="c1"># for NCBI accession lookup</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nf">source</span><span class="p">(</span><span class="s">&#39;/path/to/code/functions/find_primer_pair.R&#39;</span><span class="p">)</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nf">source</span><span class="p">(</span><span class="s">&#39;/path/to/code/functions/query_ncbi.R&#39;</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nf">source</span><span class="p">(</span><span class="s">&#39;/path/to/code/functions/query_ncbi_accession.R&#39;</span><span class="p">))</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nf">source</span><span class="p">(</span><span class="s">'/path/to/code/functions/find_primer_pair.R'</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nf">source</span><span class="p">(</span><span class="s">'/path/to/code/functions/query_ncbi.R'</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nf">source</span><span class="p">(</span><span class="s">'/path/to/code/functions/query_ncbi_accession.R'</span><span class="p">))</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">               </span><span class="nf">theme</span><span class="p">(</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">                    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">),</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">                    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">                                              </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;bold&#39;</span><span class="p">),</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">                                              </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'bold'</span><span class="p">),</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">                    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">                                                </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;bold&#39;</span><span class="p">),</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">                                                </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'bold'</span><span class="p">),</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">                    </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">                                              </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;bold&#39;</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">                                              </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'bold'</span><span class="p">)</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">                     </span><span class="p">)</span>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">)</span>
 </span></code></pre></div>
@@ -1586,15 +1472,15 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Primer sequences </span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">trnLG</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">&#39;GGGCAATCCTGAGCCAA&#39;</span><span class="p">)</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">trnLH</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">&#39;CCATTGAGTCTCTGCACCTATC&#39;</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">trnLG</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">'GGGCAATCCTGAGCCAA'</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">trnLH</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">'CCATTGAGTCTCTGCACCTATC'</span><span class="p">)</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">primers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">trnLG</span><span class="p">,</span><span class="w"> </span><span class="n">trnLH</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Manually curated list of dietary and medicinal plants</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">plants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;[path/to/human-foods.csv]&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;plant&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'[path/to/human-foods.csv]'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'plant'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nf">pull</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">)</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nf">length</span><span class="p">(</span><span class="n">plants</span><span class="p">)</span>
@@ -1602,26 +1488,26 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nf">tail</span><span class="p">(</span><span class="n">plants</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Manual edits</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">edits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&#39;[path/to/data/inputs/Manual renaming.csv]&#39;</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">edits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">'[path/to/data/inputs/Manual renaming.csv]'</span><span class="p">)</span><span class="w"> </span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">edits</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Parsed RefSeq data (last organized Jan 2023)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">plastid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nf">readDNAStringSet</span><span class="p">(</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="nf">here</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">            </span><span class="s">&#39;outputs&#39;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">            </span><span class="s">&#39;parsed-refs&#39;</span><span class="p">,</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">            </span><span class="s">&#39;RefSeq&#39;</span><span class="p">,</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">            </span><span class="s">&#39;refseq_plastid_species.fasta&#39;</span><span class="p">))</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="nf">here</span><span class="p">(</span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">            </span><span class="s">'outputs'</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">            </span><span class="s">'parsed-refs'</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">            </span><span class="s">'RefSeq'</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">            </span><span class="s">'refseq_plastid_species.fasta'</span><span class="p">))</span>
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">plastid</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Primer sequences</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">v5F</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">&#39;TAGAACAGGCTCCTCTAG&#39;</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">v5R</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">&#39;TTAGATACCCCACTATGC&#39;</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">v5F</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">'TAGAACAGGCTCCTCTAG'</span><span class="p">)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">v5R</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAString</span><span class="p">(</span><span class="s">'TTAGATACCCCACTATGC'</span><span class="p">)</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">primers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">v5F</span><span class="p">,</span><span class="w"> </span><span class="n">v5R</span><span class="p">)</span>
 </span></code></pre></div>
@@ -1631,8 +1517,8 @@
 </details>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Manually curated list of dietary animals</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">animals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;[path/to/human-foods.csv]&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;animal&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">'[path/to/human-foods.csv]'</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'animal'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nf">pull</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">)</span>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nf">length</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
@@ -1642,11 +1528,11 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Parsed RefSeq data (last organized Jan 2023)</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">mito</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nf">readDNAStringSet</span><span class="p">(</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="nf">here</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">            </span><span class="s">&#39;outputs&#39;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">            </span><span class="s">&#39;parsed-refs&#39;</span><span class="p">,</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">            </span><span class="s">&#39;RefSeq&#39;</span><span class="p">,</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">            </span><span class="s">&#39;refseq_mito_species.fasta&#39;</span><span class="p">))</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="nf">here</span><span class="p">(</span><span class="s">'data'</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">            </span><span class="s">'outputs'</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">            </span><span class="s">'parsed-refs'</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">            </span><span class="s">'RefSeq'</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">            </span><span class="s">'refseq_mito_species.fasta'</span><span class="p">))</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
 </span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">mito</span>
 </span></code></pre></div>
@@ -1659,12 +1545,12 @@
 <div class="tabbed-block">
 <p>Make sure you are connected to Isilon:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># SQL reference</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">sql</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql&#39;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">sql</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql'</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># SQL reference</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">sql</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;[/path/to/accessionTaxa.sql]&#39;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">sql</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'[/path/to/accessionTaxa.sql]'</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1684,7 +1570,7 @@
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">                                </span><span class="n">fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">                                </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;sequences have the primer set&#39;</span><span class="p">)</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">'sequences have the primer set'</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Next, subset the sequences to our list of food species and keep the accessions:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Find indices of entries matching </span>
@@ -1692,19 +1578,19 @@
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nf">lapply</span><span class="p">(</span><span class="n">plants</span><span class="p">,</span><span class="w"> </span><span class="n">grep</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nf">unlist</span><span class="p">()</span>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nf">cat</span><span class="p">(</span><span class="s">&#39;There are&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">plants</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;food plants in our query\n&#39;</span><span class="p">)</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nf">cat</span><span class="p">(</span><span class="s">'There are'</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">plants</span><span class="p">),</span><span class="w"> </span><span class="s">'food plants in our query\n'</span><span class="p">)</span>
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># Subset</span>
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">refseq.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">refseq.trnL</span><span class="p">[</span><span class="n">plants.i</span><span class="p">]</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;have a trnL sequence in the RefSeq plastid database&#39;</span><span class="p">)</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">'have a trnL sequence in the RefSeq plastid database'</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Strip name to only NCBI accession</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">head</span><span class="p">()</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39; .*$&#39;</span><span class="p">,</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">        </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">' .*$'</span><span class="p">,</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">        </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
 </span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nf">head</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">))</span>
 </span></code></pre></div>
@@ -1719,7 +1605,7 @@
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">                                </span><span class="n">fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">                                </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;sequences have the primer set&#39;</span><span class="p">)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">'sequences have the primer set'</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Next, subset the sequences to our list of food species and keep the accessions:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Find indices of entries matching </span>
@@ -1727,19 +1613,19 @@
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nf">lapply</span><span class="p">(</span><span class="n">animals</span><span class="p">,</span><span class="w"> </span><span class="n">grep</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nf">unlist</span><span class="p">()</span>
 </span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nf">cat</span><span class="p">(</span><span class="s">&#39;There are&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">animals</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;food animals in our query\n&#39;</span><span class="p">)</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nf">cat</span><span class="p">(</span><span class="s">'There are'</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">animals</span><span class="p">),</span><span class="w"> </span><span class="s">'food animals in our query\n'</span><span class="p">)</span>
 </span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
 </span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="c1"># Subset</span>
 </span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="n">refseq.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">refseq.12SV5</span><span class="p">[</span><span class="n">animals.i</span><span class="p">]</span>
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;have a 12SV5 sequence in the RefSeq mito database&#39;</span><span class="p">)</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">'have a 12SV5 sequence in the RefSeq mito database'</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Strip name to only NCBI accession</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">head</span><span class="p">()</span><span class="w">        </span>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
 </span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39; .*$&#39;</span><span class="p">,</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">' .*$'</span><span class="p">,</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
 </span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
 </span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="nf">head</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">))</span>
 </span></code></pre></div>
@@ -1761,7 +1647,7 @@
 <div class="tabbed-block">
 <p>Use the custom <code>query_ncbi()</code> function to query the NCBI for trnL sequences from food species:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Pull sequences from NCBI</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">ncbi.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">query_ncbi</span><span class="p">(</span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;trnL&#39;</span><span class="p">,</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">ncbi.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">query_ncbi</span><span class="p">(</span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'trnL'</span><span class="p">,</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">                        </span><span class="n">organisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plants</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span>
@@ -1772,16 +1658,16 @@
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">                            </span><span class="n">fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">                            </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;sequences have the primer set&#39;</span><span class="p">)</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">),</span><span class="w"> </span><span class="s">'sequences have the primer set'</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Remove unverified entries:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Note some entries are marked as unverified</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;UNVERIFIED&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">))]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">'UNVERIFIED'</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">))]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="nf">head</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1"># Remove </span>
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="n">ncbi.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncbi.trnL</span><span class="p">[</span><span class="o">!</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;UNVERIFIED&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)))]</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="n">ncbi.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncbi.trnL</span><span class="p">[</span><span class="o">!</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">'UNVERIFIED'</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)))]</span>
 </span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span>
 </span></code></pre></div>
 <p>And last, strip the names to just their accessions:</p>
@@ -1789,8 +1675,8 @@
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">head</span><span class="p">()</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39; .+$&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;^&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">' .+$'</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'^&gt;'</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
 </span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
 </span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="nf">head</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">))</span>
 </span></code></pre></div>
@@ -1798,7 +1684,7 @@
 <div class="tabbed-block">
 <p>Use the custom <code>query_ncbi()</code> function to query the NCBI for 12Sv5 sequences from food species:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Pull sequences from NCBI</span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">ncbi.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">query_ncbi</span><span class="p">(</span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;12S&#39;</span><span class="p">,</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">ncbi.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">query_ncbi</span><span class="p">(</span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'12S'</span><span class="p">,</span>
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">                        </span><span class="n">organisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">animals</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span>
@@ -1809,16 +1695,16 @@
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">                            </span><span class="n">fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span>
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">                            </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
 </span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;sequences have the primer set&#39;</span><span class="p">)</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nf">cat</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">),</span><span class="w"> </span><span class="s">'sequences have the primer set'</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Remove unverified entries:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Note some entries are marked as unverified</span>
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;UNVERIFIED&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">))]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">'UNVERIFIED'</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">))]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nf">head</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
 </span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="c1"># Remove </span>
 </span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span>
-</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="n">ncbi.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncbi.12SV5</span><span class="p">[</span><span class="o">!</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;UNVERIFIED&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)))]</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="n">ncbi.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncbi.12SV5</span><span class="p">[</span><span class="o">!</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">'UNVERIFIED'</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)))]</span>
 </span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="nf">length</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span>
 </span></code></pre></div>
 <p>And last, strip the names to just their accessions:</p>
@@ -1826,8 +1712,8 @@
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">head</span><span class="p">()</span>
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39; .+$&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;^&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">' .+$'</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'^&gt;'</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
 </span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
 </span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="nf">head</span><span class="p">(</span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">))</span>
 </span></code></pre></div>
@@ -1855,12 +1741,12 @@
 <p>We can now merge:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Data frame of results</span>
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;RefSeq&#39;</span><span class="p">,</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'RefSeq'</span><span class="p">,</span>
 </span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">                </span><span class="n">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">),</span>
 </span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">                </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">refseq.trnL</span><span class="p">))</span>
 </span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>
 </span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;GenBank&#39;</span><span class="p">,</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'GenBank'</span><span class="p">,</span>
 </span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">                </span><span class="n">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">),</span>
 </span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">                </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">ncbi.trnL</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">    </span><span class="nf">bind_rows</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">)</span>
@@ -1869,35 +1755,35 @@
 </span></code></pre></div>
 <p>For trnL only, manual additions must be added in as well:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># Also add manual additions here</span>
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">additions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;add&#39;</span><span class="p">)</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">additions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'add'</span><span class="p">)</span>
 </span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="n">additions</span>
 </span></code></pre></div>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># Note that these don&#39;t have primers currently</span>
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="c1"># To get the most accurate sequence, let&#39;s just pull these records from NCBI by their accession number and trim directly</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># Note that these don't have primers currently</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="c1"># To get the most accurate sequence, let's just pull these records from NCBI by their accession number and trim directly</span>
 </span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="c1"># Note some of these returned sequences are whole genomes-- takes a few mins.</span>
 </span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="n">seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">    </span><span class="nf">entrez_fetch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s">&#39;nucleotide&#39;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">    </span><span class="nf">entrez_fetch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s">'nucleotide'</span><span class="p">,</span><span class="w"> </span>
 </span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">                </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">additions</span><span class="o">$</span><span class="n">accession</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">                </span><span class="n">rettype</span><span class="o">=</span><span class="s">&#39;fasta&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">                </span><span class="n">rettype</span><span class="o">=</span><span class="s">'fasta'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="w">    </span><span class="c1"># This returns concatenated sequence strings; split apart </span>
 </span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="w">    </span><span class="c1"># so we can re-name inline</span>
-</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="w">    </span><span class="nf">strsplit</span><span class="p">(</span><span class="s">&#39;\n{2,}&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="c1"># Usually two newline chars, but sometimes more</span>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="w">    </span><span class="nf">strsplit</span><span class="p">(</span><span class="s">'\n{2,}'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="c1"># Usually two newline chars, but sometimes more</span>
 </span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="w">    </span><span class="nf">unlist</span><span class="p">()</span>
 </span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a>
 </span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="c1"># Save this to ultimately combine with taxonomy data, as want to</span>
 </span><span id="__span-33-14"><a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a><span class="c1"># be able to identify these sequences after the fact</span>
-</span><span id="__span-33-15"><a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a><span class="n">ex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;[^&gt;]\\S*&#39;</span><span class="w"> </span>
+</span><span id="__span-33-15"><a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a><span class="n">ex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'[^&gt;]\\S*'</span><span class="w"> </span>
 </span><span id="__span-33-16"><a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a><span class="n">accs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_extract</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span>
 </span><span id="__span-33-17"><a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a>
 </span><span id="__span-33-18"><a id="__codelineno-33-18" name="__codelineno-33-18" href="#__codelineno-33-18"></a><span class="c1"># Keep full header for descriptive name</span>
-</span><span id="__span-33-19"><a id="__codelineno-33-19" name="__codelineno-33-19" href="#__codelineno-33-19"></a><span class="n">headers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_extract</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;^[^\n]*&#39;</span><span class="p">)</span>
+</span><span id="__span-33-19"><a id="__codelineno-33-19" name="__codelineno-33-19" href="#__codelineno-33-19"></a><span class="n">headers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">str_extract</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span><span class="w"> </span><span class="s">'^[^\n]*'</span><span class="p">)</span>
 </span><span id="__span-33-20"><a id="__codelineno-33-20" name="__codelineno-33-20" href="#__codelineno-33-20"></a>
 </span><span id="__span-33-21"><a id="__codelineno-33-21" name="__codelineno-33-21" href="#__codelineno-33-21"></a><span class="n">seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-33-22"><a id="__codelineno-33-22" name="__codelineno-33-22" href="#__codelineno-33-22"></a><span class="w">    </span><span class="n">seqs</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-33-23"><a id="__codelineno-33-23" name="__codelineno-33-23" href="#__codelineno-33-23"></a><span class="w">    </span><span class="c1"># Now update seqs to sequence only, stripping header</span>
-</span><span id="__span-33-24"><a id="__codelineno-33-24" name="__codelineno-33-24" href="#__codelineno-33-24"></a><span class="w">    </span><span class="nf">sub</span><span class="p">(</span><span class="s">&#39;^[^\n]*\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-33-24"><a id="__codelineno-33-24" name="__codelineno-33-24" href="#__codelineno-33-24"></a><span class="w">    </span><span class="nf">sub</span><span class="p">(</span><span class="s">'^[^\n]*\n'</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-33-25"><a id="__codelineno-33-25" name="__codelineno-33-25" href="#__codelineno-33-25"></a><span class="w">    </span><span class="c1"># And removing separating \n characters</span>
-</span><span id="__span-33-26"><a id="__codelineno-33-26" name="__codelineno-33-26" href="#__codelineno-33-26"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
+</span><span id="__span-33-26"><a id="__codelineno-33-26" name="__codelineno-33-26" href="#__codelineno-33-26"></a><span class="w">    </span><span class="nf">gsub</span><span class="p">(</span><span class="s">'\n'</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
 </span><span id="__span-33-27"><a id="__codelineno-33-27" name="__codelineno-33-27" href="#__codelineno-33-27"></a>
 </span><span id="__span-33-28"><a id="__codelineno-33-28" name="__codelineno-33-28" href="#__codelineno-33-28"></a><span class="c1"># Now add to DNAStringSet</span>
 </span><span id="__span-33-29"><a id="__codelineno-33-29" name="__codelineno-33-29" href="#__codelineno-33-29"></a><span class="n">seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DNAStringSet</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
@@ -1907,7 +1793,7 @@
 </span><span id="__span-33-33"><a id="__codelineno-33-33" name="__codelineno-33-33" href="#__codelineno-33-33"></a><span class="w">                        </span><span class="n">fwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span>
 </span><span id="__span-33-34"><a id="__codelineno-33-34" name="__codelineno-33-34" href="#__codelineno-33-34"></a><span class="w">                        </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">primers</span><span class="p">[[</span><span class="m">2</span><span class="p">]])</span>
 </span></code></pre></div>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># This leaves &#39;source&#39; labeled as NA for these entries</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># This leaves 'source' labeled as NA for these entries</span>
 </span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span>
 </span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">seqs</span><span class="p">),</span>
 </span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">                </span><span class="n">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">seqs</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
@@ -1931,12 +1817,12 @@
 <p>We can now merge:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1"># Data frame of results</span>
 </span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;RefSeq&#39;</span><span class="p">,</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'RefSeq'</span><span class="p">,</span>
 </span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">                </span><span class="n">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">),</span>
 </span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">                </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">refseq.12SV5</span><span class="p">))</span>
 </span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>
 </span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;GenBank&#39;</span><span class="p">,</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'GenBank'</span><span class="p">,</span>
 </span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">                </span><span class="n">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">),</span>
 </span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="w">                </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">ncbi.12SV5</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="w">    </span><span class="nf">bind_rows</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">)</span>
@@ -1957,7 +1843,7 @@
 </span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1"># Which ones?</span>
-</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">missing.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seqs.df</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;source&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;accession&#39;</span><span class="p">)]</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">missing.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seqs.df</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">ids</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'source'</span><span class="p">,</span><span class="w"> </span><span class="s">'accession'</span><span class="p">)]</span>
 </span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="n">missing.df</span>
 </span></code></pre></div>
 <p>Missing entries are sequence records that have been added to NCBI in the time between making the SQL file and now. Using the <code>query_ncbi_accession()</code> function, iterate through <code>missing.df</code> and add these records in:</p>
@@ -1977,14 +1863,14 @@
 <p>We can reformat this output to suit our needs by selecting the ranks we're interested in and adding taxon IDs for joining back to accessions:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="c1"># Pull desired levels from this structure</span>
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="c1"># Not working within getTaxonomy function</span>
-</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="n">vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;superkingdom&quot;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">          </span><span class="s">&quot;phylum&quot;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">          </span><span class="s">&quot;class&quot;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="w">          </span><span class="s">&quot;order&quot;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="w">          </span><span class="s">&quot;family&quot;</span><span class="p">,</span><span class="w"> </span>
-</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="w">          </span><span class="s">&quot;genus&quot;</span><span class="p">,</span>
-</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="w">          </span><span class="s">&quot;species&quot;</span><span class="p">,</span>
-</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="w">          </span><span class="s">&quot;subspecies&quot;</span><span class="p">)</span>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="n">vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"superkingdom"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">          </span><span class="s">"phylum"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">          </span><span class="s">"class"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="w">          </span><span class="s">"order"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="w">          </span><span class="s">"family"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="w">          </span><span class="s">"genus"</span><span class="p">,</span>
+</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="w">          </span><span class="s">"species"</span><span class="p">,</span>
+</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="w">          </span><span class="s">"subspecies"</span><span class="p">)</span>
 </span><span id="__span-43-11"><a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>
 </span><span id="__span-43-12"><a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="n">taxonomy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">superkingdom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span>
 </span><span id="__span-43-13"><a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a><span class="w">                       </span><span class="n">phylum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span>
@@ -2001,7 +1887,7 @@
 </span><span id="__span-43-24"><a id="__codelineno-43-24" name="__codelineno-43-24" href="#__codelineno-43-24"></a><span class="w">          </span><span class="nf">t</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-43-25"><a id="__codelineno-43-25" name="__codelineno-43-25" href="#__codelineno-43-25"></a><span class="w">          </span><span class="nf">data.frame</span><span class="p">()</span><span class="w"> </span>
 </span><span id="__span-43-26"><a id="__codelineno-43-26" name="__codelineno-43-26" href="#__codelineno-43-26"></a>
-</span><span id="__span-43-27"><a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="w">     </span><span class="c1"># Pick columns we&#39;re interested in</span>
+</span><span id="__span-43-27"><a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="w">     </span><span class="c1"># Pick columns we're interested in</span>
 </span><span id="__span-43-28"><a id="__codelineno-43-28" name="__codelineno-43-28" href="#__codelineno-43-28"></a><span class="w">     </span><span class="n">shared</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">intersect</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">row.i</span><span class="p">))</span>
 </span><span id="__span-43-29"><a id="__codelineno-43-29" name="__codelineno-43-29" href="#__codelineno-43-29"></a><span class="w">     </span><span class="n">row.i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">row.i</span><span class="p">,</span><span class="w"> </span><span class="nf">one_of</span><span class="p">(</span><span class="n">shared</span><span class="p">))</span>
 </span><span id="__span-43-30"><a id="__codelineno-43-30" name="__codelineno-43-30" href="#__codelineno-43-30"></a>
@@ -2029,13 +1915,13 @@
 </span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="w">     </span><span class="n">seqs.df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="w">     </span><span class="n">MButils</span><span class="o">::</span><span class="nf">lowest_level</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
-</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="w">     </span><span class="nf">rename</span><span class="p">(</span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;name&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="w">     </span><span class="nf">rename</span><span class="p">(</span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'name'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="w">     </span><span class="nf">select</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">accession</span><span class="p">,</span><span class="w"> </span><span class="n">taxon</span><span class="p">,</span><span class="w"> </span><span class="n">taxid</span><span class="p">,</span><span class="w"> </span><span class="n">superkingdom</span><span class="o">:</span><span class="n">subspecies</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="manual-updates-trnl-only">Manual Updates (trnL only)</h2>
 <p>For trnL only, we must manually rename and omit certain foods; this is done with the <code>edits</code> CSV read in earlier, which has a column <code>type</code> corresponding to the necessary change (foods whose <code>type</code> is <code>add</code> were added when we merged the RefSeq and NCBI outputs). First we can omit the foods whose <code>type</code> is <code>omit</code>:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1"># Handle omissions</span>
-</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="n">omit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">==</span><span class="s">&#39;omit&#39;</span><span class="p">)</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="n">omit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">==</span><span class="s">'omit'</span><span class="p">)</span>
 </span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
 </span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="w">     </span><span class="nf">filter</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">,</span><span class="w"> </span>
@@ -2043,37 +1929,37 @@
 </span></code></pre></div>
 <p>Next we rename the foods whose <code>type</code> is <code>rename</code>:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="c1"># Handle renaming </span>
-</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="n">name.update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">==</span><span class="s">&#39;rename&#39;</span><span class="p">)</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="n">name.update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">edits</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">==</span><span class="s">'rename'</span><span class="p">)</span>
 </span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>
 </span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="nf">filter</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">,</span>
 </span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="w">       </span><span class="n">accession</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">name.update</span><span class="o">$</span><span class="n">accession</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The following manual changes are to varietates of <em>Brassica oleracea</em> in <code>seqs.df</code>:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="c1"># Note that original sequence &#39;AC183493.1&#39; not found, leaving off for now</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="c1"># Note that original sequence 'AC183493.1' not found, leaving off for now</span>
 </span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="c1"># Will need to generalize this later, but now can just update specifically</span>
-</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;AB213010.1&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;Brassica oleracea var. capitata&#39;</span>
-</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;AC183493.1&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;Brassica oleracea var. alboglabra&#39;</span>
-</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;LR031874.1&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;Brassica oleracea var. italica&#39;</span>
-</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;LR031875.1&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;Brassica oleracea var. italica&#39;</span>
-</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;LR031876.1&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;Brassica oleracea var. italica&#39;</span>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'AB213010.1'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'Brassica oleracea var. capitata'</span>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'AC183493.1'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'Brassica oleracea var. alboglabra'</span>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'LR031874.1'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'Brassica oleracea var. italica'</span>
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'LR031875.1'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'Brassica oleracea var. italica'</span>
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">varietas</span><span class="p">[</span><span class="n">seqs.df</span><span class="o">$</span><span class="n">accession</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'LR031876.1'</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">'Brassica oleracea var. italica'</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="c1"># Get lowest-level taxon name</span>
 </span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="w">     </span><span class="n">seqs.df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="w">     </span><span class="n">MButils</span><span class="o">::</span><span class="nf">lowest_level</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
-</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="w">     </span><span class="nf">rename</span><span class="p">(</span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;name&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="w">     </span><span class="nf">rename</span><span class="p">(</span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'name'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="w">     </span><span class="nf">select</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">accession</span><span class="p">,</span><span class="w"> </span><span class="n">taxon</span><span class="p">,</span><span class="w"> </span><span class="n">taxid</span><span class="p">,</span><span class="w"> </span><span class="n">superkingdom</span><span class="o">:</span><span class="n">forma</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="quality-control-sequence-alignment-and-cleaning">Quality Control, Sequence Alignment, and Cleaning</h2>
 <p>We can now do some quality control on <code>seqs.df</code>. Let's first check for nucleotide degeneracy (any codes that are not A, C, G, or T) and determine if there are "back-up" sequences to allow for removing degenerate sequences:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="c1"># Check for degenerate nucleotide characters</span>
-</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="nf">grep</span><span class="p">(</span><span class="s">&#39;[AGCT]*[^AGCT]+&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="nf">grep</span><span class="p">(</span><span class="s">'[AGCT]*[^AGCT]+'</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="c1"># Add a flag to these taxa, to see if there&#39;s a back-up sequence</span>
-</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;[AGCT]*[^AGCT]+&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="c1"># Add a flag to these taxa, to see if there's a back-up sequence</span>
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="n">seqs.df</span><span class="o">$</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">grepl</span><span class="p">(</span><span class="s">'[AGCT]*[^AGCT]+'</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)</span>
 </span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>
 </span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="n">with_n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
-</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="w">     </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">taxon</span><span class="p">[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&#39;[AGCT]*[^AGCT]+&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="w">     </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">taxon</span><span class="p">[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">'[AGCT]*[^AGCT]+'</span><span class="p">,</span><span class="w"> </span><span class="n">seqs.df</span><span class="o">$</span><span class="n">seq</span><span class="p">)]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-51-6"><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="w">     </span><span class="nf">unique</span><span class="p">()</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
@@ -2088,7 +1974,7 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="c1"># Remove sequences containing Ns</span>
 </span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">     </span><span class="nf">filter</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">,</span>
-</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="w">            </span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;[AGCT]*[^AGCT]+&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">))</span>
+</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="w">            </span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'[AGCT]*[^AGCT]+'</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">))</span>
 </span></code></pre></div>
 <p>Now, let's align sequence orientations.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">trnL</label><label for="__tabbed_6_2">12Sv5</label></div>
@@ -2116,7 +2002,7 @@
 </span><span id="__span-56-6"><a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a><span class="w">                </span><span class="n">fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 </span><span id="__span-56-7"><a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-56-8"><a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-56-9"><a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;forward&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-56-9"><a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'forward'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-56-10"><a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
 </span><span id="__span-56-11"><a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a>
 </span><span id="__span-56-12"><a id="__codelineno-56-12" name="__codelineno-56-12" href="#__codelineno-56-12"></a><span class="c1"># Reverse primer at start of read</span>
@@ -2127,7 +2013,7 @@
 </span><span id="__span-56-17"><a id="__codelineno-56-17" name="__codelineno-56-17" href="#__codelineno-56-17"></a><span class="w">                </span><span class="n">fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 </span><span id="__span-56-18"><a id="__codelineno-56-18" name="__codelineno-56-18" href="#__codelineno-56-18"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-56-19"><a id="__codelineno-56-19" name="__codelineno-56-19" href="#__codelineno-56-19"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-56-20"><a id="__codelineno-56-20" name="__codelineno-56-20" href="#__codelineno-56-20"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;reverse&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-56-20"><a id="__codelineno-56-20" name="__codelineno-56-20" href="#__codelineno-56-20"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'reverse'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-56-21"><a id="__codelineno-56-21" name="__codelineno-56-21" href="#__codelineno-56-21"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
@@ -2145,7 +2031,7 @@
 <p>This code now corrects reverse-oriented sequences with the <code>reverseComplement()</code> function:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-59-2"><a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">,</span>
-</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">            </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;reverse&#39;</span><span class="p">,</span>
+</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">            </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'reverse'</span><span class="p">,</span>
 </span><span id="__span-59-4"><a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">                        </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-59-5"><a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="w">                            </span><span class="nf">DNAStringSet</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-59-6"><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="w">                            </span><span class="nf">reverseComplement</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
@@ -2177,7 +2063,7 @@
 </span><span id="__span-62-6"><a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="w">                </span><span class="n">fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 </span><span id="__span-62-7"><a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-62-8"><a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-62-9"><a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;forward&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-62-9"><a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'forward'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-62-10"><a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
 </span><span id="__span-62-11"><a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a>
 </span><span id="__span-62-12"><a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a><span class="c1"># Reverse primer at start of read</span>
@@ -2188,7 +2074,7 @@
 </span><span id="__span-62-17"><a id="__codelineno-62-17" name="__codelineno-62-17" href="#__codelineno-62-17"></a><span class="w">                </span><span class="n">fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 </span><span id="__span-62-18"><a id="__codelineno-62-18" name="__codelineno-62-18" href="#__codelineno-62-18"></a><span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-62-19"><a id="__codelineno-62-19" name="__codelineno-62-19" href="#__codelineno-62-19"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
-</span><span id="__span-62-20"><a id="__codelineno-62-20" name="__codelineno-62-20" href="#__codelineno-62-20"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;reverse&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+</span><span id="__span-62-20"><a id="__codelineno-62-20" name="__codelineno-62-20" href="#__codelineno-62-20"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'reverse'</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-62-21"><a id="__codelineno-62-21" name="__codelineno-62-21" href="#__codelineno-62-21"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
@@ -2206,7 +2092,7 @@
 <p>This code now corrects reverse-oriented sequences with the <code>reverseComplement()</code> function:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-65-2"><a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">seqs.df</span><span class="p">,</span>
-</span><span id="__span-65-3"><a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">            </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;reverse&#39;</span><span class="p">,</span>
+</span><span id="__span-65-3"><a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">            </span><span class="n">seq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'reverse'</span><span class="p">,</span>
 </span><span id="__span-65-4"><a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">                        </span><span class="n">yes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-65-5"><a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">                            </span><span class="nf">DNAStringSet</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
 </span><span id="__span-65-6"><a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a><span class="w">                            </span><span class="nf">reverseComplement</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
@@ -2463,7 +2349,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

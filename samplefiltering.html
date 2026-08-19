@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -766,11 +665,6 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -939,23 +833,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -1437,8 +1323,8 @@
 <p>After filtering taxa, the next step is to remove samples that should not be included in downstream analysis. This includes control samples (positive controls, negative controls, and blanks) as well as any samples that need to be excluded for study-specific reasons.</p>
 <h2 id="removing-controls">Removing Controls</h2>
 <p>Your phyloseq should have a <code>type</code> column in its sample metadata with values like <code>"sample"</code>, <code>"positive control"</code>, <code>"negative control"</code>, and <code>"blank"</code>. To keep only biological samples:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ps.12S</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"sample"</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ps.12S</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"sample"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>By this point in the workflow, you should have already reviewed your controls during the <a href="pipeline.html#quality-control">quality control step</a> to check for contamination. Removing controls here simply excludes them from the analysis; it does not address contamination that may have spread into biological samples.</p>
 <h2 id="other-sample-exclusions">Other Sample Exclusions</h2>
@@ -1450,10 +1336,10 @@
 </ul>
 <p>Use <code>subset_samples()</code> to filter by any column in the sample metadata:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Example: keep only samples from a specific cohort</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">cohort</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;intervention&quot;</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">cohort</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"intervention"</span><span class="p">)</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Example: exclude specific sample IDs</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;1-A01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2-B03&quot;</span><span class="p">)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"1-A01"</span><span class="p">,</span><span class="w"> </span><span class="s">"2-B03"</span><span class="p">)</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_samples</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">Sample_ID</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="minimum-read-count-thresholds">Minimum Read Count Thresholds</h2>
@@ -1666,7 +1552,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

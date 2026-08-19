@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -766,11 +665,6 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -939,23 +833,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -1467,8 +1353,8 @@
 <p>Before calling <code>merge_phyloseq()</code>, make sure the following are addressed for each phyloseq you plan to merge.</p>
 <h3 id="ensuring-unique-sample-names">Ensuring Unique Sample Names</h3>
 <p>Phyloseq objects from different sequencing runs will often share sample names (e.g., <code>1-A01</code>, <code>2-B03</code>) because the well-based naming scheme resets with each run. If you merge phyloseqs with overlapping sample names, one will silently overwrite the other. To prevent this, prefix each phyloseq's sample names with a unique identifier before merging:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;[prefix1]-&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">))</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;[prefix2]-&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">"[prefix1]-"</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">))</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="s">"[prefix2]-"</span><span class="p">,</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">))</span>
 </span></code></pre></div>
 <p>The prefix can be anything that uniquely identifies the run — a project name, a run date, a short label. For example, <code>"CHOICE-"</code>, <code>"20250401-"</code>, or <code>"Run1-"</code> would all work, as long as each phyloseq gets a different prefix. You can verify there are no collisions with:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">any</span><span class="p">(</span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">sample_names</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">))</span>
@@ -1476,8 +1362,8 @@
 <p>This should return <code>FALSE</code>.</p>
 <h3 id="updating-taxonomy-for-reference-consistency">Updating Taxonomy for Reference Consistency</h3>
 <p>If the phyloseqs you are merging were created against different versions of the trnL or 12Sv5 reference, the same organism may have different taxonomy assignments across runs. To avoid inconsistencies in the merged dataset, re-run taxonomy assignment on each phyloseq against the same reference using <code>update_taxonomy()</code> from <code>foodseq.tools</code>:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ps.run1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[/path/to/current/reference.fasta]&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ps.run2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[/path/to/current/reference.fasta]&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ps.run1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run1</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"[/path/to/current/reference.fasta]"</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"trnL"</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ps.run2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">update_taxonomy</span><span class="p">(</span><span class="n">ps.run2</span><span class="p">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"[/path/to/current/reference.fasta]"</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"trnL"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The <code>marker</code> argument should be <code>"trnL"</code> for plant data or <code>"12S"</code> for animal data. Both phyloseqs should point to the same reference FASTA so that taxonomy is assigned identically.</p>
 <h3 id="standardizing-sample-metadata">Standardizing Sample Metadata</h3>
@@ -1693,7 +1579,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

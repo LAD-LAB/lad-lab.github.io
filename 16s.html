@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,23 +667,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -1143,11 +1034,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1613,7 +1499,7 @@
 </span></code></pre></div>
 <p><code>IMG</code> points to the Apptainer container and <code>WORK</code> points to your project folder. The batch script binds <code>WORK</code> to <code>/work</code> inside the container, so the R script sees all your input files under <code>/work/</code>. It also binds <code>/scratch</code> for fast temporary I/O during processing.</p>
 <p>The rest of the batch script creates the necessary output directories, sets thread control variables to match the Slurm allocation (32 CPUs, 256 GB memory, 5-day time limit), and runs the R script:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">/logs&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">/output&quot;</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$WORK</span><span class="s2">/logs"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$WORK</span><span class="s2">/output"</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-</span><span class="nv">32</span><span class="si">}</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="nv">$OMP_NUM_THREADS</span>
@@ -1622,7 +1508,7 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span>/scratch/<span class="nv">$SLURM_JOB_ID</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$TMPDIR</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK</span><span class="s2">:/work,/scratch:/scratch&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>apptainer<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">"</span><span class="nv">$WORK</span><span class="s2">:/work,/scratch:/scratch"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$IMG</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span>Rscript<span class="w"> </span>/work/PacBio_16S_pipeline.R
 </span></code></pre></div>
 <p>To submit the job:</p>
@@ -1646,21 +1532,21 @@
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 </span></code></pre></div>
 <p>It then sets the three input paths, all relative to the <code>/work</code> mount inside the container:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">data.dir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/fastx_files&quot;</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">greengenes2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/gg2_2024_09_toSpecies_trainset.fa.gz&quot;</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">user_biosamples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/work/user_biosamples.csv&quot;</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">data.dir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/work/fastx_files"</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">greengenes2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/work/gg2_2024_09_toSpecies_trainset.fa.gz"</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">user_biosamples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/work/user_biosamples.csv"</span>
 </span></code></pre></div>
 <p>Intermediate RDS files are written to scratch space (or <code>/work/temp</code> as a fallback) for faster I/O:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">path.out</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">&quot;TMPDIR&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">                   </span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">&quot;TMPDIR&quot;</span><span class="p">),</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">                   </span><span class="s">&quot;/work/temp&quot;</span><span class="p">)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">path.rds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;RDS&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">path.out</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">"TMPDIR"</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">""</span><span class="p">,</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">                   </span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="s">"TMPDIR"</span><span class="p">),</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">                   </span><span class="s">"/work/temp"</span><span class="p">)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">path.rds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">"RDS"</span><span class="p">)</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nf">dir.create</span><span class="p">(</span><span class="n">path.rds</span><span class="p">,</span><span class="w"> </span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">showWarnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </span></code></pre></div>
 <h4 id="primer-removal-and-filtering">Primer Removal and Filtering</h4>
 <p>The script defines the 27F and 1492R primer sequences used for full-length 16S:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">F27</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;AGRGTTYGATYMTGGCTCAG&quot;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">R1492</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;RGYTACCTTGTTACGACTT&quot;</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">F27</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"AGRGTTYGATYMTGGCTCAG"</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">R1492</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"RGYTACCTTGTTACGACTT"</span>
 </span></code></pre></div>
 <p>Primers are removed with <code>removePrimers()</code>, using the reverse complement of 1492R and allowing for either orientation:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">nops</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">noprimers_dir</span><span class="p">,</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">fns</span><span class="p">))</span>
@@ -1691,7 +1577,7 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">tracking</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">ccs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prim</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">primers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prim</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">                  </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">track</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">                  </span><span class="n">denoised</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sapply</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="o">$</span><span class="n">denoised</span><span class="p">)))</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">tracking</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;read_tracking.csv&quot;</span><span class="p">))</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">tracking</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">path.out</span><span class="p">,</span><span class="w"> </span><span class="s">"read_tracking.csv"</span><span class="p">))</span>
 </span></code></pre></div>
 <h4 id="sequence-table-taxonomy-and-chimera-removal">Sequence Table, Taxonomy, and Chimera Removal</h4>
 <p>The denoised reads are assembled into a sequence table, then taxonomy is assigned using the GreenGenes2 reference with a minimum bootstrap confidence of 50:</p>
@@ -1701,7 +1587,7 @@
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">                      </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">minBoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span>
 </span></code></pre></div>
 <p><em>Escherichia/Shigella</em> assignments are simplified to <em>Escherichia</em>, since the two genera are genomically indistinguishable by 16S:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">tax</span><span class="p">[,</span><span class="s">&quot;Genus&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;Escherichia/Shigella&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Escherichia&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">[,</span><span class="s">&quot;Genus&quot;</span><span class="p">])</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">tax</span><span class="p">[,</span><span class="s">"Genus"</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">"Escherichia/Shigella"</span><span class="p">,</span><span class="w"> </span><span class="s">"Escherichia"</span><span class="p">,</span><span class="w"> </span><span class="n">tax</span><span class="p">[,</span><span class="s">"Genus"</span><span class="p">])</span>
 </span></code></pre></div>
 <p>Chimeric sequences are then identified and removed from both the sequence table and the taxonomy table:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">bim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">isBimeraDenovo</span><span class="p">(</span><span class="n">st</span><span class="p">,</span><span class="w"> </span><span class="n">minFoldParentOverAbundance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">,</span>
@@ -1713,8 +1599,8 @@
 <h4 id="sample-name-extraction">Sample Name Extraction</h4>
 <p>Sample names are extracted from the FASTQ filenames by pulling the biosample identifier from the <code>*.hifi_reads.[BIOSAMPLE].hifi_reads.fastq.gz</code> pattern:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">file.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">basename</span><span class="p">(</span><span class="n">fns</span><span class="p">)</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">sample.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="s">&quot;.*\\.hifi_reads\\.(.*?)\\.hifi_reads\\.fastq\\.gz&quot;</span><span class="p">,</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">                    </span><span class="s">&quot;\\1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">file.names</span><span class="p">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">sample.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="s">".*\\.hifi_reads\\.(.*?)\\.hifi_reads\\.fastq\\.gz"</span><span class="p">,</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">                    </span><span class="s">"\\1"</span><span class="p">,</span><span class="w"> </span><span class="n">file.names</span><span class="p">)</span>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">st_nochim</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample.names</span>
 </span></code></pre></div>
 <h4 id="phyloseq-creation">Phyloseq Creation</h4>
@@ -1939,7 +1825,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -768,23 +667,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -1198,11 +1089,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -1770,8 +1656,8 @@
 <p>With the file open, scroll to the bottom and paste <code>setopt interactivecomments</code>. Save your .zshrc file and comments should now not trigger errors in Terminal.</p>
 </details>
 <p>Now we will walk through <code>Pipeline-to-Phyloseq.Rmd</code>. First, install the <code>foodseq.tools</code> package from GitHub if you do not already have it. This package provides all of the helper functions used throughout the pipeline, including <code>process_qiime_run()</code>, <code>assignment_trnL()</code>, <code>assignment_12S()</code>, <code>qc_controls()</code>, and <code>plot_asv_length_hist()</code>.</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># install.packages(&quot;devtools&quot;)</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;Ashish-Subramanian/foodseq.tools&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># install.packages("devtools")</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">"Ashish-Subramanian/foodseq.tools"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Next, load the necessary packages. If you do not have a package installed, install it first with the function <code>install.packages("[package name]")</code>.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">dada2</span><span class="p">)</span>
@@ -1784,15 +1670,15 @@
 </span></code></pre></div>
 <p>The pipeline also sets up a custom font for all plots. The following chunk loads Source Sans 3 from Google Fonts and applies it as the default <code>ggplot2</code> theme; if the font cannot be loaded, it falls back to the default <code>theme_bw()</code>. You can replace <code>"Source Sans 3"</code> with any Google Font, or delete this chunk entirely to use defaults.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">plot_font</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tryCatch</span><span class="p">({</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nf">font_add_google</span><span class="p">(</span><span class="s">&quot;Source Sans 3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Source Sans 3&quot;</span><span class="p">)</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="s">&quot;Source Sans 3&quot;</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nf">font_add_google</span><span class="p">(</span><span class="s">"Source Sans 3"</span><span class="p">,</span><span class="w"> </span><span class="s">"Source Sans 3"</span><span class="p">)</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="s">"Source Sans 3"</span>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">},</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="nf">tryCatch</span><span class="p">({</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="nf">font_add_google</span><span class="p">(</span><span class="s">&quot;Source Sans Pro&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Source Sans Pro&quot;</span><span class="p">)</span>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="s">&quot;Source Sans Pro&quot;</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="nf">font_add_google</span><span class="p">(</span><span class="s">"Source Sans Pro"</span><span class="p">,</span><span class="w"> </span><span class="s">"Source Sans Pro"</span><span class="p">)</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="s">"Source Sans Pro"</span>
 </span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="nf">message</span><span class="p">(</span><span class="s">&quot;Could not load Source Sans from Google Fonts; using default font.&quot;</span><span class="p">)</span>
-</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">    </span><span class="s">&quot;&quot;</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="nf">message</span><span class="p">(</span><span class="s">"Could not load Source Sans from Google Fonts; using default font."</span><span class="p">)</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">    </span><span class="s">""</span>
 </span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">  </span><span class="p">})</span>
 </span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="p">})</span>
 </span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="nf">showtext_auto</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">)</span>
@@ -1819,29 +1705,29 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Duke</label><label for="__tabbed_3_2">General</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[NetID]&quot;</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;dcc-login.oit.duke.edu&quot;</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results&quot;</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]&quot;</span>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;sample-metadata.csv&quot;</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;minimal&quot;</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[NetID]"</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"dcc-login.oit.duke.edu"</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results"</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]"</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"sample-metadata.csv"</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"minimal"</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[username]&quot;</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[hpc-hostname]&quot;</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[/hpc/path/to/project/YYYYMMDD_results]&quot;</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[/path/to/local/project/folder]&quot;</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;sample-metadata.csv&quot;</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;minimal&quot;</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[username]"</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[hpc-hostname]"</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/hpc/path/to/project/YYYYMMDD_results]"</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/path/to/local/project/folder]"</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"sample-metadata.csv"</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"minimal"</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
 <p>The <code>download_mode</code> variable controls how much data is copied from the cluster. Set it to <code>"minimal"</code> (the default) to download only the files needed for phyloseq creation (<code>4_denoised-table.qza</code>, <code>4_denoised-seqs.qza</code>, and the read-tracking CSV), or <code>"full"</code> to download all pipeline output.</p>
 <p>You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. These references can be downloaded from the <a href="https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/references">LAD-LAB mb-pipeline GitHub repository</a>; place them locally and set the paths here:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">ref_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[/path/to/trnLGH_taxonomy.fasta]&quot;</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">ref_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;[/path/to/12Sv5_taxonomy.fasta]&quot;</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">ref_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/path/to/trnLGH_taxonomy.fasta]"</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">ref_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/path/to/12Sv5_taxonomy.fasta]"</span>
 </span></code></pre></div>
 <p>For instructions on creating these references from scratch, see <a href="references.html">Creating the References</a>.</p>
 <p><code>sample-metadata.csv</code> should be a CSV in your project folder with a column <code>Sample_ID</code> whose entries match the sample names from <code>samplesheet.csv</code> (in the form <code>1-A01</code>); a column <code>type</code> whose values are exactly <code>"sample"</code>, <code>"positive control"</code>, <code>"negative control"</code>, or <code>"blank"</code>; and a column <code>pcr_plate</code> whose value is the plate number from the sequencing run. If you save your metadata with the file name <code>sample-metadata.csv</code>, no changes are needed to the <code>metadata</code> variable.</p>
@@ -1871,50 +1757,50 @@
 <p>The bash chunk copies the pipeline output from the cluster into a temporary staging directory in your home folder, then sorts the run folders by marker (trnL vs. 12Sv5) and moves them into the appropriate subfolders in your project directory. The staging step works around a file-naming conflict that can occur with cloud storage providers like Box; if you are not using cloud storage, it is harmless.</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/tmp_hpc_stage&quot;</span>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>/202*_output<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PROJECT_PATH</span><span class="s2">&quot;</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/tmp_hpc_stage"</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span>/202*_output<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PROJECT_PATH</span><span class="s2">"</span>
 </span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DL_MODE</span><span class="k">:-</span><span class="nv">minimal</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;full&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DL_MODE</span><span class="k">:-</span><span class="nv">minimal</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"full"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 </span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">  </span>rsync<span class="w"> </span>-a<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$USERNAME</span><span class="s2">@</span><span class="nv">$HPC_HOST</span><span class="s2">:</span><span class="nv">$HPC_PATH</span><span class="s2">&quot;</span>/202*_output<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$USERNAME</span><span class="s2">@</span><span class="nv">$HPC_HOST</span><span class="s2">:</span><span class="nv">$HPC_PATH</span><span class="s2">"</span>/202*_output<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="k">else</span>
 </span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">  </span>rsync<span class="w"> </span>-a<span class="w"> </span>--prune-empty-dirs<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">&#39;*/&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">&#39;202*_output/4_denoised-table.qza&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-15"><a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">&#39;202*_output/4_denoised-seqs.qza&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">&#39;202*_output/*track-pipeline*.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="w">    </span>--exclude<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$USERNAME</span><span class="s2">@</span><span class="nv">$HPC_HOST</span><span class="s2">:</span><span class="nv">$HPC_PATH</span><span class="s2">&quot;</span>/<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-26-19"><a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="w">    </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">'*/'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">'202*_output/4_denoised-table.qza'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-15"><a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">'202*_output/4_denoised-seqs.qza'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="w">    </span>--include<span class="o">=</span><span class="s1">'202*_output/*track-pipeline*.csv'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="w">    </span>--exclude<span class="o">=</span><span class="s1">'*'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$USERNAME</span><span class="s2">@</span><span class="nv">$HPC_HOST</span><span class="s2">:</span><span class="nv">$HPC_PATH</span><span class="s2">"</span>/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-19"><a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </span><span id="__span-26-20"><a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a><span class="k">fi</span>
 </span><span id="__span-26-21"><a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a>
-</span><span id="__span-26-22"><a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a><span class="k">for</span><span class="w"> </span>run<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>/202*_output<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-</span><span id="__span-26-23"><a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="w">  </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$run</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
-</span><span id="__span-26-24"><a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a><span class="w">  </span><span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$run</span><span class="s2">&quot;</span><span class="k">)</span>
+</span><span id="__span-26-22"><a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a><span class="k">for</span><span class="w"> </span>run<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span>/202*_output<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-26-23"><a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="w">  </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$run</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+</span><span id="__span-26-24"><a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a><span class="w">  </span><span class="nv">base</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$run</span><span class="s2">"</span><span class="k">)</span>
 </span><span id="__span-26-25"><a id="__codelineno-26-25" name="__codelineno-26-25" href="#__codelineno-26-25"></a>
-</span><span id="__span-26-26"><a id="__codelineno-26-26" name="__codelineno-26-26" href="#__codelineno-26-26"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;_trnL_output$&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-26-27"><a id="__codelineno-26-27" name="__codelineno-26-27" href="#__codelineno-26-27"></a><span class="w">    </span><span class="nv">dest</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PROJECT_PATH</span><span class="s2">/trnL&quot;</span>
-</span><span id="__span-26-28"><a id="__codelineno-26-28" name="__codelineno-26-28" href="#__codelineno-26-28"></a><span class="w">  </span><span class="k">elif</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;_12SV5_output$&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-26-29"><a id="__codelineno-26-29" name="__codelineno-26-29" href="#__codelineno-26-29"></a><span class="w">    </span><span class="nv">dest</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PROJECT_PATH</span><span class="s2">/12S&quot;</span>
+</span><span id="__span-26-26"><a id="__codelineno-26-26" name="__codelineno-26-26" href="#__codelineno-26-26"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$base</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'_trnL_output$'</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-26-27"><a id="__codelineno-26-27" name="__codelineno-26-27" href="#__codelineno-26-27"></a><span class="w">    </span><span class="nv">dest</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PROJECT_PATH</span><span class="s2">/trnL"</span>
+</span><span id="__span-26-28"><a id="__codelineno-26-28" name="__codelineno-26-28" href="#__codelineno-26-28"></a><span class="w">  </span><span class="k">elif</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$base</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'_12SV5_output$'</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-26-29"><a id="__codelineno-26-29" name="__codelineno-26-29" href="#__codelineno-26-29"></a><span class="w">    </span><span class="nv">dest</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PROJECT_PATH</span><span class="s2">/12S"</span>
 </span><span id="__span-26-30"><a id="__codelineno-26-30" name="__codelineno-26-30" href="#__codelineno-26-30"></a><span class="w">  </span><span class="k">else</span>
-</span><span id="__span-26-31"><a id="__codelineno-26-31" name="__codelineno-26-31" href="#__codelineno-26-31"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping unknown run folder: </span><span class="nv">$base</span><span class="s2">&quot;</span>
+</span><span id="__span-26-31"><a id="__codelineno-26-31" name="__codelineno-26-31" href="#__codelineno-26-31"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Skipping unknown run folder: </span><span class="nv">$base</span><span class="s2">"</span>
 </span><span id="__span-26-32"><a id="__codelineno-26-32" name="__codelineno-26-32" href="#__codelineno-26-32"></a><span class="w">    </span><span class="k">continue</span>
 </span><span id="__span-26-33"><a id="__codelineno-26-33" name="__codelineno-26-33" href="#__codelineno-26-33"></a><span class="w">  </span><span class="k">fi</span>
-</span><span id="__span-26-34"><a id="__codelineno-26-34" name="__codelineno-26-34" href="#__codelineno-26-34"></a><span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dest</span><span class="s2">&quot;</span>
+</span><span id="__span-26-34"><a id="__codelineno-26-34" name="__codelineno-26-34" href="#__codelineno-26-34"></a><span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$dest</span><span class="s2">"</span>
 </span><span id="__span-26-35"><a id="__codelineno-26-35" name="__codelineno-26-35" href="#__codelineno-26-35"></a>
-</span><span id="__span-26-36"><a id="__codelineno-26-36" name="__codelineno-26-36" href="#__codelineno-26-36"></a><span class="w">  </span><span class="nv">req1</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$run</span><span class="s2">/4_denoised-table.qza&quot;</span>
-</span><span id="__span-26-37"><a id="__codelineno-26-37" name="__codelineno-26-37" href="#__codelineno-26-37"></a><span class="w">  </span><span class="nv">req2</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$run</span><span class="s2">/4_denoised-seqs.qza&quot;</span>
-</span><span id="__span-26-38"><a id="__codelineno-26-38" name="__codelineno-26-38" href="#__codelineno-26-38"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$req1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$req2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-26-39"><a id="__codelineno-26-39" name="__codelineno-26-39" href="#__codelineno-26-39"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: Missing required QZA(s) in </span><span class="nv">$base</span><span class="s2">; not moving this run.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-26-36"><a id="__codelineno-26-36" name="__codelineno-26-36" href="#__codelineno-26-36"></a><span class="w">  </span><span class="nv">req1</span><span class="o">=</span><span class="s2">"</span><span class="nv">$run</span><span class="s2">/4_denoised-table.qza"</span>
+</span><span id="__span-26-37"><a id="__codelineno-26-37" name="__codelineno-26-37" href="#__codelineno-26-37"></a><span class="w">  </span><span class="nv">req2</span><span class="o">=</span><span class="s2">"</span><span class="nv">$run</span><span class="s2">/4_denoised-seqs.qza"</span>
+</span><span id="__span-26-38"><a id="__codelineno-26-38" name="__codelineno-26-38" href="#__codelineno-26-38"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$req1</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$req2</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-26-39"><a id="__codelineno-26-39" name="__codelineno-26-39" href="#__codelineno-26-39"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"ERROR: Missing required QZA(s) in </span><span class="nv">$base</span><span class="s2">; not moving this run."</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 </span><span id="__span-26-40"><a id="__codelineno-26-40" name="__codelineno-26-40" href="#__codelineno-26-40"></a><span class="w">    </span><span class="k">continue</span>
 </span><span id="__span-26-41"><a id="__codelineno-26-41" name="__codelineno-26-41" href="#__codelineno-26-41"></a><span class="w">  </span><span class="k">fi</span>
 </span><span id="__span-26-42"><a id="__codelineno-26-42" name="__codelineno-26-42" href="#__codelineno-26-42"></a>
-</span><span id="__span-26-43"><a id="__codelineno-26-43" name="__codelineno-26-43" href="#__codelineno-26-43"></a><span class="w">  </span>rsync<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$run</span><span class="s2">&quot;</span>/<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dest</span><span class="s2">&quot;</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</span><span id="__span-26-43"><a id="__codelineno-26-43" name="__codelineno-26-43" href="#__codelineno-26-43"></a><span class="w">  </span>rsync<span class="w"> </span>-a<span class="w"> </span><span class="s2">"</span><span class="nv">$run</span><span class="s2">"</span>/<span class="w"> </span><span class="s2">"</span><span class="nv">$dest</span><span class="s2">"</span>/<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </span><span id="__span-26-44"><a id="__codelineno-26-44" name="__codelineno-26-44" href="#__codelineno-26-44"></a><span class="k">done</span>
 </span><span id="__span-26-45"><a id="__codelineno-26-45" name="__codelineno-26-45" href="#__codelineno-26-45"></a>
-</span><span id="__span-26-46"><a id="__codelineno-26-46" name="__codelineno-26-46" href="#__codelineno-26-46"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span>
+</span><span id="__span-26-46"><a id="__codelineno-26-46" name="__codelineno-26-46" href="#__codelineno-26-46"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$tmp</span><span class="s2">"</span>
 </span></code></pre></div>
 <p>In minimal mode, the script only downloads <code>4_denoised-table.qza</code>, <code>4_denoised-seqs.qza</code>, and the read-tracking CSV for each run — the three files needed for phyloseq creation. It also validates that both QZA files exist before moving a run folder; if either is missing, it skips that run and prints an error.</p>
 <details class="bug">
@@ -1924,16 +1810,16 @@
 </details>
 <h3 id="extracting-read-counts">Extracting Read Counts</h3>
 <p>Next, set the output directories and count the reads at each pipeline step for quality control. The <code>process_qiime_run()</code> function from <code>foodseq.tools</code> reads the tracking CSV, assembles a table of per-sample read counts at each processing step, and generates a line plot showing how reads are retained through the pipeline.</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">qiime.dir.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">project_path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">qiime.dir.12S</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">project_path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;12S&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">qiime.dir.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">project_path</span><span class="p">,</span><span class="w"> </span><span class="s">"trnL"</span><span class="p">)</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">qiime.dir.12S</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">project_path</span><span class="p">,</span><span class="w"> </span><span class="s">"12S"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="n">read_counts_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">process_qiime_run</span><span class="p">(</span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="n">read_counts_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">process_qiime_run</span><span class="p">(</span><span class="s">"trnL"</span><span class="p">)</span>
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">read_counts_trnL</span><span class="o">$</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="p">}</span>
 </span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
 </span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">  </span><span class="n">read_counts_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">process_qiime_run</span><span class="p">(</span><span class="s">&quot;12S&quot;</span><span class="p">)</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">  </span><span class="n">read_counts_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">process_qiime_run</span><span class="p">(</span><span class="s">"12S"</span><span class="p">)</span>
 </span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">read_counts_12S</span><span class="o">$</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -1947,8 +1833,8 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="n">qiime.asvtab.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dada2</span><span class="o">::</span><span class="nf">collapseNoMismatch</span><span class="p">(</span>
 </span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nf">join_table_seqs</span><span class="p">(</span>
-</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;4_denoised-table.qza&#39;</span><span class="p">)),</span>
-</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;4_denoised-seqs.qza&#39;</span><span class="p">))</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">'4_denoised-table.qza'</span><span class="p">)),</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">'4_denoised-seqs.qza'</span><span class="p">))</span>
 </span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="p">)</span>
 </span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">  </span><span class="p">)</span>
 </span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="p">}</span>
@@ -1956,8 +1842,8 @@
 </span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="w">  </span><span class="n">qiime.asvtab.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dada2</span><span class="o">::</span><span class="nf">collapseNoMismatch</span><span class="p">(</span>
 </span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="w">    </span><span class="nf">join_table_seqs</span><span class="p">(</span>
-</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;4_denoised-table.qza&#39;</span><span class="p">)),</span>
-</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;4_denoised-seqs.qza&#39;</span><span class="p">))</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">'4_denoised-table.qza'</span><span class="p">)),</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="w">      </span><span class="nf">read_qza</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">'4_denoised-seqs.qza'</span><span class="p">))</span>
 </span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="w">    </span><span class="p">)</span>
 </span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="w">  </span><span class="p">)</span>
 </span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="p">}</span>
@@ -1965,12 +1851,12 @@
 <h3 id="asv-length-histograms">ASV Length Histograms</h3>
 <p>For quality control, plot a histogram of ASV read lengths with the <code>plot_asv_length_hist()</code> function. The histograms include dashed red lines at the expected length range for the marker, which helps identify any unusually short or long sequences that may warrant further inspection.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="n">length_histograms_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plot_asv_length_hist</span><span class="p">(</span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="n">length_histograms_trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plot_asv_length_hist</span><span class="p">(</span><span class="s">"trnL"</span><span class="p">)</span>
 </span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">length_histograms_trnL</span><span class="o">$</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="p">}</span>
 </span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
 </span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span><span class="n">length_histograms_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plot_asv_length_hist</span><span class="p">(</span><span class="s">&quot;12S&quot;</span><span class="p">)</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span><span class="n">length_histograms_12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plot_asv_length_hist</span><span class="p">(</span><span class="s">"12S"</span><span class="p">)</span>
 </span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">length_histograms_12S</span><span class="o">$</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -2002,7 +1888,7 @@
 </span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">                                   </span><span class="n">taxa_are_rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span>
 </span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">             </span><span class="n">tax_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tax_table</span><span class="p">(</span><span class="n">assignments.trnL</span><span class="p">))</span>
 </span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
-</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="w">  </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;raw-ps-trnL.rds&quot;</span><span class="p">))</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="w">  </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">"raw-ps-trnL.rds"</span><span class="p">))</span>
 </span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="p">}</span>
 </span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>
 </span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -2011,7 +1897,7 @@
 </span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a><span class="w">                                   </span><span class="n">taxa_are_rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span>
 </span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a><span class="w">             </span><span class="n">tax_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tax_table</span><span class="p">(</span><span class="n">assignments.12S</span><span class="p">))</span>
 </span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>
-</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a><span class="w">  </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;raw-ps-12S.rds&quot;</span><span class="p">))</span>
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a><span class="w">  </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">"raw-ps-12S.rds"</span><span class="p">))</span>
 </span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a><span class="p">}</span>
 </span></code></pre></div>
 <details class="bug">
@@ -2028,32 +1914,32 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">file.exists</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="n">samdf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">)</span>
 </span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">  </span><span class="n">required_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Sample_ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pcr_plate&quot;</span><span class="p">)</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">  </span><span class="n">required_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Sample_ID"</span><span class="p">,</span><span class="w"> </span><span class="s">"type"</span><span class="p">,</span><span class="w"> </span><span class="s">"pcr_plate"</span><span class="p">)</span>
 </span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">all</span><span class="p">(</span><span class="n">required_cols</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">samdf</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">&quot;Missing columns: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">setdiff</span><span class="p">(</span><span class="n">required_cols</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">samdf</span><span class="p">)),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">))</span>
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Missing columns: "</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">setdiff</span><span class="p">(</span><span class="n">required_cols</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">samdf</span><span class="p">)),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">", "</span><span class="p">))</span>
 </span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>
 </span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">  </span><span class="n">incorrect_types</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">samdf</span><span class="o">$</span><span class="n">type</span><span class="p">),</span>
-</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="w">                             </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;positive control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;negative control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blank&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">))</span>
+</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="w">                             </span><span class="nf">c</span><span class="p">(</span><span class="s">"positive control"</span><span class="p">,</span><span class="w"> </span><span class="s">"negative control"</span><span class="p">,</span><span class="w"> </span><span class="s">"blank"</span><span class="p">,</span><span class="w"> </span><span class="s">"sample"</span><span class="p">))</span>
 </span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">incorrect_types</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">&quot;Column &#39;type&#39; has disallowed values: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">incorrect_types</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">))</span>
+</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Column 'type' has disallowed values: "</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">incorrect_types</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">", "</span><span class="p">))</span>
 </span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-34-14"><a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a>
-</span><span id="__span-34-15"><a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">  </span><span class="n">incorrect_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samdf</span><span class="o">$</span><span class="n">Sample_ID</span><span class="p">[</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^[0-9]-[A-H][0-9]{2}$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">samdf</span><span class="o">$</span><span class="n">Sample_ID</span><span class="p">)]</span>
+</span><span id="__span-34-15"><a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">  </span><span class="n">incorrect_samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samdf</span><span class="o">$</span><span class="n">Sample_ID</span><span class="p">[</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">"^[0-9]-[A-H][0-9]{2}$"</span><span class="p">,</span><span class="w"> </span><span class="n">samdf</span><span class="o">$</span><span class="n">Sample_ID</span><span class="p">)]</span>
 </span><span id="__span-34-16"><a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">incorrect_samples</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-34-17"><a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">&quot;Column &#39;Sample_ID&#39; has disallowed values: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">incorrect_samples</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">))</span>
+</span><span id="__span-34-17"><a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="w">    </span><span class="nf">stop</span><span class="p">(</span><span class="s">"Column 'Sample_ID' has disallowed values: "</span><span class="p">,</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">incorrect_samples</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">","</span><span class="p">))</span>
 </span><span id="__span-34-18"><a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-34-19"><a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a>
 </span><span id="__span-34-20"><a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a><span class="w">  </span><span class="nf">row.names</span><span class="p">(</span><span class="n">samdf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samdf</span><span class="o">$</span><span class="n">Sample_ID</span>
 </span><span id="__span-34-21"><a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a>
 </span><span id="__span-34-22"><a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a><span class="w">  </span><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-34-23"><a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a><span class="w">    </span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samdf</span>
-</span><span id="__span-34-24"><a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a><span class="w">    </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ps-wMetadata-trnL.rds&quot;</span><span class="p">))</span>
+</span><span id="__span-34-24"><a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a><span class="w">    </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.trnL</span><span class="p">,</span><span class="w"> </span><span class="s">"ps-wMetadata-trnL.rds"</span><span class="p">))</span>
 </span><span id="__span-34-25"><a id="__codelineno-34-25" name="__codelineno-34-25" href="#__codelineno-34-25"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-34-26"><a id="__codelineno-34-26" name="__codelineno-34-26" href="#__codelineno-34-26"></a>
 </span><span id="__span-34-27"><a id="__codelineno-34-27" name="__codelineno-34-27" href="#__codelineno-34-27"></a><span class="w">  </span><span class="kr">if</span><span class="p">(</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-34-28"><a id="__codelineno-34-28" name="__codelineno-34-28" href="#__codelineno-34-28"></a><span class="w">    </span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samdf</span>
-</span><span id="__span-34-29"><a id="__codelineno-34-29" name="__codelineno-34-29" href="#__codelineno-34-29"></a><span class="w">    </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ps-wMetadata-12S.rds&quot;</span><span class="p">))</span>
+</span><span id="__span-34-29"><a id="__codelineno-34-29" name="__codelineno-34-29" href="#__codelineno-34-29"></a><span class="w">    </span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="nf">file.path</span><span class="p">(</span><span class="n">qiime.dir.12S</span><span class="p">,</span><span class="w"> </span><span class="s">"ps-wMetadata-12S.rds"</span><span class="p">))</span>
 </span><span id="__span-34-30"><a id="__codelineno-34-30" name="__codelineno-34-30" href="#__codelineno-34-30"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-34-31"><a id="__codelineno-34-31" name="__codelineno-34-31" href="#__codelineno-34-31"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -2067,13 +1953,13 @@
 <p>The final step runs a set of standard quality control checks using the <code>qc_controls()</code> function. This function examines the controls in your phyloseq (all samples not labelled <code>"sample"</code> in the <code>type</code> column) and generates three types of output: a bar plot of species detected in each control, a plot showing non-control samples where positive control species were detected, and plate maps marking the well locations of controls and any samples with positive control contamination.</p>
 <p>First, set the positive control species for each marker. These should match the species used in your lab's positive controls:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># Update these to match your positive control species:</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">control.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Ilex paraguariensis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Trifolium pratense&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;synthetic trnL ASV&quot;</span><span class="p">)</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="n">control.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Dromaius novaehollandiae&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Correlophus ciliatus&quot;</span><span class="p">,</span>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">                 </span><span class="s">&quot;Rhacodactylus leachianus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;synthetic 12S ASV&quot;</span><span class="p">)</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">control.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Ilex paraguariensis"</span><span class="p">,</span><span class="w"> </span><span class="s">"Trifolium pratense"</span><span class="p">,</span><span class="w"> </span><span class="s">"synthetic trnL ASV"</span><span class="p">)</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="n">control.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Dromaius novaehollandiae"</span><span class="p">,</span><span class="w"> </span><span class="s">"Correlophus ciliatus"</span><span class="p">,</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">                 </span><span class="s">"Rhacodactylus leachianus"</span><span class="p">,</span><span class="w"> </span><span class="s">"synthetic 12S ASV"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Now run the quality control checks. The <code>qc_controls()</code> function requires that the phyloseq has sample metadata attached (i.e., the metadata step above must have completed successfully):</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">errorIfNULL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="n">qc.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qc_controls</span><span class="p">(</span><span class="s">&quot;trnL&quot;</span><span class="p">)</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="n">qc.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qc_controls</span><span class="p">(</span><span class="s">"trnL"</span><span class="p">)</span>
 </span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">qc.trnL</span><span class="o">$</span><span class="n">p.controls</span><span class="p">))</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">qc.trnL</span><span class="o">$</span><span class="n">p.controls</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">qc.trnL</span><span class="o">$</span><span class="n">p.samples</span><span class="p">))</span><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">qc.trnL</span><span class="o">$</span><span class="n">p.samples</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">qc.trnL</span><span class="o">$</span><span class="n">p.plates</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -2084,7 +1970,7 @@
 </span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="p">}</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="nf">sample_data</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">errorIfNULL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="n">qc.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qc_controls</span><span class="p">(</span><span class="s">&quot;12S&quot;</span><span class="p">)</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="n">qc.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qc_controls</span><span class="p">(</span><span class="s">"12S"</span><span class="p">)</span>
 </span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">qc.12S</span><span class="o">$</span><span class="n">p.controls</span><span class="p">))</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">qc.12S</span><span class="o">$</span><span class="n">p.controls</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">qc.12S</span><span class="o">$</span><span class="n">p.samples</span><span class="p">))</span><span class="w">  </span><span class="nf">print</span><span class="p">(</span><span class="n">qc.12S</span><span class="o">$</span><span class="n">p.samples</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">theme_get</span><span class="p">())</span>
 </span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">qc.12S</span><span class="o">$</span><span class="n">p.plates</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -2308,7 +2194,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>

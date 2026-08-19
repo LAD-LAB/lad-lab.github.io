@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -224,97 +226,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="index.html" class="md-tabs__link">
-          
-  
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="wetlab.html" class="md-tabs__link">
-          
-  
-  
-  Wet Lab Protocols
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="pipeline.html" class="md-tabs__link">
-          
-  
-  
-  Creating a Phyloseq
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="processing.html" class="md-tabs__link">
-          
-  
-  
-  Post-Phyloseq Processing and Analysis
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -328,12 +239,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
       
@@ -367,11 +276,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -510,11 +414,6 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -766,11 +665,6 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -939,23 +833,15 @@
     
     
     
-      
-        
-        
-      
-      
-        
-      
     
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -1536,7 +1422,7 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">here</span><span class="p">)</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 </span></code></pre></div>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">humanfoods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;[path/to/human-foods.csv]&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">humanfoods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"[path/to/human-foods.csv]"</span><span class="p">)</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">humanfoods</span>
 </span></code></pre></div>
@@ -1544,13 +1430,13 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">taxref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Biostrings</span><span class="o">::</span><span class="nf">readDNAStringSet</span><span class="p">(</span><span class="s">&quot;/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/Ashish_S/References/dada2-compatible/[path-to-reference]&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">taxref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Biostrings</span><span class="o">::</span><span class="nf">readDNAStringSet</span><span class="p">(</span><span class="s">"/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/Ashish_S/References/dada2-compatible/[path-to-reference]"</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">taxref</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">taxref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Biostrings</span><span class="o">::</span><span class="nf">readDNAStringSet</span><span class="p">(</span><span class="s">&quot;[/path/to/references/dada2-compatible/path-to-reference]&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">taxref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Biostrings</span><span class="o">::</span><span class="nf">readDNAStringSet</span><span class="p">(</span><span class="s">"[/path/to/references/dada2-compatible/path-to-reference]"</span><span class="p">)</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">taxref</span>
 </span></code></pre></div>
@@ -1566,7 +1452,7 @@
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">dim</span><span class="p">(</span><span class="n">humanfoods</span><span class="p">)</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">humanfoods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">humanfoods</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;plant&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'plant'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">,</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="n">common_name</span><span class="p">)</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nf">dim</span><span class="p">(</span><span class="n">humanfoods</span><span class="p">)</span>
@@ -1576,10 +1462,10 @@
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">asv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">taxref</span><span class="p">)</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="c1"># Remove the leading &quot;&gt;&quot; character from headers</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nf">str_remove</span><span class="p">(</span><span class="s">&quot;^&gt;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="c1"># Split headers by &quot;;&quot;</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nf">str_split</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="c1"># Remove the leading "&gt;" character from headers</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nf">str_remove</span><span class="p">(</span><span class="s">"^&gt;"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="c1"># Split headers by ";"</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nf">str_split</span><span class="p">(</span><span class="s">";"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="c1"># Convert to a dataframe</span>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="nf">map_dfr</span><span class="p">(</span><span class="o">~</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">.x</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="c1"># Rename columns for taxonomic ranks</span>
@@ -1597,7 +1483,7 @@
 </span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">  </span><span class="p">)</span>
 </span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
 </span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">taxa_df</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">na_if</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NA&quot;</span><span class="p">)))</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">na_if</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="s">"NA"</span><span class="p">)))</span>
 </span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
 </span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">taxa_df</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span>
@@ -1612,7 +1498,7 @@
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">dim</span><span class="p">(</span><span class="n">humanfoods</span><span class="p">)</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">humanfoods</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">humanfoods</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;animal&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">'animal'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">,</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">            </span><span class="n">common_name</span><span class="p">)</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nf">dim</span><span class="p">(</span><span class="n">humanfoods</span><span class="p">)</span>
@@ -1622,10 +1508,10 @@
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">asv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">taxref</span><span class="p">)</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">headers</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="c1"># Remove the leading &quot;&gt;&quot; character from headers</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nf">str_remove</span><span class="p">(</span><span class="s">&quot;^&gt;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="c1"># Split headers by &quot;;&quot;</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nf">str_split</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="c1"># Remove the leading "&gt;" character from headers</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nf">str_remove</span><span class="p">(</span><span class="s">"^&gt;"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="c1"># Split headers by ";"</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nf">str_split</span><span class="p">(</span><span class="s">";"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="c1"># Convert to a dataframe</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="nf">map_dfr</span><span class="p">(</span><span class="o">~</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">.x</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="c1"># Rename columns for taxonomic ranks</span>
@@ -1641,7 +1527,7 @@
 </span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">  </span><span class="p">)</span>
 </span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>
 </span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">taxa_df</span><span class="w"> </span><span class="o">%&gt;%</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">na_if</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NA&quot;</span><span class="p">)))</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">na_if</span><span class="p">(</span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="s">"NA"</span><span class="p">)))</span>
 </span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>
 </span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="n">taxa_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">taxa_df</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span>
@@ -1664,7 +1550,7 @@
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nf">summarize</span><span class="p">(</span>
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="c1"># Find the most specific common taxonomic classification</span>
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="n">ranks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Species&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Genus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Family&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Order&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Class&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phylum&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kingdom&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1"># Specific to general</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="n">ranks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Species"</span><span class="p">,</span><span class="w"> </span><span class="s">"Genus"</span><span class="p">,</span><span class="w"> </span><span class="s">"Family"</span><span class="p">,</span><span class="w"> </span><span class="s">"Order"</span><span class="p">,</span><span class="w"> </span><span class="s">"Class"</span><span class="p">,</span><span class="w"> </span><span class="s">"Phylum"</span><span class="p">,</span><span class="w"> </span><span class="s">"Kingdom"</span><span class="p">)</span><span class="w">  </span><span class="c1"># Specific to general</span>
 </span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="n">common_rank</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ranks</span><span class="p">[</span><span class="nf">sapply</span><span class="p">(</span><span class="n">ranks</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="c1"># Exclude NA and check if all remaining values are identical</span>
 </span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="n">values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">na.omit</span><span class="p">(</span><span class="nf">cur_data</span><span class="p">()[[</span><span class="n">rank</span><span class="p">]])</span>
@@ -1679,9 +1565,9 @@
 </span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">      </span><span class="p">}</span>
 </span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="p">},</span>
 </span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="c1"># Concatenate scientific names</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;; &quot;</span><span class="p">),</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="n">taxon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">scientific_name</span><span class="p">),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"; "</span><span class="p">),</span>
 </span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">    </span><span class="c1"># Concatenate common names</span>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="n">common_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">na.omit</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">common_name</span><span class="p">)),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;; &quot;</span><span class="p">)</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="n">common_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="nf">na.omit</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">common_name</span><span class="p">)),</span><span class="w"> </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"; "</span><span class="p">)</span>
 </span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
 </span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">  </span><span class="nf">ungroup</span><span class="p">()</span><span class="w">  </span><span class="c1"># Remove grouping</span>
 </span></code></pre></div>
@@ -1697,9 +1583,9 @@
 <a class="md-button" href="files/trnL_common_names.csv">Download trnL common names CSV</a></p>
 </div>
 <p>With a common names CSV ready, we can now use the <code>assign_common_names()</code> function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. After reading it into your analysis file, run:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">source</span><span class="p">(</span><span class="s">&quot;[path/to/assign_common_names.R]&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">source</span><span class="p">(</span><span class="s">"[path/to/assign_common_names.R]"</span><span class="p">)</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">assign_common_names</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[path/to/common_names.csv]&quot;</span><span class="p">)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">assign_common_names</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">"[path/to/common_names.csv]"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>at minimum to assign common names. The inputs of the function are:</p>
 <ul>
@@ -1713,12 +1599,12 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">common_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="nf">read.csv</span><span class="p">(</span><span class="n">common_names_csv</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">genus_key</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NULL</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;genus&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;genus_conventional_name&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">"genus"</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">"genus_conventional_name"</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">common_names</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="c1"># ...</span>
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="n">genus_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">()</span>
 </span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">idx</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">valid_genus</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">genera</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trimws</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">common_names</span><span class="o">$</span><span class="n">genus</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]])</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="n">conv_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trimws</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">common_names</span><span class="o">$</span><span class="n">genus_conventional_name</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;;&quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]])</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">genera</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trimws</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">common_names</span><span class="o">$</span><span class="n">genus</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="w"> </span><span class="s">";"</span><span class="p">)[[</span><span class="m">1</span><span class="p">]])</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="n">conv_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">trimws</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">common_names</span><span class="o">$</span><span class="n">genus_conventional_name</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="w"> </span><span class="s">";"</span><span class="p">)[[</span><span class="m">1</span><span class="p">]])</span>
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">genera</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">conv_names</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -1735,7 +1621,7 @@
 <p>Next, it extracts the taxonomy table and ASV sequences from the phyloseq and initializes <code>common_name</code> and <code>taxa</code> columns:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">tax_tab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">physeq</span><span class="p">))</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;ASV&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="s">"ASV"</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="n">asv_seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tax_tab</span><span class="o">$</span><span class="n">ASV</span>
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="n">asv_seqs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">tax_tab</span><span class="p">)</span>
@@ -1762,11 +1648,11 @@
 </span></code></pre></div>
 <p>When an ASV matches multiple rows — which can happen when a shorter ASV sequence is a substring of multiple longer reference sequences — the function tries three resolution strategies in order. First, it checks whether one matched row's <code>taxon</code> field is a superset of all others:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="n">species_j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;; &quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="n">species_j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="s">"; "</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="n">is_superset_of_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nf">seq_along</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="kr">next</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="n">species_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;; &quot;</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="n">species_k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">strsplit</span><span class="p">(</span><span class="n">matched_taxa</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="s">"; "</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">all</span><span class="p">(</span><span class="n">species_k</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">species_j</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">      </span><span class="n">is_superset_of_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">FALSE</span>
 </span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">      </span><span class="kr">break</span>
@@ -1774,7 +1660,7 @@
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_superset_of_all</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matched_conv_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="n">resolution_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;superset&quot;</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="n">resolution_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"superset"</span>
 </span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="n">resolved</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">TRUE</span>
 </span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">    </span><span class="kr">break</span>
 </span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">  </span><span class="p">}</span>
@@ -1800,11 +1686,11 @@
 <p>Finally, if the conflict is still unresolved and <code>concatenate_conflicts</code> is <code>TRUE</code>, it merges the matched <code>conventional_name</code> values with <code>smart_merge_names()</code>:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">resolved</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">concatenate_conflicts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="n">unique_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unique</span><span class="p">(</span><span class="n">matched_conv_names</span><span class="p">[</span><span class="n">matched_conv_names</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">matched_conv_names</span><span class="p">)])</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="n">unique_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unique</span><span class="p">(</span><span class="n">matched_conv_names</span><span class="p">[</span><span class="n">matched_conv_names</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">matched_conv_names</span><span class="p">)])</span>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">unique_names</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">      </span><span class="n">formatted_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">smart_merge_names</span><span class="p">(</span><span class="n">unique_names</span><span class="p">)</span>
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">      </span><span class="n">tax_tab</span><span class="o">$</span><span class="n">common_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">formatted_name</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">      </span><span class="n">resolution_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;concatenated&quot;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">      </span><span class="n">resolution_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"concatenated"</span>
 </span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">}</span>
@@ -1832,7 +1718,7 @@
 <div class="language-r highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">View</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps</span><span class="p">)))</span>
 </span></code></pre></div>
 <p>The function also prints a summary of all conflicts and their resolution methods to the console. You can access the full conflict report as a dataframe with:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;common_name_conflicts&quot;</span><span class="p">)</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">attr</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="s">"common_name_conflicts"</span><span class="p">)</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nf">View</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The conflict report includes the ASV sequence, the number of matches, the resolution method, the assigned name, and all candidate names and taxa.</p>
@@ -2052,7 +1938,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["header.autohide", "navigation.path", "navigation.top", "navigation.instant", "navigation.footer", "toc.integrate", "content.code.copy", "content.code.select", "search.suggest", "content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
