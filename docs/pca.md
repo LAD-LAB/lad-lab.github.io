@@ -12,44 +12,10 @@ In many datasets, you might have a large number of variables (features). PCA hel
 
     Rewrite this definition or make it clearer.
 
-## CLR Transform
+## Input
 
-Before creating a PCA plot, you must perform a centered log-ratio (clr) transform and filter out `NA`s at the highest level (i.e. superkingdom). To perform the clr transform, feed in an *unfiltered* phyloseq, just as for calculating relative abundances, and run the following:
+Before creating a PCA plot, you must have a CLR-transformed, foods-only phyloseq — see [Relative Abundance and CLR Transform](abundance.md#clr-transform) for how to compute `ps.filt.clr`. That object is what feeds into `pcaPlot()` below.
 
-``` r
-ps.clr <- ps %>%
-  prune_samples(sample_sums(.) > 0, .) %>% # Remove samples that do not have any food reads, will mess up PCA plot
-  microbiome::transform(transform = "compositional") %>%
-  microbiome::transform(transform = "clr")
-```
-
-Before filtering out `NA`s, you may find it useful to create a table of ASVs that don't have assigned taxa in order to BLAST them later. You can optionally do this with:
-
-``` r
-tax_table_df <- as.data.frame(tax_table(ps.clr))
-na_asvs <- tax_table_df[is.na(tax_table_df$superkingdom), ]
-```
-
-Otherwise, continue to the filtering step and remove `NA`s:
-
-``` r
-ps.filtered <- ps.clr %>%
-  subset_taxa(!is.na(superkingdom))
-```
-
-This transformed, filtered phyloseq object can now be used to plot a PCA!
-
-??? question "Why do we need to perform a clr transform?"
-
-    In short, a clr transform removes the constant-sum constraint of compositional data representing relative abundances (i.e. that all components sum to 1, or 100%) and linearizes relationships while preserving relative information. This allows for plotting the PCA using Euclidean distances, equivalent to computing Aitchison distance on the original compositional data.
-
-    The function for the clr transform is:
-
-    $$
-    \text{clr}(x) = \left[\log \frac{x_1}{g(x)},\ldots, \log \frac{x_D}{g(x)}\right]
-    $$
-    
-    where $g(x)$ is the geometric mean of $x$.
 
 ## `pcaPlot()` Function
 
@@ -272,7 +238,7 @@ The PCA plot `pca.biplot` and its interpretation will be covered in the next sec
 Below is an example of a PCA plot for us to interpret. It was created with the following line of code:
 
 ``` r
-pcaPlot(ps.filtered, "age", "Age", 10, c("red", "blue", "green"), ellipse = TRUE)
+pcaPlot(ps.filt.clr, "age", "Age", 10, c("red", "blue", "green"), ellipse = TRUE)
 ```
 
 <figure markdown="span">
