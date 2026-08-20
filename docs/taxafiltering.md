@@ -1,42 +1,46 @@
 # Filtering Taxa
 
-After reviewing unassigned ASVs, the next step is to remove taxa that should not be included in downstream analysis. This typically includes unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded.
+After [agglomerating taxa](glomming.md), the next step is to remove taxa that should not be included in downstream analysis — unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded. This is handled by two functions, `filter_trnL_taxa()` and `filter_12S_taxa()`, which replace the individual `subset_taxa()`/`prune_taxa()` calls previously used for these steps. Cohort-specific removals are still done manually with `subset_taxa()`, after calling the appropriate function.
 
-These filtering steps are performed with `phyloseq::subset_taxa()` and `phyloseq::prune_taxa()`.
+## `filter_trnL_taxa()` and `filter_12S_taxa()` Functions
 
-## Removing Unassigned (NA) Taxa
+<div class="download-buttons" markdown>
+[Download filter_trnL_taxa.R](files/filter_trnL_taxa.R){ .md-button }
+[Download filter_12S_taxa.R](files/filter_12S_taxa.R){ .md-button }
+</div>
 
-As described on the [reviewing page](reviewing.md), the definition of an unassigned ASV differs by marker:
+Both functions compute a `lowest_level` column (the most specific non-`NA` taxonomic rank per ASV) and remove unassigned and named control ASVs. `filter_12S_taxa()` additionally removes *Homo sapiens* reads. Neither function agglomerates — that happens earlier, in [Agglomerating Taxa](glomming.md).
+
+!!! to-do
+
+    `filter_12S_taxa()` currently still performs an internal `tax_glom()` step and always recomputes `lowest_level`, even if the column already exists from the [Agglomerating Taxa](glomming.md) step. Both will be corrected in an upcoming revision — agglomeration will happen only in the Agglomerating Taxa step, and `lowest_level` will be reused if already present. The downloadable script above has not yet been updated to reflect this.
+
+After reading the appropriate function into your analysis file, run:
 
 === "trnL"
 
-    For trnL, an unassigned ASV has NA at all taxonomic ranks. To remove these:
-
     ``` r
-    ps.trnL <- subset_taxa(ps.trnL, !is.na(superkingdom))
+    ps.trnL <- filter_trnL_taxa(ps.trnL)
     ```
 
 === "12Sv5"
 
-    For 12Sv5, an unassigned ASV has NA at both order and family. To remove these:
-
     ``` r
-    ps.12S <- subset_taxa(ps.12S, !(is.na(order) & is.na(family)))
+    ps.12S <- filter_12S_taxa(ps.12S)
     ```
 
-    Note that this retains ASVs that have an assignment at order or family (or both), even if lower ranks like genus or species are NA.
+Both functions preserve any tax-table columns not used for filtering (e.g. `taxa`/`common_name` from [`assign_common_names()`](commonnames.md#assign_common_names-function)) — these are set aside during filtering and reattached at the end for whichever ASVs survive, so run [Assigning Common Names](commonnames.md) first if you want those columns carried through.
 
-## Removing Human Reads
+Key inputs:
 
-Human DNA is commonly detected in 12Sv5 sequencing of stool samples. These reads should be removed before analysis, as they reflect the host rather than dietary intake.
+* `controls` (optional) — exact `species` values to treat as synthetic control ASVs and remove; defaults to `"synthetic trnL ASV"` / `"synthetic 12S ASV"`. Set to `NULL` to skip control removal, or pass your own value if your control species differs from the default.
+* `tax_cols` / `tax_coal` (optional) — which tax-table columns to use for filtering, and respectively to coalesce into `lowest_level`; default to trnL's/12Sv5's own rank sets.
+* `export_NA_ASVs` (optional) — a file path to write a CSV of removed unassigned ASVs (with prevalence and read counts) to, for later review.
+* `filter_12S_taxa()` also takes `export_human_ASVs` (a file path to write removed *Homo sapiens* ASVs to) and `calculate_human_reads_perc` (whether to report the percentage of reads from *Homo sapiens* before filtering; default `TRUE`).
 
-``` r
-ps.12S <- subset_taxa(ps.12S, species != "Homo sapiens" | is.na(species))
-```
+## Manual Review for Ambiguous Human-Matching ASVs (12Sv5)
 
-The `| is.na(species)` clause ensures that ASVs without a species-level assignment are not accidentally removed.
-
-In some cases, certain ASVs may BLAST to human but not be assigned as *Homo sapiens* by the classifier — for example, ASVs that are ambiguous between human and a closely related species. If you have identified such ASVs manually (e.g., through the [BLAST review process](reviewing.md#blasting-unassigned-asvs)), you can remove them by sequence:
+`filter_12S_taxa()`'s `controls` argument only matches ASVs assigned exactly to *Homo sapiens* or to a named control species. Some ASVs may BLAST to human without being classified that way — for example, ASVs ambiguous between human and a closely related species. If you have identified such ASVs manually (e.g., through the [BLAST review process](reviewing.md#blasting-unassigned-asvs)), remove them by sequence after calling `filter_12S_taxa()`:
 
 ``` r
 # Remove specific ASVs identified as human through manual review:
@@ -44,17 +48,13 @@ manual_human_asvs <- c("ACGT...", "TGCA...")
 ps.12S <- prune_taxa(!taxa_names(ps.12S) %in% manual_human_asvs, ps.12S)
 ```
 
-## Removing Synthetic Control ASVs
+!!! note "Synthetic controls with a different name"
 
-If your sequencing run included synthetic positive control sequences (e.g., synthetic trnL or 12S ASVs), these should be removed before analysis:
-
-``` r
-ps <- subset_taxa(ps, !grepl("synthetic", species, ignore.case = TRUE) | is.na(species))
-```
+    If your sequencing run's synthetic control ASV isn't named exactly `"synthetic trnL ASV"` or `"synthetic 12S ASV"`, pass the actual value via `controls = "[your control's species name]"`, or filter it out manually with `subset_taxa()`.
 
 ## Cohort-Specific Removals
 
-Some studies may require removing additional taxa based on the study design. Common examples include:
+Some studies may require removing additional taxa based on the study design, after calling `filter_trnL_taxa()`/`filter_12S_taxa()`. Common examples include:
 
 * **Environmental contamination** — for trnL, taxa like grasses or trees that reflect environmental DNA rather than dietary intake.
 * **Known contaminants** — taxa identified during [quality control](pipeline.md#quality-control) as likely cross-contamination from positive controls or other samples.
