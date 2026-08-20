@@ -15,7 +15,6 @@ nav:
   - Sequencing: sequencing.md
 - Creating a Phyloseq:
   - Creating a Phyloseq (trnL and 12Sv5): pipeline.md
-  - Creating a Phyloseq (16S): 16s.md
   - Creating the References: references.md
   - Creating the SQL File: sql.md
 - Post-Phyloseq Processing and Analysis:
