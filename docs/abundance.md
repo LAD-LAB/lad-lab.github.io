@@ -9,7 +9,7 @@ Relative abundance expresses each ASV's read count as a proportion of the total 
 Feed in an *_unfiltered_* phyloseq, as opposed to the filtered phyloseq object used for calculating diversity and CLR transformation:
 
 ``` r
-ps.ra <- transform_sample_counts(ps, function(x) x / sum(x))
+ps.ra <- phyloseq::transform_sample_counts(ps, function(x) x / sum(x))
 ```
 
 ## CLR Transform
