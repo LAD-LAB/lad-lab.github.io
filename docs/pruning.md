@@ -1,6 +1,6 @@
 # Pruning Taxa
 
-After filtering samples, some taxa may have zero total reads across the remaining samples — for example, a taxon that was only present in a control sample you just removed, or one that was only detected in samples excluded for low read counts. These zero-read taxa should be pruned from the phyloseq before proceeding to agglomeration and diversity calculations, as they can interfere with downstream analyses.
+After filtering samples, some taxa may have zero total reads across the remaining samples — for example, a taxon that was only present in a control sample you just removed, or one that was only detected in samples excluded for low read counts. These zero-read taxa should be pruned from the phyloseq before proceeding to diversity calculations, as they can interfere with downstream analyses.
 
 ``` r
 ps.trnL <- prune_taxa(taxa_sums(ps.trnL) > 0, ps.trnL)

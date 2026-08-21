@@ -33,7 +33,7 @@ A phyloseq is an R data structure from the `phyloseq` package that bundles toget
 * `tax_table`: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to subspecies)
 * `sam_data`: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)
 
-The phyloseq is the central data object throughout the analysis pipeline. After [creating a phyloseq](pipeline.md) from raw sequencing data, the [post-phyloseq processing workflow](processing.md) walks through assigning common names, filtering, agglomerating, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).
+The phyloseq is the central data object throughout the analysis pipeline. After [creating a phyloseq](pipeline.md) from raw sequencing data, the [post-phyloseq processing workflow](processing.md) walks through assigning common names, agglomerating, filtering, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).
 
 ??? question "Why use phyloseq objects instead of separate tables?"
 
@@ -45,7 +45,7 @@ The downstream analysis pages cover several statistical techniques in detail; br
 
 ### Alpha Diversity
 
-Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on relative abundance data; see [Calculating Diversity](diversity.md) for instructions.
+Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on count data, before any relative abundance or CLR transform; see [Calculating Diversity](diversity.md) for instructions.
 
 ### Relative Abundance
 

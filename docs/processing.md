@@ -11,7 +11,7 @@ graph TD
     D -->|Step 4: Filter samples — controls and other exclusions| E[Sample-Filtered Phyloseq]
     E -->|Step 5: Prune taxa at 0 reads after sample filtering| F[Pruned Phyloseq]
     F -->|Step 6a: Calculate diversity metrics| G[Phyloseq + Diversity Metrics]
-    F -->|Step 6b: Calculate relative abundance| H[Relative Abundance Phyloseq]
-    F -->|Step 6c: CLR transform| I[CLR-Transformed Phyloseq]
+    G -->|Step 6b: Calculate relative abundance — foods only| H[Relative Abundance Phyloseq]
+    H -->|Step 6c: CLR transform| I[CLR-Transformed Phyloseq]
     I -->|Step 7: Create PCA biplot| J[PCA Biplot]
 ```

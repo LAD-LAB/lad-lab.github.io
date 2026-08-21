@@ -1,6 +1,6 @@
 # Calculating Diversity
 
-This page will instruct you in the calculation of various common diversity metrics `[what are they used for? what do they tell us?]`. These steps are intended to precede the [calculation of relative abundance](http://lad-lab.github.io/abundance.html).
+This page will instruct you in the calculation of various common diversity metrics that help us compare the complexity of different dietary profiles. These steps are intended to precede the [calculation of relative abundance](http://lad-lab.github.io/abundance.html).
 
 ## Alpha Diversity
 
@@ -28,26 +28,35 @@ This code creates a dataframe with a column `barcode_well` with the name of each
 === "If `barcode_well` exists"
 
     ``` r
-    sample_data(ps.filtered) <- sample_data(ps.filtered) %>%
+    joined <- sample_data(ps.filtered) %>%
         data.frame() %>%
         left_join(alphadiv, by = "barcode_well")
+
+    rownames(joined) <- sample_names(ps.filtered)  # left_join drops rownames
+    sample_data(ps.filtered) <- joined
     ```
 
 === "If `barcode_well` does not exist"
 
     ``` r
-    sample_data(ps.filtered) <- sample_data(ps.filtered) %>%
+    joined <- sample_data(ps.filtered) %>%
         data.frame() %>%
         tibble::rownames_to_column("barcode_well") %>%  # Create barcode_well column
         left_join(alphadiv, by = "barcode_well")
+
+    rownames(joined) <- sample_names(ps.filtered)  # left_join drops rownames
+    sample_data(ps.filtered) <- joined
     ```
 
 === "If `barcode_well` exists under a different name"
 
     ``` r
-    sample_data(ps.filtered) <- sample_data(ps.filtered) %>%
+    joined <- sample_data(ps.filtered) %>%
         data.frame() %>%
         left_join(alphadiv, by = c("[different name]" = "barcode_well")) # Replace [different name] with the matching column's name
+
+    rownames(joined) <- sample_names(ps.filtered)  # left_join drops rownames
+    sample_data(ps.filtered) <- joined
     ```
 
 Now that you have a phyloseq object with alpha diversity metrics added to your sample metadata, you can continue with further analyses to analyze the differences in diversity between different samples or groups or continue with calculating relative abundance.
