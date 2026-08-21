@@ -1388,7 +1388,7 @@
 <li><code>tax_table</code>: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to subspecies)</li>
 <li><code>sam_data</code>: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)</li>
 </ul>
-<p>The phyloseq is the central data object throughout the analysis pipeline. After <a href="pipeline.html">creating a phyloseq</a> from raw sequencing data, the <a href="processing.html">post-phyloseq processing workflow</a> walks through assigning common names, filtering, agglomerating, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).</p>
+<p>The phyloseq is the central data object throughout the analysis pipeline. After <a href="pipeline.html">creating a phyloseq</a> from raw sequencing data, the <a href="processing.html">post-phyloseq processing workflow</a> walks through assigning common names, agglomerating, filtering, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).</p>
 <details class="question">
 <summary>Why use phyloseq objects instead of separate tables?</summary>
 <p>Keeping the ASV table, taxonomy, and sample metadata in a single object makes it straightforward to subset and transform the data without worrying about keeping the tables aligned. For example, <code>subset_samples(ps, type == "sample")</code> removes control samples from the ASV table and metadata simultaneously. The <code>phyloseq</code> package also provides built-in functions for common operations like <code>estimate_richness()</code>, <code>tax_glom()</code>, and <code>transform_sample_counts()</code>.</p>
@@ -1396,7 +1396,7 @@
 <h2 id="common-statistical-and-data-visualization-techniques">Common Statistical and Data Visualization Techniques</h2>
 <p>The downstream analysis pages cover several statistical techniques in detail; brief descriptions are provided here for reference.</p>
 <h3 id="alpha-diversity">Alpha Diversity</h3>
-<p>Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on relative abundance data; see <a href="diversity.html">Calculating Diversity</a> for instructions.</p>
+<p>Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on count data, before any relative abundance or CLR transform; see <a href="diversity.html">Calculating Diversity</a> for instructions.</p>
 <h3 id="relative-abundance">Relative Abundance</h3>
 <p>Relative abundance expresses each ASV's count as a proportion of the total reads in that sample, so that all proportions sum to 1. This normalization accounts for differences in sequencing depth across samples and is used for calculating Shannon diversity and for stacked bar plots. See <a href="abundance.html">Relative Abundance and CLR Transform</a> for instructions.</p>
 <h3 id="centered-log-ratio-clr-transform">Centered Log-Ratio (CLR) Transform</h3>
@@ -1443,7 +1443,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 16:02:27 UTC">June 2, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 21, 2026 17:36:22 UTC">August 21, 2026</span>
   </span>
 
     
@@ -1463,12 +1463,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>
+        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>
     </nav>
   </span>
 

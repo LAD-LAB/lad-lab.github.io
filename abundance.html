@@ -1284,13 +1284,13 @@
 <p>This page will instruct you in the calculation of relative abundance and the centered log-ratio (CLR) transform, and provide background on the purpose and interpretation of each. These steps are intended to follow the <a href="diversity.html">calculation of diversity</a> and precede the <a href="pca.html">creation of a PCA plot</a>.</p>
 <h2 id="calculating-relative-abundance">Calculating Relative Abundance</h2>
 <p>Relative abundance expresses each ASV's read count as a proportion of the total reads in its sample, rather than as a raw count — this makes samples with different sequencing depths comparable. </p>
-<p>Feed in an <em><em>unfiltered</em></em> phyloseq, as opposed to the filtered phyloseq object used for calculating diversity and CLR transformation:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.ra</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">transform_sample_counts</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<p>Feed in your <em><em>filtered</em></em> phyloseq, so that each proportion is calculated over food reads only:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.ra</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbiome</span><span class="o">::</span><span class="nf">transform</span><span class="p">(</span><span class="n">ps.filt</span><span class="p">,</span><span class="w"> </span><span class="s">'compositional'</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="clr-transform">CLR Transform</h2>
-<p>A center log-ratio (CLR) transformation removes the constant-sum constraint of compositional data representating relative abundances (i.e., that all components sum to 1, or 100%) and linearizes relationships while preserving relative information. This allows for plotting the PCA using Euclidean distances, equivalent to computing Aitchison distance on the original compositional data. </p>
-<p>Feed in a <em><em>filtered</em></em> phyloseq, as opposed to the unfiltered phyloseq object used for calculating relative abundance: </p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.filt.clr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbiome</span><span class="o">::</span><span class="nf">transform</span><span class="p">(</span><span class="n">ps.filt</span><span class="p">,</span><span class="w"> </span><span class="s">'clr'</span><span class="p">)</span><span class="w"> </span>
+<p>A center log-ratio (CLR) transformation removes the constant-sum constraint of compositional data representing relative abundances (i.e., that all components sum to 1, or 100%) and linearizes relationships while preserving relative information. This allows for plotting the PCA using Euclidean distances, equivalent to computing Aitchison distance on the original compositional data. </p>
+<p>Feed in the relative abundance phyloseq from the previous step: </p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.filt.clr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbiome</span><span class="o">::</span><span class="nf">transform</span><span class="p">(</span><span class="n">ps.ra</span><span class="p">,</span><span class="w"> </span><span class="s">'clr'</span><span class="p">)</span><span class="w"> </span>
 </span></code></pre></div>
 
 
@@ -1314,7 +1314,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 20, 2026 20:24:07 UTC">August 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 21, 2026 17:36:22 UTC">August 21, 2026</span>
   </span>
 
     
@@ -1340,6 +1340,7 @@
     <nav>
       
         <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>, 
         <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
