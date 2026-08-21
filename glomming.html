@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="pruning.html">
+        <link rel="prev" href="commonnames.html">
       
       
-        <link rel="next" href="diversity.html">
+        <link rel="next" href="reviewing.html">
       
       
         
@@ -877,6 +877,34 @@
   
   
     <li class="md-nav__item">
+      <a href="merging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merging Phyloseqs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="commonnames.html" class="md-nav__link">
         
   
@@ -893,6 +921,131 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agglomerating Taxa
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="glomming.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agglomerating Taxa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#12sv5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12Sv5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trnl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        trnL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="trnL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan_harmonization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plan_harmonization()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply_asv_corrections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_asv_corrections()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1014,44 +1167,6 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="glomming.html" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Agglomerating Taxa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
@@ -1139,34 +1254,6 @@
   
   
     <li class="md-nav__item">
-      <a href="merging.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Merging Phyloseqs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="anonymizer.html" class="md-nav__link">
         
   
@@ -1222,10 +1309,36 @@
 
 
 <h1 id="agglomerating-taxa">Agglomerating Taxa</h1>
+<p>Agglomeration groups ASVs that represent the same organism — whether because they were sequenced at slightly different lengths, assigned at different taxonomic resolutions, or are simply redundant with one another — into a single representative taxon. This step happens right after <a href="commonnames.html">assigning common names</a> and before <a href="taxafiltering.html">filtering taxa</a>. The approach differs by marker.</p>
 <div class="admonition to-do">
 <p class="admonition-title">To-do</p>
-<p>Add instructions on taxa agglomeration. This step differs for trnL and 12Sv5 and may require manual work depending on the cohort.</p>
 </div>
+<p>make trnL and 12Sv5 tabs to match the handbook convention</p>
+<h2 id="12sv5">12Sv5</h2>
+<p>12Sv5 agglomeration is a straightforward <code>tax_glom()</code> by a <code>lowest_level</code> column — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV. Compute <code>lowest_level</code> by coalescing ranks from most to least specific, then agglomerate:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nf">data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">lowest_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">coalesce</span><span class="p">(</span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">genus</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">phylum</span><span class="p">,</span><span class="w"> </span><span class="n">kingdom</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nf">tax_table</span><span class="p">()</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_glom</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">taxrank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lowest_level"</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="trnl">trnL</h2>
+<div class="admonition to-do">
+<p class="admonition-title">To-do</p>
+</div>
+<p><code>plan_harmonization()</code> and <code>apply_asv_corrections()</code> are still under active development. This section is a first-pass draft covering how to use them; the description below will need to be revised as the functions are finalized.</p>
+<p>trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: <code>plan_harmonization()</code> and <code>apply_asv_corrections()</code>.</p>
+<h3 id="plan_harmonization"><code>plan_harmonization()</code></h3>
+<p><code>plan_harmonization()</code> compares ASVs pairwise — by sequence (is one a substring of another?) and by taxonomy (do their assigned species sets match, overlap, or conflict?) — and classifies each pair. Clear-cut cases (a substring pair with an identical species set) are queued for automatic merging, keeping the shorter ASV; everything else (differing resolutions, overlapping or conflicting taxonomy, missing taxonomy) is flagged for you to review. </p>
+<p>Flagged pairs can be reviewed interactively with a Shiny gadget in the RStudio Viewer pane showing each pair side by side and letting you choose to merge, keep both distinct, or rename. This requires the <code>shiny</code>, <code>miniUI</code>, and <code>DT</code> packages to be installed.</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">plan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="apply_asv_corrections"><code>apply_asv_corrections()</code></h3>
+<p>Once decisions are made, <code>apply_asv_corrections()</code> applies them: it physically merges ASVs (transferring read counts and pruning discarded ASVs, including through multi-hop merge chains) and applies any chosen names.</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_asv_corrections</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">ps</span>
+</span></code></pre></div>
 
 
 
@@ -1248,7 +1361,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 14, 2026 16:06:40 UTC">May 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 20, 2026 20:11:49 UTC">August 20, 2026</span>
   </span>
 
     
@@ -1268,12 +1381,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>
+        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
 
@@ -1362,7 +1476,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="pruning.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pruning Taxa">
+          <a href="commonnames.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Assigning Common Names">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1372,20 +1486,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Pruning Taxa
+                Assigning Common Names
               </div>
             </div>
           </a>
         
         
           
-          <a href="diversity.html" class="md-footer__link md-footer__link--next" aria-label="Next: Calculating Diversity">
+          <a href="reviewing.html" class="md-footer__link md-footer__link--next" aria-label="Next: Reviewing Unassigned Taxa">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Calculating Diversity
+                Reviewing Unassigned Taxa
               </div>
             </div>
             <div class="md-footer__button md-icon">

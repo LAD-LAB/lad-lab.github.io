@@ -877,6 +877,34 @@
   
   
     <li class="md-nav__item">
+      <a href="merging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merging Phyloseqs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="commonnames.html" class="md-nav__link">
         
   
@@ -885,6 +913,34 @@
     
   
     Assigning Common Names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glomming.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agglomerating Taxa
   
 
     
@@ -993,10 +1049,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#removing-unassigned-na-taxa" class="md-nav__link">
+  <a href="#filter_trnl_taxa-and-filter_12s_taxa-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Removing Unassigned (NA) Taxa
+        filter_trnL_taxa() and filter_12S_taxa() Functions
       
     </span>
   </a>
@@ -1004,21 +1060,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#removing-human-reads" class="md-nav__link">
+  <a href="#manual-review-for-ambiguous-human-matching-asvs-12sv5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Removing Human Reads
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#removing-synthetic-control-asvs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Removing Synthetic Control ASVs
+        Manual Review for Ambiguous Human-Matching ASVs (12Sv5)
       
     </span>
   </a>
@@ -1088,34 +1133,6 @@
     
   
     Pruning Taxa
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="glomming.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Agglomerating Taxa
   
 
     
@@ -1220,34 +1237,6 @@
   
   
     <li class="md-nav__item">
-      <a href="merging.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Merging Phyloseqs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="anonymizer.html" class="md-nav__link">
         
   
@@ -1303,53 +1292,62 @@
 
 
 <h1 id="filtering-taxa">Filtering Taxa</h1>
-<p>After reviewing unassigned ASVs, the next step is to remove taxa that should not be included in downstream analysis. This typically includes unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded.</p>
-<p>These filtering steps are performed with <code>phyloseq::subset_taxa()</code> and <code>phyloseq::prune_taxa()</code>.</p>
-<h2 id="removing-unassigned-na-taxa">Removing Unassigned (NA) Taxa</h2>
-<p>As described on the <a href="reviewing.html">reviewing page</a>, the definition of an unassigned ASV differs by marker:</p>
+<p>After <a href="glomming.html">agglomerating taxa</a>, the next step is to remove taxa that should not be included in downstream analysis — unassigned (NA) taxa, human reads (for 12Sv5), synthetic control ASVs, and any cohort-specific taxa that need to be excluded. This is handled by two functions, <code>filter_trnL_taxa()</code> and <code>filter_12S_taxa()</code>, which replace the individual <code>subset_taxa()</code>/<code>prune_taxa()</code> calls previously used for these steps. Cohort-specific removals are still done manually with <code>subset_taxa()</code>, after calling the appropriate function.</p>
+<h2 id="filter_trnl_taxa-and-filter_12s_taxa-functions"><code>filter_trnL_taxa()</code> and <code>filter_12S_taxa()</code> Functions</h2>
+<div class="download-buttons">
+<p><a class="md-button" href="files/filter_trnL_taxa.R">Download filter_trnL_taxa.R</a>
+<a class="md-button" href="files/filter_12S_taxa.R">Download filter_12S_taxa.R</a></p>
+</div>
+<p>Both functions compute a <code>lowest_level</code> column (the most specific non-<code>NA</code> taxonomic rank per ASV) and remove unassigned and named control ASVs. <code>filter_12S_taxa()</code> additionally removes <em>Homo sapiens</em> reads. Neither function agglomerates — that happens earlier, in <a href="glomming.html">Agglomerating Taxa</a>.</p>
+<div class="admonition to-do">
+<p class="admonition-title">To-do</p>
+<p><code>filter_12S_taxa()</code> currently still performs an internal <code>tax_glom()</code> step and always recomputes <code>lowest_level</code>, even if the column already exists from the <a href="glomming.html">Agglomerating Taxa</a> step. Both will be corrected in an upcoming revision — agglomeration will happen only in the Agglomerating Taxa step, and <code>lowest_level</code> will be reused if already present. The downloadable script above has not yet been updated to reflect this.</p>
+</div>
+<p>After reading the appropriate function into your analysis file, run:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>For trnL, an unassigned ASV has NA at all taxonomic ranks. To remove these:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">superkingdom</span><span class="p">))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter_trnL_taxa</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>For 12Sv5, an unassigned ASV has NA at both order and family. To remove these:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">family</span><span class="p">)))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter_12S_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Note that this retains ASVs that have an assignment at order or family (or both), even if lower ranks like genus or species are NA.</p>
 </div>
 </div>
 </div>
-<h2 id="removing-human-reads">Removing Human Reads</h2>
-<p>Human DNA is commonly detected in 12Sv5 sequencing of stool samples. These reads should be removed before analysis, as they reflect the host rather than dietary intake.</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"Homo sapiens"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+<p>Both functions preserve any tax-table columns not used for filtering (e.g. <code>taxa</code>/<code>common_name</code> from <a href="commonnames.html#assign_common_names-function"><code>assign_common_names()</code></a>) — these are set aside during filtering and reattached at the end for whichever ASVs survive, so run <a href="commonnames.html">Assigning Common Names</a> first if you want those columns carried through.</p>
+<p>Key inputs:</p>
+<ul>
+<li><code>controls</code> (optional) — exact <code>species</code> values to treat as synthetic control ASVs and remove; defaults to <code>"synthetic trnL ASV"</code> / <code>"synthetic 12S ASV"</code>. Set to <code>NULL</code> to skip control removal, or pass your own value if your control species differs from the default.</li>
+<li><code>tax_cols</code> / <code>tax_coal</code> (optional) — which tax-table columns to use for filtering, and respectively to coalesce into <code>lowest_level</code>; default to trnL's/12Sv5's own rank sets.</li>
+<li><code>export_NA_ASVs</code> (optional) — a file path to write a CSV of removed unassigned ASVs (with prevalence and read counts) to, for later review.</li>
+<li><code>filter_12S_taxa()</code> also takes <code>export_human_ASVs</code> (a file path to write removed <em>Homo sapiens</em> ASVs to) and <code>calculate_human_reads_perc</code> (whether to report the percentage of reads from <em>Homo sapiens</em> before filtering; default <code>TRUE</code>).</li>
+</ul>
+<h2 id="manual-review-for-ambiguous-human-matching-asvs-12sv5">Manual Review for Ambiguous Human-Matching ASVs (12Sv5)</h2>
+<p><code>filter_12S_taxa()</code>'s <code>controls</code> argument only matches ASVs assigned exactly to <em>Homo sapiens</em> or to a named control species. Some ASVs may BLAST to human without being classified that way — for example, ASVs ambiguous between human and a closely related species. If you have identified such ASVs manually (e.g., through the <a href="reviewing.html#blasting-unassigned-asvs">BLAST review process</a>), remove them by sequence after calling <code>filter_12S_taxa()</code>:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Remove specific ASVs identified as human through manual review:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">manual_human_asvs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"ACGT..."</span><span class="p">,</span><span class="w"> </span><span class="s">"TGCA..."</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prune_taxa</span><span class="p">(</span><span class="o">!</span><span class="nf">taxa_names</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">manual_human_asvs</span><span class="p">,</span><span class="w"> </span><span class="n">ps.12S</span><span class="p">)</span>
 </span></code></pre></div>
-<p>The <code>| is.na(species)</code> clause ensures that ASVs without a species-level assignment are not accidentally removed.</p>
-<p>In some cases, certain ASVs may BLAST to human but not be assigned as <em>Homo sapiens</em> by the classifier — for example, ASVs that are ambiguous between human and a closely related species. If you have identified such ASVs manually (e.g., through the <a href="reviewing.html#blasting-unassigned-asvs">BLAST review process</a>), you can remove them by sequence:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Remove specific ASVs identified as human through manual review:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">manual_human_asvs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"ACGT..."</span><span class="p">,</span><span class="w"> </span><span class="s">"TGCA..."</span><span class="p">)</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">prune_taxa</span><span class="p">(</span><span class="o">!</span><span class="nf">taxa_names</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">manual_human_asvs</span><span class="p">,</span><span class="w"> </span><span class="n">ps.12S</span><span class="p">)</span>
-</span></code></pre></div>
-<h2 id="removing-synthetic-control-asvs">Removing Synthetic Control ASVs</h2>
-<p>If your sequencing run included synthetic positive control sequences (e.g., synthetic trnL or 12S ASVs), these should be removed before analysis:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">"synthetic"</span><span class="p">,</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w"> </span><span class="n">ignore.case</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
-</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Synthetic controls with a different name</p>
+<p>If your sequencing run's synthetic control ASV isn't named exactly <code>"synthetic trnL ASV"</code> or <code>"synthetic 12S ASV"</code>, pass the actual value via <code>controls = "[your control's species name]"</code>, or filter it out manually with <code>subset_taxa()</code>.</p>
+</div>
 <h2 id="cohort-specific-removals">Cohort-Specific Removals</h2>
-<p>Some studies may require removing additional taxa based on the study design. Common examples include:</p>
+<p>Some studies may require removing additional taxa based on the study design, after calling <code>filter_trnL_taxa()</code>/<code>filter_12S_taxa()</code>. Common examples include:</p>
 <ul>
 <li><strong>Environmental contamination</strong> — for trnL, taxa like grasses or trees that reflect environmental DNA rather than dietary intake.</li>
 <li><strong>Known contaminants</strong> — taxa identified during <a href="pipeline.html#quality-control">quality control</a> as likely cross-contamination from positive controls or other samples.</li>
 <li><strong>Study-specific exclusions</strong> — taxa that are not relevant to the research question (e.g., removing non-mammalian vertebrates from a study focused on meat consumption).</li>
 </ul>
 <p>These removals are study-dependent and should be documented in your analysis scripts. Use <code>subset_taxa()</code> to filter by any column in the taxonomy table:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Example: remove a specific genus</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">genus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"Festuca"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">genus</span><span class="p">))</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Example: remove multiple species</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Bos taurus"</span><span class="p">,</span><span class="w"> </span><span class="s">"Sus scrofa"</span><span class="p">)</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">species</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Example: remove a specific genus</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="n">genus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"Festuca"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">genus</span><span class="p">))</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Example: remove multiple species</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">exclude</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"Bos taurus"</span><span class="p">,</span><span class="w"> </span><span class="s">"Sus scrofa"</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">ps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">species</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">exclude</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
 </span></code></pre></div>
 
 
@@ -1373,7 +1371,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:52:09 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 20, 2026 20:30:36 UTC">August 20, 2026</span>
   </span>
 
     
@@ -1393,12 +1391,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>
+        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
 
