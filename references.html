@@ -1415,6 +1415,10 @@
 
 <h1 id="creating-the-references">Creating the References</h1>
 <p>These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5." A <a href="https://lad-lab.github.io/references.html#flowchart">flowchart</a> is provided at the bottom of the page if it may help simplify the workflow of the phyloseq creation process.</p>
+<div class="admonition info">
+<p class="admonition-title">A newer reference-building pipeline is in beta</p>
+<p>The process described on this page is the established one. A newer, more automated pipeline lives in the <a href="https://github.com/LAD-LAB/food-dbs">food-dbs repository</a>, where <code>foodseq_reference_pipeline.Rmd</code> builds the references end to end and writes both DADA2- and QIIME2-formatted output. It is still in beta testing and has not replaced the workflow below, so treat it as a preview rather than the current standard.</p>
+</div>
 <h2 id="setting-up-and-reading-in-data">Setting Up and Reading in Data</h2>
 <p>First, load the necessary packages and functions. If you do not have a package installed, install it first with the function <code>install.packages("[package name]")</code>. Make sure to replace the paths to <code>find_primer_pair.R</code>, <code>query_ncbi.R</code>, and <code>query_ncbi_accession.R</code>.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">Biostrings</span><span class="p">)</span>
@@ -2147,7 +2151,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 16:21:35 UTC">June 2, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 24, 2026 19:11:36 UTC">August 24, 2026</span>
   </span>
 
     
@@ -2167,12 +2171,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>
+        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>
     </nav>
   </span>
 
