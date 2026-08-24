@@ -8,9 +8,9 @@ A PCA plot is a graphical representation of Principal Component Analysis (PCA), 
 
 In many datasets, you might have a large number of variables (features). PCA helps simplify such datasets by transforming them into a smaller set of uncorrelated variables called principal components (PCs). These PCs capture the maximum variation in the data, with each successive PC accounting for progressively less of the remaining variability.
 
-!!! to-do
+For FoodSeq data the variables are the food taxa detected in each sample, so a phyloseq containing many food taxa can be summarized in a plot with two axes. Each point is one sample, and samples that sit close together tend to have more similar food profiles than samples that sit far apart. Because each PC is a weighted combination of many foods rather than a single measurement, the values along the axes are not directly interpretable on their own. What the axis labels do tell you is the percentage of the total variation that each component accounts for.
 
-    Rewrite this definition or make it clearer.
+`pcaPlot()` produces a *biplot*, which layers a second kind of information onto the same axes: arrows drawn from the origin, each representing one food taxon. These arrows are the loadings. The direction of an arrow shows how that food relates to the two components being plotted, and its length shows how strongly the food contributes to them, so together the arrows show which foods drive the spread you see in the points. Not every taxon gets an arrow. The function ranks all taxa by arrow length and draws only the top `nTaxa`, so setting `nTaxa = 10` shows the ten taxa with the strongest influence on those two components. The rest are left off to keep the plot readable.
 
 ## Input
 
@@ -18,6 +18,10 @@ Before creating a PCA plot, you must have a CLR-transformed, foods-only phyloseq
 
 
 ## `pcaPlot()` Function
+
+!!! to-do
+
+    This section is waiting on the current `pcaPlot()` from the foodseq.tools package. Until that is swapped in, three things here are known to be out of date: the function below, the worked outputs under [Understanding the Output](#understanding-the-output), and the example call above the figure in [Interpreting the PCA Plot](#interpreting-the-pca-plot). The function as shown does not reproduce the biplot further down this page.
 
 The function below was written by Ben Neubert to create a PCA plot. After reading it into your analysis file, run:
 
@@ -231,14 +235,16 @@ The PCA plot `pca.biplot` and its interpretation will be covered in the next sec
 
 ## Interpreting the PCA Plot
 
-!!! to-do
-    
-    Replace the PCA below with one from a published, lab-internal cohort.
-
-Below is an example of a PCA plot for us to interpret. It was created with the following line of code:
+Below is an example of a PCA biplot to interpret. It shows CLR-transformed trnL (plant) data pooled across five cohorts, colored by cohort, with the ten longest loadings drawn as arrows. It was created with:
 
 ``` r
-pcaPlot(ps.filt.clr, "age", "Age", 10, c("red", "blue", "green"), ellipse = TRUE)
+cohort_colors <- c("A" = "#E69F00", "B" = "#56B4E9", "C" = "#009E73",
+                   "D" = "#D55E00", "E" = "#CC79A7")
+
+pca <- pcaPlot(ps.filt.clr, "cohort", "Cohort", 10,
+               customColors = cohort_colors)
+
+pca$pca.biplot + labs(title = "PCA biplot — trnL dietary profiles")
 ```
 
 <figure markdown="span">
@@ -247,8 +253,10 @@ pcaPlot(ps.filt.clr, "age", "Age", 10, c("red", "blue", "green"), ellipse = TRUE
   <figcaption></figcaption>
 </figure>
 
-The axes show that PC1 explains 8.85% of the total variation in the data, while PC2 explains 6.69%; combined, they explain 15.54% of the variance.
+!!! note
 
-The samples are colored by age. The three groups (mothers, infants at 12 months, and infants at 9 months) each cluster together, indicating similar characteristics within groups; the 12-month and 9-month infants' clusters overlap greatly, indicating high similarity between the infant samples, while the mothers' samples overlap less, suggesting that the composition of the mothers' diets differs noticeably from the diets of infants (as expected). This is shown by the overlap of the dashed ellipses as well, which represent the 95% confidence intervals for each group.
+    Cohort names have been replaced with the letters A–E for this handbook. The arrow labels are the conventional common names described in [Assigning Common Names](commonnames.md); label wrapping in the published figure was hand-tuned for a few of the longest names.
 
-The loadings (variables contributing most to variation) are represented by black arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. For example, *Musa* (the banana genus) and *Pyrus communis* (the pear) are more indicative of infant dietary patterns, while *Linum usitatissimum* (flax), *Apiaceae* (the family containing carrots, parsnips, parsley, dill, cumin, and fennel), *Avena* (the oat genus), and *Asteraceae* (the sunflower family) are more indicative of mothers' dietary patterns.
+The axes show that PC1 explains 12.9% of the total variation in the data, while PC2 explains 8%; combined, they explain 20.9% of the variance.
+
+The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here the leafy greens and stems (lettuce, spinach), the flowers and brassicas (cabbage, broccoli, cauliflower), and the herbs and spices (the carrot and parsley family; cinnamon, avocados, and bay leaf) all point up and to the right. The grains and cereals (wheat and rye, corn), cacao, and the nightshades (potatoes, tomatillos, and others) point down and to the right. Bananas and plantains point almost straight down.

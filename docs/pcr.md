@@ -10,15 +10,49 @@ Primers are custom-synthesized DNA oligos (Integrated DNA Technologies, Coralvil
 
 **Table 1.** FoodSeq primers. Locus-specific sequences are bolded and Illumina adapters are in standard typeface.
 
-| Name | Primer sequence 5'–3' | Reference |
-|---|---|---|
-| trnL(UAA)g | TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG**GGGCAATCCTGAGCCA\*A** | Taberlet et al., 2007 |
-| trnL(UAA)h | GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG**CCATTGAGTCTCTGCACCTAT\*C** | |
-| 12SV5F | TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG**TAGAACAGGCTCCTCTAG** | Shehzad et al., 2012 |
-| 12SV5R | GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG**TTAGATACCCCACTATGC** | |
-| DeBarba14 HomoB | **CTATGCTTAGCCCTAAACCTCAACAGTTAAATCAACAAAACTGCT**/3SpC3/ | De Barba et al., 2014 |
-| i7 indexing primer | CAAGCAGAAGACGGCATACGAGAT*XXXXXXXX*GTCTCGTGGGCTCGG | Illumina, 2025 |
-| i5 indexing primer | AATGATACGGCGACCACCGAGATCTACAC*XXXXXXXX*TCGTCGGCAGCGTC | |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Primer sequence 5'&ndash;3'</th>
+      <th>Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>trnL(UAA)g</td>
+      <td>TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG<strong>GGGCAATCCTGAGCCA*A</strong></td>
+      <td rowspan="2">Taberlet et al., 2007</td>
+    </tr>
+    <tr>
+      <td>trnL(UAA)h</td>
+      <td>GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG<strong>CCATTGAGTCTCTGCACCTAT*C</strong></td>
+    </tr>
+    <tr>
+      <td>12SV5F</td>
+      <td>TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG<strong>TAGAACAGGCTCCTCTAG</strong></td>
+      <td rowspan="2">Shehzad et al., 2012</td>
+    </tr>
+    <tr>
+      <td>12SV5R</td>
+      <td>GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG<strong>TTAGATACCCCACTATGC</strong></td>
+    </tr>
+    <tr>
+      <td>DeBarba14 HomoB</td>
+      <td><strong>CTATGCTTAGCCCTAAACCTCAACAGTTAAATCAACAAAACTGCT</strong>/3SpC3/</td>
+      <td>De Barba et al., 2014</td>
+    </tr>
+    <tr>
+      <td>i7 indexing primer</td>
+      <td>CAAGCAGAAGACGGCATACGAGAT<em>XXXXXXXX</em>GTCTCGTGGGCTCGG</td>
+      <td rowspan="2">Illumina, 2025</td>
+    </tr>
+    <tr>
+      <td>i5 indexing primer</td>
+      <td>AATGATACGGCGACCACCGAGATCTACAC<em>XXXXXXXX</em>TCGTCGGCAGCGTC</td>
+    </tr>
+  </tbody>
+</table>
 
 *XXXXXXXX* denotes 8-bp barcode sequences, available from Illumina ([Illumina Adapter Sequences](https://support-docs.illumina.com/SHARE/AdapterSequences/Content/Nextera-DNAIndexes.htm)).
 

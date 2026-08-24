@@ -2,6 +2,10 @@
 
 These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5." A [flowchart](https://lad-lab.github.io/references.html#flowchart) is provided at the bottom of the page if it may help simplify the workflow of the phyloseq creation process.
 
+!!! info "A newer reference-building pipeline is in beta"
+
+    The process described on this page is the established one. A newer, more automated pipeline lives in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs), where `foodseq_reference_pipeline.Rmd` builds the references end to end and writes both DADA2- and QIIME2-formatted output. It is still in beta testing and has not replaced the workflow below, so treat it as a preview rather than the current standard.
+
 ## Setting Up and Reading in Data
 
 First, load the necessary packages and functions. If you do not have a package installed, install it first with the function `install.packages("[package name]")`. Make sure to replace the paths to `find_primer_pair.R`, `query_ncbi.R`, and `query_ncbi_accession.R`.
