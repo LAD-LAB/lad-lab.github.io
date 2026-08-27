@@ -1,6 +1,6 @@
 # Creating the References
 
-These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5." A [flowchart](https://lad-lab.github.io/references.html#flowchart) is provided at the bottom of the page if it may help simplify the workflow of the phyloseq creation process.
+These instructions will help you create a trnL or 12Sv5 reference for use in creating phyloseq objects. Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5."
 
 !!! info "A newer reference-building pipeline is in beta"
 
@@ -893,6 +893,4 @@ After building the 12Sv5 reference with the steps above, add the human sequences
 ### DADA2
 
 ### QIIME2
-
-## Flowchart
 
