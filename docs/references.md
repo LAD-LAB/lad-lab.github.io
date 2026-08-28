@@ -19,7 +19,7 @@ library(tidyverse)
 
 source('/path/to/code/functions/find_primer_pair.R')
 source('/path/to/code/functions/query_ncbi.R')
-source('/path/to/code/functions/query_ncbi_accession.R'))
+source('/path/to/code/functions/query_ncbi_accession.R')
 ```
 
 ``` r
@@ -853,26 +853,51 @@ The number of sequences we expect after filtering is given by:
 dim(seqs.df)[1] - sum(dups$n)
 ```
 
-This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates:
+This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates. trnL carries the subspecific ranks `varietas` and `forma` through this step; 12Sv5 stops at `subspecies`.
 
-```{r}
-seqs.df <- 
-     seqs.df |>
-     group_by(superkingdom,
-              phylum,
-              class,
-              order,
-              family,
-              genus,
-              species,
-              subspecies,
-              taxon, 
-              seq) |> 
-     arrange(desc(source), accession) |> # Puts RefSeq accessions first 
-     summarize(accession = first(accession)) # Choose the first accession number
+=== "trnL"
 
-dim(seqs.df)
-```
+    ``` r
+    seqs.df <- 
+         seqs.df |>
+         group_by(superkingdom,
+                  phylum,
+                  class,
+                  order,
+                  family,
+                  genus,
+                  species,
+                  subspecies,
+                  varietas,
+                  forma, 
+                  taxon, 
+                  seq) |> 
+         arrange(desc(source), accession) |> # Puts RefSeq accessions first 
+         summarize(accession = first(accession)) # Choose the first accession number
+
+    dim(seqs.df)
+    ```
+
+=== "12Sv5"
+
+    ``` r
+    seqs.df <- 
+         seqs.df |>
+         group_by(superkingdom,
+                  phylum,
+                  class,
+                  order,
+                  family,
+                  genus,
+                  species,
+                  subspecies,
+                  taxon, 
+                  seq) |> 
+         arrange(desc(source), accession) |> # Puts RefSeq accessions first 
+         summarize(accession = first(accession)) # Choose the first accession number
+
+    dim(seqs.df)
+    ```
 
 ## Adding Human Sequences to the 12Sv5 Reference
 
@@ -886,11 +911,105 @@ After building the 12Sv5 reference with the steps above, add the human sequences
 
 ## Saving the References
 
-!!! to-do
+Each marker is saved as a FASTA whose headers carry the full taxonomic lineage. This is the file you point `ref_trnL` or `ref_12S` at in [Pipeline-to-Phyloseq](pipeline.md#creating-the-taxonomy-table), and the same file [`assign_common_names()`](commonnames.md) reads. The markers differ in how many ranks go in the lineage.
 
-    Finish the following sections.
+!!! note
 
-### DADA2
+    trnL lineages run through `forma`; 12Sv5 lineages stop at `subspecies`. Each marker's assignment function expects its own depth, so do not copy one `unite()` call across to the other.
 
-### QIIME2
+### DADA2-formatted reference files
 
+!!! warning
+
+    The `writeXStringSet()` calls below overwrite the current version of the reference. Check that this is what you want before running them.
+
+=== "trnL"
+
+    This section produces `trnLGH_taxonomy.fasta`, which names each sequence by its full lineage across ten ranks. `assignment_trnL()` matches your ASVs against the sequences and reads the lineage off the header of whatever it matched.
+
+    Sort the sequences, then name each one by its full lineage:
+
+    ``` r
+    # Sort alphabetically (first by species name, and then accession number)
+    seqs.df <- arrange(seqs.df, 
+                       taxon,
+                       accession)
+
+    seqs.df <- 
+         seqs.df |> 
+         unite(col = 'name',
+               superkingdom:forma,
+               sep = ';') 
+
+    # Convert back to DNAStringSet object
+    trnL <- seqs.df$seq
+    names(trnL) <- seqs.df$name
+
+    trnL <- DNAStringSet(trnL)
+    trnL
+    ```
+
+    ``` r
+    # Save to file
+    writeXStringSet(trnL,
+                    here('data',
+                         'outputs',
+                         'dada2-compatible',
+                         'trnL',
+                         'trnLGH_taxonomy.fasta'))
+    ```
+
+    ??? note "Legacy: `trnLGH.fasta`"
+
+        An accession-named copy of the same sequences can also be created using the code below, for the older `assignSpecies()` workflow. Under that workflow the header was an accession, so a match told you which record hit but not its taxonomy, and a separate SQL lookup turned that accession into a lineage.
+
+        ``` r
+        names(trnL) <- paste(seqs.df$accession, seqs.df$taxon)
+
+        writeXStringSet(trnL,
+                        here('data',
+                             'outputs',
+                             'dada2-compatible',
+                             'trnL',
+                             'trnLGH.fasta'))
+        ```
+
+=== "12Sv5"
+
+    This section produces `12Sv5_taxonomy.fasta`, which names each sequence by its full lineage across eight ranks.
+
+    Sort the sequences, then name each one by its full lineage:
+
+    ``` r
+    # Sort alphabetically (first by species name, and then accession number)
+    seqs.df <- arrange(seqs.df, 
+                       taxon,
+                       accession)
+
+    seqs.df <- 
+         seqs.df |> 
+         unite(col = 'name',
+               superkingdom:subspecies,
+               sep = ';') 
+
+    # Convert back to DNAStringSet object
+    ref <- seqs.df$seq
+    names(ref) <- seqs.df$name
+
+    ref <- DNAStringSet(ref)
+    ref
+    ```
+
+    ``` r
+    # Save to file
+    writeXStringSet(ref,
+                    here('data',
+                         'outputs',
+                         'dada2-compatible',
+                         '12Sv5',
+                         '12Sv5_taxonomy.fasta'))
+    ```
+
+    ??? note "Legacy: `assignTaxonomy()`"
+
+        12Sv5 was assigned with `dada2::assignTaxonomy()` before `assignment_12S()`, and both read taxonomy from the FASTA headers.
