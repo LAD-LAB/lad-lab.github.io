@@ -153,11 +153,7 @@ The trnL off-target allowlist deliberately includes Cyanobacteriota alongside St
 - **Synthetic spike-in controls** — the lab's positive-control constructs (`synthetic trnL ASV`, `synthetic 12S ASV`), which never come back from a RefSeq/GenBank query since they aren't real organisms. Without an explicit entry here, every food-list-driven rebuild silently drops them, and their reads get reassigned to whatever real taxon they're nearest to.
 - **Real biological host/contaminant taxa** — species that aren't on `human-foods.csv` (so the food-list-driven build never queries them) but that the assay reliably amplifies and that dominate raw read counts if absent from the reference: *Rhacodactylus leachianus* (the gecko positive control) and *Homo sapiens* (89 haplotype records, needed because a single NCBI reference sequence for the 12Sv5 region is not enough to catch the genetic diversity of human host DNA in dietary samples). Each of these carries its own real taxonomic lineage in `controls.csv`, rather than the repeated-label format used for the synthetic constructs.
 
-This replaces the older practice of manually appending Schneider et al. (2021) human haplotype sequences after building the 12Sv5 reference (see the [archived manual workflow](references-legacy.md#adding-human-sequences-to-the-12sv5-reference)) — human sequences are now included automatically as part of the standard build.
-
-!!! note
-
-    Schneider J, Mas-Carrió E, Jan C, Miquel C, Taberlet P, Michaud K, Fumagalli L, Comprehensive coverage of human last meal components revealed by a forensic DNA metabarcoding approach. *Sci. Rep.* **11**, 8876 (2021). [https://doi.org/10.1038/s41598-021-88418-x](https://doi.org/10.1038/s41598-021-88418-x)
+This automates what was previously a manual, easy-to-forget step (see the [archived manual workflow](references-legacy.md#adding-human-sequences-to-the-12sv5-reference)) — human sequences are now included automatically as part of the standard build.
 
 Without a matching entry in `controls.csv`, host or contaminant reads land on the nearest available taxon in the reference — for 12Sv5 specifically, that has historically meant a large fraction of human reads misassigned into food clades (e.g. Artiodactyla) when human was absent. If you're adding a new marker or a new assay to this pipeline, check whether it needs its own host/control row before shipping a build.
 
