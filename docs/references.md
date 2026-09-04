@@ -55,7 +55,7 @@ Three large files are needed before running the pipeline. The pipeline generates
 
 !!! tip
 
-    If your lab already maintains a shared `accessionTaxa.sql` build, point `SQL_PATH` (below) at it instead of rebuilding — this skips the ~70 GB download/build. See [Creating the SQL File](sql.md) for how that shared copy is built.
+    If your lab already maintains a shared `accessionTaxa.sql` build, point `SQL_PATH` (below) at it instead of rebuilding — this skips the ~70 GB download/build.
 
     === "Duke"
 

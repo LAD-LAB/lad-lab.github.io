@@ -119,7 +119,7 @@ Read in primers, food species, and RefSeq data for the gene of interest:
     mito
     ```
 
-Also, read in the SQL file (see [Creating the SQL File](sql.md) for more information):
+Also, read in the SQL file:
 
 === "Duke"
 
