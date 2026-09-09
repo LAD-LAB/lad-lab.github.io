@@ -313,14 +313,16 @@ Set the following variables to match your setup. The `project_path` should be th
 
 The `download_mode` variable controls how much data is copied from the cluster. Set it to `"minimal"` (the default) to download only the files needed for phyloseq creation (`4_denoised-table.qza`, `4_denoised-seqs.qza`, and the read-tracking CSV), or `"full"` to download all pipeline output.
 
-You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. These references can be downloaded from the [LAD-LAB mb-pipeline GitHub repository](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/references); place them locally and set the paths here:
+You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`. Download the taxonomy FASTA for each marker, place them locally, and set the paths here:
 
 ``` r
 ref_trnL <- "[/path/to/trnLGH_taxonomy.fasta]"
 ref_12S <- "[/path/to/12Sv5_taxonomy.fasta]"
 ```
 
-For instructions on creating these references from scratch, see [Creating the References](references.md).
+The files in food-dbs carry the build date in their name, for example `trnLGH_taxonomy_Aug2026.fasta`, so match the paths above to whichever build you downloaded.
+
+For instructions on building or extending these references, see [Creating the References](references.md).
 
 `sample-metadata.csv` should be a CSV in your project folder with a column `Sample_ID` whose entries match the sample names from `samplesheet.csv` (in the form `1-A01`); a column `type` whose values are exactly `"sample"`, `"positive control"`, `"negative control"`, or `"blank"`; and a column `pcr_plate` whose value is the plate number from the sequencing run. If you save your metadata with the file name `sample-metadata.csv`, no changes are needed to the `metadata` variable.
 

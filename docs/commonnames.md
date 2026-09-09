@@ -19,23 +19,13 @@ humanfoods <- read_csv("[path/to/human-foods.csv]")
 humanfoods
 ```
 
-Read in the desired reference, for either trnL or 12Sv5. Make sure you read in the reference with taxonomy:
+Read in the desired reference, for either trnL or 12Sv5. Make sure you read in the reference with taxonomy. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`:
 
-=== "Duke"
+``` r
+taxref <- Biostrings::readDNAStringSet("[/path/to/taxonomy-reference.fasta]")
 
-    ``` r
-    taxref <- Biostrings::readDNAStringSet("/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/Ashish_S/References/dada2-compatible/[path-to-reference]")
-
-    taxref
-    ```
-
-=== "General"
-
-    ``` r
-    taxref <- Biostrings::readDNAStringSet("[/path/to/references/dada2-compatible/path-to-reference]")
-
-    taxref
-    ```
+taxref
+```
 
 ### Pre-Processing and Data Wrangling
 
