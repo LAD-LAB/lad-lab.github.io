@@ -13,9 +13,8 @@ nav:
   - Amplicon Cleaning: cleaning.md
   - Quantification and Pooling: pooling.md
   - Sequencing: sequencing.md
-- Creating a Phyloseq:
-  - Creating a Phyloseq (trnL and 12Sv5): pipeline.md
-  - Creating the References: references.md
+- Creating the References: references.md
+- Creating a Phyloseq: pipeline.md
 - Post-Phyloseq Processing and Analysis:
   - Overview: processing.md
   - Merging Phyloseqs: merging.md
@@ -61,8 +60,8 @@ theme:
         icon: material/weather-night
         name: Switch to light mode
 
-repo_url: https://github.com/LAD-LAB
-repo_name: LAD-LAB
+repo_url: https://github.com/LAD-LAB/lad-lab.github.io
+repo_name: lad-lab.github.io
 
 markdown_extensions:
   - attr_list
