@@ -4,7 +4,7 @@ These instructions will help you anonymize human DNA reads in 12Sv5 metabarcodin
 
 The tool replaces human reads rather than removing them. Removal would alter total read counts and change the structure of the FASTQ files; replacement keeps everything intact while rendering the human sequences unidentifiable. The replacement sequence is derived from the human 12S mitochondrial region, so it is classified as *Homo sapiens* during taxonomy assignment and can be filtered out in the phyloseq like any other human read.
 
-The anonymizer lives in the [`mb-pipeline` repository](https://github.com/LAD-LAB/mb-pipeline/tree/main/reference/anonymizer). It operates on demultiplexed FASTQ files; when preparing data for SRA submission, you run it on the demultiplexed files and then re-run the marker pipeline on the anonymized output to generate a clean set of results for deposition.
+The anonymizer lives in the [`mb-pipeline` repository](https://github.com/LAD-LAB/mb-pipeline/tree/main/anonymizer). It operates on demultiplexed FASTQ files; when preparing data for SRA submission, you run it on the demultiplexed files and then re-run the marker pipeline on the anonymized output to generate a clean set of results for deposition.
 
 ## How Detection Works
 
@@ -65,7 +65,7 @@ For a full sequencing run, use the batch submission script to process all demult
     ``` sh
     ssh [NetID]@dcc-login.oit.duke.edu
 
-    cd /hpc/group/ldavidlab/users/[NetID]/mb-pipeline/reference/anonymizer
+    cd /hpc/group/ldavidlab/users/[NetID]/mb-pipeline/anonymizer
 
     chmod +x submit_anonymization.sh human_read_anonymizer.R
     ./submit_anonymization.sh
@@ -86,7 +86,7 @@ For a full sequencing run, use the batch submission script to process all demult
     ``` sh
     ssh [username]@[hpc-hostname]
 
-    cd [/path/to/mb-pipeline]/reference/anonymizer
+    cd [/path/to/mb-pipeline]/anonymizer
 
     chmod +x submit_anonymization.sh human_read_anonymizer.R
     ./submit_anonymization.sh
