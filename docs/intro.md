@@ -4,11 +4,11 @@ This page provides background on the core concepts used throughout this handbook
 
 ## DNA Metabarcoding
 
-DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. In our lab, we use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake at the species level without relying on self-report.
+DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. In our lab, we use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake without relying on self-report.
 
 We target two markers:
 
-* **trnL** (trnL-gh intergenic spacer): a chloroplast region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.
+* **trnL** (trnL (UAA) intron, P6 loop): a chloroplast region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.
 * **12Sv5** (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12Sv5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.
 
 Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12Sv5 dataset (animals), which are processed separately throughout the pipeline.
@@ -30,7 +30,7 @@ A single food species may produce multiple ASVs (due to natural sequence variati
 A phyloseq is an R data structure from the `phyloseq` package that bundles together the different components of a metabarcoding dataset into a single object. A phyloseq contains up to three components:
 
 * `otu_table`: a matrix of ASV counts per sample (rows are samples, columns are ASVs)
-* `tax_table`: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to subspecies)
+* `tax_table`: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to forma for trnL, and down to subspecies for 12Sv5)
 * `sam_data`: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)
 
 The phyloseq is the central data object throughout the analysis pipeline. After [creating a phyloseq](pipeline.md) from raw sequencing data, the [post-phyloseq processing workflow](processing.md) walks through assigning common names, agglomerating, filtering, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).
@@ -49,7 +49,7 @@ Alpha diversity measures the diversity within a single sample. We commonly repor
 
 ### Relative Abundance
 
-Relative abundance expresses each ASV's count as a proportion of the total reads in that sample, so that all proportions sum to 1. This normalization accounts for differences in sequencing depth across samples and is used for calculating Shannon diversity and for stacked bar plots. See [Relative Abundance and CLR Transform](abundance.md) for instructions.
+Relative abundance expresses each ASV's count as a proportion of the total reads in that sample, so that all proportions sum to 1. This normalization accounts for differences in sequencing depth across samples and is used for stacked bar plots and as the input to the CLR transform. See [Relative Abundance and CLR Transform](abundance.md) for instructions.
 
 ### Centered Log-Ratio (CLR) Transform
 
