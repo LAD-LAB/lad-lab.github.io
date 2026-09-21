@@ -11,9 +11,7 @@ After [agglomerating taxa](glomming.md), the next step is to remove taxa that sh
 
 Both functions compute a `lowest_level` column (the most specific non-`NA` taxonomic rank per ASV) and remove unassigned and named control ASVs. `filter_12S_taxa()` additionally removes *Homo sapiens* reads. Neither function agglomerates — that happens earlier, in [Agglomerating Taxa](glomming.md).
 
-!!! to-do
-
-    `filter_12S_taxa()` currently still performs an internal `tax_glom()` step and always recomputes `lowest_level`, even if the column already exists from the [Agglomerating Taxa](glomming.md) step. Both will be corrected in an upcoming revision — agglomeration will happen only in the Agglomerating Taxa step, and `lowest_level` will be reused if already present. The downloadable script above has not yet been updated to reflect this.
+Both are safe to re-run on an already-filtered object. A `lowest_level` column left over from a previous run is dropped and recomputed rather than reused, so re-running cannot silently double-count.
 
 After reading the appropriate function into your analysis file, run:
 

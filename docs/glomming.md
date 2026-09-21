@@ -4,7 +4,7 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
 !!! to-do
 
-make trnL and 12Sv5 tabs to match the handbook convention
+    Convert the trnL and 12Sv5 sections below into content tabs, to match the convention used on the rest of the site.
 
 ## 12Sv5
 
@@ -23,7 +23,7 @@ ps.12S <- phyloseq::tax_glom(ps.12S, taxrank = "lowest_level")
 
 !!! to-do
 
-`plan_harmonization()` and `apply_asv_corrections()` are still under active development. This section is a first-pass draft covering how to use them; the description below will need to be revised as the functions are finalized.
+    A first version of `plan_harmonization()` and `apply_asv_corrections()` was released in September 2026 and the section below describes that version. Both are still being actively developed, so check the function documentation before relying on the arguments and return values shown here.
 
 trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: `plan_harmonization()` and `apply_asv_corrections()`.
 
@@ -39,9 +39,13 @@ plan <- plan_harmonization(ps.trnL)
 
 ### `apply_asv_corrections()`
 
-Once decisions are made, `apply_asv_corrections()` applies them: it physically merges ASVs (transferring read counts and pruning discarded ASVs, including through multi-hop merge chains) and applies any chosen names.
+Once decisions are made, `apply_asv_corrections()` applies them: it adds a `glom_name` column to the tax table, physically merges ASVs (transferring read counts and pruning discarded ASVs, including through multi-hop merge chains) and applies any chosen names.
+
+Pass the plan itself — everything the function needs is carried on it.
 
 ``` r
-result <- apply_asv_corrections(ps.trnL, plan)
-ps.trnL <- result$ps
+result <- apply_asv_corrections(plan)
+ps.trnL <- result$ps_harmonized
 ```
+
+Alongside `ps_harmonized`, the result carries `decisions` (one row per reviewed pair, with the scenario, the decision and your rationale), `asv_summary`, and `unresolved` for any flagged pairs you did not settle.
