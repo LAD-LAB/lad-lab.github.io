@@ -1215,10 +1215,7 @@
 <a class="md-button" href="files/filter_12S_taxa.R">Download filter_12S_taxa.R</a></p>
 </div>
 <p>Both functions compute a <code>lowest_level</code> column (the most specific non-<code>NA</code> taxonomic rank per ASV) and remove unassigned and named control ASVs. <code>filter_12S_taxa()</code> additionally removes <em>Homo sapiens</em> reads. Neither function agglomerates — that happens earlier, in <a href="glomming.html">Agglomerating Taxa</a>.</p>
-<div class="admonition to-do">
-<p class="admonition-title">To-do</p>
-<p><code>filter_12S_taxa()</code> currently still performs an internal <code>tax_glom()</code> step and always recomputes <code>lowest_level</code>, even if the column already exists from the <a href="glomming.html">Agglomerating Taxa</a> step. Both will be corrected in an upcoming revision — agglomeration will happen only in the Agglomerating Taxa step, and <code>lowest_level</code> will be reused if already present. The downloadable script above has not yet been updated to reflect this.</p>
-</div>
+<p>Both are safe to re-run on an already-filtered object. A <code>lowest_level</code> column left over from a previous run is dropped and recomputed rather than reused, so re-running cannot silently double-count.</p>
 <p>After reading the appropriate function into your analysis file, run:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
 <div class="tabbed-content">
@@ -1287,7 +1284,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 20, 2026 20:30:36 UTC">August 20, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 18:48:09 UTC">September 21, 2026</span>
   </span>
 
     
@@ -1313,6 +1310,7 @@
     <nav>
       
         <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>, 
         <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
