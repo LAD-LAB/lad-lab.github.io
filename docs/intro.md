@@ -45,7 +45,7 @@ The downstream analysis pages cover several statistical techniques in detail; br
 
 ### Alpha Diversity
 
-Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected, referred to as pFR for plants and pMR for meat/animals) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on count data, before any relative abundance or CLR transform; see [Calculating Diversity](diversity.md) for instructions.
+Alpha diversity measures the diversity within a single sample. We commonly report two metrics: observed richness (the number of distinct taxa detected; for trnL this is reported as pMR, plant metabarcoding richness) and Shannon diversity (which accounts for both richness and evenness of taxa abundances). Alpha diversity is calculated on count data, before any relative abundance or CLR transform; see [Calculating Diversity](diversity.md) for instructions.
 
 ### Relative Abundance
 
@@ -68,9 +68,9 @@ PCA is a dimensionality reduction technique that projects high-dimensional data 
 * **marker**: a short, standardized gene region used for identification; our lab uses trnL (plants) and 12Sv5 (animals).
 * **metabarcoding**: a method for identifying organisms in a mixed sample by sequencing a shared marker region and matching against a reference.
 * **OTU**: operational taxonomic unit; an older clustering-based approach to grouping sequences, replaced by ASVs in our pipeline.
-* **pFR**: plant food richness; the number of distinct plant taxa detected in a sample.
+* **pFR**: plant FoodSeq richness; the number of distinct plant taxa detected in a sample (Aqeel et al. 2025, *Obesity*).
 * **phyloseq**: an R object bundling ASV counts, taxonomy, and sample metadata into a single data structure.
-* **pMR**: plant and meat richness; the number of distinct taxa detected in a sample (used for 12Sv5 data).
+* **pMR**: plant metabarcoding richness; the number of distinct plant taxa detected in a sample by trnL metabarcoding (Petrone et al. 2023, *PNAS*).
 * **QIIME2**: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.
 * **reference database**: a curated FASTA file mapping known marker sequences to taxonomy; used for assigning species to ASVs.
 * **relative abundance**: ASV counts expressed as proportions of total sample reads, summing to 1.
