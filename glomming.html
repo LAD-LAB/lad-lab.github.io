@@ -1208,7 +1208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="projection.md" class="md-nav__link">
+      <a href="projection.html" class="md-nav__link">
         
   
   
@@ -1474,7 +1474,7 @@ at minimum to build a harmonization plan. The inputs of the function are:</p>
 <p><code>ps</code> physically loses an ASV the moment it's pruned, so on its own <code>$asv_outcomes</code> only ever reflects the most recent round's merges. To keep a running record across every round of harmonization you've done so far, pass the previous round's result back in as <code>prior_outcomes</code>:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_harmonization</span><span class="p">(</span><span class="n">ps.trnL2</span><span class="p">,</span><span class="w"> </span><span class="n">plan2</span><span class="p">,</span><span class="w"> </span><span class="n">prior_outcomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </span></code></pre></div>
-<p>This cumulative ledger is exactly what <a href="projection.md">PCA Projection</a> uses as a stand-in reference object — see that page for why you might want one.</p>
+<p>This cumulative ledger is exactly what <a href="projection.html">PCA Projection</a> uses as a stand-in reference object — see that page for why you might want one.</p>
 <h3 id="understanding-the-output_1">Understanding the Output</h3>
 <p><code>apply_harmonization()</code> returns a list with <code>ps</code> (the corrected phyloseq), <code>taxtab</code> (its tax table as a data frame), <code>asv_outcomes</code> — the <strong>ASV ledger</strong>: one row per original ASV (as of <code>ps</code> at this call, plus anything carried forward via <code>prior_outcomes</code>), with its fate (<code>asv_status</code>: <code>"unchanged"</code> / <code>"representative"</code> / <code>"dropped after merge"</code> / <code>"unresolved"</code> — the last meaning this ASV is part of a still-blank flagged decision), <code>merged_with</code>/<code>merged_into</code> (the latter always resolved to the ultimate surviving representative), the full rank-by-rank taxonomy (one column per <code>tax_rank_cols</code> entry — enough for this table alone to stand in for a live reference object), <code>batch_source</code>, read counts, and rationale — <code>unresolved</code> (any flagged pairs still without a decision), <code>n_s2_corrected</code> (count of S2 rank-alignment corrections applied), and <code>n_manual</code> (count of flagged pairs resolved).</p>
 <p>Check <code>result$unresolved</code> for any flagged pairs that are still blank; if any remain, resolve them and re-run.</p>

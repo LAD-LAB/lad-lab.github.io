@@ -12,7 +12,7 @@
         <link rel="prev" href="abundance.html">
       
       
-        <link rel="next" href="anonymizer.html">
+        <link rel="next" href="projection.html">
       
       
         
@@ -1180,7 +1180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="projection.md" class="md-nav__link">
+      <a href="projection.html" class="md-nav__link">
         
   
   
@@ -1332,7 +1332,7 @@
 <li><code>xPC</code> / <code>yPC</code> (optional) — the principal components for the x-/y-axes; by default <code>1</code> / <code>2</code></li>
 <li><code>ellipse</code> (optional) — whether to add centroid ellipses to your plot; by default <code>FALSE</code></li>
 </ul>
-<p>Internally, <code>pca_plot()</code> relies on one helper function: <code>.pca_biplot_layer()</code>, which takes a fitted PCA's rotation/eigenvalues and a base scatter plot and draws the top-<code>nTaxa</code> loading arrows and their quadrant-aware text labels. It's factored out this way because <a href="projection.md#project_pca"><code>project_pca()</code></a> needs the exact same drawing logic when projecting new data into an <em>existing</em> PCA's biplot — both functions call it identically.</p>
+<p>Internally, <code>pca_plot()</code> relies on one helper function: <code>.pca_biplot_layer()</code>, which takes a fitted PCA's rotation/eigenvalues and a base scatter plot and draws the top-<code>nTaxa</code> loading arrows and their quadrant-aware text labels. It's factored out this way because <a href="projection.html#project_pca"><code>project_pca()</code></a> needs the exact same drawing logic when projecting new data into an <em>existing</em> PCA's biplot — both functions call it identically.</p>
 <p>It works as follows. First, it normalizes the phyloseq's orientation to samples-as-rows, since <code>prcomp()</code> is run directly on the OTU table and everything downstream assumes that layout — without this, a taxa-as-rows phyloseq (an equally common convention) would silently produce a transposed, nonsensical PCA:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">taxa_are_rows</span><span class="p">(</span><span class="n">ps</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="n">otu_samples_rows</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">methods</span><span class="o">::</span><span class="nf">as</span><span class="p">(</span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">otu_table</span><span class="p">(</span><span class="n">ps</span><span class="p">),</span><span class="w"> </span><span class="s">"matrix"</span><span class="p">))</span>
@@ -1513,7 +1513,7 @@
 </div>
 <p>The axes show that PC1 explains 12.9% of the total variation in the data, while PC2 explains 8%; combined, they explain 20.9% of the variance.</p>
 <p>The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here the leafy greens and stems (lettuce, spinach), the flowers and brassicas (cabbage, broccoli, cauliflower), and the herbs and spices (the carrot and parsley family; cinnamon, avocados, and bay leaf) all point up and to the right. The grains and cereals (wheat and rye, corn), cacao, and the nightshades (potatoes, tomatillos, and others) point down and to the right. Bananas and plantains point almost straight down.</p>
-<p>If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see <a href="projection.md">PCA Projection</a>.</p>
+<p>If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see <a href="projection.html">PCA Projection</a>.</p>
 
 
 
@@ -1669,13 +1669,13 @@
         
         
           
-          <a href="anonymizer.html" class="md-footer__link md-footer__link--next" aria-label="Next: Anonymizing Human Reads">
+          <a href="projection.html" class="md-footer__link md-footer__link--next" aria-label="Next: PCA Projection">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Anonymizing Human Reads
+                PCA Projection
               </div>
             </div>
             <div class="md-footer__button md-icon">
