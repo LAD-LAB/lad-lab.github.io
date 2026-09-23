@@ -4,13 +4,10 @@ This page will instruct you in the calculation of various common diversity metri
 
 ## Alpha Diversity
 
-To calculate alpha diversity, first filter out `NA`s and then use the `estimate_richness()` function from the package `phyloseq`:
+Feed in your phyloseq after [filtering taxa](taxafiltering.md), [filtering samples](samplefiltering.md), and [pruning](pruning.md) have already run. Use the `estimate_richness()` function from the package `phyloseq`:
 
 ``` r
 library(phyloseq)
-
-ps.filtered <- ps %>%
-  subset_taxa(!is.na(superkingdom))
 
 alphadiv <- estimate_richness(ps.filtered, measures = c("Observed", "Shannon")) %>%
   mutate(barcode_well = rownames(.)) %>%  

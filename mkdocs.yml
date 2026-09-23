@@ -19,14 +19,15 @@ nav:
   - Overview: processing.md
   - Merging Phyloseqs: merging.md
   - Assigning Common Names: commonnames.md
-  - Agglomerating Taxa: glomming.md
   - Reviewing Unassigned Taxa: reviewing.md
   - Filtering Taxa: taxafiltering.md
   - Filtering Samples: samplefiltering.md
   - Pruning Taxa: pruning.md
+  - Agglomerating Taxa: glomming.md
   - Calculating Diversity: diversity.md
   - Relative Abundance and CLR Transform: abundance.md
   - Creating a PCA Plot: pca.md
+  - PCA Projection: projection.md
   - Anonymizing Human Reads: anonymizer.md
 
 theme:

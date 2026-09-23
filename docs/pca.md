@@ -1,6 +1,6 @@
 # Creating a PCA Plot
 
-This page will instruct you in the creation of a principal component analysis (PCA) plot using the custom `pcaPlot()` function and to provide background on the purpose and interpretation of PCA plots. These steps are intended to follow the [calculation of relative abundance](https://lad-lab.github.io/abundance.html).
+This page will instruct you in the creation of a principal component analysis (PCA) plot using the custom `pca_plot()` function and to provide background on the purpose and interpretation of PCA plots. These steps are intended to follow the [calculation of relative abundance](https://lad-lab.github.io/abundance.html).
 
 ## What is a PCA Plot?
 
@@ -10,189 +10,83 @@ In many datasets, you might have a large number of variables (features). PCA hel
 
 For FoodSeq data the variables are the food taxa detected in each sample, so a phyloseq containing many food taxa can be summarized in a plot with two axes. Each point is one sample, and samples that sit close together tend to have more similar food profiles than samples that sit far apart. Because each PC is a weighted combination of many foods rather than a single measurement, the values along the axes are not directly interpretable on their own. What the axis labels do tell you is the percentage of the total variation that each component accounts for.
 
-`pcaPlot()` produces a *biplot*, which layers a second kind of information onto the same axes: arrows drawn from the origin, each representing one food taxon. These arrows are the loadings. The direction of an arrow shows how that food relates to the two components being plotted, and its length shows how strongly the food contributes to them, so together the arrows show which foods drive the spread you see in the points. Not every taxon gets an arrow. The function ranks all taxa by arrow length and draws only the top `nTaxa`, so setting `nTaxa = 10` shows the ten taxa with the strongest influence on those two components. The rest are left off to keep the plot readable.
+`pca_plot()` produces a *biplot*, which layers a second kind of information onto the same axes: arrows drawn from the origin, each representing one food taxon. These arrows are the loadings. The direction of an arrow shows how that food relates to the two components being plotted, and its length shows how strongly the food contributes to them, so together the arrows show which foods drive the spread you see in the points. Not every taxon gets an arrow. The function ranks all taxa by arrow length and draws only the top `nTaxa`, so setting `nTaxa = 10` shows the ten taxa with the strongest influence on those two components. The rest are left off to keep the plot readable.
 
 ## Input
 
-Before creating a PCA plot, you must have a CLR-transformed, foods-only phyloseq — see [Relative Abundance and CLR Transform](abundance.md#clr-transform) for how to compute `ps.filt.clr`. That object is what feeds into `pcaPlot()` below.
+Before creating a PCA plot, you must have a CLR-transformed, foods-only phyloseq — see [Relative Abundance and CLR Transform](abundance.md#clr-transform) for how to compute `ps.filt.clr`. That object is what feeds into `pca_plot()` below.
 
+## `pca_plot()` Function
 
-## `pcaPlot()` Function
+<div class="download-buttons" markdown>
+[Download pca_plot.R](files/pca_plot.R){ .md-button }
+</div>
 
-!!! to-do
-
-    This section is waiting on the current `pcaPlot()` from the foodseq.tools package. Until that is swapped in, three things here are known to be out of date: the function below, the worked outputs under [Understanding the Output](#understanding-the-output), and the example call above the figure in [Interpreting the PCA Plot](#interpreting-the-pca-plot). The function as shown does not reproduce the biplot further down this page.
-
-The function below was written by Ben Neubert to create a PCA plot. After reading it into your analysis file, run:
+After reading it into your analysis file, run:
 
 ``` r
-pcaPlot(ps, colorVar, colorName, nTaxa)
+pca_plot(ps, colorVar, colorName, nTaxa)
 ```
 
 at minimum to plot a PCA. The inputs of Ben's function are:
 
-* `ps` (required) — your phyloseq object
-* `colorVar` (required) — the variable from your sample metadata to color the samples by
-* `colorName` (required) — a legend title corresponding to the `colorVar` variable
-* `nTaxa` (required) — the number of taxa to display loadings for
-* `customColors` (optional) — a vector of colors corresponding in length to the number of unique values for `colorVar`; by default `NULL`
-* `xPC` (optional) — the principal component for the x-axis; by default `1`
-* `yPC` (optional) — the principal component for the y-axis; by default `2`
-* `ellipse` (optional) — a Boolean for the option to add centroid ellipses to your plot; by default `FALSE`
+* `ps` (required) — your CLR-transformed, filtered phyloseq
+* `colorVar` (optional) — the variable from your sample metadata to color the samples by; by default `NULL` (no color grouping)
+* `colorName` (optional) — a legend title corresponding to `colorVar`; by default `NULL`
+* `nTaxa` (optional) — the number of taxa to display loadings for; by default `10`
+* `customColors` (optional) — a named vector of colors, one per unique value of `colorVar`; by default `NULL`
+* `customGradient` (optional) — a data frame of `low`/`mid`/`high` colors, for a continuous color gradient when `colorVar` is numeric rather than categorical; by default `NULL`
+* `mid` (optional) — for `customGradient`, how to compute the gradient's midpoint — `"middle"` (mean of the range), `"median"`, or `"mean"`; by default `"mean"`
+* `xPC` / `yPC` (optional) — the principal components for the x-/y-axes; by default `1` / `2`
+* `ellipse` (optional) — whether to add centroid ellipses to your plot; by default `FALSE`
+
+Internally, `pca_plot()` relies on one helper function: `.pca_biplot_layer()`, which takes a fitted PCA's rotation/eigenvalues and a base scatter plot and draws the top-`nTaxa` loading arrows and their quadrant-aware text labels. It's factored out this way because [`project_pca()`](projection.md#project_pca) needs the exact same drawing logic when projecting new data into an *existing* PCA's biplot — both functions call it identically.
+
+It works as follows. First, it normalizes the phyloseq's orientation to samples-as-rows, since `prcomp()` is run directly on the OTU table and everything downstream assumes that layout — without this, a taxa-as-rows phyloseq (an equally common convention) would silently produce a transposed, nonsensical PCA:
 
 ``` r
-pcaPlot <- function(ps, # clr transformed and filtered data
-                    colorVar, # variable from samdf to color samples by
-                    colorName, # what to display variable name as in legend
-                    nTaxa, # number of taxa to display
-                    customColors = NULL, # optional named vector of colors
-                    xPC = 1, # Principal Component for x-axis
-                    yPC = 2,  # Principal Component for y-axis
-                    ellipse = FALSE # optional add centroid ellipses 
-                    ) { 
-  
-  if ("name" %in% colnames(data.frame(ps@sam_data))) { 
-    # Prevent conflict with 'name' column
-    sample_data(ps) <- ps@sam_data %>%
-      data.frame() %>%
-      dplyr::rename(name.x = name)
-  }
-  
-  samdf <- data.frame(ps@sam_data) %>%
-    rownames_to_column(var = 'name')
-  
-  # PCA
-  pca <- prcomp(ps@otu_table, center = TRUE, scale = FALSE)
-  
-  # % variance explained
-  eigs <- pca$sdev^2
-  varExplained <- 100 * eigs / sum(eigs)
-  names(varExplained) <- paste0('PC', seq_along(varExplained))
-  
-  # Extract variance explained for specified PCs
-  ve.xPC <- as.character(round(varExplained[paste0('PC', xPC)], 3))
-  ve.yPC <- as.character(round(varExplained[paste0('PC', yPC)], 3))
-  
-  # PCA scores
-  pca.df <- data.frame(pca$x) %>% 
-    rownames_to_column(var = 'name')
-  
-  # Add back sample data
-  pca.df <- left_join(pca.df, samdf, by = "name")
-  
-  # Calculate plotting limits based on specified PCs
-  limit <- max(abs(pca.df[, c(paste0('PC', xPC), paste0('PC', yPC))])) +
-    0.05 * max(abs(pca.df[, c(paste0('PC', xPC), paste0('PC', yPC))]))
-  
-  # Initialize PCA plot
-  pca.plot <- ggplot(pca.df, aes_string(x = paste0('PC', xPC), y = paste0('PC', yPC), color = colorVar)) +
-    geom_point(size = 2, alpha = 0.5) +
-    coord_equal() +
-    labs(x = paste0('PC', xPC, ' (', ve.xPC, '%)'),
-         y = paste0('PC', yPC, ' (', ve.yPC, '%)')) + 
-    xlim(-limit, limit) + ylim(-limit, limit) +
-    theme_classic() +
-    theme(axis.line = element_line(size = 1, color = 'black'),
-          axis.ticks = element_line(color = 'black'),
-          axis.title = element_text(size = 14, face = 'bold', color = 'black'))
-  
-  # Add custom color scale if provided
-  if (!is.null(customColors)) {
-    pca.plot <- pca.plot + scale_color_manual(values = customColors)
-  }
-  
-  # Add optional ellipses
-  if (ellipse) {
-    pca.plot <- pca.plot + stat_ellipse(level = 0.95, aes_string(group = colorVar), linetype = "dashed")
-  }
-  
-  # Calculate loadings
-  V <- pca$rotation # Eigenvectors
-  L <- diag(pca$sdev) # Diagonal matrix with square roots of eigenvalues
-  loadings <- V %*% L
-  colnames(loadings) <- colnames(V)  # Assign column names to loadings
-  
-  # Get loadings for specified PCs and format for plotting
-  loadings.xy <- data.frame(loadings[, c(paste0('PC', xPC), paste0('PC', yPC))]) %>%
-    dplyr::rename(PCx = paste0('PC', xPC), PCy = paste0('PC', yPC)) %>% 
-    mutate(variable = row.names(loadings),
-           length = sqrt(PCx^2 + PCy^2),
-           ang = atan2(PCy, PCx) * (180 / pi))
-  
-  loadings.plot <- top_n(loadings.xy, nTaxa, wt = length) 
-  
-  # Adjust angles to keep labels upright
-  loadings.plot <- loadings.plot %>%
-    mutate(adj_ang = ifelse(ang < -90, ang + 180,
-                     ifelse(ang > 90, ang - 180, ang)))
-  
-  # Rename loadings with lowest taxonomic level
-  loadings.taxtab <- tax_table(ps)[row.names(loadings.plot)] %>% 
-    data.frame() 
-  loadings.taxtab <- loadings.taxtab[cbind(1:nrow(loadings.taxtab), max.col(!is.na(loadings.taxtab), ties.method = 'last'))] %>%  
-    data.frame()
-  colnames(loadings.taxtab) <- c("name")
-  loadings.taxtab$asv <- tax_table(ps)[row.names(loadings.plot)] %>% 
-    data.frame() %>% 
-    rownames()
-  
-  loadings.plot <- loadings.taxtab %>% 
-    dplyr::select(asv, name) %>% 
-    right_join(loadings.plot, by = c('asv' = 'variable'))
-  
-  # Determine the quadrant of each label
-  q1 <- filter(loadings.plot, PCx > 0 & PCy > 0)
-  q2 <- filter(loadings.plot, PCx < 0 & PCy > 0)
-  q3 <- filter(loadings.plot, PCx < 0 & PCy < 0)
-  q4 <- filter(loadings.plot, PCx > 0 & PCy < 0)
-       
-  pca.biplot <- 
-       pca.plot + 
-       geom_segment(data = loadings.plot,
-                    aes(x = 0, y = 0, 
-                        xend = PCx, yend = PCy),
-                    color = 'black',
-                    arrow = arrow(angle = 15, 
-                                  length = unit(0.1, 'inches'))) + 
-    labs(color = colorName)
-  
-  # Add geom_text for each quadrant with adjusted angle and justification
-  if (nrow(q1) != 0) {
-       pca.biplot <- pca.biplot +
-            geom_text(data = q1, aes(x = PCx, y = PCy, hjust = 0, vjust = 0, angle = adj_ang,
-                                     label = name,
-                                     fontface = 'bold'),
-                      color = 'black', show.legend = FALSE)
-  }
-  if (nrow(q2) != 0) {
-       pca.biplot <- pca.biplot +
-            geom_text(data = q2, aes(x = PCx, y = PCy, hjust = 1, vjust = 0, angle = adj_ang,
-                                     label = name,
-                                     fontface = 'bold'),
-                      color = 'black', show.legend = FALSE)
-  }
-  if (nrow(q3) != 0) {
-       pca.biplot <- pca.biplot +
-            geom_text(data = q3, aes(x = PCx, y = PCy, hjust = 1, vjust = 1, angle = adj_ang,
-                                     label = name,
-                                     fontface = 'bold'),
-                      color = 'black', show.legend = FALSE)
-  }
-  if (nrow(q4) != 0) {
-       pca.biplot <- pca.biplot +
-            geom_text(data = q4, aes(x = PCx, y = PCy, hjust = 0, vjust = 1, angle = adj_ang,
-                                     label = name,
-                                     fontface = 'bold'),
-                      color = 'black', show.legend = FALSE)
-  }
-  
-  return(list(pca.df = pca.df, pca.biplot = pca.biplot, loadings = loadings))
+if (phyloseq::taxa_are_rows(ps)) {
+  otu_samples_rows <- t(methods::as(phyloseq::otu_table(ps), "matrix"))
+  phyloseq::otu_table(ps) <- phyloseq::otu_table(otu_samples_rows, taxa_are_rows = FALSE)
 }
 ```
 
+It then renames a `name` column in your sample data if one exists (to avoid colliding with a `name` column the function adds later), and — if `bplab` is set — relocates that tax-table column to the end, so it's the one used for biplot labels.
+
+With the phyloseq prepared, it runs `prcomp()` and builds a scree table (per-PC eigenvalues, variance explained, and cumulative variance) and a matching scree plot:
+
+``` r
+pca <- stats::prcomp(ps@otu_table, center = TRUE, scale = FALSE)
+
+scree.table <- data.frame(
+  PC = paste0("PC", seq_along(varExplained)),
+  Eigenvalue = eigs,
+  VarianceExplained = varExplained,
+  CumulativeVariance = cumsum(varExplained)
+)
+```
+
+Next, it builds the base scatter plot — coloring by `colorVar` if one was given, otherwise leaving points uncolored — and layers on a custom color scale or gradient and centroid ellipses if requested. It then calculates loadings for every taxon, keeps only the top `nTaxa` by vector length, and resolves each one's label to its lowest assigned taxonomic rank:
+
+``` r
+V <- pca$rotation # Eigenvectors
+L <- diag(pca$sdev) # Diagonal matrix with square roots of eigenvalues
+loadings <- V %*% L
+loadings.plot <- dplyr::top_n(loadings.xy, nTaxa, wt = length)
+```
+
+Finally, it determines which quadrant each label falls into (so labels sit outside their arrow rather than overlapping it) and adds an arrow plus text label for each taxon, building the finished biplot on top of the base scatter plot from before, via `.pca_biplot_layer()`.
+
 ### Understanding the Output
 
-The `pcaPlot()` function returns three things: `loadings`, representing the PCA loadings; `pca.df`, representing the PCA scores; and `pca.biplot`, the PCA plot.
+`pca_plot()` returns a named list with six elements:
+
+* `pca.df` — your sample data with all PCs added as columns; the PCA scores, useful for plotting sample separation in PCA space colored by any metadata field
+* `pca.biplot` — the finished PCA biplot
+* `loadings` — a matrix of loadings in PCA space, one row per ASV and one column per principal component; the sign indicates the relationship with that PC and the absolute value indicates the strength of contribution
+* `pca.output` — the raw `prcomp()` object (standard deviations, rotation matrix, centering/scaling, and scores), for anyone who needs lower-level access than `pca.df`/`loadings` provide
+* `scree.table` — a table with one row per PC, giving its eigenvalue, percent variance explained, and cumulative variance explained; useful for deciding how many PCs are worth interpreting
+* `scree.plot` — a scree plot (variance explained vs. PC number) built from `scree.table`
 
 `loadings` should look like this:
 
@@ -241,7 +135,7 @@ Below is an example of a PCA biplot to interpret. It shows CLR-transformed trnL 
 cohort_colors <- c("A" = "#E69F00", "B" = "#56B4E9", "C" = "#009E73",
                    "D" = "#D55E00", "E" = "#CC79A7")
 
-pca <- pcaPlot(ps.filt.clr, "cohort", "Cohort", 10,
+pca <- pca_plot(ps.filt.clr, "cohort", "Cohort", 10,
                customColors = cohort_colors)
 
 pca$pca.biplot + labs(title = "PCA biplot — trnL dietary profiles")
@@ -260,3 +154,5 @@ pca$pca.biplot + labs(title = "PCA biplot — trnL dietary profiles")
 The axes show that PC1 explains 12.9% of the total variation in the data, while PC2 explains 8%; combined, they explain 20.9% of the variance.
 
 The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here the leafy greens and stems (lettuce, spinach), the flowers and brassicas (cabbage, broccoli, cauliflower), and the herbs and spices (the carrot and parsley family; cinnamon, avocados, and bay leaf) all point up and to the right. The grains and cereals (wheat and rye, corn), cacao, and the nightshades (potatoes, tomatillos, and others) point down and to the right. Bananas and plantains point almost straight down.
+
+If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see [PCA Projection](projection.md).
