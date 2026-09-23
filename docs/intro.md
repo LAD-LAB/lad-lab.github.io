@@ -8,7 +8,7 @@ DNA metabarcoding is a method for identifying the biological composition of a mi
 
 We target two markers:
 
-* **trnL** (trnL (UAA) intron, P6 loop): a chloroplast region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.
+* **trnL** (trnL (UAA) intron, P6 loop): a plastid region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.
 * **12Sv5** (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12Sv5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.
 
 Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12Sv5 dataset (animals), which are processed separately throughout the pipeline.
@@ -68,9 +68,8 @@ PCA is a dimensionality reduction technique that projects high-dimensional data 
 * **marker**: a short, standardized gene region used for identification; our lab uses trnL (plants) and 12Sv5 (animals).
 * **metabarcoding**: a method for identifying organisms in a mixed sample by sequencing a shared marker region and matching against a reference.
 * **OTU**: operational taxonomic unit; an older clustering-based approach to grouping sequences, replaced by ASVs in our pipeline.
-* **pFR**: plant FoodSeq richness; the number of distinct plant taxa detected in a sample (Aqeel et al. 2025, *Obesity*).
+* **pFR** (also **pMR**): plant FoodSeq richness; the number of distinct plant taxa detected in a sample by trnL metabarcoding. Earlier work calls the same metric plant metabarcoding richness, or pMR (pFR: Aqeel et al. 2025, *Obesity*; pMR: Petrone et al. 2023, *PNAS*).
 * **phyloseq**: an R object bundling ASV counts, taxonomy, and sample metadata into a single data structure.
-* **pMR**: plant metabarcoding richness; the number of distinct plant taxa detected in a sample by trnL metabarcoding (Petrone et al. 2023, *PNAS*).
 * **QIIME2**: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.
 * **reference database**: a curated FASTA file mapping known marker sequences to taxonomy; used for assigning species to ASVs.
 * **relative abundance**: ASV counts expressed as proportions of total sample reads, summing to 1.
