@@ -232,7 +232,7 @@ Now we will walk through `Pipeline-to-Phyloseq.Rmd`. First, install the `foodseq
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Ashish-Subramanian/foodseq.tools")
+devtools::install_github("LAD-LAB/foodseq.tools")
 ```
 
 Next, load the necessary packages. If you do not have a package installed, install it first with the function `install.packages("[package name]")`.
