@@ -1053,12 +1053,18 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#example-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Scenarios
+      
+    </span>
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#understanding-the-output" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1066,6 +1072,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1092,12 +1103,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#understanding-the-output_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1105,6 +1111,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1334,34 +1345,22 @@
 
 <h1 id="agglomerating-taxa">Agglomerating Taxa</h1>
 <p>Agglomeration groups ASVs that represent the same organism — whether because they were sequenced at slightly different lengths, assigned at different taxonomic resolutions, or are simply redundant with one another — into a single representative taxon. This step happens after <a href="pruning.html">pruning taxa</a> and before <a href="diversity.html">calculating diversity</a>, once taxa filtering, sample filtering, and pruning have already settled which ASVs and samples are in play. The approach differs by marker.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">12Sv5</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
-<p>12Sv5 agglomeration is a straightforward <code>tax_glom()</code> by <code>lowest_level</code> — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV, already computed back in <a href="taxafiltering.html">Filtering Taxa</a>. Reuse that column directly rather than recomputing it:</p>
-<div class="language-text highlight"><pre><span></span><code>```r
-ps.12S &lt;- phyloseq::tax_glom(ps.12S, taxrank = "lowest_level")
-```
-</code></pre></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">trnL</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="download-buttons" markdown>
-<a class="md-button" href="files/plan_harmonization.R">Download plan_harmonization.R</a>
-<a class="md-button" href="files/apply_harmonization.R">Download apply_harmonization.R</a>
-</div></p>
-</div>
-</div>
-</div>
-<p>trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: <code>plan_harmonization()</code> and <code>apply_asv_harmonization()</code>.</p>
+<p>trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: <strong><code>plan_harmonization()</code></strong> and <strong><code>apply_harmonization()</code></strong>, both part of the <code>foodseq.tools</code> package. Install it if you haven't already, then load it:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># install.packages("devtools")</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">"LAD-LAB/foodseq.tools"</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">library</span><span class="p">(</span><span class="n">foodseq.tools</span><span class="p">)</span>
+</span></code></pre></div>
 <h3 id="prerequisite">Prerequisite</h3>
 <p>Both functions expect the <code>taxa</code> and <code>common_name</code> columns added by <a href="commonnames.html#assign_common_names-function"><code>assign_common_names()</code></a> to already be present in your phyloseq's tax table.</p>
-<h3 id="plan_harmonization"><code>plan_harmonization()</code></h3>
-<p>After reading the function into your analysis file, run:</p>
-<p><div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">plan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span>
+<h3 id="plan_harmonization"><strong><code>plan_harmonization()</code></strong></h3>
+<p>Run:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">plan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span>
 </span></code></pre></div>
-at minimum to build a harmonization plan. The inputs of the function are:</p>
+<p>at minimum to build a harmonization plan. The inputs of the function are:</p>
 <ul>
 <li><code>ps_list</code> (required) — a single phyloseq object, or a named list of phyloseq objects if you're harmonizing across multiple sequencing batches</li>
 <li><code>source_names</code> (optional) — batch labels, one per object in <code>ps_list</code>; by default <code>names(ps_list)</code></li>
@@ -1443,9 +1442,30 @@ at minimum to build a harmonization plan. The inputs of the function are:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">plan2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps_list2</span><span class="p">,</span><span class="w"> </span><span class="n">prior_decisions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan</span><span class="p">)</span>
 </span></code></pre></div>
 <p>This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. <code>decisions</code> in the returned plan is always the full cumulative table (everything from <code>prior_decisions</code> plus whatever this round resolved) — ready to pass straight back in as <code>prior_decisions</code> again for the next round.</p>
-<h3 id="understanding-the-output">Understanding the Output</h3>
-<p><code>plan_harmonization()</code> returns a <code>harmonization_plan</code> object with two elements: <code>$decisions</code>, a data frame with one row per flagged pair — including the <code>scenario</code>/<code>action</code> classification, both ASVs' sequences and taxonomy, the <code>decision</code>/<code>chosen_name</code>/<code>rationale</code> columns ready to hand-edit, <code>touches_prior_decision</code> (set when <code>prior_decisions</code> was supplied and this pair touches an ASV it already resolved), and two manifest columns, <code>plan_samples</code> and <code>plan_taxa_hashes</code>, recording <code>ps_list</code>'s full original sample names and a compact hash of every original ASV — used by <code>apply_harmonization()</code>'s checkpoints below, not meant to be edited by hand; and <code>$summary</code>, a table of pair counts by scenario.</p>
-<h3 id="apply_harmonization"><code>apply_harmonization()</code></h3>
+<h4 id="example-scenarios">Example Scenarios</h4>
+<p>The scenario a pair falls into is a starting point, not the final word — here's how to reason about a few common cases you'll actually see.</p>
+<p><strong>S1 — usually a sequencing artifact, safe to auto-merge.</strong> The single most common substring pair is two otherwise-identical sequences differing by one extra base at the very start or end — for example, an extra <code>A</code> tacked onto the 5' or 3' end. This pattern is a hallmark of a sequencing or trimming artifact (an incompletely removed adapter or primer base is a common cause), not a real biological difference. That's exactly why S1 auto-merges these pairs and keeps the shorter ASV — no review needed.</p>
+<p><strong>S2 or S3 — a real insertion, worth a closer look.</strong> Contrast that single-base artifact with a genuine biological insertion — for example, a handful of closely related rice (<em>Oryza</em>) species whose trnL sequences differ by a short, real insertion rather than one stray base. Whether a pair like this lands in S2 or S3 depends on whether the <em>longer</em> sequence still contains the <em>shorter</em> one as a literal, unbroken substring:</p>
+<ul>
+<li>If it does — the insertion sits entirely within one continuous stretch, so one ASV is still a substring of the other — and the two ASVs resolve to different taxonomic depths, that's <strong>S2</strong> (substring, different resolution, shared lineage).</li>
+<li>If the insertion (or other differences alongside it) breaks the substring relationship entirely, that's <strong>S3</strong> (non-substring, identical species sets).</li>
+</ul>
+<p>Either way, this is real biological signal, not noise, so it's flagged for review rather than auto-merged — you may well decide to keep these distinct.</p>
+<p><strong>Non-substring pairs that should still merge, based on what you know about the marker.</strong> Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. <em>Brassica oleracea</em> varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different <em>B. oleracea</em> varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" <code>compare_asvs()</code> detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.</p>
+<h4 id="understanding-the-output">Understanding the Output</h4>
+<p><code>plan_harmonization()</code> returns a <code>harmonization_plan</code> object with two elements:</p>
+<ul>
+<li><strong><code>$decisions</code></strong> — a data frame with one row per flagged pair:<ul>
+<li><code>scenario</code> / <code>action</code> — the classification (see the scenario table above)</li>
+<li>both ASVs' sequences and taxonomy</li>
+<li><code>decision</code> / <code>chosen_name</code> / <code>rationale</code> — ready to hand-edit</li>
+<li><code>touches_prior_decision</code> — set when <code>prior_decisions</code> was supplied and this pair touches an ASV it already resolved</li>
+<li><code>plan_samples</code> / <code>plan_taxa_hashes</code> — manifest columns recording <code>ps_list</code>'s full original sample names and a compact hash of every original ASV, used by <code>apply_harmonization()</code>'s checkpoints below; not meant to be edited by hand</li>
+</ul>
+</li>
+<li><strong><code>$summary</code></strong> — a table of pair counts by scenario</li>
+</ul>
+<h3 id="apply_harmonization"><strong><code>apply_harmonization()</code></strong></h3>
 <p>Once decisions are made — via the gadget, or by hand-editing <code>plan$decisions</code> — <code>apply_harmonization()</code> applies them to your phyloseq:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">result</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">ps</span>
@@ -1475,9 +1495,31 @@ at minimum to build a harmonization plan. The inputs of the function are:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_harmonization</span><span class="p">(</span><span class="n">ps.trnL2</span><span class="p">,</span><span class="w"> </span><span class="n">plan2</span><span class="p">,</span><span class="w"> </span><span class="n">prior_outcomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
 </span></code></pre></div>
 <p>This cumulative ledger is exactly what <a href="projection.html">PCA Projection</a> uses as a stand-in reference object — see that page for why you might want one.</p>
-<h3 id="understanding-the-output_1">Understanding the Output</h3>
-<p><code>apply_harmonization()</code> returns a list with <code>ps</code> (the corrected phyloseq), <code>taxtab</code> (its tax table as a data frame), <code>asv_outcomes</code> — the <strong>ASV ledger</strong>: one row per original ASV (as of <code>ps</code> at this call, plus anything carried forward via <code>prior_outcomes</code>), with its fate (<code>asv_status</code>: <code>"unchanged"</code> / <code>"representative"</code> / <code>"dropped after merge"</code> / <code>"unresolved"</code> — the last meaning this ASV is part of a still-blank flagged decision), <code>merged_with</code>/<code>merged_into</code> (the latter always resolved to the ultimate surviving representative), the full rank-by-rank taxonomy (one column per <code>tax_rank_cols</code> entry — enough for this table alone to stand in for a live reference object), <code>batch_source</code>, read counts, and rationale — <code>unresolved</code> (any flagged pairs still without a decision), <code>n_s2_corrected</code> (count of S2 rank-alignment corrections applied), and <code>n_manual</code> (count of flagged pairs resolved).</p>
+<h4 id="understanding-the-output_1">Understanding the Output</h4>
+<p><code>apply_harmonization()</code> returns a list with:</p>
+<ul>
+<li><strong><code>ps</code></strong> — the corrected phyloseq</li>
+<li><strong><code>taxtab</code></strong> — its tax table as a data frame</li>
+<li><strong><code>asv_outcomes</code></strong> — the <strong>ASV ledger</strong>: one row per original ASV (as of <code>ps</code> at this call, plus anything carried forward via <code>prior_outcomes</code>), including:<ul>
+<li><code>asv_status</code> — <code>"unchanged"</code> / <code>"representative"</code> / <code>"dropped after merge"</code> / <code>"unresolved"</code> (the last meaning this ASV is part of a still-blank flagged decision)</li>
+<li><code>merged_with</code> / <code>merged_into</code> — the latter always resolved to the ultimate surviving representative</li>
+<li>the full rank-by-rank taxonomy (one column per <code>tax_rank_cols</code> entry — enough for this table alone to stand in for a live reference object)</li>
+<li><code>batch_source</code>, read counts, and rationale</li>
+</ul>
+</li>
+<li><strong><code>unresolved</code></strong> — any flagged pairs still without a decision</li>
+<li><strong><code>n_s2_corrected</code></strong> — count of S2 rank-alignment corrections applied</li>
+<li><strong><code>n_manual</code></strong> — count of flagged pairs resolved</li>
+</ul>
 <p>Check <code>result$unresolved</code> for any flagged pairs that are still blank; if any remain, resolve them and re-run.</p>
+</div>
+<div class="tabbed-block">
+<p>12Sv5 agglomeration is a straightforward <code>tax_glom()</code> by <code>lowest_level</code> — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV, already computed back in <a href="taxafiltering.html">Filtering Taxa</a>.</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_glom</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">taxrank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lowest_level"</span><span class="p">)</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
 
 
 
@@ -1500,7 +1542,7 @@ at minimum to build a harmonization plan. The inputs of the function are:</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 23, 2026 18:40:18 UTC">September 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:24:48 UTC">September 25, 2026</span>
   </span>
 
     

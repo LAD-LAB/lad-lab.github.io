@@ -9,10 +9,6 @@
       
       
       
-        <link rel="prev" href="diversity.html">
-      
-      
-        <link rel="next" href="pca.html">
       
       
         
@@ -23,7 +19,7 @@
     
     
       
-        <title>Relative Abundance and CLR Transform - David Lab FoodSeq Handbook</title>
+        <title>Foodseqtools - David Lab FoodSeq Handbook</title>
       
     
     
@@ -88,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#relative-abundance-and-clr-transform" class="md-skip">
+        <a href="#foodseqtools" class="md-skip">
           Skip to content
         </a>
       
@@ -124,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Relative Abundance and CLR Transform
+              Foodseqtools
             
           </span>
         </div>
@@ -712,20 +708,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -746,7 +740,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1013,37 +1007,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Relative Abundance and CLR Transform
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="abundance.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="abundance.html" class="md-nav__link">
         
   
   
@@ -1059,48 +1026,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#calculating-relative-abundance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Calculating Relative Abundance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clr-transform" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CLR Transform
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1215,46 +1140,6 @@
   
 
 
-  <nav class="md-path" aria-label="Navigation" >
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href="index.html" class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Home
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="processing.html" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Post-Phyloseq Processing and Analysis
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
               
               <article class="md-content__inner md-typeset">
                 
@@ -1265,27 +1150,102 @@
   
 
 
-<h1 id="relative-abundance-and-clr-transform">Relative Abundance and CLR Transform</h1>
-<p>This page will instruct you in the calculation of relative abundance and the centered log-ratio (CLR) transform, and provide background on the purpose and interpretation of each. These steps are intended to follow the <a href="diversity.html">calculation of diversity</a> and precede the <a href="pca.html">creation of a PCA plot</a>.</p>
-<h2 id="calculating-relative-abundance">Calculating Relative Abundance</h2>
-<p>Relative abundance expresses each ASV's read count as a proportion of the total reads in its sample, rather than as a raw count — this makes samples with different sequencing depths comparable. </p>
-<p>Feed in your <em><em>filtered</em></em> phyloseq, so that each proportion is calculated over food reads only:</p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ps.ra</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbiome</span><span class="o">::</span><span class="nf">transform</span><span class="p">(</span><span class="n">ps.filt</span><span class="p">,</span><span class="w"> </span><span class="s">'compositional'</span><span class="p">)</span>
+<p><a href="https://github.com/user-attachments/files/32664989/foodseqtools.md">foodseqtools.md</a></p>
+<h1 id="foodseqtools">foodseq.tools</h1>
+<p><code>foodseq.tools</code> is the R package maintained by <a href="https://github.com/LAD-LAB/foodseq.tools">LAD-LAB</a> that provides nearly every custom function referenced throughout this handbook — from creating a phyloseq object all the way through PCA. If you're setting up your environment for the first time, install it here before working through the rest of the handbook; most later pages assume it's already installed and loaded.</p>
+<h2 id="installation">Installation</h2>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># install.packages("devtools")</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">"LAD-LAB/foodseq.tools"</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">library</span><span class="p">(</span><span class="n">foodseq.tools</span><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="clr-transform">CLR Transform</h2>
-<p>A center log-ratio (CLR) transformation removes the constant-sum constraint of compositional data representing relative abundances (i.e., that all components sum to 1, or 100%) and linearizes relationships while preserving relative information. This allows for plotting the PCA using Euclidean distances, equivalent to computing Aitchison distance on the original compositional data. </p>
-<p>Feed in the relative abundance phyloseq from the previous step: </p>
-<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ps.filt.clr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbiome</span><span class="o">::</span><span class="nf">transform</span><span class="p">(</span><span class="n">ps.ra</span><span class="p">,</span><span class="w"> </span><span class="s">'clr'</span><span class="p">)</span><span class="w"> </span>
-</span></code></pre></div>
-<details class="info">
-<summary>The pseudocount <code>microbiome::transform()</code> adds automatically</summary>
-</details>
-<p>A CLR transform takes the log of every value, and log(0) is undefined, so zeros have to be replaced with a small positive number first. microbiome::transform(ps, 'clr') does this automatically. It converts counts to relative abundances, takes half the smallest non-zero proportion in the whole dataset as a pseudocount, and adds that to every value (not just the zeros) before taking logs. You don't need to add a pseudocount yourself, but keep in mind:</p>
-<ul>
-<li>ps.filt.clr's values aren't simply log() of ps.ra's proportions. The pseudocount is built into every value.</li>
-<li>The pseudocount depends on your data, so filtering or subsetting samples before transforming can change it.</li>
-<li>A manual CLR won't match unless you use the same pseudocount. The common log(counts + 1) approach gives noticeably different values, especially for rare taxa. If you do it by hand, match microbiome's approach or report the pseudocount you used.</li>
-</ul>
+<h2 id="functions-used-in-this-handbook">Functions Used in This Handbook</h2>
+<p>Every function below is documented in more detail on the handbook page it's linked from.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Used in</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>process_qiime_run()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Reads the pipeline's read-tracking CSV and plots per-sample read retention across processing steps, for quality control</td>
+</tr>
+<tr>
+<td><code>join_table_seqs()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Reads the denoised QIIME2 feature table and representative sequences, replaces hash identifiers with actual sequences, and transposes to samples × ASVs</td>
+</tr>
+<tr>
+<td><code>plot_asv_length_hist()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Plots a histogram of ASV read lengths against the marker's expected length range, for quality control</td>
+</tr>
+<tr>
+<td><code>assignment_trnL()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Assigns trnL taxonomy via exact sequence matching against a reference FASTA</td>
+</tr>
+<tr>
+<td><code>assignment_12S()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Assigns 12Sv5 taxonomy via a naive Bayesian classifier</td>
+</tr>
+<tr>
+<td><code>qc_controls()</code></td>
+<td><a href="pipeline.html">Creating a Phyloseq</a></td>
+<td>Runs standard quality control checks on positive/negative controls in a phyloseq</td>
+</tr>
+<tr>
+<td><code>assign_common_names()</code></td>
+<td><a href="commonnames.html#assign_common_names-function">Assigning Common Names</a></td>
+<td>Assigns conventional common food names to ASVs from a common names CSV</td>
+</tr>
+<tr>
+<td><code>lowest_level()</code></td>
+<td><a href="taxafiltering.html">Filtering Taxa</a></td>
+<td>Adds a <code>lowest_level</code> column giving each ASV's most specific non-<code>NA</code> taxonomic rank</td>
+</tr>
+<tr>
+<td><code>plan_harmonization()</code></td>
+<td><a href="glomming.html#plan_harmonization">Agglomerating Taxa</a></td>
+<td>Detects likely-redundant trnL ASVs within or across sequencing batches and builds a review plan</td>
+</tr>
+<tr>
+<td><code>apply_harmonization()</code></td>
+<td><a href="glomming.html#apply_harmonization">Agglomerating Taxa</a></td>
+<td>Applies a harmonization plan's merge/rename decisions to a phyloseq</td>
+</tr>
+<tr>
+<td><code>pca_plot()</code></td>
+<td><a href="pca.html#pca_plot-function">Creating a PCA Plot</a></td>
+<td>Fits a PCA on a phyloseq and returns a ready-to-plot biplot</td>
+</tr>
+<tr>
+<td><code>plan_projection()</code></td>
+<td><a href="projection.html#plan_projection">PCA Projection</a></td>
+<td>Detects correspondences between a new phyloseq's ASVs and a harmonized reference's ASV space</td>
+</tr>
+<tr>
+<td><code>apply_projection()</code></td>
+<td><a href="projection.html#apply_projection">PCA Projection</a></td>
+<td>Builds a phyloseq projected into a reference's exact ASV space</td>
+</tr>
+<tr>
+<td><code>project_pca()</code></td>
+<td><a href="projection.html#project_pca">PCA Projection</a></td>
+<td>Projects new data into an existing PCA's fixed coordinate space</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Other lab packages</p>
+<p><a href="https://github.com/ammararuby/MButils"><code>MButils</code></a>, made by past lab members, is still referenced in a few places (e.g. the archived <a href="references-legacy.html">legacy reference-building workflow</a>) — see <a href="settingup.html#common-commands-and-packages">Setting Up</a> for installing it if you need it. Most of its functionality that's still in active use has since been ported into <code>foodseq.tools</code>, including <code>lowest_level()</code>.</p>
+</div>
 
 
 
@@ -1308,7 +1268,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:32:26 UTC">September 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:39:56 UTC">September 25, 2026</span>
   </span>
 
     
@@ -1318,7 +1278,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 9, 2026 19:13:05 UTC">January 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:39:56 UTC">September 25, 2026</span>
   </span>
 
     
@@ -1328,13 +1288,11 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
-        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>, 
         <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
@@ -1390,7 +1348,7 @@
                 
                 
               
-              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Relative%20Abundance%20and%20CLR%20Transform&body=Page:+/abundance.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
+              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Foodseqtools&body=Page:+/foodseqtools.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
             </div>
           
         </div>
@@ -1419,44 +1377,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="diversity.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Calculating Diversity">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Calculating Diversity
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="pca.html" class="md-footer__link md-footer__link--next" aria-label="Next: Creating a PCA Plot">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Creating a PCA Plot
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
