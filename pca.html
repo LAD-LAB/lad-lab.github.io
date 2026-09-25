@@ -1502,7 +1502,7 @@
 </span></code></pre></div>
 <details class="example">
 <summary>Extra formatting options</summary>
-<p>The biplot above adds some further formatting on top of <code>pca_plot()</code>'s own output — stretching the loading arrows for legibility, shortening long common-name labels, redrawing them as rounded background labels so they stay readable over the point cloud, and swapping the legend to numbered cohorts instead of real cohort names:</p>
+<p>The biplot below adds some further formatting on top of <code>pca_plot()</code>'s own output — stretching the loading arrows for legibility, shortening long common-name labels, redrawing them as rounded background labels so they stay readable over the point cloud, and swapping the legend to numbered cohorts instead of real cohort names:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">out</span><span class="o">$</span><span class="n">pca.biplot</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Stretch the loading arrows so they're easier to read against the point cloud</span>
@@ -1561,15 +1561,13 @@
 </details>
 <figure>
   <img alt="PCA Plot" src="images/panel_pca.png" width="600" />
-<br />
-<figcaption></figcaption>
 </figure>
+<p>The axes show that PC1 explains 8.3% of the total variation in the data, while PC2 explains 6.2%.</p>
+<p>The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here, leafy greens and cruciferous vegetables (spinach, cabbage/broccoli, lettuce) point to the right, opposite a cluster of grains, starches, and herbs (wheat and rye, corn, potatoes/tomatillos, mints/oregano) pointing left, and spices and root vegetables (cinnamon/avocados, carrots/parsnips) pointing down — suggesting these food groups tend to vary inversely with one another across the cohorts sampled here.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Cohort names have been replaced with the numbers 1–5 for this handbook. The arrow labels are the conventional common names described in <a href="commonnames.html">Assigning Common Names</a>, shortened to their first two names plus "etc." when there are more (see <code>short_name()</code> above).</p>
 </div>
-<p>The axes show that PC1 explains 8.3% of the total variation in the data, while PC2 explains 6.2%.</p>
-<p>The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here, leafy greens and cruciferous vegetables (spinach, cabbage/broccoli, lettuce) point to the right, opposite a cluster of grains, starches, and herbs (wheat and rye, corn, potatoes/tomatillos, mints/oregano) pointing left, and spices and root vegetables (cinnamon/avocados, carrots/parsnips) pointing down — suggesting these food groups tend to vary inversely with one another across the cohorts sampled here.</p>
 <p>If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see <a href="projection.html">PCA Projection</a>.</p>
 
 
@@ -1593,7 +1591,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 19:31:23 UTC">September 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 19:41:34 UTC">September 25, 2026</span>
   </span>
 
     

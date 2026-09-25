@@ -1041,6 +1041,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#plan_harmonization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        plan_harmonization()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="plan_harmonization()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reviewing-incrementally-across-batches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewing incrementally across batches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Scenarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1280,147 +1319,161 @@
 <p>Both functions expect the <code>taxa</code> and <code>common_name</code> columns added by <a href="commonnames.html#assign_common_names-function"><code>assign_common_names()</code></a> to already be present in your phyloseq's tax table.</p>
 <h3 id="overview">Overview</h3>
 <p><strong>Overview of the trnL harmonization workflow.</strong> Purple shapes show the automated pairwise comparison, in which plan_harmonization() compares every pair of ASVs and sorts it into a scenario (S1–S5) based on sequence and taxonomy. Yellow boxes are the steps that require user input: reviewing each flagged pair and, optionally, choosing a representative ASV. Everything in green is automated, including flagging pairs for review, applying the accepted decisions with apply_harmonization(), and writing the decisions log and harmonized phyloseq object. </p>
+<pre class="mermaid"><code>flowchart TD
+
+ASVI["ASV i"]
+ASVJ["ASV j"]
+
+Q1{"Substring&lt;br/&gt;match?"}
+Q2{"Shared&lt;br/&gt;lineage?"}
+Q3{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;lowest_level&lt;/span&gt;?"}
+Q4{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt; set?"}
+Q5{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt; set?"}
+Q6{"&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt;&lt;br/&gt;subset?"}
+Q7{"&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt;&lt;br/&gt;overlap?"}
+
+ASVI --&gt; Q1
+ASVJ --&gt; Q1
+
+Q1 --&gt;|yes| Q2
+Q2 --&gt;|yes| Q3
+Q3 --&gt;|yes| Q4
+Q4 --&gt;|yes| S1(("S1"))
+Q3 -.-&gt;|no| S2(("S2"))
+Q4 -.-&gt;|no| S1b(("S1b"))
+
+Q1 -.-&gt;|no| Q5
+Q5 --&gt;|yes| S3(("S3"))
+Q5 -.-&gt;|no| Q6
+Q6 --&gt;|yes| S4(("S4"))
+Q6 -.-&gt;|no| Q7
+Q7 --&gt;|yes| S5(("S5"))
+
+FLAG["Flagged for&lt;br/&gt;manual review"]
+S2 --&gt; FLAG
+S1b --&gt; FLAG
+S3 --&gt; FLAG
+S4 --&gt; FLAG
+S5 --&gt; FLAG
+
+REVIEW["&lt;b&gt;Interactive review&lt;/b&gt;&lt;br/&gt;Resolve each flagged pair:&lt;br/&gt;merge, keep separate, or override.&lt;br/&gt;Optionally pick a representative ASV&lt;br/&gt;and record a rationale."]
+REP["&lt;b&gt;Representative ASV selection&lt;/b&gt; (optional)&lt;br/&gt;Default priority:&lt;br/&gt;1. Shortest sequence&lt;br/&gt;2. Lowest resolution&lt;br/&gt;3. Highest prevalence&lt;br/&gt;4. Highest read count"]
+APPLY["&lt;b&gt;Correction application&lt;/b&gt;&lt;br/&gt;Merges reads, aligns taxonomy,&lt;br/&gt;prunes redundant ASVs, and&lt;br/&gt;updates common names."]
+LOG[("Decisions log&lt;br/&gt;with rationale")]
+PS["Harmonized&lt;br/&gt;phyloseq object"]
+
+FLAG --&gt; REVIEW
+S1 --&gt;|not flagged| REP
+REVIEW --&gt; REP
+REVIEW -.-&gt;|record decisions| LOG
+REP --&gt; APPLY
+APPLY --&gt;|apply accepted decisions| PS
+
+style FLAG fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+style REVIEW fill:#F5EEDC,stroke:#C9A96E,color:#5F4A1E
+style REP fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+style APPLY fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+style PS fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
+style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
+<h3 id="plan_harmonization"><strong><code>plan_harmonization()</code></strong></h3>
+<p>Run:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">plan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">)</span>
+</span></code></pre></div>
+<p>at minimum to build a harmonization plan. The inputs of the function are:</p>
+<ul>
+<li><code>ps_list</code> (required) — a single phyloseq object, or a named list of phyloseq objects if you're harmonizing across multiple sequencing batches</li>
+<li><code>source_names</code> (optional) — batch labels, one per object in <code>ps_list</code>; by default <code>names(ps_list)</code></li>
+<li><code>min_overlap</code> (optional) — the species-set overlap threshold for flagging non-substring pairs; by default <code>0.01</code></li>
+<li><code>flag_common_name</code> (optional) — whether to also flag pairs that share a common name despite low species-set overlap; by default <code>FALSE</code></li>
+<li><code>verbose</code> (optional) — whether to print a scenario summary to the console; by default <code>TRUE</code></li>
+<li><code>tax_rank_cols</code> (optional) — character vector of formal taxonomic rank column names; inferred from the phyloseq's tax table when <code>NULL</code></li>
+<li><code>save_path</code> (optional) — a file path to immediately write <code>$decisions</code> to as a CSV; by default <code>NULL</code> (not written)</li>
+<li><code>prior_decisions</code> (optional) — decisions from an earlier <code>plan_harmonization()</code> round on a related set of objects (its return value, <code>$decisions</code> directly, or a path to a saved CSV); by default <code>NULL</code>, meaning every pair is reviewed fresh. See "Reviewing incrementally across batches" below.</li>
+</ul>
+<p>Internally, <code>plan_harmonization()</code> relies on two helper functions: <code>compare_asvs()</code>, which does the actual pairwise ASV comparison (using its own internal helpers — <code>parse_species_set()</code>, <code>strip_infraspecific()</code>, and <code>taxa_set_relation()</code> — to parse and compare species sets), and <code>resolve_conflicts_interactive()</code>, the review gadget, which has its own internal helpers (e.g. <code>default_name()</code>, <code>do_merge_groups()</code>, <code>pair_info()</code>) for managing the review session's state.</p>
+<p><code>plan_harmonization()</code> does its work in a few steps. First, it coerces a single phyloseq into a one-item list, since the rest of the function works over a list of batches:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">inherits</span><span class="p">(</span><span class="n">ps_list</span><span class="p">,</span><span class="w"> </span><span class="s">"phyloseq"</span><span class="p">))</span><span class="w"> </span><span class="n">ps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">ps_list</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Next, it calls <code>compare_asvs()</code> to detect redundant ASV pairs. <code>compare_asvs()</code> compares every pair of ASVs both by sequence (is one a substring of the other?) and by taxonomy (do their species sets — from the <code>taxa</code> column — match, overlap, or conflict?), then classifies each pair into a scenario:</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Meaning</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>Substring pair, identical species set</td>
+<td>Auto-merged, keeping the shorter ASV</td>
+</tr>
+<tr>
+<td>S1b</td>
+<td>Substring pair, same formal taxon, different species sets</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>Substring pair, different resolution, shared lineage</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Non-substring pair, identical species sets</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Non-substring pair, one species set a strict subset of the other</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Non-substring pair, overlapping species sets (above <code>min_overlap</code>)</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>conflict</td>
+<td>Conflicting taxonomy at the same rank</td>
+<td>Flagged for review</td>
+</tr>
+<tr>
+<td>unassigned</td>
+<td>One or both ASVs lack taxonomy</td>
+<td>Flagged for review</td>
+</tr>
+</tbody>
+</table>
+<p>Only S1 is resolved automatically; everything else needs a decision from you.</p>
+<p>If <code>prior_decisions</code> was supplied, it's checked next: a pair identical to an already-resolved row is carried forward automatically and never re-shown; a genuinely new pair that happens to touch an ASV <code>prior_decisions</code> already resolved is tagged <code>touches_prior_decision = TRUE</code> and reviewed as its own skippable category (reviewing one only ever decides whether the <em>new</em> ASV joins that established group, never anything about the group itself).</p>
+<p>Finally, it launches <code>resolve_conflicts_interactive()</code>, a Shiny gadget, so you can review every remaining flagged pair side by side and choose to merge, keep both distinct, or rename — then packages your decisions (along with the automatic S1 merges and anything carried forward from <code>prior_decisions</code>) into a <code>decisions</code> data frame:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">manual</span><span class="w">    </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">resolve_conflicts_interactive</span><span class="p">(</span><span class="n">flagged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compare_result</span><span class="o">$</span><span class="n">flagged</span><span class="p">,</span><span class="w"> </span><span class="n">compare_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compare_result</span><span class="p">,</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">                                           </span><span class="n">prior_asv_final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_asv_final</span><span class="p">,</span><span class="w"> </span><span class="n">exact_repeat_keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exact_repeat_keys</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">decisions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">.build_decisions_table</span><span class="p">(</span><span class="n">compare_result</span><span class="o">$</span><span class="n">flagged</span><span class="p">,</span><span class="w"> </span><span class="n">manual</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">                                    </span><span class="n">prior_lookup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_lookup</span><span class="p">,</span><span class="w"> </span><span class="n">prior_keep_asvs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prior_keep_asvs</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Reviewing the gadget requires the <code>shiny</code>, <code>miniUI</code>, and <code>DT</code> packages to be installed, and an interactive R session (e.g. RStudio); run non-interactively (such as inside a knitted R Markdown document), it skips review and returns every pair unresolved with a warning.</p>
+<p>If you'd rather review the flagged pairs by hand instead of using the gadget, <code>plan$decisions</code> is a plain data frame you can edit directly — each row's <code>decision</code> column takes <code>"merge_keep_i"</code>, <code>"merge_keep_j"</code>, <code>"keep_distinct"</code>, or a literal ASV sequence (when both ASVs in a pair were merged into a third, external representative), left blank if still unresolved.</p>
+<h4 id="reviewing-incrementally-across-batches">Reviewing incrementally across batches</h4>
+<p>If you harmonize new trnL batches on an ongoing basis rather than all at once, pass your previous round's plan back in as <code>prior_decisions</code>:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">plan2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">plan_harmonization</span><span class="p">(</span><span class="n">ps_list2</span><span class="p">,</span><span class="w"> </span><span class="n">prior_decisions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. <code>decisions</code> in the returned plan is always the full cumulative table (everything from <code>prior_decisions</code> plus whatever this round resolved) — ready to pass straight back in as <code>prior_decisions</code> again for the next round.</p>
+<h4 id="example-scenarios">Example Scenarios</h4>
+<p>The scenario a pair falls into is a starting point, not the final word — here's how to reason about a few common cases you'll actually see.</p>
+<p><strong>S1 — usually a sequencing artifact, safe to auto-merge.</strong> The single most common substring pair is two otherwise-identical sequences differing by one extra base at the very start or end — for example, an extra <code>A</code> tacked onto the 5' or 3' end. This pattern is a hallmark of a sequencing or trimming artifact (an incompletely removed adapter or primer base is a common cause), not a real biological difference. That's exactly why S1 auto-merges these pairs and keeps the shorter ASV — no review needed.</p>
+<p><strong>S2 or S3 — a real insertion, worth a closer look.</strong> Contrast that single-base artifact with a genuine biological insertion — for example, a handful of closely related rice (<em>Oryza</em>) species whose trnL sequences differ by a short, real insertion rather than one stray base. Whether a pair like this lands in S2 or S3 depends on whether the <em>longer</em> sequence still contains the <em>shorter</em> one as a literal, unbroken substring:</p>
+<ul>
+<li>If it does — the insertion sits entirely within one continuous stretch, so one ASV is still a substring of the other — and the two ASVs resolve to different taxonomic depths, that's <strong>S2</strong> (substring, different resolution, shared lineage).</li>
+<li>If the insertion (or other differences alongside it) breaks the substring relationship entirely, that's <strong>S3</strong> (non-substring, identical species sets).</li>
+</ul>
+<p>Either way, this is real biological signal, not noise, so it's flagged for review rather than auto-merged — you may well decide to keep these distinct.</p>
+<p><strong>Non-substring pairs that should still merge, based on what you know about the marker.</strong> Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. <em>Brassica oleracea</em> varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different <em>B. oleracea</em> varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" <code>compare_asvs()</code> detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.</p>
 </div>
 </div>
 </div>
-<pre class="mermaid"><code>    flowchart TD
-
-    ASVI["ASV i"]
-    ASVJ["ASV j"]
-
-    Q1{"Substring&lt;br/&gt;match?"}
-    Q2{"Shared&lt;br/&gt;lineage?"}
-    Q3{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;lowest_level&lt;/span&gt;?"}
-    Q4{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt; set?"}
-    Q5{"Shared&lt;br/&gt;&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt; set?"}
-    Q6{"&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt;&lt;br/&gt;subset?"}
-    Q7{"&lt;span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'&gt;taxa&lt;/span&gt;&lt;br/&gt;overlap?"}
-
-    ASVI --&gt; Q1
-    ASVJ --&gt; Q1
-
-    Q1 --&gt;|yes| Q2
-    Q2 --&gt;|yes| Q3
-    Q3 --&gt;|yes| Q4
-    Q4 --&gt;|yes| S1(("S1"))
-    Q3 -.-&gt;|no| S2(("S2"))
-    Q4 -.-&gt;|no| S1b(("S1b"))
-
-    Q1 -.-&gt;|no| Q5
-    Q5 --&gt;|yes| S3(("S3"))
-    Q5 -.-&gt;|no| Q6
-    Q6 --&gt;|yes| S4(("S4"))
-    Q6 -.-&gt;|no| Q7
-    Q7 --&gt;|yes| S5(("S5"))
-
-    FLAG["Flagged for&lt;br/&gt;manual review"]
-    S2 --&gt; FLAG
-    S1b --&gt; FLAG
-    S3 --&gt; FLAG
-    S4 --&gt; FLAG
-    S5 --&gt; FLAG
-
-    REVIEW["&lt;b&gt;Interactive review&lt;/b&gt;&lt;br/&gt;Resolve each flagged pair:&lt;br/&gt;merge, keep separate, or override.&lt;br/&gt;Optionally pick a representative ASV&lt;br/&gt;and record a rationale."]
-    REP["&lt;b&gt;Representative ASV selection&lt;/b&gt; (optional)&lt;br/&gt;Default priority:&lt;br/&gt;1. Shortest sequence&lt;br/&gt;2. Lowest resolution&lt;br/&gt;3. Highest prevalence&lt;br/&gt;4. Highest read count"]
-    APPLY["&lt;b&gt;Correction application&lt;/b&gt;&lt;br/&gt;Merges reads, aligns taxonomy,&lt;br/&gt;prunes redundant ASVs, and&lt;br/&gt;updates common names."]
-    LOG[("Decisions log&lt;br/&gt;with rationale")]
-    PS["Harmonized&lt;br/&gt;phyloseq object"]
-
-    FLAG --&gt; REVIEW
-    S1 --&gt;|not flagged| REP
-    REVIEW --&gt; REP
-    REVIEW -.-&gt;|record decisions| LOG
-    REP --&gt; APPLY
-    APPLY --&gt;|apply accepted decisions| PS
-
-    style FLAG fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
-    style REVIEW fill:#F5EEDC,stroke:#C9A96E,color:#5F4A1E
-    style REP fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
-    style APPLY fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
-    style PS fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
-    style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
-<div class="language-text highlight"><pre><span></span><code>### **`plan_harmonization()`**
-
-Run:
-
-``` r
-plan &lt;- plan_harmonization(ps.trnL)
-```
-
-at minimum to build a harmonization plan. The inputs of the function are:
-
-* `ps_list` (required) — a single phyloseq object, or a named list of phyloseq objects if you're harmonizing across multiple sequencing batches
-* `source_names` (optional) — batch labels, one per object in `ps_list`; by default `names(ps_list)`
-* `min_overlap` (optional) — the species-set overlap threshold for flagging non-substring pairs; by default `0.01`
-* `flag_common_name` (optional) — whether to also flag pairs that share a common name despite low species-set overlap; by default `FALSE`
-* `verbose` (optional) — whether to print a scenario summary to the console; by default `TRUE`
-* `tax_rank_cols` (optional) — character vector of formal taxonomic rank column names; inferred from the phyloseq's tax table when `NULL`
-* `save_path` (optional) — a file path to immediately write `$decisions` to as a CSV; by default `NULL` (not written)
-* `prior_decisions` (optional) — decisions from an earlier `plan_harmonization()` round on a related set of objects (its return value, `$decisions` directly, or a path to a saved CSV); by default `NULL`, meaning every pair is reviewed fresh. See "Reviewing incrementally across batches" below.
-
-Internally, `plan_harmonization()` relies on two helper functions: `compare_asvs()`, which does the actual pairwise ASV comparison (using its own internal helpers — `parse_species_set()`, `strip_infraspecific()`, and `taxa_set_relation()` — to parse and compare species sets), and `resolve_conflicts_interactive()`, the review gadget, which has its own internal helpers (e.g. `default_name()`, `do_merge_groups()`, `pair_info()`) for managing the review session's state.
-
-`plan_harmonization()` does its work in a few steps. First, it coerces a single phyloseq into a one-item list, since the rest of the function works over a list of batches:
-
-``` r
-if (inherits(ps_list, "phyloseq")) ps_list &lt;- list(ps_list)
-```
-
-Next, it calls `compare_asvs()` to detect redundant ASV pairs. `compare_asvs()` compares every pair of ASVs both by sequence (is one a substring of the other?) and by taxonomy (do their species sets — from the `taxa` column — match, overlap, or conflict?), then classifies each pair into a scenario:
-
-| Scenario | Meaning | What happens |
-| --- | --- | --- |
-| S1 | Substring pair, identical species set | Auto-merged, keeping the shorter ASV |
-| S1b | Substring pair, same formal taxon, different species sets | Flagged for review |
-| S2 | Substring pair, different resolution, shared lineage | Flagged for review |
-| S3 | Non-substring pair, identical species sets | Flagged for review |
-| S4 | Non-substring pair, one species set a strict subset of the other | Flagged for review |
-| S5 | Non-substring pair, overlapping species sets (above `min_overlap`) | Flagged for review |
-| conflict | Conflicting taxonomy at the same rank | Flagged for review |
-| unassigned | One or both ASVs lack taxonomy | Flagged for review |
-
-Only S1 is resolved automatically; everything else needs a decision from you.
-
-If `prior_decisions` was supplied, it's checked next: a pair identical to an already-resolved row is carried forward automatically and never re-shown; a genuinely new pair that happens to touch an ASV `prior_decisions` already resolved is tagged `touches_prior_decision = TRUE` and reviewed as its own skippable category (reviewing one only ever decides whether the *new* ASV joins that established group, never anything about the group itself).
-
-Finally, it launches `resolve_conflicts_interactive()`, a Shiny gadget, so you can review every remaining flagged pair side by side and choose to merge, keep both distinct, or rename — then packages your decisions (along with the automatic S1 merges and anything carried forward from `prior_decisions`) into a `decisions` data frame:
-
-``` r
-manual    &lt;- resolve_conflicts_interactive(flagged = compare_result$flagged, compare_result = compare_result,
-                                           prior_asv_final = prior_asv_final, exact_repeat_keys = exact_repeat_keys)
-decisions &lt;- .build_decisions_table(compare_result$flagged, manual,
-                                    prior_lookup = prior_lookup, prior_keep_asvs = prior_keep_asvs)
-```
-
-Reviewing the gadget requires the `shiny`, `miniUI`, and `DT` packages to be installed, and an interactive R session (e.g. RStudio); run non-interactively (such as inside a knitted R Markdown document), it skips review and returns every pair unresolved with a warning.
-
-If you'd rather review the flagged pairs by hand instead of using the gadget, `plan$decisions` is a plain data frame you can edit directly — each row's `decision` column takes `"merge_keep_i"`, `"merge_keep_j"`, `"keep_distinct"`, or a literal ASV sequence (when both ASVs in a pair were merged into a third, external representative), left blank if still unresolved.
-
-#### Reviewing incrementally across batches
-
-If you harmonize new trnL batches on an ongoing basis rather than all at once, pass your previous round's plan back in as `prior_decisions`:
-
-``` r
-plan2 &lt;- plan_harmonization(ps_list2, prior_decisions = plan)
-```
-
-This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. `decisions` in the returned plan is always the full cumulative table (everything from `prior_decisions` plus whatever this round resolved) — ready to pass straight back in as `prior_decisions` again for the next round.
-
-#### Example Scenarios
-
-The scenario a pair falls into is a starting point, not the final word — here's how to reason about a few common cases you'll actually see.
-
-**S1 — usually a sequencing artifact, safe to auto-merge.** The single most common substring pair is two otherwise-identical sequences differing by one extra base at the very start or end — for example, an extra `A` tacked onto the 5' or 3' end. This pattern is a hallmark of a sequencing or trimming artifact (an incompletely removed adapter or primer base is a common cause), not a real biological difference. That's exactly why S1 auto-merges these pairs and keeps the shorter ASV — no review needed.
-
-**S2 or S3 — a real insertion, worth a closer look.** Contrast that single-base artifact with a genuine biological insertion — for example, a handful of closely related rice (*Oryza*) species whose trnL sequences differ by a short, real insertion rather than one stray base. Whether a pair like this lands in S2 or S3 depends on whether the *longer* sequence still contains the *shorter* one as a literal, unbroken substring:
-
-* If it does — the insertion sits entirely within one continuous stretch, so one ASV is still a substring of the other — and the two ASVs resolve to different taxonomic depths, that's **S2** (substring, different resolution, shared lineage).
-* If the insertion (or other differences alongside it) breaks the substring relationship entirely, that's **S3** (non-substring, identical species sets).
-
-Either way, this is real biological signal, not noise, so it's flagged for review rather than auto-merged — you may well decide to keep these distinct.
-
-**Non-substring pairs that should still merge, based on what you know about the marker.** Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. *Brassica oleracea* varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different *B. oleracea* varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" `compare_asvs()` detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.
-</code></pre></div>
 <p>Here's an example of what the interactive review gadget looks like: </p>
 <div class="language-text highlight"><pre><span></span><code>&lt;figure markdown="span"&gt;
   ![resolve_conflicts_interactive() reviewing a flagged S4 pair](images/panel_harmonize_asvs.png){ width="700" }
@@ -1537,7 +1590,7 @@ Check `result$unresolved` for any flagged pairs that are still blank; if any rem
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 19:25:28 UTC">September 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 19:44:22 UTC">September 25, 2026</span>
   </span>
 
     
