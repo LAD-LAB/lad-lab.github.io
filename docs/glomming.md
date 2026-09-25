@@ -161,7 +161,7 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     **Non-substring pairs that should still merge, based on what you know about the marker.** Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. *Brassica oleracea* varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different *B. oleracea* varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" `compare_asvs()` detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.
 
-Here's an example of what the interactive review gadget looks like: 
+    Here's an example of what the interactive review gadget looks like: 
 
     <figure markdown="span">
       ![resolve_conflicts_interactive() reviewing a flagged S4 pair](images/panel_harmonize_asvs.png){ width="700" }
@@ -173,11 +173,11 @@ Here's an example of what the interactive review gadget looks like:
     `plan_harmonization()` returns a `harmonization_plan` object with two elements:
 
     * **`$decisions`** — a data frame with one row per flagged pair:
-        * `scenario` / `action` — the classification (see the scenario table above)
-        * both ASVs' sequences and taxonomy
-        * `decision` / `chosen_name` / `rationale` — ready to hand-edit
-        * `touches_prior_decision` — set when `prior_decisions` was supplied and this pair touches an ASV it already resolved
-        * `plan_samples` / `plan_taxa_hashes` — manifest columns recording `ps_list`'s full original sample names and a compact hash of every original ASV, used by `apply_harmonization()`'s checkpoints below; not meant to be edited by hand
+    * `scenario` / `action` — the classification (see the scenario table above)
+    * both ASVs' sequences and taxonomy
+    * `decision` / `chosen_name` / `rationale` — ready to hand-edit
+    * `touches_prior_decision` — set when `prior_decisions` was supplied and this pair touches an ASV it already resolved
+    * `plan_samples` / `plan_taxa_hashes` — manifest columns recording `ps_list`'s full original sample names and a compact hash of every original ASV, used by `apply_harmonization()`'s checkpoints below; not meant to be edited by hand
     * **`$summary`** — a table of pair counts by scenario
 
     ### **`apply_harmonization()`**
