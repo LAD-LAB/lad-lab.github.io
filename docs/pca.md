@@ -135,30 +135,85 @@ The PCA plot `pca.biplot` and its interpretation will be covered in the next sec
 
 ## Interpreting the PCA Plot
 
-Below is an example of a PCA biplot to interpret. It shows CLR-transformed trnL (plant) data pooled across five cohorts, colored by cohort, with the ten longest loadings drawn as arrows. It was created with:
+Below is an example of a PCA biplot to interpret. It shows CLR-transformed trnL (plant) data pooled across five cohorts, colored by cohort, with the ten longest loadings drawn as arrows and labeled by each taxon's conventional common name. It was created with:
 
 ``` r
-cohort_colors <- c("A" = "#E69F00", "B" = "#56B4E9", "C" = "#009E73",
-                   "D" = "#D55E00", "E" = "#CC79A7")
-
-pca <- pca_plot(ps.filt.clr, "cohort", "Cohort", 10,
-               customColors = cohort_colors)
-
-pca$pca.biplot + labs(title = "PCA biplot — trnL dietary profiles")
+out <- pca_plot(ps_published_clr, colorVar = "cohort", colorName = "cohort",
+                nTaxa = 10, bplab = "common_name")
 ```
 
+??? example "Extra formatting options"
+
+    The biplot above adds some further formatting on top of `pca_plot()`'s own output — stretching the loading arrows for legibility, shortening long common-name labels, redrawing them as rounded background labels so they stay readable over the point cloud, and swapping the legend to numbered cohorts instead of real cohort names:
+
+    ``` r
+    p <- out$pca.biplot
+
+    # Stretch the loading arrows so they're easier to read against the point cloud
+    arrow_scale <- 3
+
+    # Shorten a comma-separated common name to its first n items, e.g.
+    # "cabbage, broccoli, cauliflower, kale" -> "cabbage, broccoli, etc."
+    short_name <- function(x, n = 2) {
+      parts <- strsplit(x, ",\\s*")
+      vapply(parts, function(p) {
+        p <- trimws(sub("^and ", "", p))
+        if (length(p) <= n) paste(p, collapse = ", ")
+        else paste0(paste(p[1:n], collapse = ", "), ", etc.")
+      }, character(1))
+    }
+
+    # Pull the arrow-label text layer out of the biplot so it can be shortened,
+    # stretched to match arrow_scale, and re-drawn below
+    is_text <- vapply(p$layers, function(l) inherits(l$geom, "GeomText"), logical(1))
+
+    lab_df <- bind_rows(lapply(p$layers[is_text], function(l) l$data)) %>%
+      mutate(name  = short_name(name, n = 2),
+             PCx   = PCx * arrow_scale,
+             PCy   = PCy * arrow_scale,
+             hjust = ifelse(PCx > 0, 0, 1),
+             vjust = ifelse(PCy > 0, 0, 1))
+
+    # Drop the original (unshortened, unscaled) text layer now that it's saved above
+    p$layers <- p$layers[!is_text]
+
+    # Scale the arrow segments themselves to match the stretched labels
+    seg_i <- which(vapply(p$layers, function(l) inherits(l$geom, "GeomSegment"), logical(1)))
+    p$layers[[seg_i]]$data <- p$layers[[seg_i]]$data %>%
+      mutate(PCx = PCx * arrow_scale,
+             PCy = PCy * arrow_scale)
+
+    # numbers in place of cohort names
+    cohorts    <- sort(unique(out$pca.df$cohort))
+    cohort_key <- setNames(as.character(seq_along(cohorts)), cohorts)
+
+    # Re-draw the arrow labels as bold, semi-transparent rounded background
+    # labels (rather than plain text), and apply the numbered-cohort color scale
+    biplot_final <- p +
+      geom_label(data = lab_df,
+                 aes(x = PCx, y = PCy, label = name, angle = adj_ang,
+                     hjust = hjust, vjust = vjust),
+                 fontface = "bold", color = "black",
+                 size = 3.2,
+                 fill = scales::alpha("white", 0.5),
+                 label.size = 0,
+                 label.padding = unit(0.12, "lines"),
+                 label.r = unit(0.08, "lines"),
+                 show.legend = FALSE) +
+      scale_color_viridis_d(option = "viridis", end = 0.9, labels = cohort_key)
+    ```
+
 <figure markdown="span">
-  ![PCA Plot](images/pca_biplot_light.png#only-light){ width="600" }
-  ![PCA Plot](images/pca_biplot_dark.png#only-dark){ width="600" }
+  ![PCA Plot](images/panel_pca.png){ width="600" }
   <figcaption></figcaption>
 </figure>
 
 !!! note
 
-    Cohort names have been replaced with the letters A–E for this handbook. The arrow labels are the conventional common names described in [Assigning Common Names](commonnames.md); label wrapping in the published figure was hand-tuned for a few of the longest names.
+    Cohort names have been replaced with the numbers 1–5 for this handbook. The arrow labels are the conventional common names described in [Assigning Common Names](commonnames.md), shortened to their first two names plus "etc." when there are more (see `short_name()` above).
 
-The axes show that PC1 explains 12.9% of the total variation in the data, while PC2 explains 8%; combined, they explain 20.9% of the variance.
+The axes show that PC1 explains 8.3% of the total variation in the data, while PC2 explains 6.2%.
 
-The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here the leafy greens and stems (lettuce, spinach), the flowers and brassicas (cabbage, broccoli, cauliflower), and the herbs and spices (the carrot and parsley family; cinnamon, avocados, and bay leaf) all point up and to the right. The grains and cereals (wheat and rye, corn), cacao, and the nightshades (potatoes, tomatillos, and others) point down and to the right. Bananas and plantains point almost straight down.
+The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here, leafy greens and cruciferous vegetables (spinach, cabbage/broccoli, lettuce) point to the right, opposite a cluster of grains, starches, and herbs (wheat and rye, corn, potatoes/tomatillos, mints/oregano) pointing left, and spices and root vegetables (cinnamon/avocados, carrots/parsnips) pointing down — suggesting these food groups tend to vary inversely with one another across the cohorts sampled here.
 
 If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see [PCA Projection](projection.md).

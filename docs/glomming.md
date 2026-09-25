@@ -17,6 +17,68 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     Both functions expect the `taxa` and `common_name` columns added by [`assign_common_names()`](commonnames.md#assign_common_names-function) to already be present in your phyloseq's tax table.
 
+    ### Overview
+    **Overview of the trnL harmonization workflow.** Purple shapes show the automated pairwise comparison, in which plan_harmonization() compares every pair of ASVs and sorts it into a scenario (S1–S5) based on sequence and taxonomy. Yellow boxes are the steps that require user input: reviewing each flagged pair and, optionally, choosing a representative ASV. Everything in green is automated, including flagging pairs for review, applying the accepted decisions with apply_harmonization(), and writing the decisions log and harmonized phyloseq object. 
+
+``` mermaid
+    flowchart TD
+    
+    ASVI["ASV i"]
+    ASVJ["ASV j"]
+    
+    Q1{"Substring<br/>match?"}
+    Q2{"Shared<br/>lineage?"}
+    Q3{"Shared<br/><span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'>lowest_level</span>?"}
+    Q4{"Shared<br/><span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'>taxa</span> set?"}
+    Q5{"Shared<br/><span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'>taxa</span> set?"}
+    Q6{"<span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'>taxa</span><br/>subset?"}
+    Q7{"<span style='font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:rgba(175,184,193,0.2);padding:0.2em 0.4em;border-radius:6px'>taxa</span><br/>overlap?"}
+    
+    ASVI --> Q1
+    ASVJ --> Q1
+    
+    Q1 -->|yes| Q2
+    Q2 -->|yes| Q3
+    Q3 -->|yes| Q4
+    Q4 -->|yes| S1(("S1"))
+    Q3 -.->|no| S2(("S2"))
+    Q4 -.->|no| S1b(("S1b"))
+    
+    Q1 -.->|no| Q5
+    Q5 -->|yes| S3(("S3"))
+    Q5 -.->|no| Q6
+    Q6 -->|yes| S4(("S4"))
+    Q6 -.->|no| Q7
+    Q7 -->|yes| S5(("S5"))
+    
+    FLAG["Flagged for<br/>manual review"]
+    S2 --> FLAG
+    S1b --> FLAG
+    S3 --> FLAG
+    S4 --> FLAG
+    S5 --> FLAG
+    
+    REVIEW["<b>Interactive review</b><br/>Resolve each flagged pair:<br/>merge, keep separate, or override.<br/>Optionally pick a representative ASV<br/>and record a rationale."]
+    REP["<b>Representative ASV selection</b> (optional)<br/>Default priority:<br/>1. Shortest sequence<br/>2. Lowest resolution<br/>3. Highest prevalence<br/>4. Highest read count"]
+    APPLY["<b>Correction application</b><br/>Merges reads, aligns taxonomy,<br/>prunes redundant ASVs, and<br/>updates common names."]
+    LOG[("Decisions log<br/>with rationale")]
+    PS["Harmonized<br/>phyloseq object"]
+    
+    FLAG --> REVIEW
+    S1 -->|not flagged| REP
+    REVIEW --> REP
+    REVIEW -.->|record decisions| LOG
+    REP --> APPLY
+    APPLY -->|apply accepted decisions| PS
+    
+    style FLAG fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+    style REVIEW fill:#F5EEDC,stroke:#C9A96E,color:#5F4A1E
+    style REP fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+    style APPLY fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
+    style PS fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
+    style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
+```
+
     ### **`plan_harmonization()`**
 
     Run:
@@ -98,6 +160,13 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     Either way, this is real biological signal, not noise, so it's flagged for review rather than auto-merged — you may well decide to keep these distinct.
 
     **Non-substring pairs that should still merge, based on what you know about the marker.** Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. *Brassica oleracea* varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different *B. oleracea* varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" `compare_asvs()` detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.
+
+Here's an example of what the interactive review gadget looks like: 
+
+    <figure markdown="span">
+      ![resolve_conflicts_interactive() reviewing a flagged S4 pair](images/panel_harmonize_asvs.png){ width="700" }
+      <figcaption></figcaption>
+    </figure>
 
     #### Understanding the Output
 
