@@ -20,7 +20,7 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     ### Overview
     **Overview of the trnL harmonization workflow.** Purple shapes show the automated pairwise comparison, in which plan_harmonization() compares every pair of ASVs and sorts it into a scenario (S1–S5) based on sequence and taxonomy. Yellow boxes are the steps that require user input: reviewing each flagged pair and, optionally, choosing a representative ASV. Everything in green is automated, including flagging pairs for review, applying the accepted decisions with apply_harmonization(), and writing the decisions log and harmonized phyloseq object. 
 
-``` mermaid
+    ``` mermaid
     flowchart TD
     
     ASVI["ASV i"]
@@ -77,7 +77,7 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     style APPLY fill:#C8E0C9,stroke:#2C5F2D,color:#1E3A1F
     style PS fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
     style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E
-```
+    ```
 
     ### **`plan_harmonization()`**
 

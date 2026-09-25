@@ -144,7 +144,7 @@ out <- pca_plot(ps_published_clr, colorVar = "cohort", colorName = "cohort",
 
 ??? example "Extra formatting options"
 
-    The biplot above adds some further formatting on top of `pca_plot()`'s own output — stretching the loading arrows for legibility, shortening long common-name labels, redrawing them as rounded background labels so they stay readable over the point cloud, and swapping the legend to numbered cohorts instead of real cohort names:
+    The biplot below adds some further formatting on top of `pca_plot()`'s own output — stretching the loading arrows for legibility, shortening long common-name labels, redrawing them as rounded background labels so they stay readable over the point cloud, and swapping the legend to numbered cohorts instead of real cohort names:
 
     ``` r
     p <- out$pca.biplot
@@ -205,15 +205,14 @@ out <- pca_plot(ps_published_clr, colorVar = "cohort", colorName = "cohort",
 
 <figure markdown="span">
   ![PCA Plot](images/panel_pca.png){ width="600" }
-  <figcaption></figcaption>
 </figure>
-
-!!! note
-
-    Cohort names have been replaced with the numbers 1–5 for this handbook. The arrow labels are the conventional common names described in [Assigning Common Names](commonnames.md), shortened to their first two names plus "etc." when there are more (see `short_name()` above).
 
 The axes show that PC1 explains 8.3% of the total variation in the data, while PC2 explains 6.2%.
 
 The samples are colored by cohort. The loadings (variables contributing most to variation) are represented by arrows; the magnitude of the arrow indicates the influence of that variable on variation in the data, while the direction indicates correlation with the principal components. Samples lying in the direction an arrow points tend to have a higher-than-average CLR abundance of that taxon. Here, leafy greens and cruciferous vegetables (spinach, cabbage/broccoli, lettuce) point to the right, opposite a cluster of grains, starches, and herbs (wheat and rye, corn, potatoes/tomatillos, mints/oregano) pointing left, and spices and root vegetables (cinnamon/avocados, carrots/parsnips) pointing down — suggesting these food groups tend to vary inversely with one another across the cohorts sampled here.
+
+!!! note
+
+    Cohort names have been replaced with the numbers 1–5 for this handbook. The arrow labels are the conventional common names described in [Assigning Common Names](commonnames.md), shortened to their first two names plus "etc." when there are more (see `short_name()` above).
 
 If you have a new batch of samples you'd like to place into this same PCA — rather than fitting a new one from scratch — see [PCA Projection](projection.md).
