@@ -4,10 +4,6 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
 === "trnL"
 
-    !!! to-do
-
-        `plan_harmonization()` and `apply_harmonization()` are still under active development. This section is a first-pass draft covering how to use them; the description below will need to be revised as the functions are finalized.
-
     trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: **`plan_harmonization()`** and **`apply_harmonization()`**, both part of the `foodseq.tools` package. Install it if you haven't already, then load it:
 
     ``` r
