@@ -24,9 +24,9 @@ ps.filt.clr <- microbiome::transform(ps.ra, 'clr')
 
 ??? info "The pseudocount `microbiome::transform()` adds automatically"
 
-  A CLR transform takes the log of every value, and log(0) is undefined, so zeros have to be replaced with a small positive number first. microbiome::transform(ps, 'clr') does this automatically. It converts counts to relative abundances, takes half the smallest non-zero proportion in the whole dataset as a pseudocount, and adds that to every value (not just the zeros) before taking logs. You don't need to add a pseudocount yourself, but keep in mind:
-  
-  - ps.filt.clr's values aren't simply log() of ps.ra's proportions. The pseudocount is built into every value.
-  - The pseudocount depends on your data, so filtering or subsetting samples before transforming can change it.
-  - A manual CLR won't match unless you use the same pseudocount. The common log(counts + 1) approach gives noticeably different values, especially for rare taxa. If you do it by hand, match microbiome's approach or report the pseudocount you used.
+    A CLR transform takes the log of every value, and log(0) is undefined, so zeros have to be replaced with a small positive number first. microbiome::transform(ps, 'clr') does this automatically. It converts counts to relative abundances, takes half the smallest non-zero proportion in the whole dataset as a pseudocount, and adds that to every value (not just the zeros) before taking logs. You don't need to add a pseudocount yourself, but keep in mind:
+    
+    - ps.filt.clr's values aren't simply log() of ps.ra's proportions. The pseudocount is built into every value.
+    - The pseudocount depends on your data, so filtering or subsetting samples before transforming can change it.
+    - A manual CLR won't match unless you use the same pseudocount. The common log(counts + 1) approach gives noticeably different values, especially for rare taxa. If you do it by hand, match microbiome's approach or report the pseudocount you used.
 
