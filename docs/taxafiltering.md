@@ -66,7 +66,11 @@ After [assigning common names](commonnames.md), the next step is to remove taxa 
     manual_human_asvs <- c("ACGT...", "TGCA...")
     ps.12S <- prune_taxa(!taxa_names(ps.12S) %in% manual_human_asvs, ps.12S)
     ```
+    
+!!! note "Filtering unassigned taxa" 
 
+    It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12Sv5. This is because `assignment_trnL()` uses exact sequence matching, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12Sv5, by contrast, is assigned by `assignment_12S()`, which uses a naive Bayesian classifier and makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is `NA` at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).
+    
 ## Cohort-Specific Removals
 
 Some studies may require removing additional taxa based on the study design, after the steps above. Common examples include:
