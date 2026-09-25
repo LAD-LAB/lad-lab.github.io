@@ -18,17 +18,22 @@ Before creating a PCA plot, you must have a CLR-transformed, foods-only phyloseq
 
 ## `pca_plot()` Function
 
-<div class="download-buttons" markdown>
-[Download pca_plot.R](files/pca_plot.R){ .md-button }
-</div>
-
-After reading it into your analysis file, run:
+`pca_plot()` is part of the `foodseq.tools` package. Install it if you haven't already, then load it:
 
 ``` r
-pca_plot(ps, colorVar, colorName, nTaxa)
+# install.packages("devtools")
+devtools::install_github("LAD-LAB/foodseq.tools")
+
+library(foodseq.tools)
 ```
 
-at minimum to plot a PCA. The inputs of Ben's function are:
+Run:
+
+``` r
+pca_plot(ps)
+```
+
+at minimum to plot a PCA. The inputs of the function are:
 
 * `ps` (required) — your CLR-transformed, filtered phyloseq
 * `colorVar` (optional) — the variable from your sample metadata to color the samples by; by default `NULL` (no color grouping)
@@ -39,6 +44,7 @@ at minimum to plot a PCA. The inputs of Ben's function are:
 * `mid` (optional) — for `customGradient`, how to compute the gradient's midpoint — `"middle"` (mean of the range), `"median"`, or `"mean"`; by default `"mean"`
 * `xPC` / `yPC` (optional) — the principal components for the x-/y-axes; by default `1` / `2`
 * `ellipse` (optional) — whether to add centroid ellipses to your plot; by default `FALSE`
+* `bplab` (optional) — the name of a tax-table column to use for biplot arrow labels; by default `NULL` (falls back to each ASV's lowest assigned taxonomic rank)
 
 Internally, `pca_plot()` relies on one helper function: `.pca_biplot_layer()`, which takes a fitted PCA's rotation/eigenvalues and a base scatter plot and draws the top-`nTaxa` loading arrows and their quadrant-aware text labels. It's factored out this way because [`project_pca()`](projection.md#project_pca) needs the exact same drawing logic when projecting new data into an *existing* PCA's biplot — both functions call it identically.
 

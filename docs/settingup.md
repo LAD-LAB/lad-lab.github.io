@@ -268,7 +268,7 @@ Some commonly-used data types include:
 
 ### Common Commands and Packages
 
-Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include `dplyr`, for data manipulation, and `ggplot2`, for creating graphics, both within a collection called the tidyverse; in our lab, we also often use `MButils`, made by past lab members, and `phyloseq`, for working with phyloseq objects.
+Packages are bundles of functions created by past users, often with a common purpose, which can be loaded from repositories like CRAN or Bioconductor. Common packages include `dplyr`, for data manipulation, and `ggplot2`, for creating graphics, both within a collection called the tidyverse; in our lab, we also use `phyloseq`, for working with phyloseq objects, and [`foodseq.tools`](foodseqtools.md), maintained by LAD-LAB, which provides nearly every custom function used throughout this handbook. `MButils`, made by past lab members, is still cited in archived legacy code, and most functionality has since been ported into `foodseq.tools`.
 
 To load a package, you will first need to install it and then load it with the `library()` function. The code chunk below will demonstrate how to install a function from CRAN, Bioconductor, and GitHub respectively:
 
@@ -286,9 +286,11 @@ library(phyloseq)
 # From GitHub:
 install.packages("devtools")
 library(devtools)
-devtools::install_github("ammararuby/MButils")
-library(MButils)
+devtools::install_github("LAD-LAB/foodseq.tools")
+library(foodseq.tools)
 ```
+
+See [foodseq.tools](foodseqtools.md) for a full list of the functions it provides and where each is used in this handbook. If you also need `MButils`, install it the same way: `devtools::install_github("ammararuby/MButils")`.
 
 !!! note
 

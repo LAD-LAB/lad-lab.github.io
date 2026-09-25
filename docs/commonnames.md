@@ -181,15 +181,21 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 ## `assign_common_names()` Function
 
 <div class="download-buttons" markdown>
-[Download assign_common_names.R](files/assign_common_names.R){ .md-button }
 [Download trnL common names CSV](files/trnL_common_names.csv){ .md-button }
 </div>
 
-With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. After reading it into your analysis file, run:
+With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. `assign_common_names()` is part of the `foodseq.tools` package. Install it if you haven't already, then load it:
 
 ``` r
-source("[path/to/assign_common_names.R]")
+# install.packages("devtools")
+devtools::install_github("LAD-LAB/foodseq.tools")
 
+library(foodseq.tools)
+```
+
+Then run:
+
+``` r
 ps <- assign_common_names(ps, "[path/to/common_names.csv]")
 ```
 
