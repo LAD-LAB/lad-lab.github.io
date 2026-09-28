@@ -150,8 +150,8 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **S1 — substring pair, identical species sets → auto-merged**
     
-    `asv_i` (52 bp): `ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`<br>
-    `asv_j` (53 bp): **`A`**`ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`
+    <pre class="asv-align"><code>asv_i (52 bp)  <b>-</b>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG
+    asv_j (53 bp)  <b>A</b>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code></pre>
     
     |                   | `asv_i`                          | `asv_j`       |
     |-------------------|----------------------------------|---------------|
@@ -165,8 +165,8 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **S2 — substring pair, different resolution → flagged for review**
     
-    `asv_i` (51 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`<br>
-    `asv_j` (54 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`**`AAA`**
+    <pre class="asv-align"><code>asv_i (51 bp)  ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA<b>---</b>
+    asv_j (54 bp)  ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA<b>AAA</b></code></pre>
     
     |                   | `asv_i`                          | `asv_j`       |
     |-------------------|----------------------------------|---------------|
@@ -180,8 +180,8 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **S3 — non-substring pair, identical species sets → flagged for review**
     
-    `asv_i` (39 bp): `ATC`**`A`**`T`**`G`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`<br>
-    `asv_j` (39 bp): `ATC`**`C`**`T`**`A`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`
+    <pre class="asv-align"><code>asv_i (39 bp)  ATC<b>A</b>T<b>G</b>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG
+    asv_j (39 bp)  ATC<b>C</b>T<b>A</b>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code></pre>
     
     |                   | `asv_i`                          | `asv_j`       |
     |-------------------|----------------------------------|---------------|
@@ -195,8 +195,8 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **S4 — non-substring pair, one species set contained in the other → flagged for review**
     
-    `asv_i` (53 bp): `AATCC`**`A`**`TGTTTT`**`G`**`AGAAAACAAGCGGTTCT`**`C`**`GAA`**`C`**`TAGAA`**`C`**`CCAAAGGAAAAG`<br>
-    `asv_j` (53 bp): `AATCC`**`G`**`TGTTTT`**`A`**`AGAAAACAAGCGGTTCT`**`T`**`GAA`**`T`**`TAGAA`**`T`**`CCAAAGGAAAAG`
+    <pre class="asv-align"><code>asv_i (53 bp)  AATCC<b>A</b>TGTTTT<b>G</b>AGAAAACAAGCGGTTCT<b>C</b>GAA<b>C</b>TAGAA<b>C</b>CCAAAGGAAAAG
+    asv_j (53 bp)  AATCC<b>G</b>TGTTTT<b>A</b>AGAAAACAAGCGGTTCT<b>T</b>GAA<b>T</b>TAGAA<b>T</b>CCAAAGGAAAAG</code></pre>
     
     |                   | `asv_i`                          | `asv_j`       |
     |-------------------|----------------------------------|---------------|
@@ -206,12 +206,12 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **What differs:** The two sequences are the same length but differ by five substitutions spread along their length, so this isn't a substring pair. `asv_j`'s species set is a strict subset of `asv_i`'s.
     
-    **Merge or keep?** Both are "rice," and African rice (*O. glaberrima*) is rarely eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.
+    **Merge or keep?** Both are "rice," and African rice (*O. glaberrima*) is less commonly eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.
     
     **S5 — non-substring pair, overlapping species sets → flagged for review**
     
-    `asv_i` (48 bp): `ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAAG`<br>
-    `asv_j` (53 bp): **`CCAA`**`ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA`**`A`**`G`
+    <pre class="asv-align"><code>asv_i (48 bp)  <b>----</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>-</b>G
+    asv_j (53 bp)  <b>CCAA</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>A</b>G</code></pre>
     
     |                   | `asv_i`                          | `asv_j`       |
     |-------------------|----------------------------------|---------------|
