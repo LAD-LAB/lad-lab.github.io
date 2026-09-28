@@ -1513,8 +1513,8 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 <p>This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. <code>decisions</code> in the returned plan is always the full cumulative table (everything from <code>prior_decisions</code> plus whatever this round resolved) — ready to pass straight back in as <code>prior_decisions</code> again for the next round.</p>
 <h4 id="example-scenarios">Example Scenarios</h4>
 <p><strong>S1 — substring pair, identical species sets → auto-merged</strong></p>
-<p><code>asv_i</code> (52 bp): <code>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code><br>
-<code>asv_j</code> (53 bp): <strong><code>A</code></strong><code>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code></p>
+<p><pre class="asv-align"><code>asv_i (52 bp)  <b>-</b>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG
+asv_j (53 bp)  <b>A</b>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code></pre></p>
 <table>
 <thead>
 <tr>
@@ -1544,8 +1544,8 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 <p><strong>What differs:</strong> <code>asv_j</code> is <code>asv_i</code> with one extra base at the 5′ end, a typical sequencing or trimming artifact.</p>
 <p><strong>Merge or keep?</strong> The two ASVs have identical assignments, so merging loses no information, and the pipeline merges them automatically, keeping the shorter sequence. You can still override any auto-merge in the review gadget.</p>
 <p><strong>S2 — substring pair, different resolution → flagged for review</strong></p>
-<p><code>asv_i</code> (51 bp): <code>ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA</code><br>
-<code>asv_j</code> (54 bp): <code>ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA</code><strong><code>AAA</code></strong></p>
+<p><pre class="asv-align"><code>asv_i (51 bp)  ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA<b>---</b>
+asv_j (54 bp)  ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA<b>AAA</b></code></pre></p>
 <table>
 <thead>
 <tr>
@@ -1575,8 +1575,8 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 <p><strong>What differs:</strong> <code>asv_j</code> has three more A's at the end of a poly-A run (11 instead of 8). At first glance this looks like the S1 artifact, but the two ASVs resolve to different identities, so the pair is not auto-merged. A difference in homopolymer length can be a sequencing artifact, but it can also be the variation that let <code>asv_j</code> resolve to chamomile, and the sequences alone can't tell you which.</p>
 <p><strong>Merge or keep?</strong> Merging keeps the lower-resolution, family-level assignment, which is conservative but discards the species-level chamomile call. Keep them distinct if chamomile specifically matters to your question (for example, chamomile tea intake); merge if a broad Asteraceae herb/spice group is enough.</p>
 <p><strong>S3 — non-substring pair, identical species sets → flagged for review</strong></p>
-<p><code>asv_i</code> (39 bp): <code>ATC</code><strong><code>A</code></strong><code>T</code><strong><code>G</code></strong><code>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code><br>
-<code>asv_j</code> (39 bp): <code>ATC</code><strong><code>C</code></strong><code>T</code><strong><code>A</code></strong><code>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code></p>
+<p><pre class="asv-align"><code>asv_i (39 bp)  ATC<b>A</b>T<b>G</b>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG
+asv_j (39 bp)  ATC<b>C</b>T<b>A</b>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code></pre></p>
 <table>
 <thead>
 <tr>
@@ -1606,8 +1606,8 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 <p><strong>What differs:</strong> The two sequences are the same length and differ by two substitutions near the 5′ end, with no inserted or missing bases, so neither can be a substring of the other.</p>
 <p><strong>Merge or keep?</strong> Both ASVs have the same assignment, so this is usually an easy merge. The case for keeping them apart would be that the two variants reflect real differences between <em>B. oleracea</em> crops, but trnL doesn't reliably separate cabbage, broccoli, and cauliflower, so that's rarely worth doing.</p>
 <p><strong>S4 — non-substring pair, one species set contained in the other → flagged for review</strong></p>
-<p><code>asv_i</code> (53 bp): <code>AATCC</code><strong><code>A</code></strong><code>TGTTTT</code><strong><code>G</code></strong><code>AGAAAACAAGCGGTTCT</code><strong><code>C</code></strong><code>GAA</code><strong><code>C</code></strong><code>TAGAA</code><strong><code>C</code></strong><code>CCAAAGGAAAAG</code><br>
-<code>asv_j</code> (53 bp): <code>AATCC</code><strong><code>G</code></strong><code>TGTTTT</code><strong><code>A</code></strong><code>AGAAAACAAGCGGTTCT</code><strong><code>T</code></strong><code>GAA</code><strong><code>T</code></strong><code>TAGAA</code><strong><code>T</code></strong><code>CCAAAGGAAAAG</code></p>
+<p><pre class="asv-align"><code>asv_i (53 bp)  AATCC<b>A</b>TGTTTT<b>G</b>AGAAAACAAGCGGTTCT<b>C</b>GAA<b>C</b>TAGAA<b>C</b>CCAAAGGAAAAG
+asv_j (53 bp)  AATCC<b>G</b>TGTTTT<b>A</b>AGAAAACAAGCGGTTCT<b>T</b>GAA<b>T</b>TAGAA<b>T</b>CCAAAGGAAAAG</code></pre></p>
 <table>
 <thead>
 <tr>
@@ -1635,10 +1635,10 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 </tbody>
 </table>
 <p><strong>What differs:</strong> The two sequences are the same length but differ by five substitutions spread along their length, so this isn't a substring pair. <code>asv_j</code>'s species set is a strict subset of <code>asv_i</code>'s.</p>
-<p><strong>Merge or keep?</strong> Both are "rice," and African rice (<em>O. glaberrima</em>) is rarely eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.</p>
+<p><strong>Merge or keep?</strong> Both are "rice," and African rice (<em>O. glaberrima</em>) is less commonly eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.</p>
 <p><strong>S5 — non-substring pair, overlapping species sets → flagged for review</strong></p>
-<p><code>asv_i</code> (48 bp): <code>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAAG</code><br>
-<code>asv_j</code> (53 bp): <strong><code>CCAA</code></strong><code>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA</code><strong><code>A</code></strong><code>G</code></p>
+<p><pre class="asv-align"><code>asv_i (48 bp)  <b>----</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>-</b>G
+asv_j (53 bp)  <b>CCAA</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>A</b>G</code></pre></p>
 <table>
 <thead>
 <tr>
@@ -1762,7 +1762,7 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2026 18:45:02 UTC">September 28, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2026 18:58:42 UTC">September 28, 2026</span>
   </span>
 
     
