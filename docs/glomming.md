@@ -148,23 +148,89 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     #### Example Scenarios
 
-    The scenario a pair falls into is a starting point, not the final word — here's how to reason about a few common cases you'll actually see.
+   **S1 — substring pair, identical species sets → auto-merged**
 
-    **S1 — usually a sequencing artifact, safe to auto-merge.** The single most common substring pair is two otherwise-identical sequences differing by one extra base at the very start or end — for example, an extra `A` tacked onto the 5' or 3' end. This pattern is a hallmark of a sequencing or trimming artifact (an incompletely removed adapter or primer base is a common cause), not a real biological difference. That's exactly why S1 auto-merges these pairs and keeps the shorter ASV — no review needed.
+    `asv_i` (52 bp): `ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`<br>
+    `asv_j` (53 bp): **`A`**`ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`
+    
+    |                   | `asv_i`                          | `asv_j`       |
+    |-------------------|----------------------------------|---------------|
+    | Deepest rank      | family (*Poaceae*)               | same          |
+    | Matched taxa      | 20 *Triticum* and *Secale* species and subspecies (wheat/rye complex) | same |
+    | Common name       | "wheat and rye"                  | same          |
+    
+    **What differs:** `asv_j` is `asv_i` with one extra base at the 5′ end, a typical sequencing or trimming artifact.
+    
+    **Merge or keep?** The two ASVs have identical assignments, so merging loses no information, and the pipeline merges them automatically, keeping the shorter sequence. You can still override any auto-merge in the review gadget.
+    
+    **S2 — substring pair, different resolution → flagged for review**
+    
+    `asv_i` (51 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`<br>
+    `asv_j` (54 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`**`AAA`**
+    
+    |                   | `asv_i`                          | `asv_j`       |
+    |-------------------|----------------------------------|---------------|
+    | Deepest rank      | family (*Asteraceae*)            | species (*Matricaria chamomilla*) |
+    | Matched taxa      | 12 taxa across 10 species: yarrow, wormwood, mugwort, tarragon, tansy, feverfew, Indian chrysanthemum, and German and Roman chamomile | *M. chamomilla* only |
+    | Common name       | "tarragon, chamomile, yarrow, wormwood, mugwort, Indian chrysanthemum, and feverfew" | "chamomile" |
+    
+    **What differs:** `asv_j` has three more A's at the end of a poly-A run (11 instead of 8). At first glance this looks like the S1 artifact, but the two ASVs resolve to different identities, so the pair is not auto-merged. A difference in homopolymer length can be a sequencing artifact, but it can also be the variation that let `asv_j` resolve to chamomile, and the sequences alone can't tell you which.
+    
+    **Merge or keep?** Merging keeps the lower-resolution, family-level assignment, which is conservative but discards the species-level chamomile call. Keep them distinct if chamomile specifically matters to your question (for example, chamomile tea intake); merge if a broad Asteraceae herb/spice group is enough.
+    
+    **S3 — non-substring pair, identical species sets → flagged for review**
+    
+    `asv_i` (39 bp): `ATC`**`A`**`T`**`G`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`<br>
+    `asv_j` (39 bp): `ATC`**`C`**`T`**`A`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`
+    
+    |                   | `asv_i`                          | `asv_j`       |
+    |-------------------|----------------------------------|---------------|
+    | Deepest rank      | variety (*Brassica oleracea* var. *italica*) | same |
+    | Matched taxa      | *Brassica oleracea*              | same          |
+    | Common name       | "cabbage, broccoli, cauliflower, etc." | same    |
+    
+    **What differs:** The two sequences are the same length and differ by two substitutions near the 5′ end, with no inserted or missing bases, so neither can be a substring of the other.
+    
+    **Merge or keep?** Both ASVs have the same assignment, so this is usually an easy merge. The case for keeping them apart would be that the two variants reflect real differences between *B. oleracea* crops, but trnL doesn't reliably separate cabbage, broccoli, and cauliflower, so that's rarely worth doing.
+    
+    **S4 — non-substring pair, one species set contained in the other → flagged for review**
+    
+    `asv_i` (53 bp): `AATCC`**`A`**`TGTTTT`**`G`**`AGAAAACAAGCGGTTCT`**`C`**`GAA`**`C`**`TAGAA`**`C`**`CCAAAGGAAAAG`<br>
+    `asv_j` (53 bp): `AATCC`**`G`**`TGTTTT`**`A`**`AGAAAACAAGCGGTTCT`**`T`**`GAA`**`T`**`TAGAA`**`T`**`CCAAAGGAAAAG`
+    
+    |                   | `asv_i`                          | `asv_j`       |
+    |-------------------|----------------------------------|---------------|
+    | Deepest rank      | genus (*Oryza*)                  | species (*Oryza sativa*) |
+    | Matched taxa      | *O. glaberrima*, *O. sativa*     | *O. sativa* only |
+    | Common name       | "rice"                           | "rice"        |
+    
+    **What differs:** The two sequences are the same length but differ by five substitutions spread along their length, so this isn't a substring pair. `asv_j`'s species set is a strict subset of `asv_i`'s.
+    
+    **Merge or keep?** Both are "rice," and African rice (*O. glaberrima*) is rarely eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.
+    
+    **S5 — non-substring pair, overlapping species sets → flagged for review**
+    
+    `asv_i` (48 bp): `ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAAG`<br>
+    `asv_j` (53 bp): **`CCAA`**`ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA`**`A`**`G`
+    
+    |                   | `asv_i`                          | `asv_j`       |
+    |-------------------|----------------------------------|---------------|
+    | Deepest rank      | genus (*Ocimum*)                 | genus (*Ocimum*) |
+    | Matched taxa      | *O. basilicum*, *O. × africanum* | *O. basilicum*, *O. gratissimum* |
+    | Common name       | "basil"                          | "basil"       |
+    
+    **What differs:** `asv_j` is `asv_i` with four extra bases at the 5′ end and one extra A in the poly-A run near the 3′ end. That single extra A is the only reason this isn't caught as a substring pair. The species sets share *O. basilicum*, but each also includes a species the other lacks, which puts the pair in S5 rather than S3 or S4.
+    
+    **Merge or keep?** Both differences look like typical artifacts, and both ASVs are "basil," so merging is reasonable for most diet studies. Keep them distinct only if telling sweet basil apart from lemon basil (*O. × africanum*) or African basil (*O. gratissimum*) matters to your cohort or question.
+    
+    Deciding what to do with a flagged pair usually draws on two kinds of knowledge. General knowledge of ASVs and markers, such as what trnL can resolve for a given genus or what a sequencing artifact typically looks like, tells you whether a pair is *likely* the same organism. Cohort-specific factors, such as which species are plausible in your study population and whether merging would blur a distinction your research question needs, determine whether you'd *choose* to merge them. To support that judgment, the review gadget also shows read statistics for each ASV: total reads, the most reads in any single sample, share of all reads, and prevalence (the percentage of samples it was detected in). A low-abundance, low-prevalence variant that closely resembles a common ASV is more likely to be an artifact, while two ASVs that are both abundant and widespread are more likely to be real, distinct sequences.
+    
+    Because these decisions are judgment calls, record the reasoning behind each one in the gadget's optional rationale field. Rationales are saved with each decision in the `decisions` table that `apply_harmonization()` returns, so anyone reproducing or reviewing the analysis can see not only which pairs were merged but why.
 
-    **S2 or S3 — a real insertion, worth a closer look.** Contrast that single-base artifact with a genuine biological insertion — for example, a handful of closely related rice (*Oryza*) species whose trnL sequences differ by a short, real insertion rather than one stray base. Whether a pair like this lands in S2 or S3 depends on whether the *longer* sequence still contains the *shorter* one as a literal, unbroken substring:
-
-    * If it does — the insertion sits entirely within one continuous stretch, so one ASV is still a substring of the other — and the two ASVs resolve to different taxonomic depths, that's **S2** (substring, different resolution, shared lineage).
-    * If the insertion (or other differences alongside it) breaks the substring relationship entirely, that's **S3** (non-substring, identical species sets).
-
-    Either way, this is real biological signal, not noise, so it's flagged for review rather than auto-merged — you may well decide to keep these distinct.
-
-    **Non-substring pairs that should still merge, based on what you know about the marker.** Some pairs should be merged even though they're never flagged as S1 and aren't a substring pair at all. *Brassica oleracea* varieties (cabbage, broccoli, cauliflower, kale, and others) are a good example: trnL frequently can't distinguish between them at the varietas level, so two ASVs assigned to different *B. oleracea* varieties commonly surface as a non-substring pair (S3, S4, or S5) — yet should usually still be merged, since the "difference" `compare_asvs()` detects reflects a known resolution limit of the marker for this genus, not a distinction FoodSeq data can actually support. This is exactly the kind of call that needs domain knowledge about a marker's resolution for a given genus, which the algorithm has no way to know on its own.
-
-    Here's an example of what the interactive review gadget looks like: 
+    Here's an example of what the interactive widget looks like:
 
     <figure markdown="span">
-      ![resolve_conflicts_interactive() reviewing a flagged S4 pair](images/panel_harmonize_asvs.png){ width="700" }
+      ![resolve_conflicts_interactive() reviewing this S4 pair](images/panel_harmonize_asvs.png){ width="700" }
       <figcaption></figcaption>
     </figure>
 
