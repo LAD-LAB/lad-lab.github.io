@@ -148,6 +148,17 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     #### Example Scenarios
     
+    Deciding what to do with a flagged pair usually draws on two kinds of knowledge: **(1)** General knowledge of ASVs and markers, such as what trnL can resolve for a given genus or what a sequencing artifact typically looks like, tells you whether a pair is *likely* the same organism. **(2)** Cohort-specific factors, such as which species are plausible in your study population and whether merging would blur a distinction your research question needs, determine whether you'd *choose* to merge them. To support that judgment, the review gadget also shows read statistics for each ASV: total reads, the most reads in any single sample, percent of all reads, and prevalence (the percentage of samples it was detected in). A low-abundance, low-prevalence variant that closely resembles a common ASV is more likely to be an artifact, while two ASVs that are both abundant and widespread are more likely to be real, distinct sequences.
+    
+    Because these decisions are judgment calls, record the reasoning behind each one in the gadget's optional rationale field. Rationales are saved with each decision in the `decisions` table that `apply_harmonization()` returns, so anyone reproducing or reviewing the analysis can see not only which pairs were merged but why.
+
+    Here's an example of what the interactive widget looks like:
+
+    <figure markdown="span">
+      ![resolve_conflicts_interactive() reviewing this S4 pair](images/panel_harmonize_asvs.png){ width="700" }
+      <figcaption></figcaption>
+    </figure>
+    
     **S1 — substring pair, identical species sets → auto-merged**
     
     <pre class="asv-align"><code>asv_i (52 bp)  <b>-</b>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG
@@ -223,17 +234,6 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     
     **Merge or keep?** Both differences look like typical artifacts, and both ASVs are "basil," so merging is reasonable for most diet studies. Keep them distinct only if telling sweet basil apart from lemon basil (*O. × africanum*) or African basil (*O. gratissimum*) matters to your cohort or question.
     
-    Deciding what to do with a flagged pair usually draws on two kinds of knowledge. General knowledge of ASVs and markers, such as what trnL can resolve for a given genus or what a sequencing artifact typically looks like, tells you whether a pair is *likely* the same organism. Cohort-specific factors, such as which species are plausible in your study population and whether merging would blur a distinction your research question needs, determine whether you'd *choose* to merge them. To support that judgment, the review gadget also shows read statistics for each ASV: total reads, the most reads in any single sample, share of all reads, and prevalence (the percentage of samples it was detected in). A low-abundance, low-prevalence variant that closely resembles a common ASV is more likely to be an artifact, while two ASVs that are both abundant and widespread are more likely to be real, distinct sequences.
-    
-    Because these decisions are judgment calls, record the reasoning behind each one in the gadget's optional rationale field. Rationales are saved with each decision in the `decisions` table that `apply_harmonization()` returns, so anyone reproducing or reviewing the analysis can see not only which pairs were merged but why.
-
-    Here's an example of what the interactive widget looks like:
-
-    <figure markdown="span">
-      ![resolve_conflicts_interactive() reviewing this S4 pair](images/panel_harmonize_asvs.png){ width="700" }
-      <figcaption></figcaption>
-    </figure>
-
     #### Understanding the Output
 
     `plan_harmonization()` returns a `harmonization_plan` object with two elements:
