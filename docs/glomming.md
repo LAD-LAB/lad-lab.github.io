@@ -147,9 +147,9 @@ Agglomeration groups ASVs that represent the same organism — whether because t
     This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. `decisions` in the returned plan is always the full cumulative table (everything from `prior_decisions` plus whatever this round resolved) — ready to pass straight back in as `prior_decisions` again for the next round.
 
     #### Example Scenarios
-
+    
     **S1 — substring pair, identical species sets → auto-merged**
-
+    
     `asv_i` (52 bp): `ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`<br>
     `asv_j` (53 bp): **`A`**`ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`
     
