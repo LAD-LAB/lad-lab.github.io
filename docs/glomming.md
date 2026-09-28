@@ -148,7 +148,7 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     #### Example Scenarios
 
-   **S1 — substring pair, identical species sets → auto-merged**
+    **S1 — substring pair, identical species sets → auto-merged**
 
     `asv_i` (52 bp): `ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`<br>
     `asv_j` (53 bp): **`A`**`ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`
