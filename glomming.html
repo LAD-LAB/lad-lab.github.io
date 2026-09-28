@@ -1075,6 +1075,56 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#understanding-the-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply_harmonization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_harmonization()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="apply_harmonization()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#carrying-an-asv-ledger-across-rounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carrying an ASV ledger across rounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Output
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1306,7 +1356,7 @@
 
 <h1 id="agglomerating-taxa">Agglomerating Taxa</h1>
 <p>Agglomeration groups ASVs that represent the same organism — whether because they were sequenced at slightly different lengths, assigned at different taxonomic resolutions, or are simply redundant with one another — into a single representative taxon. This step happens after <a href="pruning.html">pruning taxa</a> and before <a href="diversity.html">calculating diversity</a>, once taxa filtering, sample filtering, and pruning have already settled which ASVs and samples are in play. The approach differs by marker.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: <strong><code>plan_harmonization()</code></strong> and <strong><code>apply_harmonization()</code></strong>, both part of the <code>foodseq.tools</code> package. Install it if you haven't already, then load it:</p>
@@ -1462,175 +1512,227 @@ style LOG fill:#CDE3CE,stroke:#2C5F2D,color:#1E5F1E</code></pre>
 </span></code></pre></div>
 <p>This keeps a continuous project's decisions consistent over time and means each new round only asks you to review what's actually new, rather than re-showing every pair from scratch. <code>decisions</code> in the returned plan is always the full cumulative table (everything from <code>prior_decisions</code> plus whatever this round resolved) — ready to pass straight back in as <code>prior_decisions</code> again for the next round.</p>
 <h4 id="example-scenarios">Example Scenarios</h4>
-</div>
-</div>
-</div>
 <p><strong>S1 — substring pair, identical species sets → auto-merged</strong></p>
-<div class="language-text highlight"><pre><span></span><code>`asv_i` (52 bp): `ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`&lt;br&gt;
-`asv_j` (53 bp): **`A`**`ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG`
-
-|                   | `asv_i`                          | `asv_j`       |
-|-------------------|----------------------------------|---------------|
-| Deepest rank      | family (*Poaceae*)               | same          |
-| Matched taxa      | 20 *Triticum* and *Secale* species and subspecies (wheat/rye complex) | same |
-| Common name       | "wheat and rye"                  | same          |
-
-**What differs:** `asv_j` is `asv_i` with one extra base at the 5′ end, a typical sequencing or trimming artifact.
-
-**Merge or keep?** The two ASVs have identical assignments, so merging loses no information, and the pipeline merges them automatically, keeping the shorter sequence. You can still override any auto-merge in the review gadget.
-
-**S2 — substring pair, different resolution → flagged for review**
-
-`asv_i` (51 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`&lt;br&gt;
-`asv_j` (54 bp): `ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA`**`AAA`**
-
-|                   | `asv_i`                          | `asv_j`       |
-|-------------------|----------------------------------|---------------|
-| Deepest rank      | family (*Asteraceae*)            | species (*Matricaria chamomilla*) |
-| Matched taxa      | 12 taxa across 10 species: yarrow, wormwood, mugwort, tarragon, tansy, feverfew, Indian chrysanthemum, and German and Roman chamomile | *M. chamomilla* only |
-| Common name       | "tarragon, chamomile, yarrow, wormwood, mugwort, Indian chrysanthemum, and feverfew" | "chamomile" |
-
-**What differs:** `asv_j` has three more A's at the end of a poly-A run (11 instead of 8). At first glance this looks like the S1 artifact, but the two ASVs resolve to different identities, so the pair is not auto-merged. A difference in homopolymer length can be a sequencing artifact, but it can also be the variation that let `asv_j` resolve to chamomile, and the sequences alone can't tell you which.
-
-**Merge or keep?** Merging keeps the lower-resolution, family-level assignment, which is conservative but discards the species-level chamomile call. Keep them distinct if chamomile specifically matters to your question (for example, chamomile tea intake); merge if a broad Asteraceae herb/spice group is enough.
-
-**S3 — non-substring pair, identical species sets → flagged for review**
-
-`asv_i` (39 bp): `ATC`**`A`**`T`**`G`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`&lt;br&gt;
-`asv_j` (39 bp): `ATC`**`C`**`T`**`A`**`GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG`
-
-|                   | `asv_i`                          | `asv_j`       |
-|-------------------|----------------------------------|---------------|
-| Deepest rank      | variety (*Brassica oleracea* var. *italica*) | same |
-| Matched taxa      | *Brassica oleracea*              | same          |
-| Common name       | "cabbage, broccoli, cauliflower, etc." | same    |
-
-**What differs:** The two sequences are the same length and differ by two substitutions near the 5′ end, with no inserted or missing bases, so neither can be a substring of the other.
-
-**Merge or keep?** Both ASVs have the same assignment, so this is usually an easy merge. The case for keeping them apart would be that the two variants reflect real differences between *B. oleracea* crops, but trnL doesn't reliably separate cabbage, broccoli, and cauliflower, so that's rarely worth doing.
-
-**S4 — non-substring pair, one species set contained in the other → flagged for review**
-
-`asv_i` (53 bp): `AATCC`**`A`**`TGTTTT`**`G`**`AGAAAACAAGCGGTTCT`**`C`**`GAA`**`C`**`TAGAA`**`C`**`CCAAAGGAAAAG`&lt;br&gt;
-`asv_j` (53 bp): `AATCC`**`G`**`TGTTTT`**`A`**`AGAAAACAAGCGGTTCT`**`T`**`GAA`**`T`**`TAGAA`**`T`**`CCAAAGGAAAAG`
-
-|                   | `asv_i`                          | `asv_j`       |
-|-------------------|----------------------------------|---------------|
-| Deepest rank      | genus (*Oryza*)                  | species (*Oryza sativa*) |
-| Matched taxa      | *O. glaberrima*, *O. sativa*     | *O. sativa* only |
-| Common name       | "rice"                           | "rice"        |
-
-**What differs:** The two sequences are the same length but differ by five substitutions spread along their length, so this isn't a substring pair. `asv_j`'s species set is a strict subset of `asv_i`'s.
-
-**Merge or keep?** Both are "rice," and African rice (*O. glaberrima*) is rarely eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.
-
-**S5 — non-substring pair, overlapping species sets → flagged for review**
-
-`asv_i` (48 bp): `ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAAG`&lt;br&gt;
-`asv_j` (53 bp): **`CCAA`**`ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA`**`A`**`G`
-
-|                   | `asv_i`                          | `asv_j`       |
-|-------------------|----------------------------------|---------------|
-| Deepest rank      | genus (*Ocimum*)                 | genus (*Ocimum*) |
-| Matched taxa      | *O. basilicum*, *O. × africanum* | *O. basilicum*, *O. gratissimum* |
-| Common name       | "basil"                          | "basil"       |
-
-**What differs:** `asv_j` is `asv_i` with four extra bases at the 5′ end and one extra A in the poly-A run near the 3′ end. That single extra A is the only reason this isn't caught as a substring pair. The species sets share *O. basilicum*, but each also includes a species the other lacks, which puts the pair in S5 rather than S3 or S4.
-
-**Merge or keep?** Both differences look like typical artifacts, and both ASVs are "basil," so merging is reasonable for most diet studies. Keep them distinct only if telling sweet basil apart from lemon basil (*O. × africanum*) or African basil (*O. gratissimum*) matters to your cohort or question.
-
-Deciding what to do with a flagged pair usually draws on two kinds of knowledge. General knowledge of ASVs and markers, such as what trnL can resolve for a given genus or what a sequencing artifact typically looks like, tells you whether a pair is *likely* the same organism. Cohort-specific factors, such as which species are plausible in your study population and whether merging would blur a distinction your research question needs, determine whether you'd *choose* to merge them. To support that judgment, the review gadget also shows read statistics for each ASV: total reads, the most reads in any single sample, share of all reads, and prevalence (the percentage of samples it was detected in). A low-abundance, low-prevalence variant that closely resembles a common ASV is more likely to be an artifact, while two ASVs that are both abundant and widespread are more likely to be real, distinct sequences.
-
-Because these decisions are judgment calls, record the reasoning behind each one in the gadget's optional rationale field. Rationales are saved with each decision in the `decisions` table that `apply_harmonization()` returns, so anyone reproducing or reviewing the analysis can see not only which pairs were merged but why.
-
-Here's an example of what the interactive widget looks like:
-
-&lt;figure markdown="span"&gt;
-  ![resolve_conflicts_interactive() reviewing this S4 pair](images/panel_harmonize_asvs.png){ width="700" }
-  &lt;figcaption&gt;&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-#### Understanding the Output
-
-`plan_harmonization()` returns a `harmonization_plan` object with two elements:
-
-* **`$decisions`** — a data frame with one row per flagged pair:
-* `scenario` / `action` — the classification (see the scenario table above)
-* both ASVs' sequences and taxonomy
-* `decision` / `chosen_name` / `rationale` — ready to hand-edit
-* `touches_prior_decision` — set when `prior_decisions` was supplied and this pair touches an ASV it already resolved
-* `plan_samples` / `plan_taxa_hashes` — manifest columns recording `ps_list`'s full original sample names and a compact hash of every original ASV, used by `apply_harmonization()`'s checkpoints below; not meant to be edited by hand
-* **`$summary`** — a table of pair counts by scenario
-
-### **`apply_harmonization()`**
-
-Once decisions are made — via the gadget, or by hand-editing `plan$decisions` — `apply_harmonization()` applies them to your phyloseq:
-
-``` r
-result  &lt;- apply_harmonization(ps.trnL, plan)
-ps.trnL &lt;- result$ps
-```
-
-at minimum to apply the plan. The inputs of the function are:
-
-* `ps` (required) — the phyloseq object (or the merged result of your `ps_list`) that was passed to `plan_harmonization()`
-* `decisions` (required) — the list returned by `plan_harmonization()`, a decisions data frame (e.g. `plan$decisions`, possibly hand-edited), or a file path to a decisions table saved as a CSV
-* `tax_rank_cols` (optional) — character vector of formal taxonomic rank column names; inferred from `ps`'s tax table when `NULL`
-* `prior_outcomes` (optional) — a prior `apply_harmonization()` result (its return value, `$asv_outcomes` directly, or a path to a saved CSV) from an earlier round on a related object; by default `NULL`. See "Carrying an ASV ledger across rounds" below.
-
-Internally, `apply_harmonization()` relies on two helper functions: `.decisions_to_vectors()`, which validates and converts the `decisions` table's `decision` column into the `keep_asvs`/`manual_updates`/`rationale` vectors used below, and `resolve_final_keep()`, defined within the function itself, which walks a chain of merge decisions (e.g. A merged into B, itself merged into C) to find each ASV's ultimate surviving representative.
-
-It works in a few steps. If `decisions` carries the `plan_samples`/`plan_taxa_hashes` manifest columns `plan_harmonization()` wrote, `ps` is checked against them first — an ASV or sample in `ps` the plan never saw is reported. Neither check ever blocks execution; both only ever `warning()`/`message()`. Then it adds a `glom_name` column to the tax table, defaulting every ASV to its own sequence — so nothing merges unless a decision says so:
-
-``` r
-taxtab$glom_name &lt;- rownames(taxtab)
-```
-
-For pairs where you chose to merge two ASVs at different taxonomic resolutions (scenario S2), it aligns the higher-resolution ASV's rank columns to match the lower-resolution one, so the surviving row is internally consistent:
-
-``` r
-taxtab[to_rename, tax_rank_cols] &lt;- taxtab[keep_asv, tax_rank_cols]
-```
-
-It then applies any names you chose during review to `glom_name`, and transfers read counts from each discarded ASV to its merge target — resolving multi-hop chains first (e.g. A merged into B, which is itself merged into C) so no reads are lost regardless of processing order — before pruning the discarded ASVs:
-
-``` r
-otu_mat[keep, ] &lt;- otu_mat[keep, ] + otu_mat[discard, ]
-# ...
-otu_mat &lt;- otu_mat[surviving, , drop = FALSE]
-```
-
-Finally, it drops the temporary `glom_name` column and, if `prior_outcomes` was supplied, upserts this round's `asv_outcomes` rows onto the prior ones (this round wins for any ASV in both) and re-resolves every `merged_into` chain across the combined table.
-
-#### Carrying an ASV ledger across rounds
-
-`ps` physically loses an ASV the moment it's pruned, so on its own `$asv_outcomes` only ever reflects the most recent round's merges. To keep a running record across every round of harmonization you've done so far, pass the previous round's result back in as `prior_outcomes`:
-
-``` r
-result2 &lt;- apply_harmonization(ps.trnL2, plan2, prior_outcomes = result)
-```
-
-This cumulative ledger is exactly what [PCA Projection](projection.md) uses as a stand-in reference object — see that page for why you might want one.
-
-#### Understanding the Output
-
-`apply_harmonization()` returns a list with:
-
-* **`ps`** — the corrected phyloseq
-* **`taxtab`** — its tax table as a data frame
-* **`asv_outcomes`** — the **ASV ledger**: one row per original ASV (as of `ps` at this call, plus anything carried forward via `prior_outcomes`), including:
-    * `asv_status` — `"unchanged"` / `"representative"` / `"dropped after merge"` / `"unresolved"` (the last meaning this ASV is part of a still-blank flagged decision)
-    * `merged_with` / `merged_into` — the latter always resolved to the ultimate surviving representative
-    * the full rank-by-rank taxonomy (one column per `tax_rank_cols` entry — enough for this table alone to stand in for a live reference object)
-    * `batch_source`, read counts, and rationale
-* **`unresolved`** — any flagged pairs still without a decision
-* **`n_s2_corrected`** — count of S2 rank-alignment corrections applied
-* **`n_manual`** — count of flagged pairs resolved
-
-Check `result$unresolved` for any flagged pairs that are still blank; if any remain, resolve them and re-run.
-</code></pre></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">12Sv5</label></div>
-<div class="tabbed-content">
+<p><code>asv_i</code> (52 bp): <code>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code><br>
+<code>asv_j</code> (53 bp): <strong><code>A</code></strong><code>ATCCGTGTTTTGAGAAAACAAGGGGTTCTCGAACTAGAATACAAAGGAAAAG</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>asv_i</code></th>
+<th><code>asv_j</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepest rank</td>
+<td>family (<em>Poaceae</em>)</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Matched taxa</td>
+<td>20 <em>Triticum</em> and <em>Secale</em> species and subspecies (wheat/rye complex)</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Common name</td>
+<td>"wheat and rye"</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What differs:</strong> <code>asv_j</code> is <code>asv_i</code> with one extra base at the 5′ end, a typical sequencing or trimming artifact.</p>
+<p><strong>Merge or keep?</strong> The two ASVs have identical assignments, so merging loses no information, and the pipeline merges them automatically, keeping the shorter sequence. You can still override any auto-merge in the review gadget.</p>
+<p><strong>S2 — substring pair, different resolution → flagged for review</strong></p>
+<p><code>asv_i</code> (51 bp): <code>ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA</code><br>
+<code>asv_j</code> (54 bp): <code>ATCACGTTTTCCGAAAACAAACAAAGGTTCAGAAAGCGAAAAGAAAAAAAA</code><strong><code>AAA</code></strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>asv_i</code></th>
+<th><code>asv_j</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepest rank</td>
+<td>family (<em>Asteraceae</em>)</td>
+<td>species (<em>Matricaria chamomilla</em>)</td>
+</tr>
+<tr>
+<td>Matched taxa</td>
+<td>12 taxa across 10 species: yarrow, wormwood, mugwort, tarragon, tansy, feverfew, Indian chrysanthemum, and German and Roman chamomile</td>
+<td><em>M. chamomilla</em> only</td>
+</tr>
+<tr>
+<td>Common name</td>
+<td>"tarragon, chamomile, yarrow, wormwood, mugwort, Indian chrysanthemum, and feverfew"</td>
+<td>"chamomile"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What differs:</strong> <code>asv_j</code> has three more A's at the end of a poly-A run (11 instead of 8). At first glance this looks like the S1 artifact, but the two ASVs resolve to different identities, so the pair is not auto-merged. A difference in homopolymer length can be a sequencing artifact, but it can also be the variation that let <code>asv_j</code> resolve to chamomile, and the sequences alone can't tell you which.</p>
+<p><strong>Merge or keep?</strong> Merging keeps the lower-resolution, family-level assignment, which is conservative but discards the species-level chamomile call. Keep them distinct if chamomile specifically matters to your question (for example, chamomile tea intake); merge if a broad Asteraceae herb/spice group is enough.</p>
+<p><strong>S3 — non-substring pair, identical species sets → flagged for review</strong></p>
+<p><code>asv_i</code> (39 bp): <code>ATC</code><strong><code>A</code></strong><code>T</code><strong><code>G</code></strong><code>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code><br>
+<code>asv_j</code> (39 bp): <code>ATC</code><strong><code>C</code></strong><code>T</code><strong><code>A</code></strong><code>GGTTACGCGAACAAACCAAAGTTTAGAAAGCGG</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>asv_i</code></th>
+<th><code>asv_j</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepest rank</td>
+<td>variety (<em>Brassica oleracea</em> var. <em>italica</em>)</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Matched taxa</td>
+<td><em>Brassica oleracea</em></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Common name</td>
+<td>"cabbage, broccoli, cauliflower, etc."</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What differs:</strong> The two sequences are the same length and differ by two substitutions near the 5′ end, with no inserted or missing bases, so neither can be a substring of the other.</p>
+<p><strong>Merge or keep?</strong> Both ASVs have the same assignment, so this is usually an easy merge. The case for keeping them apart would be that the two variants reflect real differences between <em>B. oleracea</em> crops, but trnL doesn't reliably separate cabbage, broccoli, and cauliflower, so that's rarely worth doing.</p>
+<p><strong>S4 — non-substring pair, one species set contained in the other → flagged for review</strong></p>
+<p><code>asv_i</code> (53 bp): <code>AATCC</code><strong><code>A</code></strong><code>TGTTTT</code><strong><code>G</code></strong><code>AGAAAACAAGCGGTTCT</code><strong><code>C</code></strong><code>GAA</code><strong><code>C</code></strong><code>TAGAA</code><strong><code>C</code></strong><code>CCAAAGGAAAAG</code><br>
+<code>asv_j</code> (53 bp): <code>AATCC</code><strong><code>G</code></strong><code>TGTTTT</code><strong><code>A</code></strong><code>AGAAAACAAGCGGTTCT</code><strong><code>T</code></strong><code>GAA</code><strong><code>T</code></strong><code>TAGAA</code><strong><code>T</code></strong><code>CCAAAGGAAAAG</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>asv_i</code></th>
+<th><code>asv_j</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepest rank</td>
+<td>genus (<em>Oryza</em>)</td>
+<td>species (<em>Oryza sativa</em>)</td>
+</tr>
+<tr>
+<td>Matched taxa</td>
+<td><em>O. glaberrima</em>, <em>O. sativa</em></td>
+<td><em>O. sativa</em> only</td>
+</tr>
+<tr>
+<td>Common name</td>
+<td>"rice"</td>
+<td>"rice"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What differs:</strong> The two sequences are the same length but differ by five substitutions spread along their length, so this isn't a substring pair. <code>asv_j</code>'s species set is a strict subset of <code>asv_i</code>'s.</p>
+<p><strong>Merge or keep?</strong> Both are "rice," and African rice (<em>O. glaberrima</em>) is rarely eaten outside West Africa, so most studies would merge them. Keep them distinct if your cohort plausibly eats African rice or your question needs to tell the two rice species apart.</p>
+<p><strong>S5 — non-substring pair, overlapping species sets → flagged for review</strong></p>
+<p><code>asv_i</code> (48 bp): <code>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAAG</code><br>
+<code>asv_j</code> (53 bp): <strong><code>CCAA</code></strong><code>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA</code><strong><code>A</code></strong><code>G</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>asv_i</code></th>
+<th><code>asv_j</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deepest rank</td>
+<td>genus (<em>Ocimum</em>)</td>
+<td>genus (<em>Ocimum</em>)</td>
+</tr>
+<tr>
+<td>Matched taxa</td>
+<td><em>O. basilicum</em>, <em>O. × africanum</em></td>
+<td><em>O. basilicum</em>, <em>O. gratissimum</em></td>
+</tr>
+<tr>
+<td>Common name</td>
+<td>"basil"</td>
+<td>"basil"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What differs:</strong> <code>asv_j</code> is <code>asv_i</code> with four extra bases at the 5′ end and one extra A in the poly-A run near the 3′ end. That single extra A is the only reason this isn't caught as a substring pair. The species sets share <em>O. basilicum</em>, but each also includes a species the other lacks, which puts the pair in S5 rather than S3 or S4.</p>
+<p><strong>Merge or keep?</strong> Both differences look like typical artifacts, and both ASVs are "basil," so merging is reasonable for most diet studies. Keep them distinct only if telling sweet basil apart from lemon basil (<em>O. × africanum</em>) or African basil (<em>O. gratissimum</em>) matters to your cohort or question.</p>
+<p>Deciding what to do with a flagged pair usually draws on two kinds of knowledge. General knowledge of ASVs and markers, such as what trnL can resolve for a given genus or what a sequencing artifact typically looks like, tells you whether a pair is <em>likely</em> the same organism. Cohort-specific factors, such as which species are plausible in your study population and whether merging would blur a distinction your research question needs, determine whether you'd <em>choose</em> to merge them. To support that judgment, the review gadget also shows read statistics for each ASV: total reads, the most reads in any single sample, share of all reads, and prevalence (the percentage of samples it was detected in). A low-abundance, low-prevalence variant that closely resembles a common ASV is more likely to be an artifact, while two ASVs that are both abundant and widespread are more likely to be real, distinct sequences.</p>
+<p>Because these decisions are judgment calls, record the reasoning behind each one in the gadget's optional rationale field. Rationales are saved with each decision in the <code>decisions</code> table that <code>apply_harmonization()</code> returns, so anyone reproducing or reviewing the analysis can see not only which pairs were merged but why.</p>
+<p>Here's an example of what the interactive widget looks like:</p>
+<p><figure markdown="span">
+  <img alt="resolve_conflicts_interactive() reviewing this S4 pair" src="images/panel_harmonize_asvs.png" width="700" />
+  <figcaption></figcaption>
+</figure></p>
+<h4 id="understanding-the-output">Understanding the Output</h4>
+<p><code>plan_harmonization()</code> returns a <code>harmonization_plan</code> object with two elements:</p>
+<ul>
+<li><strong><code>$decisions</code></strong> — a data frame with one row per flagged pair:</li>
+<li><code>scenario</code> / <code>action</code> — the classification (see the scenario table above)</li>
+<li>both ASVs' sequences and taxonomy</li>
+<li><code>decision</code> / <code>chosen_name</code> / <code>rationale</code> — ready to hand-edit</li>
+<li><code>touches_prior_decision</code> — set when <code>prior_decisions</code> was supplied and this pair touches an ASV it already resolved</li>
+<li><code>plan_samples</code> / <code>plan_taxa_hashes</code> — manifest columns recording <code>ps_list</code>'s full original sample names and a compact hash of every original ASV, used by <code>apply_harmonization()</code>'s checkpoints below; not meant to be edited by hand</li>
+<li><strong><code>$summary</code></strong> — a table of pair counts by scenario</li>
+</ul>
+<h3 id="apply_harmonization"><strong><code>apply_harmonization()</code></strong></h3>
+<p>Once decisions are made — via the gadget, or by hand-editing <code>plan$decisions</code> — <code>apply_harmonization()</code> applies them to your phyloseq:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">result</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_harmonization</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">ps.trnL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="o">$</span><span class="n">ps</span>
+</span></code></pre></div>
+<p>at minimum to apply the plan. The inputs of the function are:</p>
+<ul>
+<li><code>ps</code> (required) — the phyloseq object (or the merged result of your <code>ps_list</code>) that was passed to <code>plan_harmonization()</code></li>
+<li><code>decisions</code> (required) — the list returned by <code>plan_harmonization()</code>, a decisions data frame (e.g. <code>plan$decisions</code>, possibly hand-edited), or a file path to a decisions table saved as a CSV</li>
+<li><code>tax_rank_cols</code> (optional) — character vector of formal taxonomic rank column names; inferred from <code>ps</code>'s tax table when <code>NULL</code></li>
+<li><code>prior_outcomes</code> (optional) — a prior <code>apply_harmonization()</code> result (its return value, <code>$asv_outcomes</code> directly, or a path to a saved CSV) from an earlier round on a related object; by default <code>NULL</code>. See "Carrying an ASV ledger across rounds" below.</li>
+</ul>
+<p>Internally, <code>apply_harmonization()</code> relies on two helper functions: <code>.decisions_to_vectors()</code>, which validates and converts the <code>decisions</code> table's <code>decision</code> column into the <code>keep_asvs</code>/<code>manual_updates</code>/<code>rationale</code> vectors used below, and <code>resolve_final_keep()</code>, defined within the function itself, which walks a chain of merge decisions (e.g. A merged into B, itself merged into C) to find each ASV's ultimate surviving representative.</p>
+<p>It works in a few steps. If <code>decisions</code> carries the <code>plan_samples</code>/<code>plan_taxa_hashes</code> manifest columns <code>plan_harmonization()</code> wrote, <code>ps</code> is checked against them first — an ASV or sample in <code>ps</code> the plan never saw is reported. Neither check ever blocks execution; both only ever <code>warning()</code>/<code>message()</code>. Then it adds a <code>glom_name</code> column to the tax table, defaulting every ASV to its own sequence — so nothing merges unless a decision says so:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">taxtab</span><span class="o">$</span><span class="n">glom_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">taxtab</span><span class="p">)</span>
+</span></code></pre></div>
+<p>For pairs where you chose to merge two ASVs at different taxonomic resolutions (scenario S2), it aligns the higher-resolution ASV's rank columns to match the lower-resolution one, so the surviving row is internally consistent:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">taxtab</span><span class="p">[</span><span class="n">to_rename</span><span class="p">,</span><span class="w"> </span><span class="n">tax_rank_cols</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">taxtab</span><span class="p">[</span><span class="n">keep_asv</span><span class="p">,</span><span class="w"> </span><span class="n">tax_rank_cols</span><span class="p">]</span>
+</span></code></pre></div>
+<p>It then applies any names you chose during review to <code>glom_name</code>, and transfers read counts from each discarded ASV to its merge target — resolving multi-hop chains first (e.g. A merged into B, which is itself merged into C) so no reads are lost regardless of processing order — before pruning the discarded ASVs:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">otu_mat</span><span class="p">[</span><span class="n">keep</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">otu_mat</span><span class="p">[</span><span class="n">keep</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">otu_mat</span><span class="p">[</span><span class="n">discard</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># ...</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">otu_mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">otu_mat</span><span class="p">[</span><span class="n">surviving</span><span class="p">,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">drop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">]</span>
+</span></code></pre></div>
+<p>Finally, it drops the temporary <code>glom_name</code> column and, if <code>prior_outcomes</code> was supplied, upserts this round's <code>asv_outcomes</code> rows onto the prior ones (this round wins for any ASV in both) and re-resolves every <code>merged_into</code> chain across the combined table.</p>
+<h4 id="carrying-an-asv-ledger-across-rounds">Carrying an ASV ledger across rounds</h4>
+<p><code>ps</code> physically loses an ASV the moment it's pruned, so on its own <code>$asv_outcomes</code> only ever reflects the most recent round's merges. To keep a running record across every round of harmonization you've done so far, pass the previous round's result back in as <code>prior_outcomes</code>:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">result2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply_harmonization</span><span class="p">(</span><span class="n">ps.trnL2</span><span class="p">,</span><span class="w"> </span><span class="n">plan2</span><span class="p">,</span><span class="w"> </span><span class="n">prior_outcomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This cumulative ledger is exactly what <a href="projection.html">PCA Projection</a> uses as a stand-in reference object — see that page for why you might want one.</p>
+<h4 id="understanding-the-output_1">Understanding the Output</h4>
+<p><code>apply_harmonization()</code> returns a list with:</p>
+<ul>
+<li><strong><code>ps</code></strong> — the corrected phyloseq</li>
+<li><strong><code>taxtab</code></strong> — its tax table as a data frame</li>
+<li><strong><code>asv_outcomes</code></strong> — the <strong>ASV ledger</strong>: one row per original ASV (as of <code>ps</code> at this call, plus anything carried forward via <code>prior_outcomes</code>), including:<ul>
+<li><code>asv_status</code> — <code>"unchanged"</code> / <code>"representative"</code> / <code>"dropped after merge"</code> / <code>"unresolved"</code> (the last meaning this ASV is part of a still-blank flagged decision)</li>
+<li><code>merged_with</code> / <code>merged_into</code> — the latter always resolved to the ultimate surviving representative</li>
+<li>the full rank-by-rank taxonomy (one column per <code>tax_rank_cols</code> entry — enough for this table alone to stand in for a live reference object)</li>
+<li><code>batch_source</code>, read counts, and rationale</li>
+</ul>
+</li>
+<li><strong><code>unresolved</code></strong> — any flagged pairs still without a decision</li>
+<li><strong><code>n_s2_corrected</code></strong> — count of S2 rank-alignment corrections applied</li>
+<li><strong><code>n_manual</code></strong> — count of flagged pairs resolved</li>
+</ul>
+<p>Check <code>result$unresolved</code> for any flagged pairs that are still blank; if any remain, resolve them and re-run.</p>
+</div>
 <div class="tabbed-block">
 <p>12Sv5 agglomeration is a straightforward <code>tax_glom()</code> by <code>lowest_level</code> — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV, already computed back in <a href="taxafiltering.html">Filtering Taxa</a>.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_glom</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">taxrank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lowest_level"</span><span class="p">)</span>
@@ -1660,7 +1762,7 @@ Check `result$unresolved` for any flagged pairs that are still blank; if any rem
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2026 18:17:40 UTC">September 28, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2026 18:23:16 UTC">September 28, 2026</span>
   </span>
 
     
