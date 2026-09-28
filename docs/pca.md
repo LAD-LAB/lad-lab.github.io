@@ -149,11 +149,8 @@ out <- pca_plot(ps_published_clr, colorVar = "cohort", colorName = "cohort",
     ``` r
     p <- out$pca.biplot
 
-    # Stretch the loading arrows so they're easier to read against the point cloud
     arrow_scale <- 3
-
-    # Shorten a comma-separated common name to its first n items, e.g.
-    # "cabbage, broccoli, cauliflower, kale" -> "cabbage, broccoli, etc."
+    
     short_name <- function(x, n = 2) {
       parts <- strsplit(x, ",\\s*")
       vapply(parts, function(p) {
@@ -162,33 +159,27 @@ out <- pca_plot(ps_published_clr, colorVar = "cohort", colorName = "cohort",
         else paste0(paste(p[1:n], collapse = ", "), ", etc.")
       }, character(1))
     }
-
-    # Pull the arrow-label text layer out of the biplot so it can be shortened,
-    # stretched to match arrow_scale, and re-drawn below
+    
     is_text <- vapply(p$layers, function(l) inherits(l$geom, "GeomText"), logical(1))
-
+    
     lab_df <- bind_rows(lapply(p$layers[is_text], function(l) l$data)) %>%
       mutate(name  = short_name(name, n = 2),
-             PCx   = PCx * arrow_scale,
-             PCy   = PCy * arrow_scale,
+             PCx   = PCx * arrow_scale * 1.05,
+             PCy   = PCy * arrow_scale * 1.05,
              hjust = ifelse(PCx > 0, 0, 1),
-             vjust = ifelse(PCy > 0, 0, 1))
-
-    # Drop the original (unshortened, unscaled) text layer now that it's saved above
+             vjust = 0.5)
+    
     p$layers <- p$layers[!is_text]
-
-    # Scale the arrow segments themselves to match the stretched labels
+    
     seg_i <- which(vapply(p$layers, function(l) inherits(l$geom, "GeomSegment"), logical(1)))
     p$layers[[seg_i]]$data <- p$layers[[seg_i]]$data %>%
       mutate(PCx = PCx * arrow_scale,
              PCy = PCy * arrow_scale)
-
+    
     # numbers in place of cohort names
     cohorts    <- sort(unique(out$pca.df$cohort))
     cohort_key <- setNames(as.character(seq_along(cohorts)), cohorts)
-
-    # Re-draw the arrow labels as bold, semi-transparent rounded background
-    # labels (rather than plain text), and apply the numbered-cohort color scale
+    
     biplot_final <- p +
       geom_label(data = lab_df,
                  aes(x = PCx, y = PCy, label = name, angle = adj_ang,
