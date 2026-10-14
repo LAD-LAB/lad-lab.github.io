@@ -81,16 +81,16 @@ Building a reference from scratch — or picking up whatever new sequence has ac
 
         If your lab already maintains a shared `accessionTaxa.sql` build, point `SQL_PATH` at it instead of rebuilding — this skips a ~70 GB download/build.
 
-        === "Duke"
-
-            ``` r
-            SQL_PATH <- "/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql"
-            ```
-
         === "General"
 
             ``` r
             SQL_PATH <- "[/path/to/accessionTaxa.sql]"
+            ```
+
+        === "Duke"
+
+            ``` r
+            SQL_PATH <- "/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql"
             ```
 
 4. Install the required packages and set an NCBI API key. Run the **Install packages** chunk once, on first use:

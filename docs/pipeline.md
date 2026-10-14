@@ -4,96 +4,6 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
 ## In the Terminal
 
-=== "Duke"
-
-    ### Clone Repository to DCC
-
-    First, clone the mb-pipeline repository from GitHub to the DCC to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.
-
-    The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to set up a personal access token.
-
-    ``` sh
-    # Log into the DCC:
-    ssh [NetID]@dcc-login.oit.duke.edu
-
-    # Navigate to where you want to clone the repository:
-    cd /hpc/group/ldavidlab/users/[NetID]
-
-    # Clone the respository:
-    git clone https://github.com/LAD-LAB/mb-pipeline.git
-    [GitHub username]
-    [personal access token]
-    ```
-
-    ### Upload Sequencing Data to DCC
-
-    Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.
-
-    To copy the sequencing data folder from Isilon, first create a DCC folder for your project. Then, make sure you are connected to Isilon and run the following:
-
-    ``` sh
-    # Navigate to the sequencing folder on Isilon; change 2025 to the year of the sequencing run:
-    cd /Volumes/All_Staff/Sequencing/Sequencing2025/
-
-    # Copy sequencing data from Isilon to the DCC project folder:
-    scp -r [sequencing data] [NetID]@dcc-login.oit.duke.edu:/hpc/group/ldavidlab/users/[NetID]/[path/to/project/folder]
-    ```
-
-    where `[sequencing data]` is in the form `XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX`.
-
-    To this project folder, also upload a samplesheet. A template is available on GitHub and should have been copied to your DCC folder; some lab members remove unnecessary barcodes by deleting their rows, while others recommend using the full template and pruning samples in the phyloseq itself later on. You may develop a preference yourself.
-
-    ``` sh
-    scp [/path/to/samplesheet.csv] [NetID]@dcc-login.oit.duke.edu:[/path/to/project/folder]
-    ```
-
-    You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.
-
-    ### Demultiplex and Pipeline
-
-    Now, run the `demux-barcodes.sh` script with the following:
-
-    ``` sh
-    # Log into the DCC:
-    ssh [NetID]@dcc-login.oit.duke.edu
-
-    # Submit a batch job to run demux-barcodes.sh:
-    sbatch --mail-user=[NetID]@duke.edu [/path/to/demux-barcodes.sh] [/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX] [/path/to/samplesheet.csv] /hpc/group/ldavidlab/metabarcoding.sif
-    ```
-
-    Next, run the `trnL-pipeline.sh` or `12SV5-pipeline.sh` script, depending on the run:
-
-    ``` sh
-    # Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:
-    sbatch --mail-user=[NetID]@duke.edu [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] /hpc/group/ldavidlab/qiime2.sif
-    ```
-
-    Once this finishes, your file structure should look like
-
-    ```
-    └─[/DCC/path/to/]
-      ├─ XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX
-      └─ XXXXXXXX_results
-         ├─ XXXXXXXX_trnL_output or XXXXXXXX_12SV5_output
-         ├─ demultiplexed
-         │  └─ [demultiplexed .fastq.gz files]
-         └─ Reports
-            ├─ demux-barcodes-[jobid].err
-            └─ demux-barcodes-[jobid].out
-    ```
-
-    ### Count Reads (Optional)
-
-    If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
-
-    ``` sh
-    sbatch [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] /hpc/group/ldavidlab/metabarcoding.sif
-    ```
-
-    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
-
-    If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
-
 === "General"
 
     **Clone Repository to HPC**
@@ -196,27 +106,117 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
 
+=== "Duke"
+
+    ### Clone Repository to DCC
+
+    First, clone the mb-pipeline repository from GitHub to the DCC to use `demux-barcodes.sh` and either `trnL-pipeline.sh` or `12SV5-pipeline.sh` in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.
+
+    The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to set up a personal access token.
+
+    ``` sh
+    # Log into the DCC:
+    ssh [NetID]@dcc-login.oit.duke.edu
+
+    # Navigate to where you want to clone the repository:
+    cd /hpc/group/ldavidlab/users/[NetID]
+
+    # Clone the respository:
+    git clone https://github.com/LAD-LAB/mb-pipeline.git
+    [GitHub username]
+    [personal access token]
+    ```
+
+    ### Upload Sequencing Data to DCC
+
+    Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.
+
+    To copy the sequencing data folder from Isilon, first create a DCC folder for your project. Then, make sure you are connected to Isilon and run the following:
+
+    ``` sh
+    # Navigate to the sequencing folder on Isilon; change 2025 to the year of the sequencing run:
+    cd /Volumes/All_Staff/Sequencing/Sequencing2025/
+
+    # Copy sequencing data from Isilon to the DCC project folder:
+    scp -r [sequencing data] [NetID]@dcc-login.oit.duke.edu:/hpc/group/ldavidlab/users/[NetID]/[path/to/project/folder]
+    ```
+
+    where `[sequencing data]` is in the form `XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX`.
+
+    To this project folder, also upload a samplesheet. A template is available on GitHub and should have been copied to your DCC folder; some lab members remove unnecessary barcodes by deleting their rows, while others recommend using the full template and pruning samples in the phyloseq itself later on. You may develop a preference yourself.
+
+    ``` sh
+    scp [/path/to/samplesheet.csv] [NetID]@dcc-login.oit.duke.edu:[/path/to/project/folder]
+    ```
+
+    You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.
+
+    ### Demultiplex and Pipeline
+
+    Now, run the `demux-barcodes.sh` script with the following:
+
+    ``` sh
+    # Log into the DCC:
+    ssh [NetID]@dcc-login.oit.duke.edu
+
+    # Submit a batch job to run demux-barcodes.sh:
+    sbatch --mail-user=[NetID]@duke.edu [/path/to/demux-barcodes.sh] [/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX] [/path/to/samplesheet.csv] /hpc/group/ldavidlab/metabarcoding.sif
+    ```
+
+    Next, run the `trnL-pipeline.sh` or `12SV5-pipeline.sh` script, depending on the run:
+
+    ``` sh
+    # Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:
+    sbatch --mail-user=[NetID]@duke.edu [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] /hpc/group/ldavidlab/qiime2.sif
+    ```
+
+    Once this finishes, your file structure should look like
+
+    ```
+    └─[/DCC/path/to/]
+      ├─ XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX
+      └─ XXXXXXXX_results
+         ├─ XXXXXXXX_trnL_output or XXXXXXXX_12SV5_output
+         ├─ demultiplexed
+         │  └─ [demultiplexed .fastq.gz files]
+         └─ Reports
+            ├─ demux-barcodes-[jobid].err
+            └─ demux-barcodes-[jobid].out
+    ```
+
+    ### Count Reads (Optional)
+
+    If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
+
+    ``` sh
+    sbatch [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] /hpc/group/ldavidlab/metabarcoding.sif
+    ```
+
+    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
+
+    If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
+
 ## In R
 
 ### Installing and Loading Packages
 
 Create a project folder and download or duplicate a copy of `Pipeline-to-Phyloseq.Rmd` to it. You can download it directly from GitHub or through the following code:
 
-=== "Duke"
-
-    ``` sh
-    # Navigate to your Box project folder:
-    cd [/Box/path/to/project/folder]
-
-    # Download Pipeline-to-Phyloseq.Rmd from GitHub:
-    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
-    ```
-
 === "General"
 
     ``` sh
     # Navigate to your project folder:
     cd [/path/to/project/folder]
+
+    # Download Pipeline-to-Phyloseq.Rmd from GitHub:
+    wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
+    ```
+
+=== "Duke"
+
+    ``` sh
+    # Navigate to your Box project folder:
+    cd [/Box/path/to/project/folder]
 
     # Download Pipeline-to-Phyloseq.Rmd from GitHub:
     wget https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
@@ -289,17 +289,6 @@ The pipeline is designed so that all user-specific configuration is set in a sin
 
 Set the following variables to match your setup. The `project_path` should be the local folder where your trnL and 12S subfolders will be saved; its name is also used as the project name for titling plots:
 
-=== "Duke"
-
-    ``` r
-    username <- "[NetID]"
-    hpc_host <- "dcc-login.oit.duke.edu"
-    hpc_results_path <- "/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results"
-    project_path <- "/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]"
-    metadata <- "sample-metadata.csv"
-    download_mode <- "minimal"
-    ```
-
 === "General"
 
     ``` r
@@ -307,6 +296,17 @@ Set the following variables to match your setup. The `project_path` should be th
     hpc_host <- "[hpc-hostname]"
     hpc_results_path <- "[/hpc/path/to/project/YYYYMMDD_results]"
     project_path <- "[/path/to/local/project/folder]"
+    metadata <- "sample-metadata.csv"
+    download_mode <- "minimal"
+    ```
+
+=== "Duke"
+
+    ``` r
+    username <- "[NetID]"
+    hpc_host <- "dcc-login.oit.duke.edu"
+    hpc_results_path <- "/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results"
+    project_path <- "/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]"
     metadata <- "sample-metadata.csv"
     download_mode <- "minimal"
     ```

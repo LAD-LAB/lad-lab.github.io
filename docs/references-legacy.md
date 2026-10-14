@@ -121,6 +121,13 @@ Read in primers, food species, and RefSeq data for the gene of interest:
 
 Also, read in the SQL file:
 
+=== "General"
+
+    ``` r
+    # SQL reference
+    sql <- '[/path/to/accessionTaxa.sql]'
+    ```
+
 === "Duke"
 
     Make sure you are connected to Isilon:
@@ -128,13 +135,6 @@ Also, read in the SQL file:
     ``` r
     # SQL reference
     sql <- '/Volumes/All_Staff/personal_backups/ashish/ncbi_taxonomy/accessionTaxa.sql'
-    ```
-
-=== "General"
-
-    ``` r
-    # SQL reference
-    sql <- '[/path/to/accessionTaxa.sql]'
     ```
 
 ## Querying for Sequences

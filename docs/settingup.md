@@ -4,6 +4,69 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
 ## Computing Cluster
 
+=== "General"
+
+    A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use [Slurm](https://slurm.schedmd.com/) for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.
+
+    Create a folder for yourself in your lab's shared directory on the cluster, e.g. `[/hpc/path/to/lab/directory]/users/[username]`.
+
+    **Logging In**
+
+    To use your cluster, open the terminal and log in with `ssh [username]@[hpc-hostname]`. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:
+
+    ``` sh
+    (base) user@local ~ % ssh user@hpc-login.example.edu
+    Password:
+    Last login: Tue Oct  1 10:26:19 2024
+    user@hpc-login ~ $
+    ```
+
+    **SSH Keys**
+
+    You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:
+
+    ``` sh
+    ssh-keygen -t ed25519
+    ```
+
+    Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
+
+    Next, view your *public* key by running:
+
+    ``` sh
+    cat ~/.ssh/id_ed25519.pub
+    # Make sure to include .pub
+    ```
+
+    and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to `~/.ssh/authorized_keys` on the cluster directly. For more details, see the [GitHub SSH documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+    Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
+
+    ``` sh
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+    ```
+
+    and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
+
+    ``` sh
+    Host *
+    UseKeychain yes
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519
+    ```
+
+     For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
+
+    **Common Commands**
+
+    Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:
+
+    * `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`.
+        * you can receive an email notification when the job finishes running by inserting `--mail-user=[username]@[your-email]` after `sbatch`.
+        * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
+    * `squeue -u [username]` — this shows a list of jobs submitted under your username.
+    * `scancel [jobid]` — this cancels a job.
+
 === "Duke"
 
     The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit [https://oit-rc.pages.oit.duke.edu/rcsupportdocs/](https://oit-rc.pages.oit.duke.edu/rcsupportdocs/).
@@ -103,85 +166,7 @@ This page is intended to help you set up and familiarize yourself with the lab's
     * `squeue -u [NetID]` — this shows a list of jobs submitted under your NetID.
     * `scancel [jobid]` — this cancels a job.
 
-=== "General"
-
-    A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use [Slurm](https://slurm.schedmd.com/) for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.
-
-    Create a folder for yourself in your lab's shared directory on the cluster, e.g. `[/hpc/path/to/lab/directory]/users/[username]`.
-
-    **Logging In**
-
-    To use your cluster, open the terminal and log in with `ssh [username]@[hpc-hostname]`. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:
-
-    ``` sh
-    (base) user@local ~ % ssh user@hpc-login.example.edu
-    Password:
-    Last login: Tue Oct  1 10:26:19 2024
-    user@hpc-login ~ $
-    ```
-
-    **SSH Keys**
-
-    You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:
-
-    ``` sh
-    ssh-keygen -t ed25519
-    ```
-
-    Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file `~/.ssh/id_ed25519.pub`.
-
-    Next, view your *public* key by running:
-
-    ``` sh
-    cat ~/.ssh/id_ed25519.pub
-    # Make sure to include .pub
-    ```
-
-    and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to `~/.ssh/authorized_keys` on the cluster directly. For more details, see the [GitHub SSH documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
-
-    Next, set up a key manager or `ssh-agent` to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:
-
-    ``` sh
-    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-    ```
-
-    and enter your passphrase. Then, edit `~/.ssh/config` with the following lines:
-
-    ``` sh
-    Host *
-    UseKeychain yes
-    AddKeysToAgent yes
-    IdentityFile ~/.ssh/id_ed25519
-    ```
-
-     For Windows users, follow [these instructions](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement).
-
-    **Common Commands**
-
-    Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:
-
-    * `sbatch [file.sh]` — this submits a batch job to run an inputted shell script; the output should look like `Submitted batch job [jobid]`.
-        * you can receive an email notification when the job finishes running by inserting `--mail-user=[username]@[your-email]` after `sbatch`.
-        * you can schedule a job to run after another job completes by inserting `--dependency=afterok:[jobid]` after `sbatch`, where `[jobid]` is the job ID of the previous job.
-    * `squeue -u [username]` — this shows a list of jobs submitted under your username.
-    * `scancel [jobid]` — this cancels a job.
-
 ## Shared Storage
-
-=== "Duke"
-
-    We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. You must be on the DH1 (Duke Health) network to access Isilon; if you are off-site, connect via Cisco Secure Client first.
-
-    To connect to Isilon on Windows:
-
-    1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
-    2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
-    3. If prompted to sign in, enter `DHE\[NetID]` as your username.
-
-    To connect to Isilon on a Mac:
-
-    1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
-    2. Enter `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`; add this to Favorite Servers under + and then select Connect.
 
 === "General"
 
@@ -197,6 +182,21 @@ This page is intended to help you set up and familiarize yourself with the lab's
 
     1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
     2. Enter `smb://[username]@[nas-hostname]/[share-name]`; add this to Favorite Servers under + and then select Connect.
+
+=== "Duke"
+
+    We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. You must be on the DH1 (Duke Health) network to access Isilon; if you are off-site, connect via Cisco Secure Client first.
+
+    To connect to Isilon on Windows:
+
+    1. Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.
+    2. In the Drive list, select any available letter. In the Folder box, enter `\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff`. Select Reconnect at sign-in and then select Finish.
+    3. If prompted to sign in, enter `DHE\[NetID]` as your username.
+
+    To connect to Isilon on a Mac:
+
+    1. Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)
+    2. Enter `smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff`; add this to Favorite Servers under + and then select Connect.
 
 ## Terminal
 
@@ -372,55 +372,17 @@ Miscellaneous:
 
 ## Cloud Storage
 
+=== "General"
+
+    Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.
+
 === "Duke"
 
     To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at [https://duke.app.box.com/](https://duke.app.box.com/).
 
     To access Box through Mac Finder or Windows Explorer, install Box Drive from [https://duke.app.box.com/services/browse/newest/box_drive](https://duke.app.box.com/services/browse/newest/box_drive) and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.
 
-=== "General"
-
-    Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.
-
 ## GitHub
-
-=== "Duke"
-
-    GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
-
-    ### Getting Started
-
-    1. Create a free account at [https://github.com/](https://github.com/).
-    2. Install Git on your computer if you don't already have it; you can check by running `git --version` in the terminal. If it is not installed, download it from [https://git-scm.com/](https://git-scm.com/).
-    3. Configure your identity so that your commits are attributed to you:
-
-        ``` sh
-        git config --global user.name "Your Name"
-        git config --global user.email "your-email@duke.edu"
-        ```
-
-    4. Ask an owner of the LAD-LAB organization to add you as a member.
-
-    To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:
-
-    ``` sh
-    git clone https://github.com/LAD-LAB/[repository-name].git
-    ```
-
-    If prompted for credentials, you will need to set up a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and use it in place of your password.
-
-    ### Common Commands
-
-    * `git clone [url]` — downloads a remote repository to your computer.
-    * `git pull` — updates your local copy with the latest changes from the remote repository.
-    * `git status` — shows which files have been modified, added, or are untracked.
-    * `git add [file]` — stages a file for the next commit; `git add .` stages all changes in the current directory.
-    * `git commit -m "[message]"` — creates a commit (a snapshot of your staged changes) with a descriptive message.
-    * `git push` — uploads your commits to the remote repository.
-    * `git diff` — shows the changes you have made but not yet staged.
-    * `git log --oneline` — shows a concise list of recent commits.
-    * `git checkout [branch]` — switches to a different branch.
-    * `git checkout -b [branch]` — creates a new branch and switches to it.
 
 === "General"
 
@@ -448,6 +410,44 @@ Miscellaneous:
     If prompted for credentials, you will need to set up a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and use it in place of your password.
 
     **Common Commands**
+
+    * `git clone [url]` — downloads a remote repository to your computer.
+    * `git pull` — updates your local copy with the latest changes from the remote repository.
+    * `git status` — shows which files have been modified, added, or are untracked.
+    * `git add [file]` — stages a file for the next commit; `git add .` stages all changes in the current directory.
+    * `git commit -m "[message]"` — creates a commit (a snapshot of your staged changes) with a descriptive message.
+    * `git push` — uploads your commits to the remote repository.
+    * `git diff` — shows the changes you have made but not yet staged.
+    * `git log --oneline` — shows a concise list of recent commits.
+    * `git checkout [branch]` — switches to a different branch.
+    * `git checkout -b [branch]` — creates a new branch and switches to it.
+
+=== "Duke"
+
+    GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.
+
+    ### Getting Started
+
+    1. Create a free account at [https://github.com/](https://github.com/).
+    2. Install Git on your computer if you don't already have it; you can check by running `git --version` in the terminal. If it is not installed, download it from [https://git-scm.com/](https://git-scm.com/).
+    3. Configure your identity so that your commits are attributed to you:
+
+        ``` sh
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@duke.edu"
+        ```
+
+    4. Ask an owner of the LAD-LAB organization to add you as a member.
+
+    To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:
+
+    ``` sh
+    git clone https://github.com/LAD-LAB/[repository-name].git
+    ```
+
+    If prompted for credentials, you will need to set up a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and use it in place of your password.
+
+    ### Common Commands
 
     * `git clone [url]` — downloads a remote repository to your computer.
     * `git pull` — updates your local copy with the latest changes from the remote repository.

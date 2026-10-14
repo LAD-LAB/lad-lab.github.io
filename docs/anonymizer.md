@@ -56,27 +56,6 @@ R1 and R2 files are processed independently; the script auto-detects read direct
 
 For a full sequencing run, use the batch submission script to process all demultiplexed files in parallel via SLURM.
 
-=== "Duke"
-
-    First, open `submit_anonymization.sh` and edit the configuration variables at the top of the file to match your setup. You will need to set the path to the Singularity image, the reference FASTA, the input directory (your demultiplexed folder), the output directory, the threshold, and the k-mer size.
-
-    Next, make the scripts executable and submit the jobs:
-
-    ``` sh
-    ssh [NetID]@dcc-login.oit.duke.edu
-
-    cd /hpc/group/ldavidlab/users/[NetID]/mb-pipeline/anonymizer
-
-    chmod +x submit_anonymization.sh human_read_anonymizer.R
-    ./submit_anonymization.sh
-    ```
-
-    You can monitor the jobs with `squeue`:
-
-    ``` sh
-    squeue -u [NetID]
-    ```
-
 === "General"
 
     First, open `submit_anonymization.sh` and edit the configuration variables at the top of the file to match your setup. You will need to set the path to the Singularity image, the reference FASTA, the input directory (your demultiplexed folder), the output directory, the threshold, and the k-mer size.
@@ -96,6 +75,27 @@ For a full sequencing run, use the batch submission script to process all demult
 
     ``` sh
     squeue -u [username]
+    ```
+
+=== "Duke"
+
+    First, open `submit_anonymization.sh` and edit the configuration variables at the top of the file to match your setup. You will need to set the path to the Singularity image, the reference FASTA, the input directory (your demultiplexed folder), the output directory, the threshold, and the k-mer size.
+
+    Next, make the scripts executable and submit the jobs:
+
+    ``` sh
+    ssh [NetID]@dcc-login.oit.duke.edu
+
+    cd /hpc/group/ldavidlab/users/[NetID]/mb-pipeline/anonymizer
+
+    chmod +x submit_anonymization.sh human_read_anonymizer.R
+    ./submit_anonymization.sh
+    ```
+
+    You can monitor the jobs with `squeue`:
+
+    ``` sh
+    squeue -u [NetID]
     ```
 
 Once all jobs finish, point the marker pipeline at the anonymized output directory instead of the original demultiplexed directory.
