@@ -21,7 +21,7 @@
     
     
       
-        <title>Anonymizing Human Reads - David Lab FoodSeq Handbook</title>
+        <title>Anonymizing Human Reads - FoodSeq Handbook</title>
       
     
     
@@ -102,7 +102,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-header__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +116,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            David Lab FoodSeq Handbook
+            FoodSeq Handbook
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -242,13 +242,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-nav__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    David Lab FoodSeq Handbook
+    FoodSeq Handbook
   </label>
   
     <div class="md-nav__source">
@@ -1381,34 +1381,34 @@
 <p>R1 and R2 files are processed independently; the script auto-detects read direction from the filename.</p>
 <h2 id="batch-processing-on-the-cluster">Batch Processing on the Cluster</h2>
 <p>For a full sequencing run, use the batch submission script to process all demultiplexed files in parallel via SLURM.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">General</label><label for="__tabbed_1_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>First, open <code>submit_anonymization.sh</code> and edit the configuration variables at the top of the file to match your setup. You will need to set the path to the Singularity image, the reference FASTA, the input directory (your demultiplexed folder), the output directory, the threshold, and the k-mer size.</p>
 <p>Next, make the scripts executable and submit the jobs:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>/mb-pipeline/anonymizer
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline<span class="o">]</span>/anonymizer
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>submit_anonymization.sh<span class="w"> </span>human_read_anonymizer.R
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>./submit_anonymization.sh
 </span></code></pre></div>
 <p>You can monitor the jobs with <code>squeue</code>:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>squeue<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>squeue<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <p>First, open <code>submit_anonymization.sh</code> and edit the configuration variables at the top of the file to match your setup. You will need to set the path to the Singularity image, the reference FASTA, the input directory (your demultiplexed folder), the output directory, the threshold, and the k-mer size.</p>
 <p>Next, make the scripts executable and submit the jobs:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline<span class="o">]</span>/anonymizer
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">cd</span><span class="w"> </span>/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>/mb-pipeline/anonymizer
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>submit_anonymization.sh<span class="w"> </span>human_read_anonymizer.R
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>./submit_anonymization.sh
 </span></code></pre></div>
 <p>You can monitor the jobs with <code>squeue</code>:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>squeue<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>squeue<span class="w"> </span>-u<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1461,7 +1461,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 15:26:21 UTC">September 21, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
   </span>
 
     

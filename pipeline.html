@@ -23,7 +23,7 @@
     
     
       
-        <title>Creating a Phyloseq - David Lab FoodSeq Handbook</title>
+        <title>Creating a Phyloseq - FoodSeq Handbook</title>
       
     
     
@@ -104,7 +104,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-header__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -118,7 +118,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            David Lab FoodSeq Handbook
+            FoodSeq Handbook
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -244,13 +244,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-nav__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    David Lab FoodSeq Handbook
+    FoodSeq Handbook
   </label>
   
     <div class="md-nav__source">
@@ -1414,116 +1414,116 @@
 <h1 id="creating-a-phyloseq-trnl-and-12sv5">Creating a Phyloseq (trnL and 12Sv5)</h1>
 <p>These instructions will help you create a phyloseq object from raw sequencing data using <code>Pipeline-to-Phyloseq.Rmd</code> and the <code>foodseq.tools</code> R package. The pipeline handles both trnL and 12Sv5 markers simultaneously from a single multiplex sequencing run; if your run only contains one marker, it will process whichever is present and skip the other. A <a href="/pipeline.html#flowchart">flowchart</a> is provided at the bottom of the page if it may help simplify the workflow.</p>
 <h2 id="in-the-terminal">In the Terminal</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">General</label><label for="__tabbed_1_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<h3 id="clone-repository-to-dcc">Clone Repository to DCC</h3>
-<p>First, clone the mb-pipeline repository from GitHub to the DCC to use <code>demux-barcodes.sh</code> and either <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.</p>
-<p>The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">these instructions</a> to set up a personal access token.</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Log into the DCC:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
+<p><strong>Clone Repository to HPC</strong></p>
+<p>First, clone the mb-pipeline repository from GitHub to your computing cluster to use <code>demux-barcodes.sh</code> and either <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> in future steps. This step only needs to be done once; once you have the files on the cluster, you can skip this section.</p>
+<p>The scripts can be downloaded to your directory with the following shell code. If you are prompted for a password, follow <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">these instructions</a> to set up a personal access token.</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Log into your cluster:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Navigate to where you want to clone the repository:</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">cd</span><span class="w"> </span>/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/hpc/path/to/lab/directory<span class="o">]</span>/users/<span class="o">[</span>username<span class="o">]</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Clone the respository:</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/mb-pipeline.git
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="o">[</span>GitHub<span class="w"> </span>username<span class="o">]</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="o">[</span>personal<span class="w"> </span>access<span class="w"> </span>token<span class="o">]</span>
 </span></code></pre></div>
-<h3 id="upload-sequencing-data-to-dcc">Upload Sequencing Data to DCC</h3>
-<p>Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.</p>
-<p>To copy the sequencing data folder from Isilon, first create a DCC folder for your project. Then, make sure you are connected to Isilon and run the following:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Navigate to the sequencing folder on Isilon; change 2025 to the year of the sequencing run:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>/Volumes/All_Staff/Sequencing/Sequencing2025/
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Copy sequencing data from Isilon to the DCC project folder:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="o">[</span>sequencing<span class="w"> </span>data<span class="o">]</span><span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu:/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
-</span></code></pre></div>
-<p>where <code>[sequencing data]</code> is in the form <code>XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX</code>.</p>
-<p>To this project folder, also upload a samplesheet. A template is available on GitHub and should have been copied to your DCC folder; some lab members remove unnecessary barcodes by deleting their rows, while others recommend using the full template and pruning samples in the phyloseq itself later on. You may develop a preference yourself.</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>scp<span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu:<span class="o">[</span>/path/to/project/folder<span class="o">]</span>
-</span></code></pre></div>
-<p>You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.</p>
-<h3 id="demultiplex-and-pipeline">Demultiplex and Pipeline</h3>
-<p>Now, run the <code>demux-barcodes.sh</code> script with the following:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Log into the DCC:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Submit a batch job to run demux-barcodes.sh:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sbatch<span class="w"> </span>--mail-user<span class="o">=[</span>NetID<span class="o">]</span>@duke.edu<span class="w"> </span><span class="o">[</span>/path/to/demux-barcodes.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/metabarcoding.sif
-</span></code></pre></div>
-<p>Next, run the <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> script, depending on the run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sbatch<span class="w"> </span>--mail-user<span class="o">=[</span>NetID<span class="o">]</span>@duke.edu<span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/qiime2.sif
-</span></code></pre></div>
-<p>Once this finishes, your file structure should look like</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>└─[/DCC/path/to/]
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  ├─ XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  └─ XXXXXXXX_results
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>     ├─ XXXXXXXX_trnL_output or XXXXXXXX_12SV5_output
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>     ├─ demultiplexed
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>     │  └─ [demultiplexed .fastq.gz files]
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>     └─ Reports
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        ├─ demux-barcodes-[jobid].err
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        └─ demux-barcodes-[jobid].out
-</span></code></pre></div>
-<h3 id="count-reads-optional">Count Reads (Optional)</h3>
-<p>If you plan to download your data in minimal mode (the default in <code>Pipeline-to-Phyloseq.Rmd</code>), you should run <code>count-reads.sh</code> on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a <code>track-pipeline.csv</code> file that the R pipeline uses for quality control plots. It runs in a few seconds:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sbatch<span class="w"> </span><span class="o">[</span>/path/to/count-reads.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/XXXXXXXX_output<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline/pipeline<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/metabarcoding.sif
-</span></code></pre></div>
-<p>The script takes three arguments: the path to the pipeline output directory (e.g., <code>20250115_trnL_output</code>), the path to the directory containing <code>count-reads.R</code> (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.</p>
-<p>If everything looks good, you can proceed to RStudio to run <code>Pipeline-to-Phyloseq.Rmd</code>.</p>
-</div>
-<div class="tabbed-block">
-<p><strong>Clone Repository to HPC</strong></p>
-<p>First, clone the mb-pipeline repository from GitHub to your computing cluster to use <code>demux-barcodes.sh</code> and either <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> in future steps. This step only needs to be done once; once you have the files on the cluster, you can skip this section.</p>
-<p>The scripts can be downloaded to your directory with the following shell code. If you are prompted for a password, follow <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">these instructions</a> to set up a personal access token.</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Log into your cluster:</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Navigate to where you want to clone the repository:</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/hpc/path/to/lab/directory<span class="o">]</span>/users/<span class="o">[</span>username<span class="o">]</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Clone the respository:</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/mb-pipeline.git
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="o">[</span>GitHub<span class="w"> </span>username<span class="o">]</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="o">[</span>personal<span class="w"> </span>access<span class="w"> </span>token<span class="o">]</span>
-</span></code></pre></div>
 <p><strong>Upload Sequencing Data to HPC</strong></p>
 <p>Now, copy the sequencing data folder from your shared storage to the cluster and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.</p>
 <p>First, create a cluster folder for your project. Then, make sure you are connected to your shared storage and run the following:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Navigate to the sequencing folder on your shared storage:</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/shared/storage/Sequencing/<span class="o">]</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Copy sequencing data to the cluster project folder:</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="o">[</span>sequencing<span class="w"> </span>data<span class="o">]</span><span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>:<span class="o">[</span>/hpc/path/to/lab/directory<span class="o">]</span>/users/<span class="o">[</span>username<span class="o">]</span>/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Navigate to the sequencing folder on your shared storage:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/shared/storage/Sequencing/<span class="o">]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Copy sequencing data to the cluster project folder:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="o">[</span>sequencing<span class="w"> </span>data<span class="o">]</span><span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>:<span class="o">[</span>/hpc/path/to/lab/directory<span class="o">]</span>/users/<span class="o">[</span>username<span class="o">]</span>/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
 </span></code></pre></div>
 <p>where <code>[sequencing data]</code> is in the form <code>XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX</code>.</p>
 <p>To this project folder, also upload a samplesheet. A template is available on GitHub and should have been copied to your cluster folder; some lab members remove unnecessary barcodes by deleting their rows, while others recommend using the full template and pruning samples in the phyloseq itself later on. You may develop a preference yourself.</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>scp<span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>:<span class="o">[</span>/path/to/project/folder<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>scp<span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>:<span class="o">[</span>/path/to/project/folder<span class="o">]</span>
 </span></code></pre></div>
 <p>You should now have the sequencing data and a samplesheet CSV in your project folder on the cluster.</p>
 <p><strong>Singularity/Apptainer Containers</strong></p>
 <p>The pipeline scripts require two Singularity containers: <code>metabarcoding.sif</code> (used by <code>demux-barcodes.sh</code> and <code>count-reads.sh</code>) and <code>qiime2.sif</code> (used by <code>trnL-pipeline.sh</code> and <code>12SV5-pipeline.sh</code>). These containers are built on QIIME2 [version-placeholder] and can be downloaded from [link-placeholder]. If you prefer to use a local QIIME2 installation instead of containers, you can remove the <code>singularity exec --bind $wd $2</code> wrapper from the pipeline scripts and run the commands directly.</p>
 <p><strong>Demultiplex and Pipeline</strong></p>
 <p>Now, run the <code>demux-barcodes.sh</code> script with the following:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Log into your cluster:</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Submit a batch job to run demux-barcodes.sh:</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/demux-barcodes.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/metabarcoding.sif<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Log into your cluster:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ssh<span class="w"> </span><span class="o">[</span>username<span class="o">]</span>@<span class="o">[</span>hpc-hostname<span class="o">]</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Submit a batch job to run demux-barcodes.sh:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/demux-barcodes.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/metabarcoding.sif<span class="o">]</span>
 </span></code></pre></div>
 <p>Next, run the <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> script, depending on the run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/qiime2.sif<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/qiime2.sif<span class="o">]</span>
 </span></code></pre></div>
 <p>The pipeline scripts default to importing FASTQs in Illumina's Casava format (<code>CasavaOneEightSingleLanePerSampleDirFmt</code>). If your sequencing facility produces FASTQs in a different naming convention, you can pass an alternative format as a third argument to the pipeline script, e.g.:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/qiime2.sif<span class="o">]</span><span class="w"> </span>PairedEndFastqManifestPhred33V2
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span>--mail-user<span class="o">=[</span>username<span class="o">]</span>@<span class="o">[</span>your-email<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/qiime2.sif<span class="o">]</span><span class="w"> </span>PairedEndFastqManifestPhred33V2
 </span></code></pre></div>
 <p>See the <a href="https://docs.qiime2.org/2024.5/tutorials/importing/">QIIME2 importing tutorial</a> for available import formats.</p>
 <p>Once this finishes, your file structure should look like</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>└─[/hpc/path/to/]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>└─[/hpc/path/to/]
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  ├─ XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  └─ XXXXXXXX_results
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>     ├─ XXXXXXXX_trnL_output or XXXXXXXX_12SV5_output
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>     ├─ demultiplexed
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>     │  └─ [demultiplexed .fastq.gz files]
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>     └─ Reports
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        ├─ demux-barcodes-[jobid].err
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        └─ demux-barcodes-[jobid].out
+</span></code></pre></div>
+<p><strong>Count Reads (Optional)</strong></p>
+<p>If you plan to download your data in minimal mode (the default in <code>Pipeline-to-Phyloseq.Rmd</code>), you should run <code>count-reads.sh</code> on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a <code>track-pipeline.csv</code> file that the R pipeline uses for quality control plots. It runs in a few seconds:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/count-reads.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/XXXXXXXX_output<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline/pipeline<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/metabarcoding.sif<span class="o">]</span>
+</span></code></pre></div>
+<p>The script takes three arguments: the path to the pipeline output directory (e.g., <code>20250115_trnL_output</code>), the path to the directory containing <code>count-reads.R</code> (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.</p>
+<p>If everything looks good, you can proceed to RStudio to run <code>Pipeline-to-Phyloseq.Rmd</code>.</p>
+</div>
+<div class="tabbed-block">
+<h3 id="clone-repository-to-dcc">Clone Repository to DCC</h3>
+<p>First, clone the mb-pipeline repository from GitHub to the DCC to use <code>demux-barcodes.sh</code> and either <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> in future steps. This step only needs to be done once; once you have the files on the DCC, you can skip this section.</p>
+<p>The scripts can be downloaded either to the group directory under your folder or to your home directory with the following shell code. If you are prompted for a password, follow <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">these instructions</a> to set up a personal access token.</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Log into the DCC:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Navigate to where you want to clone the repository:</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nb">cd</span><span class="w"> </span>/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># Clone the respository:</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/mb-pipeline.git
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">[</span>GitHub<span class="w"> </span>username<span class="o">]</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">[</span>personal<span class="w"> </span>access<span class="w"> </span>token<span class="o">]</span>
+</span></code></pre></div>
+<h3 id="upload-sequencing-data-to-dcc">Upload Sequencing Data to DCC</h3>
+<p>Now, copy the sequencing data folder from Isilon to the DCC and upload a samplesheet containing the barcodes used during sequencing. In contrast to the above, these steps will need to be run every time.</p>
+<p>To copy the sequencing data folder from Isilon, first create a DCC folder for your project. Then, make sure you are connected to Isilon and run the following:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Navigate to the sequencing folder on Isilon; change 2025 to the year of the sequencing run:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd</span><span class="w"> </span>/Volumes/All_Staff/Sequencing/Sequencing2025/
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Copy sequencing data from Isilon to the DCC project folder:</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="o">[</span>sequencing<span class="w"> </span>data<span class="o">]</span><span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu:/hpc/group/ldavidlab/users/<span class="o">[</span>NetID<span class="o">]</span>/<span class="o">[</span>path/to/project/folder<span class="o">]</span>
+</span></code></pre></div>
+<p>where <code>[sequencing data]</code> is in the form <code>XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX</code>.</p>
+<p>To this project folder, also upload a samplesheet. A template is available on GitHub and should have been copied to your DCC folder; some lab members remove unnecessary barcodes by deleting their rows, while others recommend using the full template and pruning samples in the phyloseq itself later on. You may develop a preference yourself.</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>scp<span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu:<span class="o">[</span>/path/to/project/folder<span class="o">]</span>
+</span></code></pre></div>
+<p>You should now have the sequencing data and a samplesheet CSV in your project folder on the DCC.</p>
+<h3 id="demultiplex-and-pipeline">Demultiplex and Pipeline</h3>
+<p>Now, run the <code>demux-barcodes.sh</code> script with the following:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Log into the DCC:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ssh<span class="w"> </span><span class="o">[</span>NetID<span class="o">]</span>@dcc-login.oit.duke.edu
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Submit a batch job to run demux-barcodes.sh:</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>sbatch<span class="w"> </span>--mail-user<span class="o">=[</span>NetID<span class="o">]</span>@duke.edu<span class="w"> </span><span class="o">[</span>/path/to/demux-barcodes.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/samplesheet.csv<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/metabarcoding.sif
+</span></code></pre></div>
+<p>Next, run the <code>trnL-pipeline.sh</code> or <code>12SV5-pipeline.sh</code> script, depending on the run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Submit a batch job to run trnL-pipeline.sh or 12SV5-pipeline.sh:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sbatch<span class="w"> </span>--mail-user<span class="o">=[</span>NetID<span class="o">]</span>@duke.edu<span class="w"> </span><span class="o">[</span>/path/to/pipeline.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/demultiplexed<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/qiime2.sif
+</span></code></pre></div>
+<p>Once this finishes, your file structure should look like</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>└─[/DCC/path/to/]
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  ├─ XXXXXX_MNXXXXX_XXXX_XXXXXXXXXX
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  └─ XXXXXXXX_results
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>     ├─ XXXXXXXX_trnL_output or XXXXXXXX_12SV5_output
@@ -1533,9 +1533,9 @@
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        ├─ demux-barcodes-[jobid].err
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        └─ demux-barcodes-[jobid].out
 </span></code></pre></div>
-<p><strong>Count Reads (Optional)</strong></p>
+<h3 id="count-reads-optional">Count Reads (Optional)</h3>
 <p>If you plan to download your data in minimal mode (the default in <code>Pipeline-to-Phyloseq.Rmd</code>), you should run <code>count-reads.sh</code> on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a <code>track-pipeline.csv</code> file that the R pipeline uses for quality control plots. It runs in a few seconds:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sbatch<span class="w"> </span>--partition<span class="o">=[</span>your-partition<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/count-reads.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/XXXXXXXX_output<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline/pipeline<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/metabarcoding.sif<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sbatch<span class="w"> </span><span class="o">[</span>/path/to/count-reads.sh<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/XXXXXXXX_results/XXXXXXXX_output<span class="o">]</span><span class="w"> </span><span class="o">[</span>/path/to/mb-pipeline/pipeline<span class="o">]</span><span class="w"> </span>/hpc/group/ldavidlab/metabarcoding.sif
 </span></code></pre></div>
 <p>The script takes three arguments: the path to the pipeline output directory (e.g., <code>20250115_trnL_output</code>), the path to the directory containing <code>count-reads.R</code> (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.</p>
 <p>If everything looks good, you can proceed to RStudio to run <code>Pipeline-to-Phyloseq.Rmd</code>.</p>
@@ -1545,19 +1545,19 @@
 <h2 id="in-r">In R</h2>
 <h3 id="installing-and-loading-packages">Installing and Loading Packages</h3>
 <p>Create a project folder and download or duplicate a copy of <code>Pipeline-to-Phyloseq.Rmd</code> to it. You can download it directly from GitHub or through the following code:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Duke</label><label for="__tabbed_2_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">General</label><label for="__tabbed_2_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Navigate to your Box project folder:</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/Box/path/to/project/folder<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Navigate to your project folder:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/project/folder<span class="o">]</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Download Pipeline-to-Phyloseq.Rmd from GitHub:</span>
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>wget<span class="w"> </span>https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Navigate to your project folder:</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/path/to/project/folder<span class="o">]</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Navigate to your Box project folder:</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span><span class="o">[</span>/Box/path/to/project/folder<span class="o">]</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Download Pipeline-to-Phyloseq.Rmd from GitHub:</span>
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>wget<span class="w"> </span>https://raw.githubusercontent.com/LAD-LAB/mb-pipeline/main/pipeline/Pipeline-to-Phyloseq.Rmd
@@ -1617,22 +1617,22 @@
 </span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>            └── tables, etc.
 </span></code></pre></div>
 <p>Set the following variables to match your setup. The <code>project_path</code> should be the local folder where your trnL and 12S subfolders will be saved; its name is also used as the project name for titling plots:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Duke</label><label for="__tabbed_3_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">General</label><label for="__tabbed_3_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[NetID]"</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"dcc-login.oit.duke.edu"</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results"</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]"</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[username]"</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[hpc-hostname]"</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/hpc/path/to/project/YYYYMMDD_results]"</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/path/to/local/project/folder]"</span>
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"sample-metadata.csv"</span>
 </span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"minimal"</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-r highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[username]"</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[hpc-hostname]"</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/hpc/path/to/project/YYYYMMDD_results]"</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[/path/to/local/project/folder]"</span>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">username</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"[NetID]"</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">hpc_host</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"dcc-login.oit.duke.edu"</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">hpc_results_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/hpc/group/ldavidlab/users/[NetID]/Projects/[Project]/[YYYYMMDD]_results"</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">project_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/Users/[NetID]/Library/CloudStorage/Box-Box/project_davidlab/LAD_LAB_Personnel/[FirstL]/Projects/[Project]"</span>
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"sample-metadata.csv"</span>
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="n">download_mode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"minimal"</span>
 </span></code></pre></div>
@@ -1936,7 +1936,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 23, 2026 19:20:40 UTC">September 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
   </span>
 
     

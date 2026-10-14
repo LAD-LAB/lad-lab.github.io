@@ -21,7 +21,7 @@
     
     
       
-        <title>David Lab FoodSeq Handbook</title>
+        <title>FoodSeq Handbook</title>
       
     
     
@@ -102,7 +102,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-header__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +116,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            David Lab FoodSeq Handbook
+            FoodSeq Handbook
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -242,13 +242,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-nav__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    David Lab FoodSeq Handbook
+    FoodSeq Handbook
   </label>
   
     <div class="md-nav__source">
@@ -332,6 +332,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#whats-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's here
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#navigation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -343,10 +365,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#feedback" class="md-nav__link">
+  <a href="#feedback-and-contributions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Feedback
+        Feedback and contributions
       
     </span>
   </a>
@@ -1225,22 +1247,36 @@
 <div class="admonition note">
 <p class="admonition-title">Citation</p>
 <p><a href="https://doi.org/10.5281/zenodo.20174234"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.20174234.svg" /></a></p>
-<p>If you use the tools or protocols described here, please cite this handbook using the DOI above.</p>
+<p>If you use the tools or protocols described here, please cite this handbook using the DOI above. If you use the reference database, please also cite its archived release (<a href="https://doi.org/10.5281/zenodo.22756737">10.5281/zenodo.22756737</a>).</p>
 </div>
-<p>Welcome to the David Lab FoodSeq Handbook! This website is intended to supplement the LAD-LAB GitHub organization by providing detailed documentation and step-by-step guidance for lab members running or maintaining the lab's biostatistical scripts and tools. The instructions on this site assume minimal familiarity with R and shell and should be suitable for almost all biostatistical backgrounds.</p>
+<p>FoodSeq identifies the plants and animals in a person's or population's diet from DNA in stool or wastewater. This handbook documents the full workflow, from preparing sequencing libraries to an analysis-ready table of foods, so that any group can generate, process, and compare dietary metabarcoding data in the same way. The instructions assume minimal familiarity with R and the shell.</p>
+<h2 id="whats-here">What's here</h2>
+<ul>
+<li><strong>Library preparation protocols</strong> for two markers: <em>trnL</em> (plants) and 12SV5 (vertebrates). See <a href="https://lad-lab.github.io/wetlab.html">Wet Lab Protocols</a>.</li>
+<li><strong>A pipeline</strong> that takes sequencing output to a phyloseq object, plus a tool that removes human reads before public deposition: <a href="https://github.com/LAD-LAB/mb-pipeline">mb-pipeline</a>. See <a href="https://lad-lab.github.io/pipeline.html">Creating a Phyloseq</a>.</li>
+<li><strong>A curated reference database of human foods</strong> for both markers: <a href="https://github.com/LAD-LAB/food-dbs">food-dbs</a>, with versioned releases archived on <a href="https://doi.org/10.5281/zenodo.22756737">Zenodo</a>. See <a href="https://lad-lab.github.io/references.html">Creating the References</a>.</li>
+<li><strong>A common-name map</strong> that turns sequences into recognizable food names. See <a href="https://lad-lab.github.io/commonnames.html">Assigning Common Names</a>.</li>
+<li><strong>An R package, <a href="https://github.com/LAD-LAB/foodseq.tools">foodseq.tools</a></strong>, for quality control, taxonomy assignment, common names, harmonizing related sequences across runs, and PCA. See <a href="https://lad-lab.github.io/processing.html">Post-Phyloseq Processing and Analysis</a>.</li>
+</ul>
+<h2 id="where-to-start">Where to start</h2>
+<ul>
+<li><strong>Starting from samples:</strong> <a href="https://lad-lab.github.io/wetlab.html">Wet Lab Protocols</a>, then <a href="https://lad-lab.github.io/pipeline.html">Creating a Phyloseq</a>, then <a href="https://lad-lab.github.io/processing.html">Post-Phyloseq Processing and Analysis</a>.</li>
+<li><strong>Starting from sequencing data:</strong> <a href="https://lad-lab.github.io/pipeline.html">Creating a Phyloseq</a>, then <a href="https://lad-lab.github.io/processing.html">Post-Phyloseq Processing and Analysis</a>.</li>
+<li><strong>New to DNA metabarcoding, R, GitHub, or a computing cluster:</strong> <a href="https://lad-lab.github.io/intro.html">Getting Started</a> begins with background on metabarcoding, ASVs, phyloseq objects, and the statistics used throughout, then covers setting up your computing environment.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">General and Duke instructions</p>
+<p>Pages with institution-specific steps have two tabs. <strong>General</strong> (shown by default) works at any institution; <strong>Duke</strong> shows the setup used at Duke. Selecting a tab on any page switches all pages to that view.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Living document</p>
 <p>This site is <strong>actively maintained</strong>. Pages are updated as methods continue to develop.</p>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Duke and General instructions</p>
-<p>Use the Duke/General tabs throughout the site to switch between Duke-specific and institution-agnostic instructions; selecting a tab on any page will switch all pages to that view.</p>
-</div>
 <h2 id="navigation">Navigation</h2>
 <ul>
-<li><a href="https://lad-lab.github.io/"><strong>Getting Started:</strong></a> How to get set up and familiarize yourself with GitHub, your computing cluster, and shared storage, as well as other lab biostatistics essentials.</li>
-<li><a href="https://lad-lab.github.io/wetlab.html"><strong>Wet Lab Protocols:</strong></a> How to perform the lab's core sequencing workflow, from DNA extraction through running the MiniSeq.</li>
-<li><a href="https://lad-lab.github.io/references.html"><strong>Creating the References:</strong></a> How to build and extend the trnL and 12Sv5 reference databases, including maintaining <code>human-foods.csv</code>.</li>
+<li><a href="https://lad-lab.github.io/intro.html"><strong>Getting Started:</strong></a> Background on GitHub, computing clusters, shared storage, and the R tools used throughout.</li>
+<li><a href="https://lad-lab.github.io/wetlab.html"><strong>Wet Lab Protocols:</strong></a> The sequencing workflow, from DNA extraction through sequencing.</li>
+<li><a href="https://lad-lab.github.io/references.html"><strong>Creating the References:</strong></a> How the <em>trnL</em> and 12SV5 reference databases are built and how to extend them, including maintaining <code>human-foods.csv</code>.</li>
 <li><a href="https://lad-lab.github.io/pipeline.html"><strong>Creating a Phyloseq:</strong></a> How to create a phyloseq object from sequencing output.</li>
 <li><a href="https://lad-lab.github.io/processing.html"><strong>Post-Phyloseq Processing and Analysis:</strong></a> How to process and analyze your phyloseq once it has been created.</li>
 </ul>
@@ -1250,8 +1286,8 @@
 <li><kbd>N</kbd>  or  <kbd>.</kbd> allow you to move to the next page.</li>
 <li><kbd>F</kbd>,  <kbd>S</kbd>, or  <kbd>/</kbd> allow you to open the search dialog.</li>
 </ul>
-<h2 id="feedback">Feedback</h2>
-<p>If you have comments, questions, or feedback, use the <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg></span> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg></span> widget at the bottom of any page or <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues">open an issue</a> on the GitHub repository.</p>
+<h2 id="feedback-and-contributions">Feedback and contributions</h2>
+<p>If you have comments, questions, or suggestions, use the <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9v12H1V9zm4 12a2 2 0 0 1-2-2V9c0-.55.22-1.05.59-1.41L14.17 1l1.06 1.06c.27.27.44.64.44 1.05l-.03.32L14.69 8H21a2 2 0 0 1 2 2v2c0 .26-.05.5-.14.73l-3.02 7.05C19.54 20.5 18.83 21 18 21zm0-2h9.03L21 12v-2h-8.79l1.13-5.32L9 9.03z"/></svg></span> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 15V3h4v12zM15 3a2 2 0 0 1 2 2v10c0 .55-.22 1.05-.59 1.41L9.83 23l-1.06-1.06c-.27-.27-.44-.64-.44-1.06l.03-.31.95-4.57H3a2 2 0 0 1-2-2v-2c0-.26.05-.5.14-.73l3.02-7.05C4.46 3.5 5.17 3 6 3zm0 2H5.97L3 12v2h8.78l-1.13 5.32L15 14.97z"/></svg></span> widget at the bottom of any page or <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues">open an issue</a> on the GitHub repository. To suggest foods or sequences for the reference database, open an issue on <a href="https://github.com/LAD-LAB/food-dbs/issues">food-dbs</a>.</p>
 
 
 
@@ -1274,7 +1310,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 11, 2026 18:00:50 UTC">September 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
   </span>
 
     

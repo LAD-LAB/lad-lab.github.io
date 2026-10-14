@@ -23,7 +23,7 @@
     
     
       
-        <title>Setting Up - David Lab FoodSeq Handbook</title>
+        <title>Setting Up - FoodSeq Handbook</title>
       
     
     
@@ -104,7 +104,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-header__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-header__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -118,7 +118,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            David Lab FoodSeq Handbook
+            FoodSeq Handbook
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -244,13 +244,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="David Lab FoodSeq Handbook" class="md-nav__button md-logo" aria-label="David Lab FoodSeq Handbook" data-md-component="logo">
+    <a href="index.html" title="FoodSeq Handbook" class="md-nav__button md-logo" aria-label="FoodSeq Handbook" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    David Lab FoodSeq Handbook
+    FoodSeq Handbook
   </label>
   
     <div class="md-nav__source">
@@ -1446,39 +1446,20 @@
 <h1 id="setting-up">Setting Up</h1>
 <p>This page is intended to help you set up and familiarize yourself with the lab's biostatistics essentials, such as GitHub, your computing cluster, and shared storage.</p>
 <h2 id="computing-cluster">Computing Cluster</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Duke</label><label for="__tabbed_1_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">General</label><label for="__tabbed_1_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit <a href="https://oit-rc.pages.oit.duke.edu/rcsupportdocs/">https://oit-rc.pages.oit.duke.edu/rcsupportdocs/</a>.</p>
-<p>The DCC has two directories, <code>/hpc/home</code> and <code>/hpc/group</code>; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within <code>/hpc/group/ldavidlab</code>. Create a folder for yourself at <code>/hpc/group/ldavidlab/users/[NetID]</code>.</p>
-<h3 id="logging-in">Logging In</h3>
-<p>To use the Duke Compute Cluster, open the terminal and log in with <code>ssh [NetID]@dcc-login.oit.duke.edu</code>. This will require multi-factor authentication. Here is an example of what this should look like:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>ams292@MGM-C6LXGRQV<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>ams292@dcc-login.oit.duke.edu
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Password:
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Duo<span class="w"> </span>two-factor<span class="w"> </span>login<span class="w"> </span><span class="k">for</span><span class="w"> </span>ams292
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Enter<span class="w"> </span>a<span class="w"> </span>passcode<span class="w"> </span>or<span class="w"> </span><span class="k">select</span><span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>options:
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w"> </span><span class="m">1</span>.<span class="w"> </span>Duo<span class="w"> </span>Push<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w"> </span><span class="m">2</span>.<span class="w"> </span>Duo<span class="w"> </span>Push<span class="w"> </span>to<span class="w"> </span>ipad<span class="w"> </span><span class="o">(</span>iOS<span class="o">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w"> </span><span class="m">3</span>.<span class="w"> </span>Phone<span class="w"> </span>call<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w"> </span><span class="m">4</span>.<span class="w"> </span>SMS<span class="w"> </span>passcodes<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>Passcode<span class="w"> </span>or<span class="w"> </span>option<span class="w"> </span><span class="o">(</span><span class="m">1</span>-4<span class="o">)</span>:<span class="w"> </span><span class="m">1</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>Success.<span class="w"> </span>Logging<span class="w"> </span>you<span class="w"> </span><span class="k">in</span>...
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>Success.<span class="w"> </span>Logging<span class="w"> </span>you<span class="w"> </span><span class="k">in</span>...
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Oct<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">10</span>:26:19<span class="w"> </span><span class="m">2024</span><span class="w"> </span>from<span class="w"> </span><span class="m">152</span>.16.191.138
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1">################################################################################</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c1"># Please report any issues or questions to: oitresearchsupport@duke.edu        #</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1">#                                                                              #</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c1"># Duke Research Computing info and documentation: https://rc.duke.edu          #</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1">#                                                                              #</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="c1"># My next patch run is Wednesday (10-02-2024) at  7 PM                         #</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1">################################################################################</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>ams292@dcc-login-04<span class="w">  </span>~<span class="w"> </span>$
+<p>A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use <a href="https://slurm.schedmd.com/">Slurm</a> for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.</p>
+<p>Create a folder for yourself in your lab's shared directory on the cluster, e.g. <code>[/hpc/path/to/lab/directory]/users/[username]</code>.</p>
+<p><strong>Logging In</strong></p>
+<p>To use your cluster, open the terminal and log in with <code>ssh [username]@[hpc-hostname]</code>. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>user@local<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>user@hpc-login.example.edu
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Password:
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Oct<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">10</span>:26:19<span class="w"> </span><span class="m">2024</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>user@hpc-login<span class="w"> </span>~<span class="w"> </span>$
 </span></code></pre></div>
-<h3 id="ssh-keys">SSH Keys</h3>
-<p>You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:</p>
+<p><strong>SSH Keys</strong></p>
+<p>You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
 </span></code></pre></div>
 <p>Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file <code>~/.ssh/id_ed25519.pub</code>.</p>
@@ -1486,7 +1467,7 @@
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Make sure to include .pub</span>
 </span></code></pre></div>
-<p>and copy the contents to your Duke profile at <a href="https://idms-web-selfservice.oit.duke.edu/advanced">https://idms-web-selfservice.oit.duke.edu/advanced</a> under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA!</p>
+<p>and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to <code>~/.ssh/authorized_keys</code> on the cluster directly. For more details, see the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub SSH documentation</a>.</p>
 <p>Next, set up a key manager or <code>ssh-agent</code> to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
 </span></code></pre></div>
@@ -1495,6 +1476,67 @@
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>UseKeychain<span class="w"> </span>yes
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>AddKeysToAgent<span class="w"> </span>yes
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>IdentityFile<span class="w"> </span>~/.ssh/id_ed25519
+</span></code></pre></div>
+<p>For Windows users, follow <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">these instructions</a>.</p>
+<p><strong>Common Commands</strong></p>
+<p>Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:</p>
+<ul>
+<li><code>sbatch [file.sh]</code> — this submits a batch job to run an inputted shell script; the output should look like <code>Submitted batch job [jobid]</code>.<ul>
+<li>you can receive an email notification when the job finishes running by inserting <code>--mail-user=[username]@[your-email]</code> after <code>sbatch</code>.</li>
+<li>you can schedule a job to run after another job completes by inserting <code>--dependency=afterok:[jobid]</code> after <code>sbatch</code>, where <code>[jobid]</code> is the job ID of the previous job.</li>
+</ul>
+</li>
+<li><code>squeue -u [username]</code> — this shows a list of jobs submitted under your username.</li>
+<li><code>scancel [jobid]</code> — this cancels a job.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>The Duke Compute Cluster (DCC) is a high-performance computing cluster, a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. The DCC uses Slurm for cluster management and job scheduling. For further information, visit <a href="https://oit-rc.pages.oit.duke.edu/rcsupportdocs/">https://oit-rc.pages.oit.duke.edu/rcsupportdocs/</a>.</p>
+<p>The DCC has two directories, <code>/hpc/home</code> and <code>/hpc/group</code>; as the former has limited storage, much of our work with the DCC is done in the latter, particularly within <code>/hpc/group/ldavidlab</code>. Create a folder for yourself at <code>/hpc/group/ldavidlab/users/[NetID]</code>.</p>
+<h3 id="logging-in">Logging In</h3>
+<p>To use the Duke Compute Cluster, open the terminal and log in with <code>ssh [NetID]@dcc-login.oit.duke.edu</code>. This will require multi-factor authentication. Here is an example of what this should look like:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>ams292@MGM-C6LXGRQV<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>ams292@dcc-login.oit.duke.edu
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Password:
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">(</span>ams292@dcc-login.oit.duke.edu<span class="o">)</span><span class="w"> </span>Duo<span class="w"> </span>two-factor<span class="w"> </span>login<span class="w"> </span><span class="k">for</span><span class="w"> </span>ams292
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Enter<span class="w"> </span>a<span class="w"> </span>passcode<span class="w"> </span>or<span class="w"> </span><span class="k">select</span><span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>options:
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w"> </span><span class="m">1</span>.<span class="w"> </span>Duo<span class="w"> </span>Push<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w"> </span><span class="m">2</span>.<span class="w"> </span>Duo<span class="w"> </span>Push<span class="w"> </span>to<span class="w"> </span>ipad<span class="w"> </span><span class="o">(</span>iOS<span class="o">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w"> </span><span class="m">3</span>.<span class="w"> </span>Phone<span class="w"> </span>call<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w"> </span><span class="m">4</span>.<span class="w"> </span>SMS<span class="w"> </span>passcodes<span class="w"> </span>to<span class="w"> </span>XXX-XXX-0389
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Passcode<span class="w"> </span>or<span class="w"> </span>option<span class="w"> </span><span class="o">(</span><span class="m">1</span>-4<span class="o">)</span>:<span class="w"> </span><span class="m">1</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>Success.<span class="w"> </span>Logging<span class="w"> </span>you<span class="w"> </span><span class="k">in</span>...
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>Success.<span class="w"> </span>Logging<span class="w"> </span>you<span class="w"> </span><span class="k">in</span>...
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Oct<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">10</span>:26:19<span class="w"> </span><span class="m">2024</span><span class="w"> </span>from<span class="w"> </span><span class="m">152</span>.16.191.138
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1">################################################################################</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># Please report any issues or questions to: oitresearchsupport@duke.edu        #</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1">#                                                                              #</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1"># Duke Research Computing info and documentation: https://rc.duke.edu          #</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1">#                                                                              #</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># My next patch run is Wednesday (10-02-2024) at  7 PM                         #</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1">################################################################################</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>ams292@dcc-login-04<span class="w">  </span>~<span class="w"> </span>$
+</span></code></pre></div>
+<h3 id="ssh-keys">SSH Keys</h3>
+<p>You can set up ssh keys as a secure workaround to using your password with multi-factor authentication. To generate a key pair, first run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
+</span></code></pre></div>
+<p>Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file <code>~/.ssh/id_ed25519.pub</code>.</p>
+<p>Next, view your <em>public</em> key by running:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># Make sure to include .pub</span>
+</span></code></pre></div>
+<p>and copy the contents to your Duke profile at <a href="https://idms-web-selfservice.oit.duke.edu/advanced">https://idms-web-selfservice.oit.duke.edu/advanced</a> under "Manage Your Public SSH Keys." Next time you log in, you can use your secure passphrase without using MFA!</p>
+<p>Next, set up a key manager or <code>ssh-agent</code> to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
+</span></code></pre></div>
+<p>and enter your passphrase. Then, edit <code>~/.ssh/config</code> with the following lines:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Host<span class="w"> </span>*
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>UseKeychain<span class="w"> </span>yes
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>AddKeysToAgent<span class="w"> </span>yes
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>IdentityFile<span class="w"> </span>~/.ssh/id_ed25519
 </span></code></pre></div>
 <p>For Windows users, follow <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">these instructions</a>.</p>
 <h3 id="command-line-alternatives">Command-Line Alternatives</h3>
@@ -1525,67 +1567,11 @@
 <li><code>scancel [jobid]</code> — this cancels a job.</li>
 </ul>
 </div>
-<div class="tabbed-block">
-<p>A high-performance computing (HPC) cluster is a group of large and powerful servers (nodes) connected by a high-speed network that is able to handle massive amounts of data at high speeds. Many HPC clusters use <a href="https://slurm.schedmd.com/">Slurm</a> for cluster management and job scheduling; the instructions on this site assume a Slurm-based cluster.</p>
-<p>Create a folder for yourself in your lab's shared directory on the cluster, e.g. <code>[/hpc/path/to/lab/directory]/users/[username]</code>.</p>
-<p><strong>Logging In</strong></p>
-<p>To use your cluster, open the terminal and log in with <code>ssh [username]@[hpc-hostname]</code>. Depending on your institution, this may require multi-factor authentication. Here is an example of what this should look like:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>user@local<span class="w"> </span>~<span class="w"> </span>%<span class="w"> </span>ssh<span class="w"> </span>user@hpc-login.example.edu
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Password:
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Oct<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">10</span>:26:19<span class="w"> </span><span class="m">2024</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>user@hpc-login<span class="w"> </span>~<span class="w"> </span>$
-</span></code></pre></div>
-<p><strong>SSH Keys</strong></p>
-<p>You can set up SSH keys as a secure workaround to re-entering your password each time. To generate a key pair, first run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
-</span></code></pre></div>
-<p>Save the file to the default location and choose a secure passphrase when prompted; your public key will be stored in the file <code>~/.ssh/id_ed25519.pub</code>.</p>
-<p>Next, view your <em>public</em> key by running:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># Make sure to include .pub</span>
-</span></code></pre></div>
-<p>and copy the contents to your cluster's authorized keys. Many institutions provide a self-service portal for this; otherwise, you can append the key to <code>~/.ssh/authorized_keys</code> on the cluster directly. For more details, see the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub SSH documentation</a>.</p>
-<p>Next, set up a key manager or <code>ssh-agent</code> to allow you to authenticate without re-entering your passphrase; Linux does this automatically, but for Mac users, run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ssh-add<span class="w"> </span>--apple-use-keychain<span class="w"> </span>~/.ssh/id_ed25519
-</span></code></pre></div>
-<p>and enter your passphrase. Then, edit <code>~/.ssh/config</code> with the following lines:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Host<span class="w"> </span>*
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>UseKeychain<span class="w"> </span>yes
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>AddKeysToAgent<span class="w"> </span>yes
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>IdentityFile<span class="w"> </span>~/.ssh/id_ed25519
-</span></code></pre></div>
-<p>For Windows users, follow <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">these instructions</a>.</p>
-<p><strong>Common Commands</strong></p>
-<p>Some Slurm commands commonly used in lab scripts or that otherwise may prove useful include:</p>
-<ul>
-<li><code>sbatch [file.sh]</code> — this submits a batch job to run an inputted shell script; the output should look like <code>Submitted batch job [jobid]</code>.<ul>
-<li>you can receive an email notification when the job finishes running by inserting <code>--mail-user=[username]@[your-email]</code> after <code>sbatch</code>.</li>
-<li>you can schedule a job to run after another job completes by inserting <code>--dependency=afterok:[jobid]</code> after <code>sbatch</code>, where <code>[jobid]</code> is the job ID of the previous job.</li>
-</ul>
-</li>
-<li><code>squeue -u [username]</code> — this shows a list of jobs submitted under your username.</li>
-<li><code>scancel [jobid]</code> — this cancels a job.</li>
-</ul>
-</div>
 </div>
 </div>
 <h2 id="shared-storage">Shared Storage</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Duke</label><label for="__tabbed_2_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">General</label><label for="__tabbed_2_2">Duke</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p>We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. You must be on the DH1 (Duke Health) network to access Isilon; if you are off-site, connect via Cisco Secure Client first.</p>
-<p>To connect to Isilon on Windows:</p>
-<ol>
-<li>Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.</li>
-<li>In the Drive list, select any available letter. In the Folder box, enter <code>\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff</code>. Select Reconnect at sign-in and then select Finish.</li>
-<li>If prompted to sign in, enter <code>DHE\[NetID]</code> as your username.</li>
-</ol>
-<p>To connect to Isilon on a Mac:</p>
-<ol>
-<li>Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)</li>
-<li>Enter <code>smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff</code>; add this to Favorite Servers under + and then select Connect.</li>
-</ol>
-</div>
 <div class="tabbed-block">
 <p>Your lab likely uses a shared network drive (NAS, NFS mount, or similar) for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. Consult your system administrator for the hostname and share path.</p>
 <p>To connect on Windows:</p>
@@ -1598,6 +1584,20 @@
 <ol>
 <li>Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)</li>
 <li>Enter <code>smb://[username]@[nas-hostname]/[share-name]</code>; add this to Favorite Servers under + and then select Connect.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>We use Isilon for high-volume storage, including sequencing data and the SQL file necessary for phyloseq creation. You must be on the DH1 (Duke Health) network to access Isilon; if you are off-site, connect via Cisco Secure Client first.</p>
+<p>To connect to Isilon on Windows:</p>
+<ol>
+<li>Open This PC. On the File Explorer ribbon, select More (the three dots) and then Map network drive.</li>
+<li>In the Drive list, select any available letter. In the Folder box, enter <code>\\duhsnas-pri.dhe.duke.edu\dusom_mgm-david\All_Staff</code>. Select Reconnect at sign-in and then select Finish.</li>
+<li>If prompted to sign in, enter <code>DHE\[NetID]</code> as your username.</li>
+</ol>
+<p>To connect to Isilon on a Mac:</p>
+<ol>
+<li>Open Finder and, under Go, select Connect to server... (or <kbd>⌘ K</kbd>)</li>
+<li>Enter <code>smb://DHE;[NetID]@duhsnas-pri.dhe.duke.edu/dusom_mgm-david\All_Staff</code>; add this to Favorite Servers under + and then select Connect.</li>
 </ol>
 </div>
 </div>
@@ -1751,41 +1751,41 @@
 <li><code>summarise()</code> collapses a data frame down to summary values, often used with <code>group_by</code> to calculate values for a group of interest.</li>
 </ul>
 <h2 id="cloud-storage">Cloud Storage</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Duke</label><label for="__tabbed_3_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">General</label><label for="__tabbed_3_2">Duke</label></div>
 <div class="tabbed-content">
+<div class="tabbed-block">
+<p>Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.</p>
+</div>
 <div class="tabbed-block">
 <p>To gain access to the project_davidlab Box project, ask a co-owner (Anna, Lawrence, or Sharon) to add you as a collaborator. You should then be able to access the lab's Box files at <a href="https://duke.app.box.com/">https://duke.app.box.com/</a>.</p>
 <p>To access Box through Mac Finder or Windows Explorer, install Box Drive from <a href="https://duke.app.box.com/services/browse/newest/box_drive">https://duke.app.box.com/services/browse/newest/box_drive</a> and log in; you should then be able to work with Box files on the cloud just as you work with files saved to your hard drive through your desktop.</p>
 </div>
-<div class="tabbed-block">
-<p>Your lab may use a cloud storage service like Box, Google Drive, or Dropbox for sharing project files, references, and analysis scripts. Ask your PI or lab manager for access. Once you have access, install the desktop client for your service so you can work with cloud files through your file manager.</p>
-</div>
 </div>
 </div>
 <h2 id="github">GitHub</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Duke</label><label for="__tabbed_4_2">General</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">General</label><label for="__tabbed_4_2">Duke</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.</p>
-<h3 id="getting-started">Getting Started</h3>
+<p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.</p>
+<p><strong>Getting Started</strong></p>
 <ol>
 <li>Create a free account at <a href="https://github.com/">https://github.com/</a>.</li>
 <li>Install Git on your computer if you don't already have it; you can check by running <code>git --version</code> in the terminal. If it is not installed, download it from <a href="https://git-scm.com/">https://git-scm.com/</a>.</li>
 <li>
 <p>Configure your identity so that your commits are attributed to you:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@duke.edu"</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@example.edu"</span>
 </span></code></pre></div>
 </li>
 <li>
-<p>Ask an owner of the LAD-LAB organization to add you as a member.</p>
+<p>Ask an owner of your lab's GitHub organization to add you as a member.</p>
 </li>
 </ol>
 <p>To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/<span class="o">[</span>repository-name<span class="o">]</span>.git
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/<span class="o">[</span>organization<span class="o">]</span>/<span class="o">[</span>repository-name<span class="o">]</span>.git
 </span></code></pre></div>
 <p>If prompted for credentials, you will need to set up a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a> and use it in place of your password.</p>
-<h3 id="common-commands_2">Common Commands</h3>
+<p><strong>Common Commands</strong></p>
 <ul>
 <li><code>git clone [url]</code> — downloads a remote repository to your computer.</li>
 <li><code>git pull</code> — updates your local copy with the latest changes from the remote repository.</li>
@@ -1800,26 +1800,26 @@
 </ul>
 </div>
 <div class="tabbed-block">
-<p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to your lab's GitHub organization, create a free account and contact an owner of the organization.</p>
-<p><strong>Getting Started</strong></p>
+<p>GitHub is a platform for storing and collaborating on code using version control (tracking changes, reviewing code, etc.) which we use as a repository for important pipeline files. To get added to our GitHub project, LAD-LAB, create a free account and contact an owner of the project; currently, these are Anna, Ashish, Ben, Dorothy, Lawrence, Sharon, and Teresa.</p>
+<h3 id="getting-started">Getting Started</h3>
 <ol>
 <li>Create a free account at <a href="https://github.com/">https://github.com/</a>.</li>
 <li>Install Git on your computer if you don't already have it; you can check by running <code>git --version</code> in the terminal. If it is not installed, download it from <a href="https://git-scm.com/">https://git-scm.com/</a>.</li>
 <li>
 <p>Configure your identity so that your commits are attributed to you:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@example.edu"</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your-email@duke.edu"</span>
 </span></code></pre></div>
 </li>
 <li>
-<p>Ask an owner of your lab's GitHub organization to add you as a member.</p>
+<p>Ask an owner of the LAD-LAB organization to add you as a member.</p>
 </li>
 </ol>
 <p>To clone a repository (download a copy to your computer), navigate to the folder where you want to store it and run:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/<span class="o">[</span>organization<span class="o">]</span>/<span class="o">[</span>repository-name<span class="o">]</span>.git
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/LAD-LAB/<span class="o">[</span>repository-name<span class="o">]</span>.git
 </span></code></pre></div>
 <p>If prompted for credentials, you will need to set up a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a> and use it in place of your password.</p>
-<p><strong>Common Commands</strong></p>
+<h3 id="common-commands_2">Common Commands</h3>
 <ul>
 <li><code>git clone [url]</code> — downloads a remote repository to your computer.</li>
 <li><code>git pull</code> — updates your local copy with the latest changes from the remote repository.</li>
@@ -1857,7 +1857,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:51:04 UTC">September 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
   </span>
 
     
@@ -1883,6 +1883,7 @@
     <nav>
       
         <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>, 
         <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>
