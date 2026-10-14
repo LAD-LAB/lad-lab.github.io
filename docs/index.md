@@ -4,8 +4,6 @@
 
 FoodSeq identifies the plants and animals in a person's diet from DNA in stool. This handbook documents the full workflow, from preparing sequencing libraries to an analysis-ready table of foods, so that any group can generate, process, and compare dietary metabarcoding data in the same way.
 
-[Get started](intro.md){ .md-button .md-button--primary } [Go to the pipeline](pipeline.md){ .md-button }
-
 <p class="hero-note">The instructions assume minimal familiarity with R and the shell. This site is actively maintained, and pages are updated as methods develop.</p>
 
 </div>
