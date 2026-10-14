@@ -7,7 +7,7 @@ After taxonomy assignment, some ASVs will not match any sequence in the referenc
 The definition of an unassigned ASV differs by marker:
 
 * **trnL** — an ASV is considered unassigned if it has NA at all taxonomic ranks (i.e., NA at superkingdom). Because trnL assignment uses exact sequence matching, an ASV either matches the reference or it doesn't; there are no partial assignments.
-* **12Sv5** — an ASV is considered unassigned if it has NA at both order and family. An ASV can have assignments at higher ranks (superkingdom, phylum, class) from the Bayesian classifier and still be flagged as unassigned if it lacks order and family; conversely, an ASV with order but not family (or vice versa) is considered assigned.
+* **12SV5** — an ASV is considered unassigned if it has NA at both order and family. An ASV can have assignments at higher ranks (superkingdom, phylum, class) from the Bayesian classifier and still be flagged as unassigned if it lacks order and family; conversely, an ASV with order but not family (or vice versa) is considered assigned.
 
 ## NAs CSV
 
@@ -38,7 +38,7 @@ When reviewing BLAST results:
 * **High identity (>97%) and low E-value** — the ASV likely belongs to the matched organism. If this organism should be in your reference but isn't, it may need to be added.
 * **Multiple hits with similar scores** — the ASV may be ambiguous at the species level, which is expected for short amplicons. Look at whether the hits agree at a higher rank (genus or family).
 * **No significant hits** — the ASV may be a chimera, a sequencing artefact, or an organism not well-represented in NCBI. These are generally safe to filter out.
-* **Hits to non-food organisms** — for trnL, hits to environmental plant DNA (e.g., grasses, trees) are common and typically reflect environmental contamination rather than dietary intake. For 12Sv5, hits to human sequences are expected and are removed during [taxa filtering](taxafiltering.md).
+* **Hits to non-food organisms** — for trnL, hits to environmental plant DNA (e.g., grasses, trees) are common and typically reflect environmental contamination rather than dietary intake. For 12SV5, hits to human sequences are expected and are removed during [taxa filtering](taxafiltering.md).
 
 ## Extracting NAs from the Phyloseq
 
@@ -51,7 +51,7 @@ If you want to examine unassigned ASVs directly from the phyloseq rather than fr
     na_asvs <- tax_df[is.na(tax_df$superkingdom), ]
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     ``` r
     tax_df <- as.data.frame(tax_table(ps.12S))

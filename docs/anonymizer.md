@@ -1,6 +1,6 @@
 # Anonymizing Human Reads
 
-These instructions will help you anonymize human DNA reads in 12Sv5 metabarcoding FASTQ files for deposition to SRA or other public repositories. The Human Read Anonymizer detects human reads using k-mer matching against a reference database of 1,318 human 12S sequences and replaces them with a synthetic sequence — preserving read counts, FASTQ structure, and quality scores so that the files remain compatible with downstream tools. This step is required for IRB compliance when publishing 12Sv5 data. A [flowchart](#flowchart) is provided at the bottom of the page showing where anonymization fits in the overall workflow.
+These instructions will help you anonymize human DNA reads in 12SV5 metabarcoding FASTQ files for deposition to SRA or other public repositories. The Human Read Anonymizer detects human reads using k-mer matching against a reference database of 1,318 human 12S sequences and replaces them with a synthetic sequence — preserving read counts, FASTQ structure, and quality scores so that the files remain compatible with downstream tools. This step is required for IRB compliance when publishing 12SV5 data. A [flowchart](#flowchart) is provided at the bottom of the page showing where anonymization fits in the overall workflow.
 
 The tool replaces human reads rather than removing them. Removal would alter total read counts and change the structure of the FASTQ files; replacement keeps everything intact while rendering the human sequences unidentifiable. The replacement sequence is derived from the human 12S mitochondrial region, so it is classified as *Homo sapiens* during taxonomy assignment and can be filtered out in the phyloseq like any other human read.
 
@@ -17,7 +17,7 @@ Replaced reads are constructed to preserve compatibility with cutadapt and DADA2
 - **R1** — `[5' forward primer]` + `[replacement core, 100 bp]` + `[3' reverse primer]` + `[original adapter tail]`
 - **R2** — `[5' RC(reverse primer)]` + `[RC(replacement core), 100 bp]` + `[3' RC(forward primer)]` + `[original adapter tail]`
 
-The fixed 100 bp core matches the expected 12Sv5 amplicon length. Primers are preserved so that cutadapt trims them normally; strand complementarity between R1 and R2 allows DADA2 to merge the pair. Original quality scores are retained.
+The fixed 100 bp core matches the expected 12SV5 amplicon length. Primers are preserved so that cutadapt trims them normally; strand complementarity between R1 and R2 allows DADA2 to merge the pair. Original quality scores are retained.
 
 ## Requirements
 
@@ -113,7 +113,7 @@ Once all jobs finish, point the marker pipeline at the anonymized output directo
 
 ## Adapting for Other Markers
 
-The anonymizer can be adapted for markers other than 12Sv5. To do so, edit `human_read_anonymizer.R` and replace three constants:
+The anonymizer can be adapted for markers other than 12SV5. To do so, edit `human_read_anonymizer.R` and replace three constants:
 
 - `REPLACEMENT_CORE` — the synthetic core sequence for the new marker
 - `FORWARD_PRIMER` — the forward primer sequence

@@ -2,9 +2,9 @@
 
 !!! warning "Archived — not the current method"
 
-    This page is archived and is not linked from the handbook navigation. It preserves the original step-by-step, per-marker R workflow for building trnL and 12Sv5 references, superseded by the automated `food-dbs` pipeline described in [Creating the References](references.md). It's kept here for understanding what a given pipeline step automates, or for manual one-off intervention — **not as a way to build a production reference.** It predates the off-target filtering, controls/host-sequence handling, and QC gate that the current pipeline applies, so a reference built this way will not carry those fixes.
+    This page is archived and is not linked from the handbook navigation. It preserves the original step-by-step, per-marker R workflow for building trnL and 12SV5 references, superseded by the automated `food-dbs` pipeline described in [Creating the References](references.md). It's kept here for understanding what a given pipeline step automates, or for manual one-off intervention — **not as a way to build a production reference.** It predates the off-target filtering, controls/host-sequence handling, and QC gate that the current pipeline applies, so a reference built this way will not carry those fixes.
 
-Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5."
+Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12SV5" for one tab will switch all tabs on this page to "12SV5."
 
 ## Setting Up and Reading in Data
 
@@ -80,7 +80,7 @@ Read in primers, food species, and RefSeq data for the gene of interest:
     plastid
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     ``` r
     # Primer sequences
@@ -188,7 +188,7 @@ With everything read in, we now need to determine the sequences from both RefSeq
     head(names(refseq.trnL))
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     First, clean the RefSeq sequences and determine which sequences have the primer pair:
 
@@ -238,7 +238,7 @@ With everything read in, we now need to determine the sequences from both RefSeq
 
 !!! tip
 
-    The NCBI query may prove tedious, especially for 12Sv5; for best results:
+    The NCBI query may prove tedious, especially for 12SV5; for best results:
 
     * Set an API key. Create an NCBI account (you can log in with Google) and go to [NCBI Account Settings](https://account.ncbi.nlm.nih.gov/settings/). At the bottom of the page, under "API Key Management," you should find an alphanumeric API key. Copy this, and in R, run `set_entrez_key("1a2b3c")` with your API key pasted in. This increases your e-utils limit to 10 requests per second.
     * Run the following code either on weekends or between 9:00 PM and 5:00 AM EST on weekdays.
@@ -295,9 +295,9 @@ With everything read in, we now need to determine the sequences from both RefSeq
     head(names(ncbi.trnL))
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
-    Use the custom `query_ncbi()` function to query the NCBI for 12Sv5 sequences from food species:
+    Use the custom `query_ncbi()` function to query the NCBI for 12SV5 sequences from food species:
 
     ``` r
     # Pull sequences from NCBI
@@ -441,7 +441,7 @@ We can now merge the output of the above queries.
         bind_rows(seqs.df) 
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     First, let's check the degree of overlap:
 
@@ -748,7 +748,7 @@ Now, let's align sequence orientations.
         select(-c(type, group))
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     The following code sets maximum allowed mismatch thresholds as 20% of the lengths of the forward and reverse primers:
 
@@ -853,7 +853,7 @@ The number of sequences we expect after filtering is given by:
 dim(seqs.df)[1] - sum(dups$n)
 ```
 
-This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates. trnL carries the subspecific ranks `varietas` and `forma` through this step; 12Sv5 stops at `subspecies`.
+This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates. trnL carries the subspecific ranks `varietas` and `forma` through this step; 12SV5 stops at `subspecies`.
 
 === "trnL"
 
@@ -878,7 +878,7 @@ This now groups identical entries, choosing the first accession number which is 
     dim(seqs.df)
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     ``` r
     seqs.df <- 
@@ -899,11 +899,11 @@ This now groups identical entries, choosing the first accession number which is 
     dim(seqs.df)
     ```
 
-## Adding Human Sequences to the 12Sv5 Reference
+## Adding Human Sequences to the 12SV5 Reference
 
-The NCBI contains only a single *Homo sapiens* reference sequence for the 12Sv5 region, which is insufficient for accurately assigning all human ASVs in our data due to natural genetic diversity across individuals. To address this, we supplement the 12Sv5 reference with human sequences from Schneider et al. (2021), who compiled a 12S reference from the European Nucleotide Archive (ENA) for forensic dietary analysis and included substantially more *Homo sapiens* sequence variants.
+The NCBI contains only a single *Homo sapiens* reference sequence for the 12SV5 region, which is insufficient for accurately assigning all human ASVs in our data due to natural genetic diversity across individuals. To address this, we supplement the 12SV5 reference with human sequences from Schneider et al. (2021), who compiled a 12S reference from the European Nucleotide Archive (ENA) for forensic dietary analysis and included substantially more *Homo sapiens* sequence variants.
 
-After building the 12Sv5 reference with the steps above, add the human sequences from the Schneider reference by extracting all *Homo sapiens* entries and appending them to `seqs.df`. These sequences should go through the same quality control and deduplication steps described in the previous section.
+After building the 12SV5 reference with the steps above, add the human sequences from the Schneider reference by extracting all *Homo sapiens* entries and appending them to `seqs.df`. These sequences should go through the same quality control and deduplication steps described in the previous section.
 
 !!! note
 
@@ -915,7 +915,7 @@ Each marker is saved as a FASTA whose headers carry the full taxonomic lineage. 
 
 !!! note
 
-    trnL lineages run through `forma`; 12Sv5 lineages stop at `subspecies`. Each marker's assignment function expects its own depth, so do not copy one `unite()` call across to the other.
+    trnL lineages run through `forma`; 12SV5 lineages stop at `subspecies`. Each marker's assignment function expects its own depth, so do not copy one `unite()` call across to the other.
 
 ### DADA2-formatted reference files
 
@@ -974,7 +974,7 @@ Each marker is saved as a FASTA whose headers carry the full taxonomic lineage. 
                              'trnLGH.fasta'))
         ```
 
-=== "12Sv5"
+=== "12SV5"
 
     This section produces `12Sv5_taxonomy.fasta`, which names each sequence by its full lineage across eight ranks.
 
@@ -1012,4 +1012,4 @@ Each marker is saved as a FASTA whose headers carry the full taxonomic lineage. 
 
     ??? note "Legacy: `assignTaxonomy()`"
 
-        12Sv5 was assigned with `dada2::assignTaxonomy()` before `assignment_12S()`, and both read taxonomy from the FASTA headers.
+        12SV5 was assigned with `dada2::assignTaxonomy()` before `assignment_12S()`, and both read taxonomy from the FASTA headers.

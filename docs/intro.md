@@ -1,36 +1,36 @@
-# Introduction to Lab Biostatistics
+# Introduction to FoodSeq Biostatistics
 
-This page provides background on the core concepts used throughout this handbook. If you are new to the lab or to DNA metabarcoding, read through this page before proceeding to [Setting Up](settingup.md) or [Creating a Phyloseq](pipeline.md).
+This page provides background on the core concepts used throughout this handbook. If you are new to DNA metabarcoding, read through this page before proceeding to [Setting Up](settingup.md) or [Creating a Phyloseq](pipeline.md).
 
 ## DNA Metabarcoding
 
-DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. In our lab, we use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake without relying on self-report.
+DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. We can use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake without relying on self-report.
 
 We target two markers:
 
 * **trnL** (trnL (UAA) intron, P6 loop): a plastid region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.
-* **12Sv5** (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12Sv5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.
+* **12SV5** (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12SV5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.
 
-Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12Sv5 dataset (animals), which are processed separately throughout the pipeline.
+Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12SV5 dataset (animals), which are processed separately throughout the pipeline.
 
 ## Amplicon Sequencing Variants (ASVs)
 
 An amplicon sequencing variant (ASV) is a unique DNA sequence recovered from a sequencing run after denoising. During sequencing, millions of DNA reads are generated from a sample; denoising algorithms like DADA2 correct sequencing errors and resolve the reads into a set of exact sequences, each representing a true biological variant. These are ASVs.
 
-ASVs are the fundamental unit of observation in our data. Each ASV is defined by its exact nucleotide sequence, and each sample in a sequencing run has a count of how many reads were assigned to each ASV. Taxonomy is assigned by matching ASV sequences against a reference database; for trnL, this is done by exact sequence matching, while for 12Sv5, a naive Bayesian classifier is used. An ASV that does not match anything in the reference is marked as `NA` and can be investigated further with tools like BLAST.
+ASVs are the fundamental unit of observation in our data. Each ASV is defined by its exact nucleotide sequence, and each sample in a sequencing run has a count of how many reads were assigned to each ASV. Taxonomy is assigned by matching ASV sequences against a reference database; for trnL, this is done by exact sequence matching, while for 12SV5, a naive Bayesian classifier is used. An ASV that does not match anything in the reference is marked as `NA` and can be investigated further with tools like BLAST.
 
 A single food species may produce multiple ASVs (due to natural sequence variation within the species), and in some cases a single ASV may match multiple species (when those species share an identical marker sequence). The taxonomy assignment step handles these cases by condensing multi-match ASVs to their last common ancestor.
 
 ??? question "How are ASVs different from OTUs?"
 
-    Older metabarcoding workflows clustered similar sequences into operational taxonomic units (OTUs), typically at a 97% similarity threshold. ASVs replace this approach by resolving sequences to exact variants without clustering, which provides higher taxonomic resolution and makes results comparable across studies and sequencing runs. Our lab uses ASVs exclusively.
+    Older metabarcoding workflows clustered similar sequences into operational taxonomic units (OTUs), typically at a 97% similarity threshold. ASVs replace this approach by resolving sequences to exact variants without clustering, which provides higher taxonomic resolution and makes results comparable across studies and sequencing runs. FoodSeq uses ASVs exclusively.
 
 ## Phyloseq Objects
 
 A phyloseq is an R data structure from the `phyloseq` package that bundles together the different components of a metabarcoding dataset into a single object. A phyloseq contains up to three components:
 
 * `otu_table`: a matrix of ASV counts per sample (rows are samples, columns are ASVs)
-* `tax_table`: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to forma for trnL, and down to subspecies for 12Sv5)
+* `tax_table`: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to forma for trnL, and down to subspecies for 12SV5)
 * `sam_data`: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)
 
 The phyloseq is the central data object throughout the analysis pipeline. After [creating a phyloseq](pipeline.md) from raw sequencing data, the [post-phyloseq processing workflow](processing.md) walks through assigning common names, agglomerating, filtering, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).
@@ -65,12 +65,12 @@ PCA is a dimensionality reduction technique that projects high-dimensional data 
 * **CLR transform**: centered log-ratio transform; a normalization applied to compositional data before multivariate analysis.
 * **DADA2**: the denoising algorithm used to resolve raw sequencing reads into ASVs.
 * **denoising**: the process of correcting sequencing errors and collapsing reads into true biological variants (ASVs).
-* **marker**: a short, standardized gene region used for identification; our lab uses trnL (plants) and 12Sv5 (animals).
+* **marker**: a short, standardized gene region used for identification; FoodSeq currently uses trnL (plants) and 12SV5 (animals).
 * **metabarcoding**: a method for identifying organisms in a mixed sample by sequencing a shared marker region and matching against a reference.
 * **OTU**: operational taxonomic unit; an older clustering-based approach to grouping sequences, replaced by ASVs in our pipeline.
 * **pFR** (also **pMR**): plant FoodSeq richness; the number of distinct plant taxa detected in a sample by trnL metabarcoding. Earlier work calls the same metric plant metabarcoding richness, or pMR (pFR: Aqeel et al. 2025, *Obesity*; pMR: Petrone et al. 2023, *PNAS*).
 * **phyloseq**: an R object bundling ASV counts, taxonomy, and sample metadata into a single data structure.
-* **QIIME2**: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.
+* **QIIME 2**: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.
 * **reference database**: a curated FASTA file mapping known marker sequences to taxonomy; used for assigning species to ASVs.
 * **relative abundance**: ASV counts expressed as proportions of total sample reads, summing to 1.
 * **Shannon diversity**: an alpha diversity metric that accounts for both richness and evenness.

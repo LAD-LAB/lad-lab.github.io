@@ -19,7 +19,7 @@ humanfoods <- read_csv("[path/to/human-foods.csv]")
 humanfoods
 ```
 
-Read in the desired reference, for either trnL or 12Sv5. Make sure you read in the reference with taxonomy. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`:
+Read in the desired reference, for either trnL or 12SV5. Make sure you read in the reference with taxonomy. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`:
 
 ``` r
 taxref <- Biostrings::readDNAStringSet("[/path/to/taxonomy-reference.fasta]")
@@ -82,7 +82,7 @@ Prune human-foods.csv to the desired species:
       select(asv, everything()) 
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     ``` r
     # Prune to animals only
@@ -382,7 +382,7 @@ The conflict report includes the ASV sequence, the number of matches, the resolu
 
 !!! warning "User action required"
 
-    In the 12Sv5 region, human and elk are phylogenetically similar. We have found that ASVs assigned to elk (*Cervus canadensis*) are not reliably elk: some BLAST to human, others to elk. Users should recheck elk-labeled ASVs and decide whether to manually relabel them as human, based on context.
+    In the 12SV5 region, human and elk are phylogenetically similar. We have found that ASVs assigned to elk (*Cervus canadensis*) are not reliably elk: some BLAST to human, others to elk. Users should recheck elk-labeled ASVs and decide whether to manually relabel them as human, based on context.
 
 ### Pecan/Walnut
 

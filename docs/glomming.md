@@ -313,9 +313,9 @@ Agglomeration groups ASVs that represent the same organism — whether because t
 
     Check `result$unresolved` for any flagged pairs that are still blank; if any remain, resolve them and re-run.
 
-=== "12Sv5"
+=== "12SV5"
 
-    12Sv5 agglomeration is a straightforward `tax_glom()` by `lowest_level` — the most specific non-`NA` taxonomic rank assigned to each ASV, already computed back in [Filtering Taxa](taxafiltering.md).
+    12SV5 agglomeration is a straightforward `tax_glom()` by `lowest_level` — the most specific non-`NA` taxonomic rank assigned to each ASV, already computed back in [Filtering Taxa](taxafiltering.md).
 
     ``` r
     ps.12S <- phyloseq::tax_glom(ps.12S, taxrank = "lowest_level")

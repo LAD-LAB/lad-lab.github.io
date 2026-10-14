@@ -1,6 +1,6 @@
 # Filtering Taxa
 
-After [assigning common names](commonnames.md), the next step is to remove taxa that should not be included in downstream analysis — synthetic control ASVs, non-food taxa (unassigned, and, for 12Sv5, human reads), and any cohort-specific taxa that need to be excluded. These are listed out as independent steps below, rather than wrapped in a single function, so you can adapt, reorder, or skip individual steps as your study needs.
+After [assigning common names](commonnames.md), the next step is to remove taxa that should not be included in downstream analysis — synthetic control ASVs, non-food taxa (unassigned, and, for 12SV5, human reads), and any cohort-specific taxa that need to be excluded. These are listed out as independent steps below, rather than wrapped in a single function, so you can adapt, reorder, or skip individual steps as your study needs.
 
 === "trnL"
 
@@ -22,7 +22,7 @@ After [assigning common names](commonnames.md), the next step is to remove taxa 
     ps.trnL <- subset_taxa(ps.trnL, !is.na(superkingdom))
     ```
 
-=== "12Sv5"
+=== "12SV5"
 
     ## Removing Controls
 
@@ -50,7 +50,7 @@ After [assigning common names](commonnames.md), the next step is to remove taxa 
 
     ## Removing Non-Food Taxa
 
-    Two things count as non-food for 12Sv5: unassigned ASVs (`NA` at `kingdom`, or `NA` at both `order` and `family`) and human reads, which are commonly detected in 12Sv5 sequencing of stool samples and reflect the host rather than dietary intake:
+    Two things count as non-food for 12SV5: unassigned ASVs (`NA` at `kingdom`, or `NA` at both `order` and `family`) and human reads, which are commonly detected in 12SV5 sequencing of stool samples and reflect the host rather than dietary intake:
 
     ``` r
     ps.12S <- subset_taxa(ps.12S, !(is.na(kingdom) | (is.na(family) & is.na(order))))
@@ -69,7 +69,7 @@ After [assigning common names](commonnames.md), the next step is to remove taxa 
     
 !!! note "Filtering unassigned taxa" 
 
-    It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12Sv5. This is because `assignment_trnL()` uses exact sequence matching, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12Sv5, by contrast, is assigned by `assignment_12S()`, which uses a naive Bayesian classifier and makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is `NA` at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).
+    It is recommended to filter out `NA`s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12SV5. This is because `assignment_trnL()` uses exact sequence matching, so any non-`NA` assignment reflects a true match in the reference and `NA`s appear only when no match exists. 12SV5, by contrast, is assigned by `assignment_12S()`, which uses a naive Bayesian classifier and makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is `NA` at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).
     
 ## Cohort-Specific Removals
 

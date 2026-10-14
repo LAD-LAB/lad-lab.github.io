@@ -19,10 +19,10 @@ Every function below is documented in more detail on the handbook page it's link
 | Function | Used in | What it does |
 |---|---|---|
 | `process_qiime_run()` | [Creating a Phyloseq](pipeline.md) | Reads the pipeline's read-tracking CSV and plots per-sample read retention across processing steps, for quality control |
-| `join_table_seqs()` | [Creating a Phyloseq](pipeline.md) | Reads the denoised QIIME2 feature table and representative sequences, replaces hash identifiers with actual sequences, and transposes to samples × ASVs |
+| `join_table_seqs()` | [Creating a Phyloseq](pipeline.md) | Reads the denoised QIIME 2 feature table and representative sequences, replaces hash identifiers with actual sequences, and transposes to samples × ASVs |
 | `plot_asv_length_hist()` | [Creating a Phyloseq](pipeline.md) | Plots a histogram of ASV read lengths against the marker's expected length range, for quality control |
 | `assignment_trnL()` | [Creating a Phyloseq](pipeline.md) | Assigns trnL taxonomy via exact sequence matching against a reference FASTA |
-| `assignment_12S()` | [Creating a Phyloseq](pipeline.md) | Assigns 12Sv5 taxonomy via a naive Bayesian classifier |
+| `assignment_12S()` | [Creating a Phyloseq](pipeline.md) | Assigns 12SV5 taxonomy via a naive Bayesian classifier |
 | `qc_controls()` | [Creating a Phyloseq](pipeline.md) | Runs standard quality control checks on positive/negative controls in a phyloseq |
 | `assign_common_names()` | [Assigning Common Names](commonnames.md#assign_common_names-function) | Assigns conventional common food names to ASVs from a common names CSV |
 | `lowest_level()` | [Filtering Taxa](taxafiltering.md) | Adds a `lowest_level` column giving each ASV's most specific non-`NA` taxonomic rank |

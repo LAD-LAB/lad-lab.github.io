@@ -25,7 +25,7 @@ This should return `FALSE`.
 
 ### Updating Taxonomy for Reference Consistency
 
-If the phyloseqs you are merging were created against different versions of the trnL or 12Sv5 reference, the same organism may have different taxonomy assignments across runs. To avoid inconsistencies in the merged dataset, re-run taxonomy assignment on each phyloseq against the same reference using `update_taxonomy()` from `foodseq.tools`:
+If the phyloseqs you are merging were created against different versions of the trnL or 12SV5 reference, the same organism may have different taxonomy assignments across runs. To avoid inconsistencies in the merged dataset, re-run taxonomy assignment on each phyloseq against the same reference using `update_taxonomy()` from `foodseq.tools`:
 
 ``` r
 ps.run1 <- update_taxonomy(ps.run1, reference = "[/path/to/current/reference.fasta]", marker = "trnL")

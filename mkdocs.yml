@@ -3,7 +3,7 @@ site_name: FoodSeq Handbook
 nav:
 - Home: index.md
 - Getting Started:
-  - Introduction to Lab Biostatistics: intro.md
+  - Introduction to FoodSeq Biostatistics: intro.md
   - Setting Up: settingup.md
 - Wet Lab Protocols:
   - Overview: wetlab.md

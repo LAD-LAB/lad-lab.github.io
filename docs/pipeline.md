@@ -1,6 +1,6 @@
-# Creating a Phyloseq (trnL and 12Sv5)
+# Creating a Phyloseq (trnL and 12SV5)
 
-These instructions will help you create a phyloseq object from raw sequencing data using `Pipeline-to-Phyloseq.Rmd` and the `foodseq.tools` R package. The pipeline handles both trnL and 12Sv5 markers simultaneously from a single multiplex sequencing run; if your run only contains one marker, it will process whichever is present and skip the other. A [flowchart](/pipeline.html#flowchart) is provided at the bottom of the page if it may help simplify the workflow.
+These instructions will help you create a phyloseq object from raw sequencing data using `Pipeline-to-Phyloseq.Rmd` and the `foodseq.tools` R package. The pipeline handles both trnL and 12SV5 markers simultaneously from a single multiplex sequencing run; if your run only contains one marker, it will process whichever is present and skip the other. A [flowchart](/pipeline.html#flowchart) is provided at the bottom of the page if it may help simplify the workflow.
 
 ## In the Terminal
 
@@ -51,7 +51,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     **Singularity/Apptainer Containers**
 
-    The pipeline scripts require two Singularity containers: `metabarcoding.sif` (used by `demux-barcodes.sh` and `count-reads.sh`) and `qiime2.sif` (used by `trnL-pipeline.sh` and `12SV5-pipeline.sh`). These containers are built on QIIME2 [version-placeholder] and can be downloaded from [link-placeholder]. If you prefer to use a local QIIME2 installation instead of containers, you can remove the `singularity exec --bind $wd $2` wrapper from the pipeline scripts and run the commands directly.
+    The pipeline scripts require two Singularity containers: `metabarcoding.sif` (used by `demux-barcodes.sh` and `count-reads.sh`) and `qiime2.sif` (used by `trnL-pipeline.sh` and `12SV5-pipeline.sh`). These containers are built on QIIME 2 [version-placeholder] and can be downloaded from [link-placeholder]. If you prefer to use a local QIIME 2 installation instead of containers, you can remove the `singularity exec --bind $wd $2` wrapper from the pipeline scripts and run the commands directly.
 
     **Demultiplex and Pipeline**
 
@@ -78,7 +78,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
     sbatch --partition=[your-partition] --mail-user=[username]@[your-email] [/path/to/pipeline.sh] [/path/to/XXXXXXXX_results/demultiplexed] [/path/to/qiime2.sif] PairedEndFastqManifestPhred33V2
     ```
 
-    See the [QIIME2 importing tutorial](https://docs.qiime2.org/2024.5/tutorials/importing/) for available import formats.
+    See the [QIIME 2 importing tutorial](https://docs.qiime2.org/2024.5/tutorials/importing/) for available import formats.
 
     Once this finishes, your file structure should look like
 
@@ -313,7 +313,7 @@ Set the following variables to match your setup. The `project_path` should be th
 
 The `download_mode` variable controls how much data is copied from the cluster. Set it to `"minimal"` (the default) to download only the files needed for phyloseq creation (`4_denoised-table.qza`, `4_denoised-seqs.qza`, and the read-tracking CSV), or `"full"` to download all pipeline output.
 
-You also need to set paths to the trnL and 12Sv5 reference FASTAs used for taxonomy assignment. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`. Download the taxonomy FASTA for each marker, place them locally, and set the paths here:
+You also need to set paths to the trnL and 12SV5 reference FASTAs used for taxonomy assignment. Current builds live in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/dada2-compatible), under `trnL/` and `12Sv5/`. Download the taxonomy FASTA for each marker, place them locally, and set the paths here:
 
 ``` r
 ref_trnL <- "[/path/to/trnLGH_taxonomy.fasta]"
@@ -359,7 +359,7 @@ Sys.setenv(
 )
 ```
 
-The bash chunk copies the pipeline output from the cluster into a temporary staging directory in your home folder, then sorts the run folders by marker (trnL vs. 12Sv5) and moves them into the appropriate subfolders in your project directory. The staging step works around a file-naming conflict that can occur with cloud storage providers like Box; if you are not using cloud storage, it is harmless.
+The bash chunk copies the pipeline output from the cluster into a temporary staging directory in your home folder, then sorts the run folders by marker (trnL vs. 12SV5) and moves them into the appropriate subfolders in your project directory. The staging step works around a file-naming conflict that can occur with cloud storage providers like Box; if you are not using cloud storage, it is harmless.
 
 ``` sh
 set -euo pipefail
@@ -447,7 +447,7 @@ The output plot shows read counts across pipeline steps (raw, adapter trim, prim
 
 ### Data Preparation
 
-Now we create ASV tables from the QIIME2 output. The `join_table_seqs()` function reads in the denoised feature table and representative sequences, replaces hash identifiers with actual DNA sequences, and transposes the table so that rows are samples and columns are ASVs. Then, `dada2::collapseNoMismatch()` merges any ASVs that are perfect subsequences of one another:
+Now we create ASV tables from the QIIME 2 output. The `join_table_seqs()` function reads in the denoised feature table and representative sequences, replaces hash identifiers with actual DNA sequences, and transposes the table so that rows are samples and columns are ASVs. Then, `dada2::collapseNoMismatch()` merges any ASVs that are perfect subsequences of one another:
 
 ``` r
 if(dir.exists(qiime.dir.trnL)) {
@@ -487,11 +487,11 @@ if(dir.exists(qiime.dir.12S)) {
 
 ### Creating the Taxonomy Table
 
-The `assignment_trnL()` and `assignment_12S()` functions handle taxonomy assignment from start to finish. For trnL, the function performs exact sequence matching against the reference FASTA and uses `taxonomizr::condenseTaxa()` to resolve each ASV to its last common ancestor when multiple species match. For 12Sv5, it uses a naive Bayesian classifier (adapted from `dada2::assignTaxonomy()`) to assign taxonomy at each rank down to subspecies, then similarly condenses multi-match ASVs. Both functions clean up subspecific ranks (subspecies, varietas, forma) before condensing, so that disagreements at those ranks do not inflate the ASV to a higher taxonomic level unnecessarily.
+The `assignment_trnL()` and `assignment_12S()` functions handle taxonomy assignment from start to finish. For trnL, the function performs exact sequence matching against the reference FASTA and uses `taxonomizr::condenseTaxa()` to resolve each ASV to its last common ancestor when multiple species match. For 12SV5, it uses a naive Bayesian classifier (adapted from `dada2::assignTaxonomy()`) to assign taxonomy at each rank down to subspecies, then similarly condenses multi-match ASVs. Both functions clean up subspecific ranks (subspecies, varietas, forma) before condensing, so that disagreements at those ranks do not inflate the ASV to a higher taxonomic level unnecessarily.
 
 ??? info
 
-    The lab previously used `dada2::assignSpecies()` for trnL and `dada2::assignTaxonomy()` for 12Sv5. Exact matching was preferred for trnL because trnL sequences are short with high interspecies diversity; a single-nucleotide difference can distinguish closely related plants, so k-mer-based classification would sacrifice resolution. In contrast, 12Sv5 sequences are longer with more intraspecies diversity (a single species like cow may have many ASV variants), making the Bayesian classifier a better fit. However, `assignSpecies()` returned accession-keyed output that required a separate SQL-based lookup to build the full taxonomy table, while `assignTaxonomy()` populated the taxonomy table directly from taxonomy headers in the reference FASTA. The current `assignment_trnL()` function combines the exact matching of `assignSpecies()` with the taxonomy-header compatibility of `assignTaxonomy()`, eliminating the need for the SQL file and the accession-to-taxid conversion steps.
+    The lab previously used `dada2::assignSpecies()` for trnL and `dada2::assignTaxonomy()` for 12SV5. Exact matching was preferred for trnL because trnL sequences are short with high interspecies diversity; a single-nucleotide difference can distinguish closely related plants, so k-mer-based classification would sacrifice resolution. In contrast, 12SV5 sequences are longer with more intraspecies diversity (a single species like cow may have many ASV variants), making the Bayesian classifier a better fit. However, `assignSpecies()` returned accession-keyed output that required a separate SQL-based lookup to build the full taxonomy table, while `assignTaxonomy()` populated the taxonomy table directly from taxonomy headers in the reference FASTA. The current `assignment_trnL()` function combines the exact matching of `assignSpecies()` with the taxonomy-header compatibility of `assignTaxonomy()`, eliminating the need for the SQL file and the accession-to-taxid conversion steps.
 
 ``` r
 if(dir.exists(qiime.dir.trnL)) {
