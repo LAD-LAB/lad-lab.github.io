@@ -49,9 +49,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-  .md-typeset .hero .md-button {
-    margin: 0.3em 0.4em;
-  }
   .md-typeset .hero .hero-note {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
