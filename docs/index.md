@@ -2,9 +2,9 @@
 
 # FoodSeq Handbook
 
-FoodSeq identifies the plants and animals in a person's diet from DNA in stool. This handbook documents the full workflow, from preparing sequencing libraries to an analysis-ready table of foods, so that any group can generate, process, and compare dietary metabarcoding data in the same way.
+FoodSeq identifies the plants and animals in a person's diet from DNA in stool. This handbook documents the full workflow, from preparing sequencing libraries to an analysis-ready table of foods, so that anyone can generate, process, and compare dietary metabarcoding data. All protocols, code, and reference data are open source.
 
-<p class="hero-note">The instructions assume minimal familiarity with R and the shell. This site is actively maintained, and pages are updated as methods develop.</p>
+<p class="hero-note">The instructions assume minimal familiarity with R and the shell. This site is actively maintained by <a href="https://edibleatlas.org/">Edible Atlas</a> at Duke University, and pages are updated as methods develop.</p>
 
 </div>
 
@@ -24,13 +24,7 @@ FoodSeq identifies the plants and animals in a person's diet from DNA in stool. 
 
 !!! tip "General and Duke instructions"
 
-    Some pages have two tabs. **General** (the default) works at any institution; **Duke** shows the setup used at Duke. Your choice carries across pages.
-
-??? note "Keyboard shortcuts"
-
-    * <kbd>P</kbd> or <kbd>,</kbd> moves to the previous page.
-    * <kbd>N</kbd> or <kbd>.</kbd> moves to the next page.
-    * <kbd>F</kbd>, <kbd>S</kbd>, or <kbd>/</kbd> opens search.
+    Some pages have two tabs. **General** works at any institution; **Duke** shows the setup used at Duke.
 
 ## Citing
 
