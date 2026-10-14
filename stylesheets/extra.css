@@ -31,3 +31,34 @@
   .download-buttons .md-button {
     margin: 0.3em 0.5em;
   }
+  /* Home page banner */
+  .md-typeset .hero {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .md-typeset .hero h1 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: var(--md-typeset-a-color);
+    margin-bottom: 0.6em;
+  }
+  .md-typeset .hero > p:first-of-type {
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .md-typeset .hero .md-button {
+    margin: 0.3em 0.4em;
+  }
+  .md-typeset .hero .hero-note {
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
+  }
+  @media screen and (max-width: 44.9375em) {
+    .md-typeset .hero h1 {
+      font-size: 1.8rem;
+    }
+  }
+
