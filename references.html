@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1312,7 +1312,7 @@
 
 
 <h1 id="creating-the-references">Creating the References</h1>
-<p>The trnL (g/h) and 12Sv5 reference databases are built with <code>foodseq_reference_pipeline.Rmd</code> in the <a href="https://github.com/LAD-LAB/food-dbs">food-dbs repository</a>. It builds these reference databases end to end — downloading and querying sequence data, assigning taxonomy, filtering out off-target hits, adding controls, and writing DADA2- and QIIME2-formatted output — and is now the standard way to (re)build the references, replacing the older step-by-step manual workflow.</p>
+<p>The trnL (g/h) and 12SV5 reference databases are built with <code>foodseq_reference_pipeline.Rmd</code> in the <a href="https://github.com/LAD-LAB/food-dbs">food-dbs repository</a>. It builds these reference databases end to end — downloading and querying sequence data, assigning taxonomy, filtering out off-target hits, adding controls, and writing DADA2- and QIIME 2-formatted output — and is now the standard way to (re)build the references, replacing the older step-by-step manual workflow.</p>
 <div class="admonition info">
 <p class="admonition-title">Manual workflow archived</p>
 <p>The original per-step R walkthrough that this pipeline automates has been archived to <a href="references-legacy.html">Creating the References (Legacy Manual Workflow)</a>. It's kept for understanding what a given pipeline step is actually doing, or for one-off manual intervention — not as an alternative way to build a production reference.</p>
@@ -1336,14 +1336,14 @@
 <td>RefSeq plastid genomes + GenBank</td>
 </tr>
 <tr>
-<td><strong>Part B</strong> — 12Sv5</td>
+<td><strong>Part B</strong> — 12SV5</td>
 <td>Vertebrate</td>
 <td>V5F <code>TAGAACAGGCTCCTCTAG</code> / V5R <code>TTAGATACCCCACTATGC</code></td>
 <td>RefSeq mitochondrial genomes + GenBank</td>
 </tr>
 </tbody>
 </table>
-<p>Both markers pull their target species from <code>human-foods.csv</code>: trnL takes every row where <code>category == "plant"</code>, 12Sv5 every row where <code>category == "animal"</code>. As of the Aug 2026 build, that list covers 3,806 food species (1,573 plants + 7 genus-level entries, 2,121 animals + 70 genus-level entries, plus fungi and bacteria); trnL sits at 69% species coverage and 12Sv5 at 46%. See the <a href="https://github.com/LAD-LAB/food-dbs#database-coverage">food-dbs README</a> for current coverage figures and a breakdown of remaining gaps — those numbers move with every rebuild, so treat anything quoted here as a snapshot rather than the current state.</p>
+<p>Both markers pull their target species from <code>human-foods.csv</code>: trnL takes every row where <code>category == "plant"</code>, 12SV5 every row where <code>category == "animal"</code>. As of the Aug 2026 build, that list covers 3,806 food species (1,573 plants + 7 genus-level entries, 2,121 animals + 70 genus-level entries, plus fungi and bacteria); trnL sits at 69% species coverage and 12SV5 at 46%. See the <a href="https://github.com/LAD-LAB/food-dbs#database-coverage">food-dbs README</a> for current coverage figures and a breakdown of remaining gaps — those numbers move with every rebuild, so treat anything quoted here as a snapshot rather than the current state.</p>
 <h2 id="extend-vs-rebuild">Extend vs. Rebuild</h2>
 <p>Two ways to grow a reference: extend it with a handful of new species from your laptop, or trigger a full cluster rebuild. Pick based on what actually needs to change:</p>
 <p><strong>Extend</strong> (<code>code/Extend reference.Rmd</code>) — when new sequence has appeared at NCBI for species already on <code>human-foods.csv</code>, or you're adding species that were never targeted before, and nothing about an <em>existing</em> record needs to change. Runs on a laptop in minutes: no cluster, no SLURM, no large downloads, since it queries NCBI directly for both sequence and taxonomy over e-utils.</p>
@@ -1366,7 +1366,7 @@
 </li>
 </ol>
 <h2 id="rebuild">Rebuild</h2>
-<p>Building a reference from scratch — or picking up whatever new sequence has accumulated at NCBI more broadly — uses <code>foodseq_reference_pipeline.Rmd</code> on a cluster with SLURM. It builds trnL g/h and 12Sv5 together (see <a href="#what-each-part-builds">What Each Part Builds</a> below).</p>
+<p>Building a reference from scratch — or picking up whatever new sequence has accumulated at NCBI more broadly — uses <code>foodseq_reference_pipeline.Rmd</code> on a cluster with SLURM. It builds trnL g/h and 12SV5 together (see <a href="#what-each-part-builds">What Each Part Builds</a> below).</p>
 <ol>
 <li>
 <p>Clone the repository:</p>
@@ -1457,7 +1457,7 @@
 </table>
 </li>
 <li>
-<p>Once the jobs finish, run <strong>Part A</strong> (trnL g/h) and/or <strong>Part B</strong> (12Sv5), as needed.</p>
+<p>Once the jobs finish, run <strong>Part A</strong> (trnL g/h) and/or <strong>Part B</strong> (12SV5), as needed.</p>
 </li>
 <li>The notebook's final section, <strong>Verify before shipping</strong>, runs the QC gate automatically — see <a href="#verifying-a-build-the-qc-gate">Verifying a Build</a> below.</li>
 </ol>
@@ -1469,7 +1469,7 @@
 <tr>
 <th>Step</th>
 <th>Part A (trnL g/h)</th>
-<th>Part B (12Sv5)</th>
+<th>Part B (12SV5)</th>
 </tr>
 </thead>
 <tbody>
@@ -1515,22 +1515,22 @@
 </tr>
 </tbody>
 </table>
-<p>The trnL off-target allowlist deliberately includes Cyanobacteriota alongside Streptophyta: spirulina (<em>Arthrospira platensis</em>) and fat choy (<em>Nostoc flagelliforme</em>) are edible cyanobacteria on the food list with real trnL records that a plant-only filter would strip. The 12Sv5 filter is Chordata-only — a lab decision based on production data showing invertebrate reference records were never actually hit by real reads.</p>
+<p>The trnL off-target allowlist deliberately includes Cyanobacteriota alongside Streptophyta: spirulina (<em>Arthrospira platensis</em>) and fat choy (<em>Nostoc flagelliforme</em>) are edible cyanobacteria on the food list with real trnL records that a plant-only filter would strip. The 12SV5 filter is Chordata-only — a lab decision based on production data showing invertebrate reference records were never actually hit by real reads.</p>
 <h2 id="controls-and-host-sequences">Controls and Host Sequences</h2>
 <p><code>data/inputs/controls.csv</code> holds two kinds of record, both merged in at each part's final dedup-and-save step (A10 / B9) rather than as a separate post-hoc step:</p>
 <ul>
 <li><strong>Synthetic spike-in controls</strong> — the lab's positive-control constructs (<code>synthetic trnL ASV</code>, <code>synthetic 12S ASV</code>), which never come back from a RefSeq/GenBank query since they aren't real organisms. Without an explicit entry here, every food-list-driven rebuild silently drops them, and their reads get reassigned to whatever real taxon they're nearest to.</li>
-<li><strong>Real biological host/contaminant taxa</strong> — species that aren't on <code>human-foods.csv</code> (so the food-list-driven build never queries them) but that the assay reliably amplifies and that dominate raw read counts if absent from the reference: <em>Rhacodactylus leachianus</em> (the gecko positive control) and <em>Homo sapiens</em> (89 haplotype records, needed because a single NCBI reference sequence for the 12Sv5 region is not enough to catch the genetic diversity of human host DNA in dietary samples). Each of these carries its own real taxonomic lineage in <code>controls.csv</code>, rather than the repeated-label format used for the synthetic constructs.</li>
+<li><strong>Real biological host/contaminant taxa</strong> — species that aren't on <code>human-foods.csv</code> (so the food-list-driven build never queries them) but that the assay reliably amplifies and that dominate raw read counts if absent from the reference: <em>Rhacodactylus leachianus</em> (the gecko positive control) and <em>Homo sapiens</em> (89 haplotype records, needed because a single NCBI reference sequence for the 12SV5 region is not enough to catch the genetic diversity of human host DNA in dietary samples). Each of these carries its own real taxonomic lineage in <code>controls.csv</code>, rather than the repeated-label format used for the synthetic constructs.</li>
 </ul>
 <p>This automates what was previously a manual, easy-to-forget step (see the <a href="references-legacy.html#adding-human-sequences-to-the-12sv5-reference">archived manual workflow</a>) — human sequences are now included automatically as part of the standard build.</p>
-<p>Without a matching entry in <code>controls.csv</code>, host or contaminant reads land on the nearest available taxon in the reference — for 12Sv5 specifically, that has historically meant a large fraction of human reads misassigned into food clades (e.g. Artiodactyla) when human was absent. If you're adding a new marker or a new assay to this pipeline, check whether it needs its own host/control row before shipping a build.</p>
+<p>Without a matching entry in <code>controls.csv</code>, host or contaminant reads land on the nearest available taxon in the reference — for 12SV5 specifically, that has historically meant a large fraction of human reads misassigned into food clades (e.g. Artiodactyla) when human was absent. If you're adding a new marker or a new assay to this pipeline, check whether it needs its own host/control row before shipping a build.</p>
 <h2 id="outputs">Outputs</h2>
 <p>Each run writes both formats:</p>
 <ul>
 <li><code>data/outputs/dada2-compatible/{trnL,12Sv5}/</code> — FASTA files named by full taxonomic lineage, for use with <code>assignment_trnL()</code> / <code>assignment_12S()</code> (see <a href="pipeline.html#creating-the-taxonomy-table">Creating a Phyloseq</a>)</li>
 <li><code>data/outputs/qiime2-compatible/{trnL,12Sv5}/</code> — sequence FASTA + taxonomy TSV pairs</li>
 </ul>
-<p>trnL lineages run through <code>forma</code> (ten ranks); 12Sv5 lineages stop at <code>subspecies</code> (eight ranks).</p>
+<p>trnL lineages run through <code>forma</code> (ten ranks); 12SV5 lineages stop at <code>subspecies</code> (eight ranks).</p>
 <h2 id="verifying-a-build-the-qc-gate">Verifying a Build: the QC Gate</h2>
 <p><code>code/qc_reference_build.R</code> runs automatically at the end of the notebook (the <strong>Verify before shipping</strong> section), and checks each output against <code>QC_PREVIOUS_SUFFIX</code>'s build for:</p>
 <ul>
@@ -1545,12 +1545,12 @@
 </span></code></pre></div>
 <p>An optional 4th argument restricts the check to one marker (<code>trnL</code> or <code>12SV5</code>) — needed after an extend-only run (see <a href="#extending-an-existing-reference">Extending an Existing Reference</a> above), since a single-marker update otherwise reads as a failure on every marker it didn't touch.</p>
 <h2 id="known-limitations">Known Limitations</h2>
-<p>Most remaining coverage gaps reflect species with no public trnL/12Sv5 sequence at NCBI yet, not a pipeline limitation — with one notable exception: <strong>41 plant species (Aug 2026) are recoverable only from a complete chloroplast genome</strong>, and the pipeline's 50 kb length cap on GenBank queries (added to avoid crashing R's string-length limit on chromosomal assemblies) excludes complete plastomes from the pull entirely. See the <a href="https://github.com/LAD-LAB/food-dbs#remaining-gaps-aug-2026">food-dbs README</a> for the current gap breakdown.</p>
+<p>Most remaining coverage gaps reflect species with no public trnL/12SV5 sequence at NCBI yet, not a pipeline limitation — with one notable exception: <strong>41 plant species (Aug 2026) are recoverable only from a complete chloroplast genome</strong>, and the pipeline's 50 kb length cap on GenBank queries (added to avoid crashing R's string-length limit on chromosomal assemblies) excludes complete plastomes from the pull entirely. See the <a href="https://github.com/LAD-LAB/food-dbs#remaining-gaps-aug-2026">food-dbs README</a> for the current gap breakdown.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li><a href="https://github.com/LAD-LAB/food-dbs">food-dbs README</a> — full pipeline documentation, current coverage tables, and an interactive Mermaid flowchart of the pipeline</li>
 <li><a href="https://github.com/LAD-LAB/food-dbs/blob/master/changes-summary.html"><code>changes-summary.html</code></a> — everything changed in the 2026 pipeline rebuilds, grouped by theme</li>
-<li><a href="https://github.com/LAD-LAB/food-dbs/blob/master/pipeline-flowchart.html"><code>pipeline-flowchart.html</code></a> — the same flowchart below, with a parameter comparison table for everything that differs between the trnL and 12Sv5 runs</li>
+<li><a href="https://github.com/LAD-LAB/food-dbs/blob/master/pipeline-flowchart.html"><code>pipeline-flowchart.html</code></a> — the same flowchart below, with a parameter comparison table for everything that differs between the trnL and 12SV5 runs</li>
 </ul>
 <pre class="mermaid"><code>flowchart TD
 
@@ -1613,7 +1613,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     

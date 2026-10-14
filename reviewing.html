@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1310,7 +1310,7 @@
 <p>The definition of an unassigned ASV differs by marker:</p>
 <ul>
 <li><strong>trnL</strong> — an ASV is considered unassigned if it has NA at all taxonomic ranks (i.e., NA at superkingdom). Because trnL assignment uses exact sequence matching, an ASV either matches the reference or it doesn't; there are no partial assignments.</li>
-<li><strong>12Sv5</strong> — an ASV is considered unassigned if it has NA at both order and family. An ASV can have assignments at higher ranks (superkingdom, phylum, class) from the Bayesian classifier and still be flagged as unassigned if it lacks order and family; conversely, an ASV with order but not family (or vice versa) is considered assigned.</li>
+<li><strong>12SV5</strong> — an ASV is considered unassigned if it has NA at both order and family. An ASV can have assignments at higher ranks (superkingdom, phylum, class) from the Bayesian classifier and still be flagged as unassigned if it lacks order and family; conversely, an ASV with order but not family (or vice versa) is considered assigned.</li>
 </ul>
 <h2 id="nas-csv">NAs CSV</h2>
 <p>The <code>assignment_trnL()</code> and <code>assignment_12S()</code> functions automatically save a CSV of unassigned ASVs to the output directory (<code>trnL_NAs.csv</code> and <code>12S_NAs.csv</code>). Each CSV contains:</p>
@@ -1352,11 +1352,11 @@
 <li><strong>High identity (&gt;97%) and low E-value</strong> — the ASV likely belongs to the matched organism. If this organism should be in your reference but isn't, it may need to be added.</li>
 <li><strong>Multiple hits with similar scores</strong> — the ASV may be ambiguous at the species level, which is expected for short amplicons. Look at whether the hits agree at a higher rank (genus or family).</li>
 <li><strong>No significant hits</strong> — the ASV may be a chimera, a sequencing artefact, or an organism not well-represented in NCBI. These are generally safe to filter out.</li>
-<li><strong>Hits to non-food organisms</strong> — for trnL, hits to environmental plant DNA (e.g., grasses, trees) are common and typically reflect environmental contamination rather than dietary intake. For 12Sv5, hits to human sequences are expected and are removed during <a href="taxafiltering.html">taxa filtering</a>.</li>
+<li><strong>Hits to non-food organisms</strong> — for trnL, hits to environmental plant DNA (e.g., grasses, trees) are common and typically reflect environmental contamination rather than dietary intake. For 12SV5, hits to human sequences are expected and are removed during <a href="taxafiltering.html">taxa filtering</a>.</li>
 </ul>
 <h2 id="extracting-nas-from-the-phyloseq">Extracting NAs from the Phyloseq</h2>
 <p>If you want to examine unassigned ASVs directly from the phyloseq rather than from the CSV, you can extract them in R:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">tax_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">tax_table</span><span class="p">(</span><span class="n">ps.trnL</span><span class="p">))</span>
@@ -1399,7 +1399,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 13, 2026 15:11:28 UTC">August 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     
@@ -1419,12 +1419,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>
+        <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>
     </nav>
   </span>
 

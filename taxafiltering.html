@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1321,8 +1321,8 @@
 
 
 <h1 id="filtering-taxa">Filtering Taxa</h1>
-<p>After <a href="commonnames.html">assigning common names</a>, the next step is to remove taxa that should not be included in downstream analysis — synthetic control ASVs, non-food taxa (unassigned, and, for 12Sv5, human reads), and any cohort-specific taxa that need to be excluded. These are listed out as independent steps below, rather than wrapped in a single function, so you can adapt, reorder, or skip individual steps as your study needs.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<p>After <a href="commonnames.html">assigning common names</a>, the next step is to remove taxa that should not be included in downstream analysis — synthetic control ASVs, non-food taxa (unassigned, and, for 12SV5, human reads), and any cohort-specific taxa that need to be excluded. These are listed out as independent steps below, rather than wrapped in a single function, so you can adapt, reorder, or skip individual steps as your study needs.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <h2 id="removing-controls">Removing Controls</h2>
@@ -1353,7 +1353,7 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nf">tax_table</span><span class="p">()</span>
 </span></code></pre></div>
 <h2 id="removing-non-food-taxa_1">Removing Non-Food Taxa</h2>
-<p>Two things count as non-food for 12Sv5: unassigned ASVs (<code>NA</code> at <code>kingdom</code>, or <code>NA</code> at both <code>order</code> and <code>family</code>) and human reads, which are commonly detected in 12Sv5 sequencing of stool samples and reflect the host rather than dietary intake:</p>
+<p>Two things count as non-food for 12SV5: unassigned ASVs (<code>NA</code> at <code>kingdom</code>, or <code>NA</code> at both <code>order</code> and <code>family</code>) and human reads, which are commonly detected in 12SV5 sequencing of stool samples and reflect the host rather than dietary intake:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">kingdom</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">family</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">order</span><span class="p">))))</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset_taxa</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">lowest_level</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lowest_level</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"Homo sapiens"</span><span class="p">)</span>
 </span></code></pre></div>
@@ -1368,7 +1368,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Filtering unassigned taxa</p>
-<p>It is recommended to filter out <code>NA</code>s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12Sv5. This is because <code>assignment_trnL()</code> uses exact sequence matching, so any non-<code>NA</code> assignment reflects a true match in the reference and <code>NA</code>s appear only when no match exists. 12Sv5, by contrast, is assigned by <code>assignment_12S()</code>, which uses a naive Bayesian classifier and makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is <code>NA</code> at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).</p>
+<p>It is recommended to filter out <code>NA</code>s at the highest level (i.e., superkingdom) for trnL and at Order + Family for 12SV5. This is because <code>assignment_trnL()</code> uses exact sequence matching, so any non-<code>NA</code> assignment reflects a true match in the reference and <code>NA</code>s appear only when no match exists. 12SV5, by contrast, is assigned by <code>assignment_12S()</code>, which uses a naive Bayesian classifier and makes assignments at every level along with bootstrap confidence values, which tend to fall off below Order. Any ASV that is <code>NA</code> at both the Order and Family level should be filtered out. Include Family in your filtering criteria to ensure you retain entries that do not have Order or Family assignments but still contain valid assignments at lower taxonomic ranks (e.g., due to gaps in the reference).</p>
 </div>
 <h2 id="cohort-specific-removals">Cohort-Specific Removals</h2>
 <p>Some studies may require removing additional taxa based on the study design, after the steps above. Common examples include:</p>
@@ -1407,7 +1407,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 25, 2026 17:56:30 UTC">September 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     
@@ -1433,6 +1433,7 @@
     <nav>
       
         <a href="mailto:ashthekabob@gmail.com">Ashish Subramanian</a>, 
+        <a href="mailto:35972232+dksuperdock@users.noreply.github.com">Dorothy Superdock</a>, 
         <a href="mailto:151646120+cr403@users.noreply.github.com">cr403</a>
     </nav>
   </span>

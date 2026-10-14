@@ -351,7 +351,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1153,9 +1153,9 @@
 <h1 id="creating-the-references-legacy-manual-workflow">Creating the References (Legacy Manual Workflow)</h1>
 <div class="admonition warning">
 <p class="admonition-title">Archived — not the current method</p>
-<p>This page is archived and is not linked from the handbook navigation. It preserves the original step-by-step, per-marker R workflow for building trnL and 12Sv5 references, superseded by the automated <code>food-dbs</code> pipeline described in <a href="references.html">Creating the References</a>. It's kept here for understanding what a given pipeline step automates, or for manual one-off intervention — <strong>not as a way to build a production reference.</strong> It predates the off-target filtering, controls/host-sequence handling, and QC gate that the current pipeline applies, so a reference built this way will not carry those fixes.</p>
+<p>This page is archived and is not linked from the handbook navigation. It preserves the original step-by-step, per-marker R workflow for building trnL and 12SV5 references, superseded by the automated <code>food-dbs</code> pipeline described in <a href="references.html">Creating the References</a>. It's kept here for understanding what a given pipeline step automates, or for manual one-off intervention — <strong>not as a way to build a production reference.</strong> It predates the off-target filtering, controls/host-sequence handling, and QC gate that the current pipeline applies, so a reference built this way will not carry those fixes.</p>
 </div>
-<p>Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12Sv5" for one tab will switch all tabs on this page to "12Sv5."</p>
+<p>Where code differs between the two references, largely just due to differences in the naming of variables, content tabs have been used to allow selection of the code for the gene of interest; tabs are linked such that selecting "12SV5" for one tab will switch all tabs on this page to "12SV5."</p>
 <h2 id="setting-up-and-reading-in-data">Setting Up and Reading in Data</h2>
 <p>First, load the necessary packages and functions. If you do not have a package installed, install it first with the function <code>install.packages("[package name]")</code>. Make sure to replace the paths to <code>find_primer_pair.R</code>, <code>query_ncbi.R</code>, and <code>query_ncbi_accession.R</code>.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">Biostrings</span><span class="p">)</span>
@@ -1181,7 +1181,7 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">)</span>
 </span></code></pre></div>
 <p>Read in primers, food species, and RefSeq data for the gene of interest:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Primer sequences </span>
@@ -1271,7 +1271,7 @@
 <h2 id="querying-for-sequences">Querying for Sequences</h2>
 <p>With everything read in, we now need to determine the sequences from both RefSeq (saved locally) and the NCBI that belong to food species and have the gene of interest as determined by our primers.</p>
 <h3 id="refseq">RefSeq</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">trnL</label><label for="__tabbed_3_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">trnL</label><label for="__tabbed_3_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>First, clean the RefSeq sequences and determine which sequences have the primer pair:</p>
@@ -1348,14 +1348,14 @@
 <h3 id="ncbi">NCBI</h3>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The NCBI query may prove tedious, especially for 12Sv5; for best results:</p>
+<p>The NCBI query may prove tedious, especially for 12SV5; for best results:</p>
 <ul>
 <li>Set an API key. Create an NCBI account (you can log in with Google) and go to <a href="https://account.ncbi.nlm.nih.gov/settings/">NCBI Account Settings</a>. At the bottom of the page, under "API Key Management," you should find an alphanumeric API key. Copy this, and in R, run <code>set_entrez_key("1a2b3c")</code> with your API key pasted in. This increases your e-utils limit to 10 requests per second.</li>
 <li>Run the following code either on weekends or between 9:00 PM and 5:00 AM EST on weekdays.</li>
 <li>Other usage guidelines and requirements can be found at <a href="https://www.ncbi.nlm.nih.gov/books/NBK25497/#chapter2.Usage_Guidelines_and_Requiremen">this link</a>.</li>
 </ul>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">trnL</label><label for="__tabbed_4_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">trnL</label><label for="__tabbed_4_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Use the custom <code>query_ncbi()</code> function to query the NCBI for trnL sequences from food species:</p>
@@ -1395,7 +1395,7 @@
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>Use the custom <code>query_ncbi()</code> function to query the NCBI for 12Sv5 sequences from food species:</p>
+<p>Use the custom <code>query_ncbi()</code> function to query the NCBI for 12SV5 sequences from food species:</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Pull sequences from NCBI</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">ncbi.12SV5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">query_ncbi</span><span class="p">(</span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'12S'</span><span class="p">,</span>
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">                        </span><span class="n">organisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">animals</span><span class="p">)</span>
@@ -1435,7 +1435,7 @@
 </div>
 <h2 id="combining-refseq-and-ncbi-output">Combining RefSeq and NCBI Output</h2>
 <p>We can now merge the output of the above queries.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">trnL</label><label for="__tabbed_5_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">trnL</label><label for="__tabbed_5_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>First, let's check the degree of overlap:</p>
@@ -1690,7 +1690,7 @@
 </span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="w">            </span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">'[AGCT]*[^AGCT]+'</span><span class="p">,</span><span class="w"> </span><span class="n">seq</span><span class="p">))</span>
 </span></code></pre></div>
 <p>Now, let's align sequence orientations.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">trnL</label><label for="__tabbed_6_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">trnL</label><label for="__tabbed_6_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>The following code sets maximum allowed mismatch thresholds as 20% of the lengths of the forward and reverse primers:</p>
@@ -1833,8 +1833,8 @@
 <p>The number of sequences we expect after filtering is given by:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-69-1"><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>dim(seqs.df)[1] - sum(dups$n)
 </span></code></pre></div>
-<p>This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates. trnL carries the subspecific ranks <code>varietas</code> and <code>forma</code> through this step; 12Sv5 stops at <code>subspecies</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">trnL</label><label for="__tabbed_7_2">12Sv5</label></div>
+<p>This now groups identical entries, choosing the first accession number which is from RefSeq if possible, effectively removing duplicates. trnL carries the subspecific ranks <code>varietas</code> and <code>forma</code> through this step; 12SV5 stops at <code>subspecies</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">trnL</label><label for="__tabbed_7_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-r highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="n">seqs.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
@@ -1878,9 +1878,9 @@
 </div>
 </div>
 </div>
-<h2 id="adding-human-sequences-to-the-12sv5-reference">Adding Human Sequences to the 12Sv5 Reference</h2>
-<p>The NCBI contains only a single <em>Homo sapiens</em> reference sequence for the 12Sv5 region, which is insufficient for accurately assigning all human ASVs in our data due to natural genetic diversity across individuals. To address this, we supplement the 12Sv5 reference with human sequences from Schneider et al. (2021), who compiled a 12S reference from the European Nucleotide Archive (ENA) for forensic dietary analysis and included substantially more <em>Homo sapiens</em> sequence variants.</p>
-<p>After building the 12Sv5 reference with the steps above, add the human sequences from the Schneider reference by extracting all <em>Homo sapiens</em> entries and appending them to <code>seqs.df</code>. These sequences should go through the same quality control and deduplication steps described in the previous section.</p>
+<h2 id="adding-human-sequences-to-the-12sv5-reference">Adding Human Sequences to the 12SV5 Reference</h2>
+<p>The NCBI contains only a single <em>Homo sapiens</em> reference sequence for the 12SV5 region, which is insufficient for accurately assigning all human ASVs in our data due to natural genetic diversity across individuals. To address this, we supplement the 12SV5 reference with human sequences from Schneider et al. (2021), who compiled a 12S reference from the European Nucleotide Archive (ENA) for forensic dietary analysis and included substantially more <em>Homo sapiens</em> sequence variants.</p>
+<p>After building the 12SV5 reference with the steps above, add the human sequences from the Schneider reference by extracting all <em>Homo sapiens</em> entries and appending them to <code>seqs.df</code>. These sequences should go through the same quality control and deduplication steps described in the previous section.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Schneider J, Mas-Carrió E, Jan C, Miquel C, Taberlet P, Michaud K, Fumagalli L, Comprehensive coverage of human last meal components revealed by a forensic DNA metabarcoding approach. <em>Sci. Rep.</em> <strong>11</strong>, 8876 (2021). <a href="https://doi.org/10.1038/s41598-021-88418-x">https://doi.org/10.1038/s41598-021-88418-x</a></p>
@@ -1889,14 +1889,14 @@
 <p>Each marker is saved as a FASTA whose headers carry the full taxonomic lineage. This is the file you point <code>ref_trnL</code> or <code>ref_12S</code> at in <a href="pipeline.html#creating-the-taxonomy-table">Pipeline-to-Phyloseq</a>, and the same file <a href="commonnames.html"><code>assign_common_names()</code></a> reads. The markers differ in how many ranks go in the lineage.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>trnL lineages run through <code>forma</code>; 12Sv5 lineages stop at <code>subspecies</code>. Each marker's assignment function expects its own depth, so do not copy one <code>unite()</code> call across to the other.</p>
+<p>trnL lineages run through <code>forma</code>; 12SV5 lineages stop at <code>subspecies</code>. Each marker's assignment function expects its own depth, so do not copy one <code>unite()</code> call across to the other.</p>
 </div>
 <h3 id="dada2-formatted-reference-files">DADA2-formatted reference files</h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The <code>writeXStringSet()</code> calls below overwrite the current version of the reference. Check that this is what you want before running them.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">trnL</label><label for="__tabbed_8_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">trnL</label><label for="__tabbed_8_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>This section produces <code>trnLGH_taxonomy.fasta</code>, which names each sequence by its full lineage across ten ranks. <code>assignment_trnL()</code> matches your ASVs against the sequences and reads the lineage off the header of whatever it matched.</p>
@@ -1972,7 +1972,7 @@
 </span></code></pre></div>
 <details class="note">
 <summary>Legacy: <code>assignTaxonomy()</code></summary>
-<p>12Sv5 was assigned with <code>dada2::assignTaxonomy()</code> before <code>assignment_12S()</code>, and both read taxonomy from the FASTA headers.</p>
+<p>12SV5 was assigned with <code>dada2::assignTaxonomy()</code> before <code>assignment_12S()</code>, and both read taxonomy from the FASTA headers.</p>
 </details>
 </div>
 </div>
@@ -1999,7 +1999,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     

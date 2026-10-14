@@ -23,7 +23,7 @@
     
     
       
-        <title>Introduction to Lab Biostatistics - FoodSeq Handbook</title>
+        <title>Introduction to FoodSeq Biostatistics - FoodSeq Handbook</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction-to-lab-biostatistics" class="md-skip">
+        <a href="#introduction-to-foodseq-biostatistics" class="md-skip">
           Skip to content
         </a>
       
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction to Lab Biostatistics
+              Introduction to FoodSeq Biostatistics
             
           </span>
         </div>
@@ -366,7 +366,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -384,7 +384,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1348,29 +1348,29 @@
   
 
 
-<h1 id="introduction-to-lab-biostatistics">Introduction to Lab Biostatistics</h1>
-<p>This page provides background on the core concepts used throughout this handbook. If you are new to the lab or to DNA metabarcoding, read through this page before proceeding to <a href="settingup.html">Setting Up</a> or <a href="pipeline.html">Creating a Phyloseq</a>.</p>
+<h1 id="introduction-to-foodseq-biostatistics">Introduction to FoodSeq Biostatistics</h1>
+<p>This page provides background on the core concepts used throughout this handbook. If you are new to DNA metabarcoding, read through this page before proceeding to <a href="settingup.html">Setting Up</a> or <a href="pipeline.html">Creating a Phyloseq</a>.</p>
 <h2 id="dna-metabarcoding">DNA Metabarcoding</h2>
-<p>DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. In our lab, we use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake without relying on self-report.</p>
+<p>DNA metabarcoding is a method for identifying the biological composition of a mixed sample by sequencing short, standardized gene regions (markers) and matching them against a reference database. We can use metabarcoding to identify foods consumed by study participants from DNA extracted from stool samples. This approach allows us to detect dietary intake without relying on self-report.</p>
 <p>We target two markers:</p>
 <ul>
 <li><strong>trnL</strong> (trnL (UAA) intron, P6 loop): a plastid region used to identify plants. trnL sequences are short and show high interspecies diversity; a single-nucleotide difference can distinguish closely related plant species.</li>
-<li><strong>12Sv5</strong> (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12Sv5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.</li>
+<li><strong>12SV5</strong> (12S ribosomal RNA, V5 region): a mitochondrial region used to identify animals. 12SV5 sequences are longer than trnL sequences and show more intraspecies variation, meaning a single animal species may produce multiple distinct sequence variants.</li>
 </ul>
-<p>Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12Sv5 dataset (animals), which are processed separately throughout the pipeline.</p>
+<p>Because each marker targets a different kingdom, a typical sequencing run produces both a trnL dataset (plants) and a 12SV5 dataset (animals), which are processed separately throughout the pipeline.</p>
 <h2 id="amplicon-sequencing-variants-asvs">Amplicon Sequencing Variants (ASVs)</h2>
 <p>An amplicon sequencing variant (ASV) is a unique DNA sequence recovered from a sequencing run after denoising. During sequencing, millions of DNA reads are generated from a sample; denoising algorithms like DADA2 correct sequencing errors and resolve the reads into a set of exact sequences, each representing a true biological variant. These are ASVs.</p>
-<p>ASVs are the fundamental unit of observation in our data. Each ASV is defined by its exact nucleotide sequence, and each sample in a sequencing run has a count of how many reads were assigned to each ASV. Taxonomy is assigned by matching ASV sequences against a reference database; for trnL, this is done by exact sequence matching, while for 12Sv5, a naive Bayesian classifier is used. An ASV that does not match anything in the reference is marked as <code>NA</code> and can be investigated further with tools like BLAST.</p>
+<p>ASVs are the fundamental unit of observation in our data. Each ASV is defined by its exact nucleotide sequence, and each sample in a sequencing run has a count of how many reads were assigned to each ASV. Taxonomy is assigned by matching ASV sequences against a reference database; for trnL, this is done by exact sequence matching, while for 12SV5, a naive Bayesian classifier is used. An ASV that does not match anything in the reference is marked as <code>NA</code> and can be investigated further with tools like BLAST.</p>
 <p>A single food species may produce multiple ASVs (due to natural sequence variation within the species), and in some cases a single ASV may match multiple species (when those species share an identical marker sequence). The taxonomy assignment step handles these cases by condensing multi-match ASVs to their last common ancestor.</p>
 <details class="question">
 <summary>How are ASVs different from OTUs?</summary>
-<p>Older metabarcoding workflows clustered similar sequences into operational taxonomic units (OTUs), typically at a 97% similarity threshold. ASVs replace this approach by resolving sequences to exact variants without clustering, which provides higher taxonomic resolution and makes results comparable across studies and sequencing runs. Our lab uses ASVs exclusively.</p>
+<p>Older metabarcoding workflows clustered similar sequences into operational taxonomic units (OTUs), typically at a 97% similarity threshold. ASVs replace this approach by resolving sequences to exact variants without clustering, which provides higher taxonomic resolution and makes results comparable across studies and sequencing runs. FoodSeq uses ASVs exclusively.</p>
 </details>
 <h2 id="phyloseq-objects">Phyloseq Objects</h2>
 <p>A phyloseq is an R data structure from the <code>phyloseq</code> package that bundles together the different components of a metabarcoding dataset into a single object. A phyloseq contains up to three components:</p>
 <ul>
 <li><code>otu_table</code>: a matrix of ASV counts per sample (rows are samples, columns are ASVs)</li>
-<li><code>tax_table</code>: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to forma for trnL, and down to subspecies for 12Sv5)</li>
+<li><code>tax_table</code>: a matrix of taxonomy assignments per ASV (rows are ASVs, columns are taxonomic ranks from superkingdom down to forma for trnL, and down to subspecies for 12SV5)</li>
 <li><code>sam_data</code>: a dataframe of sample metadata (participant IDs, sample types, experimental conditions, etc.)</li>
 </ul>
 <p>The phyloseq is the central data object throughout the analysis pipeline. After <a href="pipeline.html">creating a phyloseq</a> from raw sequencing data, the <a href="processing.html">post-phyloseq processing workflow</a> walks through assigning common names, agglomerating, filtering, and calculating diversity and abundance metrics, all operating on the same phyloseq object (or filtered copies of it).</p>
@@ -1394,12 +1394,12 @@
 <li><strong>CLR transform</strong>: centered log-ratio transform; a normalization applied to compositional data before multivariate analysis.</li>
 <li><strong>DADA2</strong>: the denoising algorithm used to resolve raw sequencing reads into ASVs.</li>
 <li><strong>denoising</strong>: the process of correcting sequencing errors and collapsing reads into true biological variants (ASVs).</li>
-<li><strong>marker</strong>: a short, standardized gene region used for identification; our lab uses trnL (plants) and 12Sv5 (animals).</li>
+<li><strong>marker</strong>: a short, standardized gene region used for identification; FoodSeq currently uses trnL (plants) and 12SV5 (animals).</li>
 <li><strong>metabarcoding</strong>: a method for identifying organisms in a mixed sample by sequencing a shared marker region and matching against a reference.</li>
 <li><strong>OTU</strong>: operational taxonomic unit; an older clustering-based approach to grouping sequences, replaced by ASVs in our pipeline.</li>
 <li><strong>pFR</strong> (also <strong>pMR</strong>): plant FoodSeq richness; the number of distinct plant taxa detected in a sample by trnL metabarcoding. Earlier work calls the same metric plant metabarcoding richness, or pMR (pFR: Aqeel et al. 2025, <em>Obesity</em>; pMR: Petrone et al. 2023, <em>PNAS</em>).</li>
 <li><strong>phyloseq</strong>: an R object bundling ASV counts, taxonomy, and sample metadata into a single data structure.</li>
-<li><strong>QIIME2</strong>: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.</li>
+<li><strong>QIIME 2</strong>: the bioinformatics platform used for demultiplexing and initial sequence processing on the computing cluster.</li>
 <li><strong>reference database</strong>: a curated FASTA file mapping known marker sequences to taxonomy; used for assigning species to ASVs.</li>
 <li><strong>relative abundance</strong>: ASV counts expressed as proportions of total sample reads, summing to 1.</li>
 <li><strong>Shannon diversity</strong>: an alpha diversity metric that accounts for both richness and evenness.</li>
@@ -1427,7 +1427,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 23, 2026 14:28:31 UTC">September 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     
@@ -1508,7 +1508,7 @@
                 
                 
               
-              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Introduction%20to%20Lab%20Biostatistics&body=Page:+/intro.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
+              Thanks for your feedback! Please <a href="https://github.com/LAD-LAB/lad-lab.github.io/issues/new/?title=[Feedback]+Introduction%20to%20FoodSeq%20Biostatistics&body=Page:+/intro.html%0A%0AFeedback:+" target="_blank" rel="noopener">open an issue</a> and let us know what was missing or unclear (no GitHub familiarity needed).
             </div>
           
         </div>

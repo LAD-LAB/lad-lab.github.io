@@ -353,7 +353,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1341,7 +1341,7 @@
 
 
 <h1 id="anonymizing-human-reads">Anonymizing Human Reads</h1>
-<p>These instructions will help you anonymize human DNA reads in 12Sv5 metabarcoding FASTQ files for deposition to SRA or other public repositories. The Human Read Anonymizer detects human reads using k-mer matching against a reference database of 1,318 human 12S sequences and replaces them with a synthetic sequence — preserving read counts, FASTQ structure, and quality scores so that the files remain compatible with downstream tools. This step is required for IRB compliance when publishing 12Sv5 data. A <a href="#flowchart">flowchart</a> is provided at the bottom of the page showing where anonymization fits in the overall workflow.</p>
+<p>These instructions will help you anonymize human DNA reads in 12SV5 metabarcoding FASTQ files for deposition to SRA or other public repositories. The Human Read Anonymizer detects human reads using k-mer matching against a reference database of 1,318 human 12S sequences and replaces them with a synthetic sequence — preserving read counts, FASTQ structure, and quality scores so that the files remain compatible with downstream tools. This step is required for IRB compliance when publishing 12SV5 data. A <a href="#flowchart">flowchart</a> is provided at the bottom of the page showing where anonymization fits in the overall workflow.</p>
 <p>The tool replaces human reads rather than removing them. Removal would alter total read counts and change the structure of the FASTQ files; replacement keeps everything intact while rendering the human sequences unidentifiable. The replacement sequence is derived from the human 12S mitochondrial region, so it is classified as <em>Homo sapiens</em> during taxonomy assignment and can be filtered out in the phyloseq like any other human read.</p>
 <p>The anonymizer lives in the <a href="https://github.com/LAD-LAB/mb-pipeline/tree/main/anonymizer"><code>mb-pipeline</code> repository</a>. It operates on demultiplexed FASTQ files; when preparing data for SRA submission, you run it on the demultiplexed files and then re-run the marker pipeline on the anonymized output to generate a clean set of results for deposition.</p>
 <h2 id="how-detection-works">How Detection Works</h2>
@@ -1352,7 +1352,7 @@
 <li><strong>R1</strong> — <code>[5' forward primer]</code> + <code>[replacement core, 100 bp]</code> + <code>[3' reverse primer]</code> + <code>[original adapter tail]</code></li>
 <li><strong>R2</strong> — <code>[5' RC(reverse primer)]</code> + <code>[RC(replacement core), 100 bp]</code> + <code>[3' RC(forward primer)]</code> + <code>[original adapter tail]</code></li>
 </ul>
-<p>The fixed 100 bp core matches the expected 12Sv5 amplicon length. Primers are preserved so that cutadapt trims them normally; strand complementarity between R1 and R2 allows DADA2 to merge the pair. Original quality scores are retained.</p>
+<p>The fixed 100 bp core matches the expected 12SV5 amplicon length. Primers are preserved so that cutadapt trims them normally; strand complementarity between R1 and R2 allows DADA2 to merge the pair. Original quality scores are retained.</p>
 <h2 id="requirements">Requirements</h2>
 <p>The anonymizer requires:</p>
 <ul>
@@ -1425,7 +1425,7 @@
 <p>Replacing a large fraction of reads (~70%) with an identical synthetic sequence alters DADA2's error model, which can cause over-splitting at the ASV level. In testing, mean ASV-level richness increased from 4.5 to 7.9 after anonymization. However, species-level composition, beta diversity, and ecological conclusions are unaffected. If you are working with anonymized data, be aware that raw ASV counts may appear inflated relative to non-anonymized runs.</p>
 </div>
 <h2 id="adapting-for-other-markers">Adapting for Other Markers</h2>
-<p>The anonymizer can be adapted for markers other than 12Sv5. To do so, edit <code>human_read_anonymizer.R</code> and replace three constants:</p>
+<p>The anonymizer can be adapted for markers other than 12SV5. To do so, edit <code>human_read_anonymizer.R</code> and replace three constants:</p>
 <ul>
 <li><code>REPLACEMENT_CORE</code> — the synthetic core sequence for the new marker</li>
 <li><code>FORWARD_PRIMER</code> — the forward primer sequence</li>
@@ -1461,7 +1461,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 13:34:36 UTC">October 14, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     

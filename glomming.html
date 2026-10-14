@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    Introduction to Lab Biostatistics
+    Introduction to FoodSeq Biostatistics
   
 
     
@@ -1356,7 +1356,7 @@
 
 <h1 id="agglomerating-taxa">Agglomerating Taxa</h1>
 <p>Agglomeration groups ASVs that represent the same organism — whether because they were sequenced at slightly different lengths, assigned at different taxonomic resolutions, or are simply redundant with one another — into a single representative taxon. This step happens after <a href="pruning.html">pruning taxa</a> and before <a href="diversity.html">calculating diversity</a>, once taxa filtering, sample filtering, and pruning have already settled which ASVs and samples are in play. The approach differs by marker.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12Sv5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">trnL</label><label for="__tabbed_1_2">12SV5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>trnL agglomeration works differently: rather than grouping by taxonomic rank alone, it detects ASVs that likely represent the same organism across (or within) sequencing batches — near-identical sequences, differing resolutions, overlapping or subset taxonomy — and merges them once a human has reviewed the ambiguous cases. Two functions handle this: <strong><code>plan_harmonization()</code></strong> and <strong><code>apply_harmonization()</code></strong>, both part of the <code>foodseq.tools</code> package. Install it if you haven't already, then load it:</p>
@@ -1734,7 +1734,7 @@ asv_j (53 bp)  <b>CCAA</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>A</b
 <p>Check <code>result$unresolved</code> for any flagged pairs that are still blank; if any remain, resolve them and re-run.</p>
 </div>
 <div class="tabbed-block">
-<p>12Sv5 agglomeration is a straightforward <code>tax_glom()</code> by <code>lowest_level</code> — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV, already computed back in <a href="taxafiltering.html">Filtering Taxa</a>.</p>
+<p>12SV5 agglomeration is a straightforward <code>tax_glom()</code> by <code>lowest_level</code> — the most specific non-<code>NA</code> taxonomic rank assigned to each ASV, already computed back in <a href="taxafiltering.html">Filtering Taxa</a>.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ps.12S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">phyloseq</span><span class="o">::</span><span class="nf">tax_glom</span><span class="p">(</span><span class="n">ps.12S</span><span class="p">,</span><span class="w"> </span><span class="n">taxrank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lowest_level"</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
@@ -1762,7 +1762,7 @@ asv_j (53 bp)  <b>CCAA</b>ATCCTGTTTTCTCAAAACAAAAGTTCAAAAAACGAAAAAAAAAAAAA<b>A</b
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2026 18:58:42 UTC">September 28, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 17:59:35 UTC">October 14, 2026</span>
   </span>
 
     
