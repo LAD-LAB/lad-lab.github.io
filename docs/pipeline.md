@@ -51,7 +51,7 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     **Singularity/Apptainer Containers**
 
-    The pipeline scripts require two Singularity containers: `metabarcoding.sif` (used by `demux-barcodes.sh` and `count-reads.sh`) and `qiime2.sif` (used by `trnL-pipeline.sh` and `12SV5-pipeline.sh`). These containers are built on QIIME 2 [version-placeholder] and can be downloaded from [link-placeholder]. If you prefer to use a local QIIME 2 installation instead of containers, you can remove the `singularity exec --bind $wd $2` wrapper from the pipeline scripts and run the commands directly.
+    The pipeline scripts use two Singularity containers. `trnL-pipeline.sh` and `12SV5-pipeline.sh` run in `qiime2.sif`, which is built on QIIME 2 2023.5 and can be downloaded from Zenodo ([10.5281/zenodo.23376442](https://doi.org/10.5281/zenodo.23376442)). `demux-barcodes.sh` and `count-reads.sh` run in `metabarcoding.sif`, which includes Illumina's bcl2fastq software. Illumina's license doesn't allow bcl2fastq to be redistributed, so `metabarcoding.sif` can't be shared. To demultiplex, download bcl2fastq or BCL Convert directly from Illumina, or skip this step if your sequencing facility already provides one FASTQ file per sample. To count reads without `metabarcoding.sif`, see Count Reads below. If you prefer to use a local QIIME 2 installation instead of containers, you can remove the `singularity exec --bind $wd $2` wrapper from the pipeline scripts and run the commands directly.
 
     **Demultiplex and Pipeline**
 
@@ -96,13 +96,15 @@ These instructions will help you create a phyloseq object from raw sequencing da
 
     **Count Reads (Optional)**
 
-    If you plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
+    If you have `metabarcoding.sif` and plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
 
     ``` sh
     sbatch --partition=[your-partition] [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] [/path/to/metabarcoding.sif]
     ```
 
-    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container. If you download in full mode instead, this step is not needed — the R pipeline can process the QC data locally.
+    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container.
+
+    If you don't have `metabarcoding.sif`, skip this step and set `download_mode <- "full"` in `Pipeline-to-Phyloseq.Rmd` instead. Its `process_qiime_run()` function will then count the reads for each sample at each pipeline step on your own computer.
 
     If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
 
