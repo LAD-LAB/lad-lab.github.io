@@ -94,17 +94,15 @@ These instructions will help you create a phyloseq object from raw sequencing da
             └─ demux-barcodes-[jobid].out
     ```
 
-    **Count Reads (Optional)**
+    **Count Reads**
 
-    If you have `metabarcoding.sif` and plan to download your data in minimal mode (the default in `Pipeline-to-Phyloseq.Rmd`), you should run `count-reads.sh` on the cluster before proceeding. This script extracts per-sample read counts at each pipeline step and writes a `track-pipeline.csv` file that the R pipeline uses for quality control plots. It runs in a few seconds:
+    `Pipeline-to-Phyloseq.Rmd` counts the reads for each sample at each pipeline step for you with `process_qiime_run()`, for the quality control plots. To use it, set `download_mode <- "full"` in its user inputs chunk so the files it reads from are downloaded along with your data.
 
-    ``` sh
-    sbatch --partition=[your-partition] [/path/to/count-reads.sh] [/path/to/XXXXXXXX_results/XXXXXXXX_output] [/path/to/mb-pipeline/pipeline] [/path/to/metabarcoding.sif]
-    ```
+    !!! warning "User action required"
 
-    The script takes three arguments: the path to the pipeline output directory (e.g., `20250115_trnL_output`), the path to the directory containing `count-reads.R` (which should be wherever you cloned the mb-pipeline repository), and the path to the Singularity container.
+        `download_mode` defaults to `"minimal"` in `Pipeline-to-Phyloseq.Rmd`. Change it to `"full"` before running the Rmd, or the read counts won't work.
 
-    If you don't have `metabarcoding.sif`, skip this step and set `download_mode <- "full"` in `Pipeline-to-Phyloseq.Rmd` instead. Its `process_qiime_run()` function will then count the reads for each sample at each pipeline step on your own computer.
+    Duke users can run `count-reads.sh` on the DCC instead; see the Duke tab.
 
     If everything looks good, you can proceed to RStudio to run `Pipeline-to-Phyloseq.Rmd`.
 
