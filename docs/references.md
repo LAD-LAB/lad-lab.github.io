@@ -79,7 +79,7 @@ Building a reference from scratch — or picking up whatever new sequence has ac
 
     !!! tip
 
-        If your lab already maintains a shared `accessionTaxa.sql` build, point `SQL_PATH` at it instead of rebuilding — this skips a ~70 GB download/build.
+        If your lab already maintains a shared `accessionTaxa.sql` build, point `SQL_PATH` at it instead of rebuilding — this skips a ~110 GB download/build.
 
         === "General"
 
@@ -122,7 +122,7 @@ Building a reference from scratch — or picking up whatever new sequence has ac
     |---|---|---|
     | RefSeq plastid FASTA | ~15–20 GB uncompressed | `ftp://ftp.ncbi.nlm.nih.gov/refseq/release/plastid/` |
     | RefSeq mitochondrial FASTA | ~5–10 GB uncompressed | `ftp://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/` |
-    | `accessionTaxa.sql` | ~70 GB | Built with `taxonomizr::prepareDatabase()` |
+    | `accessionTaxa.sql` | ~110 GB (Aug 2026 build; grows as NCBI grows) | Built with `taxonomizr::prepareDatabase()` |
 
 6. Once the jobs finish, run **Part A** (trnL g/h) and/or **Part B** (12SV5), as needed.
 7. The notebook's final section, **Verify before shipping**, runs the QC gate automatically — see [Verifying a Build](#verifying-a-build-the-qc-gate) below.
