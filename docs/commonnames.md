@@ -172,7 +172,7 @@ result <- taxa_df %>%
 
 From this point, the `result` dataframe will have a `common_name` column containing concatenated species-level common names from `human-foods.csv`. These individual names need to be consolidated into a single standardized name per ASV — a `conventional_name` — that is concise and human-readable. For example, an ASV matching *Fragaria* and *Rubus* species might have a `common_name` of "beach strawberry; scarlet strawberry; strawberry; arctic bramble; cloudberry; ..." but a `conventional_name` of "strawberries, raspberries, and blackberries."
 
-This consolidation is done manually and saved as a new column in the CSV. The lab maintains a curated trnL common names CSV with `conventional_name` already populated for all known ASVs; if you are working with trnL data, you likely do not need to create the CSV from scratch.
+This consolidation is done manually and saved as a new column in the CSV. The lab maintains curated common names CSVs for trnL and 12SV5 in the [food-dbs repository](https://github.com/LAD-LAB/food-dbs/tree/master/data/outputs/common-names); if you are working with either marker, you likely do not need to create the CSV from scratch. These files are actively maintained, and `conventional_name` is still being filled in for some ASVs, so download the current version rather than reusing an old copy.
 
 !!! note
 
@@ -181,7 +181,8 @@ This consolidation is done manually and saved as a new column in the CSV. The la
 ## `assign_common_names()` Function
 
 <div class="download-buttons" markdown>
-[Download trnL common names CSV](files/trnL_common_names.csv){ .md-button }
+[trnL common names CSV](https://github.com/LAD-LAB/food-dbs/blob/master/data/outputs/common-names/trnL%20common%20names.csv){ .md-button }
+[12SV5 common names CSV](https://github.com/LAD-LAB/food-dbs/blob/master/data/outputs/common-names/12S%20common%20names.csv){ .md-button }
 </div>
 
 With a common names CSV ready, we can now use the `assign_common_names()` function to assign those names to a phyloseq object. The function matches ASV sequences via substring lookup, resolves multi-match conflicts through superset logic, genus-level resolution, and smart name merging, and propagates common names to unmatched ASVs that share species-level taxonomy with matched siblings. `assign_common_names()` is part of the `foodseq.tools` package. Install it if you haven't already, then load it:
