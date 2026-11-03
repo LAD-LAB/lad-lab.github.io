@@ -375,7 +375,7 @@ The conflict report includes the ASV sequence, the number of matches, the resolu
 
 !!! note "Avoid blanket agglomeration by common name"
 
-    For trnL, we strongly advise against performing a blanket agglomeration (`tax_glom()`) by common name. Grouping by common name risks silently merging biologically distinct organisms. If grouping is needed for nutritional analysis, it should be done manually and deliberately.
+    For trnL, we strongly advise against performing a blanket agglomeration (`tax_glom()`) by common name. Grouping by common name risks silently merging biologically distinct organisms. To merge ASVs that represent the same organism, use the harmonization workflow on the [Agglomerating Taxa](glomming.md) page (trnL tab). If grouping is needed for nutritional analysis, it should be done manually and deliberately.
 
 ## Known Issues
 
