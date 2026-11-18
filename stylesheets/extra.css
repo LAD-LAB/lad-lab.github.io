@@ -53,6 +53,12 @@
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
   }
+  .md-typeset .hero .ea-link img,
+  .md-copyright .ea-link img {
+    height: 1.4em;
+    vertical-align: -0.35em;
+    margin-right: 0.2em;
+  }
   @media screen and (max-width: 44.9375em) {
     .md-typeset .hero h1 {
       font-size: 1.8rem;
