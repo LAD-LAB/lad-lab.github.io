@@ -63,6 +63,7 @@ theme:
 
 repo_url: https://github.com/LAD-LAB/lad-lab.github.io
 repo_name: lad-lab.github.io
+copyright: Maintained by <a href="https://edibleatlas.org/" class="ea-link"><img src="images/edible-atlas-icon.png" alt="">Edible Atlas</a> at Duke University
 
 markdown_extensions:
   - attr_list

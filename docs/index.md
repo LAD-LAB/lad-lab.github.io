@@ -4,7 +4,9 @@
 
 FoodSeq identifies the plants and animals in a person's diet from DNA in stool. This handbook documents the full workflow, from preparing sequencing libraries to an analysis-ready table of foods, so that anyone can generate, process, and compare dietary metabarcoding data. All protocols, code, and reference data are open source.
 
-<p class="hero-note">The instructions assume minimal familiarity with R and the shell. This site is actively maintained by <a href="https://edibleatlas.org/">Edible Atlas</a> at Duke University, and pages are updated as methods develop.</p>
+<p class="hero-note">The instructions assume minimal familiarity with R and the shell.</p>
+
+<p class="hero-note">This site is actively maintained by <a href="https://edibleatlas.org/" class="ea-link"><img src="images/edible-atlas-icon.png" alt="">Edible Atlas</a> at Duke University, and pages are updated as methods develop.</p>
 
 </div>
 
